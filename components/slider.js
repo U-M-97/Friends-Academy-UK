@@ -60,13 +60,16 @@ const Slider = () => {
         </div>
 
         <motion.div className="absolute top-16 left-1/2 w-box rounded-lg bg-white z-30 p-12 flex flex-col"
-          // animate={{x:-100}}
-          // initial={{x:0}}
+          animate={{scale: 1, opacity: 1}}
+          initial={{scale: 0.5, opacity: 0}}
+          transition={{
+          type: "spring", duration: 2
+          }}
         >
             <h1 className="text-4xl font-extrabold">No matter how good you are at anything a Coach makes you better</h1>
             <div className="mt-10 flex justify-between">
               <input className="border-lightGray border p-4 rounded-md" placeholder="Your Name"/>
-              <input className=" border-lightGray border p-4 p-4 rounded-md" placeholder="Your Email"/>
+              <input className="border-lightGray border p-4 rounded-md" placeholder="Your Email"/>
             </div>
             <button className="bg-green p-5 text-white font-bold mt-10 text-xl rounded-md hover:bg-pink duration-300">Subscribe Now</button>
         </motion.div> 

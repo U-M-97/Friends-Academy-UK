@@ -19,13 +19,17 @@ module.exports = {
         width: "1600px",
         picturesWrapper: "300vw",
         translateWidth: "100vw",
-        box: "570px"
+        box: "570px",
       },
       scale:{
         arrow: "3"
       },
       height:{
-        slider: "520px"
+        slider: "600px",
+        about: "900px"
+      },
+      borderRadius:{
+        half: "50%"
       }
     },
   },
