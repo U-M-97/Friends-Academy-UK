@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Slider from '../components/slider'
 import PlabInfo from '../components/plabInfo'
-import About from '../components/about'
+import Services from '../components/services'
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <Slider/>
       <PlabInfo/>
-      <About/>
+      <Services/>
     </div>
   )
 }

@@ -19,7 +19,9 @@ const PlabInfo = () => {
                 <h1 className="mt-10 text-4xl font-bold">What is PLAB ?</h1>
                 <div className="w-56 mt-2 flex items-center justify-center">
                     <div className="border-b-2 w-28 border-green"></div>
-                    <div className="h-2 w-2 rounded-half bg-pink mx-3"></div>
+                    <div className='mx-3'>
+                        <div className="h-2 w-2 rounded-full bg-pink"></div>
+                    </div>  
                     <div className="border-b-2 w-28 border-green"></div>
                 </div>
             </motion.div>
