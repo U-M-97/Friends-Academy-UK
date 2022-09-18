@@ -39,6 +39,9 @@ module.exports = {
       borderWidth:{
         aboutPic: "10px",
         footer: "1px"
+      },
+      padding:{
+        important: "2px"
       }
     },
   },

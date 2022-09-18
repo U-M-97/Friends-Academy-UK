@@ -57,7 +57,7 @@ const About = () => {
             <div className="flex-1 flex justify-end">
                 <div className=" border-aboutPic border-green relative flex items-center justify-center h-aboutPic w-aboutPic">
                     <div className="absolute -top-12 bottom-0 -left-16">
-                        <Image src="/images/Rehman Bashir.jpg" height={"550px"} width={"500px"} objectFit="cover" alt="Profile Pic"/>
+                        <Image src="/images/Sohail Tariq.jpeg" height={"550px"} width={"500px"} objectFit="cover" alt="Profile Pic"/>
                     </div>
                    
                 </div>

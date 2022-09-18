@@ -5,6 +5,7 @@ import PlabInfo from '../components/plabInfo'
 import Services from '../components/services'
 import About from '../components/about'
 import Contact from '../components/contact'
+import Events from '../components/events'
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <PlabInfo/>
       <Services/>
       <About/>
+      <Events/>
       <Contact/>
     </div>
   )
