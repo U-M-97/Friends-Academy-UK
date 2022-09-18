@@ -5,7 +5,6 @@ import PlabInfo from '../components/plabInfo'
 import Services from '../components/services'
 import About from '../components/about'
 import Contact from '../components/contact'
-import Footer from '../components/footer'
 
 export default function Home() {
   return (
@@ -19,7 +18,6 @@ export default function Home() {
       <Services/>
       <About/>
       <Contact/>
-      <Footer/>
     </div>
   )
 }

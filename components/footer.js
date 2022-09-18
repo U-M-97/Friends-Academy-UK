@@ -14,7 +14,7 @@ const Footer = () => {
     <div className="bg-black flex flex-col items-center justify-center">
         <div className="flex w-aboutWidth mt-20">
             <div className="flex-1 mr-5">
-                <Image src="/images/Friends Academy.png" height={"100px"} width={"200px"} objectFit="cover"/>
+                <Image src="/images/Friends Academy.png" height={"100px"} width={"200px"} objectFit="cover" alt="logo"/>
                 <p className="text-white text-lg mt-2">Coaching is a form of development in which a person called a coach supports a learner or client in achieving a specific personal or professional goal by providing training and guidance. The learner is sometimes called a coachee.</p>
             </div>
             <div className="flex-1 mr-5">
