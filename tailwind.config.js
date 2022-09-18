@@ -20,8 +20,11 @@ module.exports = {
         width: "1600px",
         picturesWrapper: "300vw",
         translateWidth: "100vw",
+        plabWidth: "1400px",
         box: "570px",
-        card: "380px"
+        card: "380px",
+        aboutWidth: "1200px",
+        aboutPic: "500px"
       },
       scale:{
         arrow: "3",
@@ -30,7 +33,12 @@ module.exports = {
       height:{
         slider: "600px",
         about: "900px",
-        card: "320px"
+        card: "320px",
+        aboutPic: "550px"
+      },
+      borderWidth:{
+        aboutPic: "10px",
+        footer: "1px"
       }
     },
   },
