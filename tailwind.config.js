@@ -34,7 +34,8 @@ module.exports = {
         slider: "600px",
         about: "900px",
         card: "320px",
-        aboutPic: "550px"
+        aboutPic: "550px",
+        accommodation: "500px"
       },
       borderWidth:{
         aboutPic: "10px",
