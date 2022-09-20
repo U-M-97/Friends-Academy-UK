@@ -73,25 +73,25 @@ const Accommodation = () => {
                 animate={isAccommodation && "visible"}
                 >
                     <motion.h1 variants={item} className='text-4xl font-medium'>Single Rooms</motion.h1>
-                    <motion.p variants={item} className='text-xl mt-4'>GB 25.00 per person per night</motion.p>
-                    <motion.div variants={item} className='flex items-center mt-6'>
-                        <HomeIcon className=' scale-125'/>
+                    <motion.p variants={item} className='text-xl text-green mt-4'>GB 25.00 per person per night</motion.p>
+                    <motion.div variants={item} className='flex items-center mt-6 '>
+                        <HomeIcon className=' scale-125 text-green'/>
                         <p className='ml-4 text-lg'>Onsite Accommodation Available</p>
                     </motion.div>
                     <motion.div variants={item} className='flex items-center mt-4'>
-                        <WifiIcon/>
+                        <WifiIcon className=' scale-125 text-green'/>
                         <p className='ml-4 text-lg'>Free Wifi</p>
                     </motion.div>
                     <motion.div variants={item} className='flex items-center mt-4'>
-                        <DirectionsCarIcon className=' scale-125'/>
+                        <DirectionsCarIcon className=' scale-125 text-green'/>
                         <p className='ml-4 text-lg'>Only 8 Minutes Drive to GMC Building</p>
                     </motion.div>
                     <motion.div variants={item} className='flex items-center mt-4'>
-                        <LocalMallIcon className=' scale-125'/>
+                        <LocalMallIcon className=' scale-125 text-green'/>
                         <p className='ml-4  text-lg'>All Local Amenities Nearby</p>
                     </motion.div>
                     <motion.div variants={item} className='flex items-center mt-4'>
-                        <RestaurantIcon className=' scale-125'/>
+                        <RestaurantIcon className=' scale-125 text-green'/>
                         <p className='ml-4 text-lg'>Halal Food At Walking Distance</p>
                     </motion.div> 
                 </motion.div>
@@ -114,25 +114,25 @@ const Accommodation = () => {
                 animate={isAccommodation2 && "visible"}
                 className='flex flex-col justify-center'>
                     <motion.h1 variants={item2} className='text-4xl font-medium'>Double Rooms</motion.h1>
-                    <motion.p variants={item2} className='text-xl mt-4'>GB 20.00 per person per night</motion.p>
+                    <motion.p variants={item2} className='text-xl mt-4 text-pink'>GB 20.00 per person per night</motion.p>
                     <motion.div variants={item2} className='flex items-center mt-6'>
-                        <HomeIcon className=' scale-125'/>
+                        <HomeIcon className=' scale-125 text-pink'/>
                         <p className='ml-4 text-lg'>Onsite Accommodation Available</p>
                     </motion.div>
                     <motion.div variants={item2} className='flex items-center mt-4'>
-                        <WifiIcon/>
+                        <WifiIcon className=' scale-125 text-pink'/>
                         <p className='ml-4 text-lg'>Free Wifi</p>
                     </motion.div>
                     <motion.div variants={item2} className='flex items-center mt-4'>
-                        <DirectionsCarIcon className=' scale-125'/>
+                        <DirectionsCarIcon className=' scale-125 text-pink'/>
                         <p className='ml-4 text-lg'>Only 8 Minutes Drive to GMC Building</p>
                     </motion.div>
                     <motion.div variants={item2} className='flex items-center mt-4'>
-                        <LocalMallIcon className=' scale-125'/>
+                        <LocalMallIcon className=' scale-125 text-pink'/>
                         <p className='ml-4  text-lg'>All Local Amenities Nearby</p>
                     </motion.div>
                     <motion.div variants={item2} className='flex items-center mt-4'>
-                        <RestaurantIcon className=' scale-125'/>
+                        <RestaurantIcon className=' scale-125 text-pink'/>
                         <p className='ml-4 text-lg'>Halal Food At Walking Distance</p>
                     </motion.div> 
                 </motion.div>

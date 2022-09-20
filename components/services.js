@@ -37,7 +37,7 @@ const Services = () => {
       
       <div ref={card1} className="mt-20">
         <motion.div 
-        initial={{y: "100px"}}
+        initial={{y: "150px"}}
         animate={isCard1 && {y: "0px"}}
         transition={{duration: 1}}
         className=" flex items-center justify-center">
@@ -61,7 +61,7 @@ const Services = () => {
 
       <div ref={card2} className="mt-10">
         <motion.div 
-        initial={{y: "100px"}}
+        initial={{y: "150px"}}
         animate={isCard2 && {y: "0px"}}
         transition={{duration: 1}}
         className=" flex items-center justify-center">
@@ -85,7 +85,7 @@ const Services = () => {
      
       <div ref={card3} className="mt-10 mb-10">
         <motion.div 
-        initial={{y: "100px"}}
+        initial={{y: "150px"}}
         animate={isCard3 && {y: "0px"}}
         transition={{duration: 1}}
         className="flex items-center justify-center">
