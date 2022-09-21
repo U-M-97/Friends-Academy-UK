@@ -14,9 +14,9 @@ const Contact = () => {
     const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
 
   return (
-    <div className="pb-20 flex font-main items-center justify-center bg-servicesBG">
-        <div className='w-width flex'>
-            <div className="flex-1 flex flex-col ml-40">
+    <div className="pb-20 flex font-main items-center justify-center bg-servicesBG ">
+        <div className='w-full sm:w-width flex flex-col sm:flex-row'>
+            <div className="flex-1 flex flex-col sm:ml-40 mx-10 sm:mx-0">
                 <div className='flex flex-col'>
                     <div ref={header}>
                         <motion.div
@@ -44,32 +44,34 @@ const Contact = () => {
                         <MailIcon className='text-green scale-125'/>
                         <label className='ml-4 text-xl'>mail@domain.com</label>
                     </div>
-                    <div className='mt-4'>
+                    <div className='mt-4 flex items-center'>
                         <LocationOnIcon className='text-green scale-125'/>
-                        <label className='ml-4 text-xl'>113-115 Smedley Road Manchester M8 0RS</label>
+                        <div className='ml-4'>
+                            <label className='text-xl'>113-115 Smedley Road Manchester M8 0RS</label> 
+                        </div>
                     </div>
 
-                    <div className='mt-10 flex'>
-                        <div className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
+                    <div className='mt-10 flex '>
+                        <div className='h-14 w-14 border border-lightGray rounded-full flex items-center justify-center sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <WhatsAppIcon className=''/>
                         </div>
-                        <div className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <div className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center ml-2 sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <FacebookIcon className=''/>
                         </div>
-                        <div className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <div className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center  ml-2 sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <YouTubeIcon className=''/>
                         </div>
-                        <div className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <div className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center  ml-2 sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <TwitterIcon className=''/>
                         </div>
-                        <div className='h-14 w-14 border border-lightGray rounded-full flex items-center justify-center ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <div className='h-14 w-14 border border-lightGray rounded-full flex items-center justify-center  ml-2 sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <InstagramIcon className=''/>
                         </div>
                     </div>
                 </div>     
             </div>
 
-            <div className="flex-1 flex flex-col mr-40">
+            <div className="flex-1 flex flex-col sm:mr-40 mx-10 sm:mx-0">
                 <div ref={header}>
                     <motion.div
                     initial={{opacity: 0, scale: 0}}
@@ -88,10 +90,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                    <p className='text-lg mt-12'>If you have any questions or just want to get in touch, use the form below. I look forward to hearing from you! You can get in touch with me directly at <a href="" className='text-green underline'>hello@domain.com.</a></p>
-                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg' placeholder='Name'/>
-                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg' placeholder='Email'/>
-                    <textarea className='p-2 pb-20 w-full border border-green rounded-sm mt-5 text-lg' placeholder='Message'/>
+                    <p className='text-lg mt-10 sm:mt-12'>If you have any questions or just want to get in touch, use the form below. I look forward to hearing from you! You can get in touch with me directly at <a href="" className='text-green underline'>hello@domain.com.</a></p>
+                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg outline-black' placeholder='Name'/>
+                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg outline-black' placeholder='Email'/>
+                    <textarea className='p-2 pb-20 w-full border border-green rounded-sm mt-5 text-lg outline-black' placeholder='Message'/>
                     <button className='w-full bg-pink mt-5 p-4 rounded-md text-white font-bold hover:bg-green duration-300'>Send Message</button>
                 </div>
             </div>

@@ -27,7 +27,7 @@ const PlabInfo = () => {
             </motion.div>
         </div> 
         
-        <div ref={p1} className="mt-10 w-plabWidth">
+        <div ref={p1} className="mt-10 sm:w-plabWidth">
             <motion.p             
                 initial={{x: "-100%"}}
                 animate={isP1 && {x: "0%"}}
@@ -35,7 +35,7 @@ const PlabInfo = () => {
                 className="text-xl ">IELTS / OET are the first step towards the PLAB and it is not an easy task to go through. Our help and guidance will make this journey possible without loosing too much money and facing an excessive amount of stress. Our team will provide one-on-one guidance and help so that you can move quickly towards your final destination. If you have plans to do PLAB and struggling to find the right information please be in touch with us so that we could help you. You can visit the GMC website for detailed information, the link of which is here <a className="font-bold" href="https://www.gmc-uk.org/registration-and-licensing/join-the-register/plab/a-guide-to-the-plab-test.">https://www.gmc-uk.org/registration-and-licensing/join-the-register/plab/a-guide-to-the-plab-test.</a>
             </motion.p>
         </div>       
-        <div ref={p2} className="mt-10 w-plabWidth">
+        <div ref={p2} className="mt-10 sm:w-plabWidth">
             <motion.p
                 initial={{x: "100%"}}
                 animate={isP2 && {x: "0%"}}
@@ -43,7 +43,7 @@ const PlabInfo = () => {
                 className="text-xl">PLAB 1 tests your clinical knowledge in various areas of medicine, our dedicated team is here to provide you guidance on what to read and what not to. Time management and staying on the right point are the keys to success and reading like a primary school child may give you extensive bookish knowledge but not necessarily what you need to know for passing this difficult exam with excellent grades. UK being pioneer of the medicine tests your knowledge based on the actual clinical scenarios and lacking the information on what is important here to be a successful part of the medical team may lead you to the failure. We believe that our timely guidance and help can make you a competent and successful candidate to step forwards to the next exam which is OSCE. Our team would be very happy in guiding you to the right path of success. If you have passed IELTS / OET please do not hesitate to contact us to get advice on the helping material for PLAB 1 preparation. There is no fee for our help in PLAB 1 guidance and you will be able to discuss anything in relation to PLAB-1 and PLAB-2 over the phone. We will guide you on how to prepare your visa application once you pass your PLAB-1. If you are looking for a true help, please contact us now.
             </motion.p>
         </div>
-        <div ref={p3} className="mt-10 w-plabWidth">            
+        <div ref={p3} className="mt-10 sm:w-plabWidth">            
             <motion.div
             initial={{x: "-100%"}}
             animate={isP3 && {x: "0%"}}

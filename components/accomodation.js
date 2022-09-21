@@ -46,7 +46,7 @@ const Accommodation = () => {
     }
 
   return (
-    <div className='font-main flex flex-col items-center overflow-x-hidden'>
+    <div className='font-main flex flex-col items-center overflow-hidden'>
         <div ref={header}>
             <motion.div
             initial={{opacity: 0, scale: 0}}
@@ -65,8 +65,8 @@ const Accommodation = () => {
             </motion.div>
          </div>
 
-         <div className='flex w-full mt-10 h-accommodation'>
-            <div ref={accommodation} className='w-2/4 bg-black text-white flex items-center justify-center'>
+         <div className='flex flex-col sm:flex-row w-full mt-10 sm:h-accommodation h-screen'>
+            <div ref={accommodation} className='sm:w-2/4 bg-black text-white flex items-center justify-center p-10 sm:p-0 order-last sm:order-first'>
                 <motion.div className='flex flex-col justify-center' 
                 variants={container}
                 initial="hidden"
@@ -97,17 +97,17 @@ const Accommodation = () => {
                 </motion.div>
             </div>
 
-            <div className=' w-3/4 relative'>
+            <div className='w-full h-full sm:w-3/4 relative'>
                 <Image src="/images/accommodation1.jpg" layout='fill' objectFit='cover'/>
             </div>
          </div>
 
-         <div className='flex w-full h-accommodation'>
-            <div className=' w-3/4 relative'>
+         <div className='flex flex-col sm:flex-row w-full sm:h-accommodation h-screen'>
+            <div className='w-full h-full sm:w-3/4 relative'>
                 <Image src="/images/accommodation.jpg" layout='fill' objectFit='cover'/>
             </div>
 
-            <div ref={accommodation2} className='w-2/4 bg-white flex justify-center items-center'>
+            <div ref={accommodation2} className='sm:w-2/4 bg-white flex justify-center items-center p-10 sm:p-0'>
                 <motion.div
                 variants={container}
                 initial="hidden"

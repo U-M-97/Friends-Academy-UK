@@ -8,11 +8,6 @@
     /* animation: headerOpen 0.5s linear; */
 }
 
-/* .headerClose{
-    background-color: black;
-    animation: headerClose 0.5s linear;
-} */
-
 .headerContainer{
     color: white;
     padding: 7px 0px;
@@ -29,21 +24,23 @@
         transform: translateX(-82%);
     }
 }
-/* 
-@keyframes headerOpen {
-    from{
-        transform: translateY(-39px);
-    }
-    to{
-        transform: translateY(0px);
+
+@media screen and (max-width: 640px) {
+    .headerContainer{
+        animation: none;
+        height: 50px;
+        width: 300vw;
+        align-items: center;
+        transform: translateX(25%);
+        animation: mobileScrolling 20s linear infinite;
     }
 }
 
-@keyframes headerClose {
+@keyframes mobileScrolling {
     from{
-        transform: translateY(0px);
+        transform: translateX(25%);
     }
     to{
-        transform: translateY(-39px);
+        transform: translateX(-95%)
     }
-} */
+}

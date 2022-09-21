@@ -29,23 +29,25 @@ const Header = () => {
             }
             
             
-            <div className='flex justify-center p-4 relative'>
-                <div className='absolute right-5 top-0 bg-green text-black cursor-pointer rounded-b-md p-1' onClick={() => setBanner(!banner)}>
-                    {banner == true ? <ClearIcon/> : <KeyboardArrowDownIcon/>}
+            <div className='flex justify-center sm:p-4 relative'>
+                <div className='absolute right-5 top-0 bg-green text-black cursor-pointer rounded-b-md sm:p-1' onClick={() => setBanner(!banner)}>
+                    {banner == true ? <ClearIcon className='scale-75 md:scale-100'/> : <KeyboardArrowDownIcon/>}
                 </div>
-                <div className='flex w-width justify-between'>
-                    <div className='flex ml-32'>
+                <div className='flex mt-5 flex-col w-screen sm:mt-0 sm:flex-row sm:w-width sm:justify-between'>
+                    <div className='px-3 sm:p-0 flex justify-between sm:ml-32'>
                         <div className='flex cursor-pointer'>
                             <PhoneIcon className='text-green'/>
                             <address className='text-font not-italic hover:text-green duration-200'>+ 00 4475 32707561</address>
                         </div>
-                        <div  className='flex cursor-pointer ml-8'>
+                        <div  className='flex cursor-pointer sm:ml-8'>
                             <MailIcon className='text-green'/>
                             <address className='text-font not-italic hover:text-green duration-200'>mail@domain.com</address>
                         </div>    
                     </div>
+
+                    <div className='border-b border-lightGray mt-2 sm:hidden'></div>
                     
-                    <div className='flex mr-40'>
+                    <div className='flex justify-center mt-2 sm:mr-40 sm:mt-0'>
                         <div className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <WhatsAppIcon/>
                         </div>
@@ -59,7 +61,8 @@ const Header = () => {
                         <div className='mr-4 text-gray cursor-pointer'>
                             <SearchIcon className=' scale-125'/>
                         </div>
-                    </div>        
+                    </div>    
+                    <div className='border-b border-lightGray mt-2 sm:hidden'></div>    
                 </div>                
             </div>
         </div>

@@ -11,13 +11,15 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 const Footer = () => {
   return (
-    <div className="bg-black flex flex-col items-center justify-center">
-        <div className="flex w-aboutWidth mt-20">
-            <div className="flex-1 mr-5">
-                <Image src="/images/Friends Academy.png" height={"100px"} width={"200px"} objectFit="cover" alt="logo"/>
-                <p className="text-white text-lg mt-2">Coaching is a form of development in which a person called a coach supports a learner or client in achieving a specific personal or professional goal by providing training and guidance. The learner is sometimes called a coachee.</p>
+    <div className="bg-black flex flex-col items-center justify-center p-10 sm:p-0">
+        <div className="flex flex-col sm:flex-row sm:w-aboutWidth mt-10 sm:mt-20">
+            <div className="flex-1 sm:mr-5 flex flex-col">
+                <div className="relative h-36 sm:w-full bg-green">
+                  <Image src="/images/Friends Academy.png" layout={"fill"} objectFit="cover" alt="logo"/>
+                </div>
+                <p className="text-white text-lg mt-4">Coaching is a form of development in which a person called a coach supports a learner or client in achieving a specific personal or professional goal by providing training and guidance. The learner is sometimes called a coachee.</p>
             </div>
-            <div className="flex-1 mr-5">
+            <div className="flex-1 sm:mr-5 mt-10 sm:mt-0">
                 <h1 className="text-white text-2xl">Events</h1>
                 <div className="mt-2  flex items-center justify-start">
                     <div className='mr-3'>
@@ -26,7 +28,7 @@ const Footer = () => {
                     <div className="border-b-2 w-20 border-green"></div>
                 </div>
             </div>
-            <div className="flex-1  mr-5 ">
+            <div className="flex-1 sm:mr-5 mt-10 sm:mt-0">
                 <h1 className="text-white text-2xl">Contact Us</h1>
                 <div className="mt-2  flex items-center justify-start">
                     <div className='mr-3'>
@@ -48,7 +50,7 @@ const Footer = () => {
                         <p className='text-xl text-white'>113-115 Smedley Road Manchester M8 0RS</p>
                     </div>    
                 </div>
-                <div className='mt-10 flex'>
+                <div className='mt-10 flex justify-center sm:justify-start'>
                         <div className=' h-10 w-10 border border-lightGray rounded-full flex items-center justify-center text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <WhatsAppIcon className=''/>
                         </div>
@@ -66,7 +68,7 @@ const Footer = () => {
                         </div>
                 </div>
             </div>
-            <div className="flex-1 mr-5">
+            <div className="flex-1 sm:mr-5 mt-10 sm:mt-0">
                 <h1 className="text-white text-2xl">Popular</h1>
                 <div className="mt-2  flex items-center justify-start">
                     <div className='mr-3'>
@@ -76,10 +78,10 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-        <div className=" border-t-footer border-gray w-full mt-14"></div>
-        <div className="text-lightGray my-5 flex">
+        <div className=" border-t-footer border-gray w-screen sm:w-full mt-14"></div>
+        <div className="text-lightGray mt-5 sm:my-5 flex">
             <CopyrightIcon/>
-            <p className="ml-2">Copyright 2022 <a className="text-green">Friends Academy</a> All Rights Reserved. Friends Academy | Developed By <a className="text-green">Usama Maqsood.</a></p>
+            <p className="ml-2">Copyrights 2022 <a className="text-green">Friends Academy</a> All Rights Reserved. Friends Academy | Developed By <a className="text-green">Usama Maqsood.</a></p>
         </div>
     </div>
   )

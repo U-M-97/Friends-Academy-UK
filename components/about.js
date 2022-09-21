@@ -28,12 +28,12 @@ const About = () => {
             </motion.div>
          </div>
 
-         <div ref={intro} className="w-aboutWidth flex mt-20">
+         <div ref={intro} className="sm:w-aboutWidth flex flex-col sm:flex-row mt-20">
             <motion.div 
             initial={{opacity:0}}
             animate={isIntro && {opacity:1}}
             transition={{duration: 1}}
-            className="flex-1 flex flex-col">
+            className="flex-1 flex flex-col order-last sm:order-first p-10 sm:p-0">
                 <h1 className=" font-extrabold text-3xl">Dr Rehman Bashir</h1>
                 <label className=" text-lg text-gray mt-2">GP consultant/MRCGP/CCT in General Practice.</label>
                 <p className="mt-5 text-lg">Yes, I know my stuff! And throughout our coaching time, you will develop the tools and confidence to take action. My way of coaching is to empower you in becoming the Leader you want to be. You are unique and so your coaching should be too. I don’t follow a template, or ‘one size fits all’. We start where you are & we work towards your goals. If you want a business that generates you income while also positively contributing to others, then you have arrived at the right place!</p>
@@ -45,21 +45,20 @@ const About = () => {
             animate={isIntro && {scale: 1}}
             transition={{duration: 2}}
             className="flex-1 flex justify-end">
-                <div className=" border-aboutPic border-green relative flex items-center justify-center h-aboutPic w-aboutPic">
-                    <div className="absolute -top-12 bottom-0 -left-16">
+                <div className=" border-aboutPic border-green relative flex items-center justify-center mr-5 sm:mr-0 h-80 w-64 sm:h-aboutPic sm:w-aboutPic">
+                    <div className="absolute right-8 sm:right-0 -left-20 -top-10 sm:-top-12 sm:bottom-0 sm:-left-16">
                         <Image src="/images/Rehman Bashir.jpg" height={"550px"} width={"500px"} objectFit="cover" alt="Profile Pic"/>
                     </div>
-                   
                 </div>
             </motion.div>
          </div>
 
-         <div ref={intro2} className="w-aboutWidth flex mt-36">
+         <div ref={intro2} className="sm:w-aboutWidth flex flex-col sm:flex-row mt-16 sm:mt-36">
             <motion.div 
             initial={{opacity:0}}
             animate={isIntro2 && {opacity:1}}
             transition={{duration: 1}}
-            className="flex-1 flex flex-col">
+            className="flex-1 flex flex-col order-last sm:order-first p-10 sm:p-0">
                 <h1 className=" font-extrabold text-3xl">Dr Sohail Tariq</h1>
                 <label className=" text-lg text-gray mt-2">Medicine Trainee in Health Education England/Working in NHS.</label>
                 <p className="mt-5 text-lg">Yes, I know my stuff! And throughout our coaching time, you will develop the tools and confidence to take action. My way of coaching is to empower you in becoming the Leader you want to be. You are unique and so your coaching should be too. I don’t follow a template, or ‘one size fits all’. We start where you are & we work towards your goals. If you want a business that generates you income while also positively contributing to others, then you have arrived at the right place!</p>
@@ -72,8 +71,8 @@ const About = () => {
             animate={isIntro2 && {scale: 1}}
             transition={{duration: 2}}
             className="flex-1 flex justify-end">
-                <div className=" border-aboutPic border-green relative flex items-center justify-center h-aboutPic w-aboutPic">
-                    <div className="absolute -top-12 bottom-0 -left-16">
+                <div className=" border-aboutPic border-green relative flex items-center justify-center mr-5 sm:mr-0 h-80 w-64 sm:h-aboutPic sm:w-aboutPic">
+                    <div className="absolute right-8 sm:right-0 -left-20 -top-10 sm:-top-12 sm:bottom-0 sm:-left-16">
                         <Image src="/images/Sohail Tariq.jpeg" height={"550px"} width={"500px"} objectFit="cover" alt="Profile Pic"/>
                     </div>
                    

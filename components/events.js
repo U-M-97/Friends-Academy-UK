@@ -9,7 +9,7 @@ const Events = () => {
     const [course, setCourse] = useState(true)
     
   return (
-    <div className='font-main flex flex-col items-center justify-center bg-servicesBG pb-10 bg-green'>
+    <div className='font-main flex flex-col items-center justify-center pb-10 bg-green'>
         <div ref={header}>
             <motion.div
             initial={{opacity: 0, scale: 0}}
@@ -17,7 +17,7 @@ const Events = () => {
             transition={{duration: 0.5}}
             className=" flex flex-col items-center mt-20"
             >
-                <h1 className="text-4xl font-bold">Our Events and Courses</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold">Our Events and Courses</h1>
                 <div className="w-56 mt-2 flex items-center justify-center">
                     <div className="border-b-2 w-28 border-white"></div>
                     <div className='mx-3'>
@@ -28,28 +28,28 @@ const Events = () => {
             </motion.div>
          </div>
 
-         <div className=' w-aboutWidth mt-10 flex justify-center'>
-            <div className='border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white' onClick={() => setCourse(true)}>
+         <div className='w-80 sm:w-aboutWidth mt-10 flex flex-col sm:flex-row justify-center'>
+            <div className='w-full sm:w-auto border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white' onClick={() => setCourse(true)}>
                 <p>Plab-2 Overseas</p>
             </div>
-            <div className='border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white' onClick={() => setCourse(false)}>
+            <div className='mt-3 sm:mt-0 w-full sm:w-auto border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white' onClick={() => setCourse(false)}>
                 <p>Plab-2 Full Course</p>
             </div>
-            <div className='border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white'>
+            <div className='mt-3 sm:mt-0 w-full sm:w-auto border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white'>
                 <p>Plab-2 Mock</p>
             </div>
-            <div className='border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white'>
+            <div className='mt-3 sm:mt-0 w-full sm:w-auto border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white'>
                 <p>Plab-2 High Yield Course</p>
             </div>
-            <div className='border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white'>
+            <div className='mt-3 sm:mt-0 w-full sm:w-auto border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white'>
                 <p>Plab-2 High Yield with Mock</p>
             </div>
-            <div className='border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white'>
+            <div className='mt-3 sm:mt-0 w-full sm:w-auto border p-2 mr-5 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white'>
                 <p>Mini Mocks</p>
             </div>
          </div>
         
-        <div className='h-aboutPic overflow-auto px-4 py-2 mt-4'>
+        <div className='hidden sm:inline-block sm:h-aboutPic sm:overflow-auto sm:px-4 sm:py-2 sm:mt-4'>
         {course == true ? 
         <div className=' mt-8 w-aboutWidth rounded-lg flex bg-white shadow-lg'>
         <div className='rounded-l-lg border-l-8 border-pink flex py-4 px-2'>

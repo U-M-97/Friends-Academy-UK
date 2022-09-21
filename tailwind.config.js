@@ -17,7 +17,7 @@ module.exports = {
         main: ['Nunito Sans', "sans-serif"]
       },
       width:{
-        width: "1600px",
+        width: "1500px",
         picturesWrapper: "300vw",
         translateWidth: "100vw",
         plabWidth: "1400px",
@@ -43,7 +43,7 @@ module.exports = {
       },
       padding:{
         important: "2px"
-      }
+      },
     },
   },
   plugins: [],

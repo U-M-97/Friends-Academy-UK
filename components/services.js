@@ -16,7 +16,7 @@ const Services = () => {
   const {ref: card3, inView: isCard3} = useInView({triggerOnce: true})
 
   return (
-    <div className="font-main flex flex-col justify-center items-center my-10 bg-servicesBG">
+    <div className="font-main flex flex-col justify-center items-center my-10 bg-servicesBG w-screen sm:w-full">
       <div ref={header}>
         <motion.div
         initial={{opacity: 0, scale: 0}}
@@ -35,23 +35,23 @@ const Services = () => {
         </motion.div>
       </div>
       
-      <div ref={card1} className="mt-20">
+      <div ref={card1} className="mt-10 sm:mt-20">
         <motion.div 
         initial={{y: "150px"}}
         animate={isCard1 && {y: "0px"}}
         transition={{duration: 1}}
-        className=" flex items-center justify-center">
-          <div className="h-card w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
+        className=" flex items-center justify-center flex-col sm:flex-row ">
+          <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <PaidIcon className='scale-services ml-4 mt-6 text-green group-hover:text-white '/>
             <h1 className='mt-11 text-2xl font-bold'>Pay Only Once</h1>
             <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
           </div>
-          <div className=" h-card w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
+          <div className=" sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <PeopleIcon className=' scale-services ml-5 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Interactive PLAB 2 Practice Sessions</h1>
             <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
           </div>
-          <div className=" h-card w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
+          <div className=" sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <HandshakeIcon className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Unlimited Career Support</h1>
             <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
@@ -59,23 +59,23 @@ const Services = () => {
         </motion.div>
       </div>
 
-      <div ref={card2} className="mt-10">
+      <div ref={card2} className="sm:mt-10">
         <motion.div 
         initial={{y: "150px"}}
         animate={isCard2 && {y: "0px"}}
         transition={{duration: 1}}
-        className=" flex items-center justify-center">
-          <div className="h-card w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
+        className=" flex items-center justify-center flex-col sm:flex-row">
+          <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <AssignmentIndIcon className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Support with CV Building</h1>
             <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
           </div>
-          <div className="h-card w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
+          <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <AiOutlineFileSearch className=' scale-services ml-3 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Support with Job Search</h1>
             <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
           </div>
-          <div className="h-card w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
+          <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <FiBookOpen className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Interview Guidance</h1>
             <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
@@ -83,13 +83,13 @@ const Services = () => {
         </motion.div>
       </div>
      
-      <div ref={card3} className="mt-10 mb-10">
+      <div ref={card3} className="sm:mt-10 mb-10">
         <motion.div 
         initial={{y: "150px"}}
         animate={isCard3 && {y: "0px"}}
         transition={{duration: 1}}
-        className="flex items-center justify-center">
-          <div className="h-card w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
+        className="flex items-center justify-center flex-col sm:flex-row">
+          <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <SchoolIcon className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Online and Onsite PLAB 2 Courses</h1>
             <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>

@@ -3,11 +3,14 @@ import style from "../styles/navbar.module.css"
 import Link from "next/link"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState, useEffect } from "react";
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
-const Navbar = () => {
+const Navbar = (props) => {
 
     const [ mouseEnter , setMouseEnter ] = useState(false)
     const [ isClicked, setIsClicked ] = useState(false)
+    const [ open, setOpen ] = useState(false)
 
     useEffect(() => {
 
@@ -36,10 +39,43 @@ const Navbar = () => {
         setIsClicked(!isClicked)
     }
 
+    const handleClick = () => {
+        setOpen(!open)
+        open == false ? props.on() : props.off()
+    }
+
   return (
-    <>
+    <div className="">
         <div className={style.border}></div>
-        <div className="flex font-main justify-center">
+        
+        <div className=" flex items-center justify-between px-6 mt-3 sm:hidden">
+            <div className=" flex items-center justify-center">
+                <Image src="/images/Friends Academy.png" alt="logo" height={"110px"} width={"300px"} objectFit="cover"/>
+            </div>
+            <div className="" onClick={handleClick}>
+                <MenuIcon className="scale-150"/>
+            </div>
+        </div>
+        
+        <div className={`font-main fixed top-0 flex flex-col h-full w-screen bg-white duration-700 z-50 sm:hidden ${open == false ? " -translate-x-full" : " translate-x"}`}>
+            <div className="flex justify-end mt-5">
+                <div className="bg-green p-2 h-10 w-10 mr-5 rounded-md" onClick={handleClick}>
+                    <CloseIcon className="scale-125"/>
+                </div>
+            </div>
+            <ul className="mt-10">
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">Home</li>
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">About</li>
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">BOOK ONLINE</li>
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">OSCE BANK</li>
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">CANDIDATE REVIEWS</li>
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">BLOG</li>
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">GALLERY</li>
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">CONTACT</li>
+            </ul>
+        </div>
+       
+        <div className="hidden sm:flex font-main sm:justify-center">
             <div className=" flex items-center justify-center ml-10 w-72">
                 <Image src="/images/Friends Academy.png" alt="logo" height={"130px"} width={"300px"} objectFit="cover"/>
             </div>
@@ -108,8 +144,7 @@ const Navbar = () => {
                 </li>
            </ul>
         </div>
-    </>
-   
+    </div>
   )
 }
 
