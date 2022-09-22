@@ -7,6 +7,7 @@ import About from '../components/about'
 import Contact from '../components/contact'
 import Events from '../components/events'
 import Accommodation from '../components/accomodation'
+import Testimonials from '../components/testimonials'
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <PlabInfo/>
       <Services/>
       <About/>
+      {/* <Testimonials/> */}
       <Events/>
       <Accommodation/>
       <Contact/>

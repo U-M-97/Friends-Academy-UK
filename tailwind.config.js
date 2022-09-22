@@ -11,7 +11,7 @@ module.exports = {
         font: "#595f5f",
         gray: "#7592a0",
         lightGray: "lightGray",
-        servicesBG: "#f3fafa"
+        servicesBG: "#f3fafa",
       },
       fontFamily:{
         main: ['Nunito Sans', "sans-serif"]
@@ -46,5 +46,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
 }
