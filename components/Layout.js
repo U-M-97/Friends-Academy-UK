@@ -12,8 +12,8 @@ export default function Layout({children}){
   }, [mobile])
 
   return (
-    <div className={mobile == true ? "overflow-y-hidden" : " scrollbar scrollbar-track-white scrollbar-thumb-green scrollbar-thumb-rounded-full h-screen"}>
-      <div className="mr-4">
+    <div className={mobile == true ? "overflow-y-hidden" : "sm:scrollbar sm:scrollbar-track-white sm:scrollbar-thumb-green sm:scrollbar-thumb-rounded-full h-screen"}>
+      <div className="sm:mr-4">
         <Header/>
         <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>
         <main>

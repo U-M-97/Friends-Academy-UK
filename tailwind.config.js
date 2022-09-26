@@ -24,18 +24,22 @@ module.exports = {
         box: "570px",
         card: "380px",
         aboutWidth: "1200px",
-        aboutPic: "500px"
+        aboutPic: "500px",
+        testimonials: "600px",
+        testimonialsContainer: "1400px",
       },
       scale:{
         arrow: "3",
-        services: "3"
+        services: "3",
+        testimonialArrow: "2"
       },
       height:{
         slider: "600px",
         about: "900px",
         card: "320px",
         aboutPic: "550px",
-        accommodation: "500px"
+        accommodation: "500px",
+        testimonials: "405px"
       },
       borderWidth:{
         aboutPic: "10px",
@@ -44,6 +48,9 @@ module.exports = {
       padding:{
         important: "2px"
       },
+      translate:{
+        cards: "340px"
+      }
     },
   },
   plugins: [

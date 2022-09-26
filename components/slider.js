@@ -13,10 +13,10 @@ const Slider = () => {
 
   const handleArrow = (e) => {
 
-    if(e=="left"){
+    if(e == "left"){
       index !== 0 ? setIndex(index - 1) : setIndex(2)
     }
-    else if(e=="right"){
+    else if(e == "right"){
       index !== 2 ? setIndex(index + 1) : setIndex(0)
     }
   }
@@ -50,7 +50,7 @@ const Slider = () => {
                   <Image src={img} alt="image" layout="fill" objectFit="cover"/>
                 </div>
               )
-            })}      
+            })}
         </div>
         <div className="hidden sm:h-20 sm:w-10 sm:flex sm:items-center sm:justify-center sm:absolute sm:top-56 sm:bottom-0 sm:left-20  sm:text-white sm:cursor-pointer sm:hover:text-green sm:z-20" onClick={() => handleArrow("left")}>
             <ArrowBackIosIcon className="scale-arrow ml-8"/>

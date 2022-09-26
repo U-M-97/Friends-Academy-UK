@@ -20,7 +20,7 @@ export default function Home() {
       <PlabInfo/>
       <Services/>
       <About/>
-      {/* <Testimonials/> */}
+      <Testimonials/>
       <Events/>
       <Accommodation/>
       <Contact/>
