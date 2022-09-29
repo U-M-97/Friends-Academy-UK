@@ -27,6 +27,7 @@ module.exports = {
         aboutPic: "500px",
         testimonials: "600px",
         testimonialsContainer: "1400px",
+        svg: "200px"
       },
       scale:{
         arrow: "3",
@@ -40,7 +41,8 @@ module.exports = {
         card: "320px",
         aboutPic: "550px",
         accommodation: "500px",
-        testimonials: "405px"
+        testimonials: "405px",
+        svg: "200px"
       },
       borderWidth:{
         aboutPic: "10px",

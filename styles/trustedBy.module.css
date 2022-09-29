@@ -23,6 +23,24 @@
     animation: scroller2 60s linear infinite;
 }
 
+@media screen and (max-width: 480px) {
+    
+    .container{
+        width: 400vw;
+    }
+    
+    .partnersContainer1{
+        width: 200vw;
+        animation: scroller 30s linear infinite;
+    }
+
+    .partnersContainer2{
+        width: 200vw;
+        animation: scroller2 30s linear infinite;
+    }
+    
+  }
+
 @keyframes scroller {
     0%{
         transform: translateX(0%);
