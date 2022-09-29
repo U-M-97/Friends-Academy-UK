@@ -52,36 +52,36 @@ const Events = () => {
         <div className='hidden sm:inline-block sm:h-aboutPic sm:overflow-auto sm:px-4 sm:py-2 sm:mt-4'>
         {course == true ? 
         <div className=' mt-8 w-aboutWidth rounded-lg flex bg-white shadow-lg'>
-        <div className='rounded-l-lg border-l-8 border-pink flex py-4 px-2'>
-            <div className='flex items-center'>
-                <div className='ml-3'>
-                    <Image src="/images/Turkey.jpg" height="120px" width="120px" objectFit='cover' className='rounded-full'/>
-                </div>       
-                <div className='ml-4'>
-                    <div className='flex items-center'>
-                    <p className='text-3xl font-bold text-black'>Plab-2 Turkey</p>
-                    <p className='ml-3 font-extrabold text-xs bg-pink rounded-lg py-important px-1 text-center text-white'>NEW!</p>
-                    <p className='ml-3 font-extrabold text-xs bg-black rounded-lg py-important px-1 text-center text-white'>FEATURED!</p>
+            <div className='rounded-l-lg border-l-8 border-pink flex py-4 px-2'>
+                <div className='flex items-center'>
+                    <div className='ml-3'>
+                        <Image src="/images/Turkey.jpg" height="120px" width="120px" objectFit='cover' className='rounded-full'/>
+                    </div>       
+                    <div className='ml-4'>
+                        <div className='flex items-center'>
+                        <p className='text-3xl font-bold text-black'>Plab-2 Turkey</p>
+                        <p className='ml-3 font-extrabold text-xs bg-pink rounded-lg py-important px-1 text-center text-white'>NEW!</p>
+                        <p className='ml-3 font-extrabold text-xs bg-black rounded-lg py-important px-1 text-center text-white'>FEATURED!</p>
+                        </div>
+                        <p className='text-2xl font-bold mt-2'>Multiple Online / Onsite Courses in UK / 4 Mocks</p> 
+                        <p className='text-gray mt-2'>Turkey Only</p>
+                        <a href='' className='underline hover:text-green duration-300'>Read More</a>
                     </div>
-                    <p className='text-2xl font-bold mt-2'>Multiple Online / Onsite Courses in UK / 4 Mocks</p> 
-                    <p className='text-gray mt-2'>Turkey Only</p>
-                    <a href='' className='underline hover:text-green duration-300'>Read More</a>
                 </div>
-            </div>
-            
-            <div className='ml-16'>
-                <h1 className='text-2xl font-bold'>Price</h1>
-                <p className='mt-5 text-2xl'>£650</p>
-            </div>
-            <div className='ml-16'>
-                <h1 className='text-2xl font-bold'>Status</h1>
-                <p className='mt-5 text-md bg-red-600 text-white text-center rounded-lg'>Ended</p>
-            </div>
-            <div className='ml-16 flex items-center'>
-                <button className='bg-pink text-white py-3 px-8 rounded-3xl text-lg font-semibold hover:bg-green duration-300 hover:text-black'>View Course</button>
-            </div>
-        </div>          
-     </div>
+                
+                <div className='ml-16'>
+                    <h1 className='text-2xl font-bold'>Price</h1>
+                    <p className='mt-5 text-2xl'>£650</p>
+                </div>
+                <div className='ml-16'>
+                    <h1 className='text-2xl font-bold'>Status</h1>
+                    <p className='mt-5 text-md bg-red-600 text-white text-center rounded-lg'>Ended</p>
+                </div>
+                <div className='ml-16 flex items-center'>
+                    <button className='bg-pink text-white py-3 px-8 rounded-3xl text-lg font-semibold hover:bg-green duration-300 hover:text-black'>View Course</button>
+                </div>
+            </div>          
+         </div>
      :
      <>
         <div className=' mt-8 w-aboutWidth rounded-lg flex bg-white shadow-lg'>

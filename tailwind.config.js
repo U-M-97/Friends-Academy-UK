@@ -31,7 +31,8 @@ module.exports = {
       scale:{
         arrow: "3",
         services: "3",
-        testimonialArrow: "2"
+        testimonialArrow: "2",
+        trustedBy: "4"
       },
       height:{
         slider: "600px",

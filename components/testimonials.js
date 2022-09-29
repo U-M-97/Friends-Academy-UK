@@ -29,7 +29,7 @@ const Testimonials = () => {
         {
             img: "/images/Tom Cruise.jpg",
             name: "Tom Cruise",
-            desc: "American Actress",
+            desc: "American Actor",
             para: "Friends Academy has deﬁnitely been a game changer for me. Their perspective on things is so clear and they are so knowledgable that they taught me and showed me a totally new way to view myself and my own capabilities, and now I'm reaching goals within weeks that I thought would take me years."
         },
         {
@@ -109,7 +109,7 @@ const Testimonials = () => {
     }
 
   return (
-    <div className='font-main flex flex-col justify-center items-center bg-servicesBG pb-32 h-full  overflow-hidden'>
+    <div className='font-main flex flex-col justify-center items-center bg-servicesBG h-full  overflow-hidden'>
 
         <div ref={header}>
             <motion.div

@@ -8,6 +8,7 @@ import Contact from '../components/contact'
 import Events from '../components/events'
 import Accommodation from '../components/accomodation'
 import Testimonials from '../components/testimonials'
+import TrustedBy from '../components/trustedBy'
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <Services/>
       <About/>
       <Testimonials/>
+      <TrustedBy/>
       <Events/>
       <Accommodation/>
       <Contact/>
