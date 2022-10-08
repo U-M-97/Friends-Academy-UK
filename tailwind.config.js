@@ -8,10 +8,16 @@ module.exports = {
       colors:{
         pink: "#e75387",
         green: "#88ced0",
+        greenHover: "#A0D8D9",
         font: "#595f5f",
         gray: "#7592a0",
         lightGray: "lightGray",
         servicesBG: "#f3fafa",
+        login: "#dae5e8",
+        google: "	#DB4437",
+        facebook: "#3b5998",
+        facebookHover: "#2F477A",
+        googleHover: "#CCCCCC"
       },
       fontFamily:{
         main: ['Nunito Sans', "sans-serif"]

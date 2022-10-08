@@ -8,10 +8,14 @@ import styles from "../styles/header.module.css"
 import { useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Link from "next/link"
+import Image from 'next/image';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
 
     const [banner, setBanner] = useState(true)
+    const user = useSelector((state) => state.user.user)
 
     return(
         <div className='font-main overflow-hidden'>
@@ -29,12 +33,12 @@ const Header = () => {
             }
             
             
-            <div className='flex justify-center sm:p-4 relative'>
+            <div className='flex justify-center sm:p-2 relative'>
                 <div className='absolute right-5 top-0 bg-green text-black cursor-pointer rounded-b-md sm:p-1' onClick={() => setBanner(!banner)}>
                     {banner == true ? <ClearIcon className='scale-75 md:scale-100'/> : <KeyboardArrowDownIcon/>}
                 </div>
                 <div className='flex mt-5 flex-col w-screen sm:mt-0 sm:flex-row sm:w-width sm:justify-between'>
-                    <div className='px-3 sm:p-0 flex justify-between sm:ml-32'>
+                    <div className='px-3 sm:p-0 flex justify-between sm:ml-32 items-center'>
                         <div className='flex cursor-pointer'>
                             <PhoneIcon className='text-green'/>
                             <address className='text-font not-italic hover:text-green duration-200'>+ 00 4475 32707561</address>
@@ -47,7 +51,7 @@ const Header = () => {
 
                     <div className='border-b border-lightGray mt-2 sm:hidden'></div>
                     
-                    <div className='flex justify-center mt-2 sm:mr-40 sm:mt-0'>
+                    <div className='flex justify-center mt-2 sm:mr-40 sm:mt-0 items-center'>
                         <div className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <WhatsAppIcon/>
                         </div>
@@ -61,7 +65,13 @@ const Header = () => {
                         <div className='mr-4 text-gray cursor-pointer'>
                             <SearchIcon className=' scale-125'/>
                         </div>
-                    </div>    
+                        {user == null ? <div className='mx-4 cursor-pointer'>
+                            <Link href="/account/signup">
+                                <button className="py-2 px-4 bg-green rounded-md font-bold hover:bg-pink duration-300 hover:text-white">LOGIN</button>
+                            </Link> 
+                        </div> : null  }              
+                    </div>   
+                    
                     <div className='border-b border-lightGray mt-2 sm:hidden'></div>    
                 </div>                
             </div>

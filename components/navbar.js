@@ -5,15 +5,18 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState, useEffect } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { useSelector } from 'react-redux';
 
 const Navbar = (props) => {
 
     const [ mouseEnter , setMouseEnter ] = useState(false)
     const [ isClicked, setIsClicked ] = useState(false)
     const [ open, setOpen ] = useState(false)
+    const user = useSelector((state) => state.user.user)
+    console.log(user) 
 
     useEffect(() => {
-
+        console.log("running")
         const handleKey = (e) => {
             const link = document.getElementById("moreInformation")
             const dropDown = document.getElementById("dropDown")
@@ -30,7 +33,7 @@ const Navbar = (props) => {
         document.addEventListener("mousedown" , handleKey)
         
         return () => {
-            document.addEventListener("mousedown", handleKey)
+            document.removeEventListener("mousedown", handleKey)
     }
     }, [])
 
@@ -80,7 +83,7 @@ const Navbar = (props) => {
                 <Image src="/images/Friends Academy.png" alt="logo" height={"130px"} width={"300px"} objectFit="cover"/>
             </div>
         
-           <ul className="flex ml-40 items-center">
+           <ul className={`flex ${user ? "ml-20" : "ml-40"} items-center`}>
                 <li className="mr-8 hover:text-green duration-200">
                     <Link href="">
                         <a>HOME</a>
@@ -133,7 +136,7 @@ const Navbar = (props) => {
                                 </li>
                             </ul>
                         
-                        </div> :null
+                        </div> : null
                     }                   
                 </div>
                    
@@ -142,6 +145,14 @@ const Navbar = (props) => {
                         <a>CONTACT</a>
                     </Link>
                 </li>
+
+                { user == null ? null : 
+                <div className='mr-4 text-gray cursor-pointer'>
+                    <div className=' h-20 w-20 relative overflow-hidden rounded-full'>
+                        <Image src={"/images/avatar.png"} layout={"fill"} objectFit="cover" alt="profile picture"/>
+                    </div>
+                </div>
+            }
            </ul>
         </div>
     </div>
