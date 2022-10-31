@@ -4,17 +4,47 @@ const dbConnect = require("../../utils/connectDB")
 
 export default async function handler (req, res) {
     await dbConnect()
-    const {cookieExist} = req.body
-    console.log(cookieExist)
-    jwt.verify(cookieExist, process.env.jwtSecret, async (err, user) => {
-        if(err){
-            console.log(err)
-            return res.send("Token is not Valid")
+    if(req.method === "POST"){
+        const cookieExist = req.body.cookieExist
+        // console.log(cookieExist)
+        jwt.verify(cookieExist, process.env.jwtSecret, async (err, user) => {
+            if(err){
+                // console.log(err)
+                return res.send("Token is not Valid")
+            }
+            const userData = await User.findById(user.id)
+            if(!userData){
+                return res.send("User not exists")
+            }
+            res.send(userData)
+        })
+    }
+    
+    else if(req.method === "PUT"){
+        const {user, plab2, prevAttempt, phone} = req.body
+        console.log(plab2, prevAttempt, phone)
+        if(plab2 === undefined){
+            const findUser = await User.findByIdAndUpdate(user._id, 
+                {
+                    $set: {
+                        prevPlab2Attempts: prevAttempt,
+                        phone: phone
+                    }
+                })
+            console.log(findUser)
+            res.send("User updated Successfully", findUser)
         }
-        const userData = await User.findById(user.id)
-        if(!userData){
-            return res.send("User not exists")
+        else{
+            const findUser = await User.findByIdAndUpdate(user._id, 
+                {
+                    $set: {
+                        plab2Date: plab2,
+                        prevPlab2Attempts: prevAttempt,
+                        phone: phone
+                    }    
+                })
+            console.log(findUser)
+            res.send("User updated Successfully", findUser)
         }
-        res.send(userData)
-    })
+    }
 }

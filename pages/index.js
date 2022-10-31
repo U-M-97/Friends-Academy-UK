@@ -12,22 +12,23 @@ import TrustedBy from '../components/trustedBy'
 import { getCookie } from "cookies-next"
 import axios from 'axios'
 import { useDispatch } from "react-redux"
-import { loginSuccess } from "../redux/userReducer"
+import { loginSuccess, logout } from "../redux/userReducer"
+import { addCourse } from "../redux/courseReducer"
 
 export default function Home(props) {
 
-  console.log(props.data)
   const dispatch = useDispatch()
-  if(props.data === "Token is not Valid"){
-    dispatch(loginSuccess(null))
+  // console.log(props.courses, props.user)
+  dispatch(addCourse(props.courses))
+  if(props.user === "Token is not Valid"){
+    dispatch(logout())
   }
   else{
-    dispatch(loginSuccess(props.data))
+    dispatch(loginSuccess(props.user))
   }
- 
 
   return (
-    <div>
+    <div className=''>
       <Head>
         <title>Friends Academy UK</title>
         <link rel="icon" href="/images/Friends Academy.png"/>
@@ -48,9 +49,12 @@ export default function Home(props) {
 export async function getServerSideProps({req, res}) {
 
   const cookieExist = await getCookie("token", {req, res});
+  console.log(cookieExist)
   
-  const { data }  = await axios.post("http://localhost:3000/api/userData", {cookieExist})
-  console.log(data)
+  const userData  = await axios.post("http://localhost:3000/api/userData", {cookieExist})
+  const coursesData = await axios.get("http://localhost:3000/api/courses")
+  const user = userData.data
+  const courses = coursesData.data
 
-  return { props: { data } }
+  return { props: { user, courses} }
 }

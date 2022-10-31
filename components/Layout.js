@@ -15,8 +15,7 @@ export default function Layout({children}){
   }, [mobile])
 
   return (
-    <div className={mobile == true ? "overflow-y-hidden" : "sm:scrollbar sm:scrollbar-track-white sm:scrollbar-thumb-green sm:scrollbar-thumb-rounded-full h-screen"}>
-      <div className="sm:mr-4">
+    <div className={mobile == true ? "overflow-y-hidden" : ""}>
         {
           homePage && 
           <>
@@ -30,8 +29,6 @@ export default function Layout({children}){
         {
           homePage && <Footer/>
         }    
-      </div>
-     
     </div>
   )
 }

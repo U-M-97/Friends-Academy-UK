@@ -172,10 +172,10 @@ const Testimonials = () => {
                 </div>
                 
                 <div className='hidden sm:flex  sm:items-center sm:justify-center sm:mt-14'>
-                    <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${page == 1 ? "bg-green scale-125" : null}`}></div>
-                    <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${page == 2 ? "bg-green scale-125 " : null}`}></div>
-                    <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${page == 3 ? "bg-green scale-125" : null}`}></div>
-                    <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${page == 4 ? "bg-green scale-125" : null}`}></div>
+                    <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${page == 1 ? "bg-greenHover scale-125" : null}`}></div>
+                    <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${page == 2 ? "bg-greenHover scale-125 " : null}`}></div>
+                    <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${page == 3 ? "bg-greenHover scale-125" : null}`}></div>
+                    <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${page == 4 ? "bg-greenHover scale-125" : null}`}></div>
                 </div>
                 <div className='flex  items-center justify-center mt-5 sm:hidden'>
                     <div className={`h-3 w-3 bg-white border border-black rounded-full mx-1 duration-300 ${pageMobile == 1 ? "bg-green scale-125" : null}`}></div>

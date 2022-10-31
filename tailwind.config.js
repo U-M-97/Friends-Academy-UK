@@ -33,7 +33,8 @@ module.exports = {
         aboutPic: "500px",
         testimonials: "600px",
         testimonialsContainer: "1400px",
-        svg: "200px"
+        svg: "200px",
+        courseWidth: "700px"
       },
       scale:{
         arrow: "3",
@@ -48,7 +49,8 @@ module.exports = {
         aboutPic: "550px",
         accommodation: "500px",
         testimonials: "405px",
-        svg: "200px"
+        svg: "200px",
+        signup: "650px"
       },
       borderWidth:{
         aboutPic: "10px",
@@ -59,10 +61,14 @@ module.exports = {
       },
       translate:{
         cards: "340px"
-      }
+      },
+      letterSpacing:{
+        debitCard: "5px",
+        name: "3px"
+      },
     },
   },
   plugins: [
-    require('tailwind-scrollbar')({ nocompatible: true }),
-  ],
+    
+  ]
 }

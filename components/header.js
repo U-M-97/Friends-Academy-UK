@@ -15,10 +15,10 @@ import { useSelector } from 'react-redux';
 const Header = () => {
 
     const [banner, setBanner] = useState(true)
-    const user = useSelector((state) => state.user.user)
+    const user = useSelector((state) => state.user.currentUser)
 
     return(
-        <div className='font-main overflow-hidden'>
+        <div className='font-main overflow-x-hidden'>
             {banner == true ? <div className={styles.headerOpen}>
                 <div className={styles.headerContainer}>
                     <p className='mr-1 text-green'>Our New Address : </p>

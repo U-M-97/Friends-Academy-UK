@@ -20,9 +20,24 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String
     },
+    plab2Date: {
+        type: String
+    },
+    prevPlab2Attempts: {
+        type: String
+    },
+    phone: {
+        type: String
+    },
     token: {
         type: String
-    }
+    },
+    courses:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Course"
+        }
+    ]
 })
 
 const User = mongoose.models.User || mongoose.model("User", userSchema)

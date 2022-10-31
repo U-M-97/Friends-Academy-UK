@@ -9,7 +9,8 @@ export default async function redirectGoogle(req, res, next){
         }
         setCookies("token", user.token, {
             req,
-            res
+            res,
+            maxAge: 24 * 60 * 60
         })
         res.redirect("http://localhost:3000")
     })(req, res, next)

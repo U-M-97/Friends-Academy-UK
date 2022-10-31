@@ -4,6 +4,6 @@ import "../../../utils/passport"
 
 export default async function handler(req, res, next) {
     await dbConnection()
-    passport.authenticate('facebook', { scope: ['email'],} )
+    passport.authenticate('facebook', { scope: ['email']} )
     (req,res,next)
 }

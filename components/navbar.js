@@ -1,19 +1,25 @@
 import Image from "next/image"
 import style from "../styles/navbar.module.css"
 import Link from "next/link"
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useState, useEffect } from "react";
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import { useSelector } from 'react-redux';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import { useState, useEffect } from "react"
+import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
+import { useDispatch , useSelector } from 'react-redux'
+import { logout } from "../redux/userReducer"
+import { deleteCookie } from "cookies-next"
+import { useRouter } from 'next/router'
 
 const Navbar = (props) => {
 
     const [ mouseEnter , setMouseEnter ] = useState(false)
     const [ isClicked, setIsClicked ] = useState(false)
     const [ open, setOpen ] = useState(false)
-    const user = useSelector((state) => state.user.user)
-    console.log(user) 
+    const user = useSelector((state) => state.user.currentUser)
+    const [ isClickedProfile, setIsClickedProfile] = useState(false)  
+    const [ mouseEnterProfile, setMouseEnterProfile ] = useState(false)
+    const dispatch = useDispatch()
+    const router = useRouter()
 
     useEffect(() => {
         console.log("running")
@@ -27,6 +33,20 @@ const Navbar = (props) => {
             }
             if(!insideLink && !insideDropDown){
                 setIsClicked(false)
+            }
+
+            const profileAvatar = document.getElementById("profileAvatar")
+            const dropDownProfile = document.getElementById("profileMenu")
+            let insideProfileAvatar
+            if(profileAvatar){
+                insideProfileAvatar = profileAvatar.contains(e.target)
+            }
+            let insideDropDownProfile
+            if(dropDownProfile){
+                insideDropDownProfile = dropDownProfile.contains(e.target)
+            }
+            if(!insideProfileAvatar && !insideDropDownProfile){
+                setIsClickedProfile(false)
             }
         }
 
@@ -45,6 +65,12 @@ const Navbar = (props) => {
     const handleClick = () => {
         setOpen(!open)
         open == false ? props.on() : props.off()
+    }
+
+    const logoutUser = () => {
+        dispatch(logout())
+        deleteCookie("token")
+        window.location.href="/"
     }
 
   return (
@@ -85,7 +111,7 @@ const Navbar = (props) => {
         
            <ul className={`flex ${user ? "ml-20" : "ml-40"} items-center`}>
                 <li className="mr-8 hover:text-green duration-200">
-                    <Link href="">
+                    <Link href="/">
                         <a>HOME</a>
                     </Link>
                 </li>
@@ -147,10 +173,37 @@ const Navbar = (props) => {
                 </li>
 
                 { user == null ? null : 
-                <div className='mr-4 text-gray cursor-pointer'>
-                    <div className=' h-20 w-20 relative overflow-hidden rounded-full'>
-                        <Image src={"/images/avatar.png"} layout={"fill"} objectFit="cover" alt="profile picture"/>
+                <div className='mr-4 text-gray relative' onMouseEnter={() => setMouseEnterProfile(true)} onMouseLeave={() => setMouseEnterProfile(false)}>
+                    <div id="profileAvatar" className='border-2 border-black h-16 w-16 relative overflow-hidden rounded-full cursor-pointer' onClick={() => setIsClickedProfile(!isClickedProfile)}>
+                        <Image src={user.image} layout={"fill"} objectFit="cover" alt="profile picture"/>
                     </div>
+                    {isClickedProfile == true || mouseEnterProfile == true ? 
+                     <div id="profileMenu" className="flex flex-col justify-between absolute top-16 right-0 border-t-4 border-green bg-white z-40 w-96 text-black">
+                        <Link href="/account/signup">
+                            <div className="border-b border-lightGray py-4 px-5 hover:bg-green hover:text-white duration-300 cursor-pointer">
+                                <a className="text-xl">Edit Profile</a>
+                            </div>
+                        </Link>
+
+                        <Link href="/account/signup">
+                            <div className="border-b border-lightGray py-4 px-5  hover:bg-green hover:text-white duration-300 cursor-pointer">
+                                <a className="text-xl">Your Booking and Subscriptions</a>
+                            </div>
+                        </Link>
+
+                        <Link href="/account/signup">
+                            <div className="border-b border-lightGray py-4 px-5  hover:bg-green hover:text-white duration-300 cursor-pointer">
+                                <a className="text-xl">Make a Payment</a>
+                            </div>
+                        </Link>
+
+                        <div className="border-b border-lightGray py-4 px-5  hover:bg-green hover:text-white duration-300 cursor-pointer" onClick={logoutUser}>
+                            <a className="text-xl">Logout</a>
+                        </div>
+                     </div>
+                     : null
+                    }
+                   
                 </div>
             }
            </ul>
