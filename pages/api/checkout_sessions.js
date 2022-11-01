@@ -3,7 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 export default async function handler(req, res){
     if(req.method === "POST"){
         const { user, selectedCourse } = req.body
-        const transformedItems = {
+        const transformedItems = [{
             description: selectedCourse.description,
             quantity: 1,
             price_data: {
@@ -13,7 +13,7 @@ export default async function handler(req, res){
                     name: selectedCourse.title
                 }
             }
-        }
+    }]
 
         try{
             const session = await stripe.checkout.sessions.create({
@@ -21,7 +21,7 @@ export default async function handler(req, res){
                 line_items: transformedItems,
                 mode: "payment",
                 success_url:`${req.headers.origin}/?success=true`,
-                cancel_url: `${req.headers.origin}/?canceled=true`, 
+                cancel_url: `${req.headers.origin}/?canceled=true`,
             })
             res.status(200).json({ id: session.id})
         }catch(err){

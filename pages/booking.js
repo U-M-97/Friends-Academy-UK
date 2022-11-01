@@ -10,11 +10,11 @@ import { useRouter } from "next/router"
 import axios from "axios"
 import { loadStripe } from '@stripe/stripe-js'
 
-const booking = () => {
+const Booking = () => {
 
+    const stripePromise = loadStripe(process.env.stripe_public_key);
     const selectedCourse = useSelector((state) => state.course.selectedCourse)
     console.log(selectedCourse)
-    const stripe = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
     const [phone, setPhone] = useState()
     const user = useSelector((state) => state.user.currentUser)
     const router = useRouter()
@@ -53,6 +53,8 @@ const booking = () => {
     }, [calendar])
 
     const handlePay = async () => {
+        const stripe = await stripePromise
+        console.log(stripe)
         console.log(plab2, prevAttempt, phone)
         if(user.plab2Date !== undefined){
             if(prevAttempt != null && phone != null){
@@ -67,7 +69,10 @@ const booking = () => {
             }
         }
         const res = await axios.post("http://localhost:3000/api/checkout_sessions", {user, selectedCourse}) 
-        console.log(res)
+        console.log(res.data.id)
+        const result = await stripe.redirectToCheckout({
+            sessionId: res.data.id
+        })
     }
 
   return (
@@ -115,4 +120,4 @@ const booking = () => {
   )
 }
 
-export default booking
+export default Booking

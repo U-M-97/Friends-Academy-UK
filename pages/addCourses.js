@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 
-const addCourses = () => {
+const AddCourses = () => {
 
     const [ inputs, setInputs ] = useState({
         title: "",
@@ -42,4 +42,4 @@ const addCourses = () => {
   )
 }
 
-export default addCourses
+export default AddCourses

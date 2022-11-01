@@ -118,18 +118,24 @@ const Signup = () => {
                 { userExist == true ? <p className="text-red-600 font-bold">User already exists</p> : null }
                 <button className="bg-green hover:bg-greenHover text-xl p-3 rounded-sm w-96 mt-2" onClick={handleSubmit}>Login</button>
                 <label className="mt-1">OR</label>
-                <a href="/api/google/authGoogle" className="bg-white hover:bg-googleHover p-1 rounded-sm w-96 mt-1 items-center flex cursor-pointer">
-                    <div className="relative h-10 w-10 ml-20">
-                        <Image src="/images/google.png" layout="fill" objectFit="cover"/>
-                    </div>
-                    <p className="ml-3 text-gray">Sign in with Google</p>
-                </a>
-                <a href="/api/facebook/authFacebook" className="bg-facebook p-1 rounded-sm w-96 mt-2 flex items-center hover:bg-facebookHover">
-                    <div className="relative h-11 w-11 ml-20">
-                        <Image src="/images/facebook.png" layout="fill" objectFit="cover"/>
-                    </div>
-                    <p className="ml-2 text-white">Sign in with Facebook</p>
-                </a>
+                <Link href="/api/google/authGoogle">
+                    <a className="bg-white hover:bg-googleHover p-1 rounded-sm w-96 mt-1 items-center flex cursor-pointer">
+                        <div className="relative h-10 w-10 ml-20">
+                            <Image src="/images/google.png" layout="fill" objectFit="cover"/>
+                        </div>
+                        <p className="ml-3 text-gray">Sign in with Google</p>
+                    </a>
+                </Link>
+                
+                <Link href="/api/facebook/authFacebook">
+                    <a className="bg-facebook p-1 rounded-sm w-96 mt-2 flex items-center hover:bg-facebookHover">
+                        <div className="relative h-11 w-11 ml-20">
+                            <Image src="/images/facebook.png" layout="fill" objectFit="cover"/>
+                        </div>
+                        <p className="ml-2 text-white">Sign in with Facebook</p>
+                    </a>
+                </Link>
+                
                 <div className="flex mt-5 mb-10">
                      <h1 className="">Already have an account?</h1>
                      <a className="ml-2 underline hover:text-green">
