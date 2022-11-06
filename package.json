@@ -8,12 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
-  
-    "engines": {
-      "node": "16.15.1",
-      "npm": "8.5.5"
-    },
-
+  "engines": {
+    "node": "16.15.1",
+    "npm": "8.5.5"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -25,6 +23,7 @@
     "cookies-next": "^2.1.1",
     "framer-motion": "^7.3.5",
     "jsonwebtoken": "^8.5.1",
+    "micro": "^9.4.1",
     "mongoose": "^6.6.2",
     "next": "^12.3.0",
     "next-redux-wrapper": "^8.0.0",

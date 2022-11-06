@@ -37,7 +37,11 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Course"
         }
-    ]
+    ],
+    amountPaid: {
+        type: Number,
+        default: 0
+    }
 })
 
 const User = mongoose.models.User || mongoose.model("User", userSchema)

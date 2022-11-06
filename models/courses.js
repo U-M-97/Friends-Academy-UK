@@ -41,7 +41,7 @@ const courseSchema = new mongoose.Schema({
                 type: String
             }
         }
-     ]
+     ],
 })
 
 const Course = mongoose.models.Course || mongoose.model("Course", courseSchema)

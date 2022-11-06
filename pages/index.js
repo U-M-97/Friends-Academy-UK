@@ -18,9 +18,9 @@ import { addCourse } from "../redux/courseReducer"
 export default function Home(props) {
 
   const dispatch = useDispatch()
-  // console.log(props.courses, props.user)
+  console.log(props.courses, props.user)
   dispatch(addCourse(props.courses))
-  if(props.user === "Token is not Valid"){
+  if(props.user === "Token is not Valid" || props.user === "User not exists"){
     dispatch(logout())
   }
   else{
@@ -49,7 +49,7 @@ export default function Home(props) {
 export async function getServerSideProps({req, res}) {
 
   const cookieExist = await getCookie("token", {req, res});
-  console.log(cookieExist)
+  // console.log(cookieExist)
   
   const userData  = await axios.post("http://localhost:3000/api/userData", {cookieExist})
   const coursesData = await axios.get("http://localhost:3000/api/courses")

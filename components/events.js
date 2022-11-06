@@ -12,6 +12,7 @@ const Events = () => {
     const dispatch = useDispatch()
     const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
     const courses = useSelector((state) => state.course.currentCourses)
+    const user = useSelector((state) => state.user.currentUser)
     const [ selectedCategory, setSelectedCategory ] = useState()
     let categories = []
     let tmp = null
@@ -29,7 +30,11 @@ const Events = () => {
 
     const handleSelectedCourse = (item) => {
         dispatch(selectCourse(item))
-        router.push("/booking")
+        if(!user){
+            router.push("/account/login")
+        }else{
+            router.push("/booking")
+        } 
     }
     
   return (
