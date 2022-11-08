@@ -23,7 +23,7 @@ const AddCourses = () => {
     console.log(inputs)
 
     const handleSubmit = () => {
-        axios.post("http://localhost:3000/api/courses", inputs)
+        axios.post(`${process.env.url}/courses`, inputs)
 
     }
 

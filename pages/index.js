@@ -51,8 +51,8 @@ export async function getServerSideProps({req, res}) {
   const cookieExist = await getCookie("token", {req, res});
   // console.log(cookieExist)
   
-  const userData  = await axios.post("http://localhost:3000/api/userData", {cookieExist})
-  const coursesData = await axios.get("http://localhost:3000/api/courses")
+  const userData  = await axios.post(`${process.env.url}/userData`, {cookieExist})
+  const coursesData = await axios.get(`${process.env.url}/courses`)
   const user = userData.data
   const courses = coursesData.data
 

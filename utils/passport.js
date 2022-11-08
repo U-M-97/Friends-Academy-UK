@@ -18,7 +18,7 @@ const FacebookStrategy = require('passport-facebook')
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/api/google/redirectGoogle" 
+    callbackURL: `${process.env.url}/google/redirectGoogle`
   },
   async (accessToken, refreshToken, profile, done) => {
     // console.log(profile)
@@ -67,7 +67,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/api/facebook/redirectFacebook",
+  callbackURL: `${process.env.url}/facebook/redirectFacebook`,
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
   async (accessToken, refreshToken, profile, done) => {

@@ -5,7 +5,7 @@ const setCookies = require("cookies-next").setCookie
 export default async function redirectFacebook(req, res, next) {
     passport.authenticate("facebook", (err,user) => {
         if(err || !user){
-            return res.redirect("http://localhost:3000/account/signup")
+            return res.redirect(`${process.env.base_url}/account/signup`)
         }
 
         setCookies("token", user.token,
@@ -14,6 +14,6 @@ export default async function redirectFacebook(req, res, next) {
             res,
             maxAge: 24 * 60 * 60
         })
-        res.redirect("http://localhost:3000")
+        res.redirect(`${process.env.base_url}`)
     })(req,res,next)
 }

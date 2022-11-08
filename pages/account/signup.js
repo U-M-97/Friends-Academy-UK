@@ -56,7 +56,7 @@ const Signup = () => {
                 inputs, plab2
             }
             try{
-                const res = await axios.post("http://localhost:3000/api/email/authEmail", data)
+                const res = await axios.post(`${process.env.url}/email/authEmail`, data)
                 console.log(res.data)
                 if(res.data == "Email already exists"){
                     setUserExist(true)
