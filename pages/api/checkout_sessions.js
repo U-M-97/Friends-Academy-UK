@@ -12,7 +12,8 @@ export default async function handler(req, res){
                 currency: "gbp",
                 unit_amount: selectedCourse.price * 100,
                 product_data: {
-                    name: selectedCourse.title
+                    name: selectedCourse.title, 
+                    images: [selectedCourse.image],
                 }
             }
     }]

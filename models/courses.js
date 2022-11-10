@@ -1,6 +1,9 @@
 const mongoose = require("mongoose")
 
 const courseSchema = new mongoose.Schema({
+    image: {
+        type: String
+    },
     title:{
         type: String
     },

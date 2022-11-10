@@ -9,7 +9,6 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
 import { loadStripe } from '@stripe/stripe-js'
-const { REACT_APP_URL } = process.env
 
 const Booking = () => {
 
@@ -68,7 +67,7 @@ const Booking = () => {
                 axios.put(`${process.env.url}/userData`, {user, plab2, prevAttempt, phone})  
             }
         }
-        const res = await axios.post(`${process.env.url}/checkout_sessions`, {user, selectedCourse}) 
+        const res = await axios.post(`http://localhost:3000/api/checkout_sessions`, {user, selectedCourse}) 
         console.log(res.data.id)
         const result = await stripe.redirectToCheckout({
             sessionId: res.data.id

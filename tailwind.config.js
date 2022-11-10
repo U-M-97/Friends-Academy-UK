@@ -34,7 +34,8 @@ module.exports = {
         testimonials: "600px",
         testimonialsContainer: "1400px",
         svg: "200px",
-        courseWidth: "700px"
+        courseWidth: "700px",
+        courses: "1250px"
       },
       scale:{
         arrow: "3",

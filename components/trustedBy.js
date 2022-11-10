@@ -10,6 +10,7 @@ import style from "../styles/trustedBy.module.css"
 const TrustedBy = () => {
 
     const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
+    const {ref: header2, inView: isHeader2} = useInView({triggerOnce: true})
     const {ref: countUp, inView: isCountUp} = useInView({triggerOnce: true})
 
   return (
@@ -61,10 +62,10 @@ const TrustedBy = () => {
             </div>
         </div>
 
-        <div ref={header}>
+        <div ref={header2}>
             <motion.div
             initial={{opacity: 0, scale: 0}}
-            animate={isHeader && {opacity: 1, scale: 1}}
+            animate={isHeader2 && {opacity: 1, scale: 1}}
             transition={{duration: 0.5}}
             className=" flex flex-col items-center mt-20 sm:mt-32"
             >
