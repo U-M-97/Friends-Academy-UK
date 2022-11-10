@@ -67,7 +67,7 @@ const Booking = () => {
                 axios.put(`${process.env.url}/userData`, {user, plab2, prevAttempt, phone})  
             }
         }
-        const res = await axios.post(`http://localhost:3000/api/checkout_sessions`, {user, selectedCourse}) 
+        const res = await axios.post(`${process.env.URL}/checkout_sessions`, {user, selectedCourse}) 
         console.log(res.data.id)
         const result = await stripe.redirectToCheckout({
             sessionId: res.data.id
