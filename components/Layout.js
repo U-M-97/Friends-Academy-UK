@@ -8,7 +8,7 @@ export default function Layout({children}){
 
   const [ mobile, setMobile ] = useState(false)
   const router = useRouter()
-  const homePage = router.pathname == "/account/signup" || router.pathname == "/account/login" ? false : true
+  const homePage = router.pathname == "/account/signup" || router.pathname == "/account/login" || router.pathname.startsWith("/admin") ? false : true
   
   useEffect(() => {
     console.log(mobile)
@@ -19,8 +19,8 @@ export default function Layout({children}){
         {
           homePage && 
           <>
-          <Header/>
-          <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>
+            <Header/>
+            <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>
           </> 
         }
         <main>

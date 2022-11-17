@@ -3,9 +3,11 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import MailIcon from '@mui/icons-material/Mail';
 import { useState } from "react"
+import { useSelector } from "react-redux"
 
 const Course = () => {
 
+    const course = useSelector((state) => state.course.selectedCourse)
     const [ readMore, setReadMore ] = useState(false)
     const text = "Cancellation Policy: - To confirm your booking, you must pay online / bank transfer / money transfer - The course fee can not be transferred to any other candidate - A deduction of £125 will be charged for any cancellation of booking of your PLAB 2 course until a week before the course start date - No cancellation request will be accepted after the start date of your PLAB 2 course however you will be allowed to reschedule your course - Any agreed refund will be refunded back to you within one month of cancellation date to the same card / account the payment was made from - No fee will be refunded for any cancellation within last 7 days prior to starting the course - MOCK fee is non-refundable and non-transferable - High Yield course fee is non-refundable and non-transferable - You can not sale accommodation to any other candidate / person - It is your responsibility to keep your room tidy and return in an acceptable condition - No smoking and / or alcohol consumption will be allowed in the academy as well as within the accommodation - In case of unforeseen situation or special circumstances e.g Natural Pandemic / National Emergency / PLAB 2 exam cancellation we will offer alternate dates of your booked courses without any extra charges however if you want to cancel then a cancellation charges will be applicable as mentioned above. "
     
@@ -13,10 +15,10 @@ const Course = () => {
     <div className="flex flex-col items-center font-main mb-10">
         <div className="flex">
             <div className="w-testimonials p-10">
-                <Image src="/images/Friends Academy logo.png" height="500px" width="500px" objectFit="cover"/>
+                <Image src={course.image} height="500px" width="500px" objectFit="cover"/>
             </div>
             <div className="w-courseWidth p-10">
-                <h1 className="text-4xl font-bold">PLAB 2 Course November 22</h1>
+                <h1 className="text-4xl font-bold">{course.title}</h1>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Duration :</p>
                     <p className="ml-2">14 Days course</p>
@@ -24,7 +26,7 @@ const Course = () => {
                 <p className="text-2xl mt-5">Starts on Fri Nov 4, 2022</p>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Price :</p>
-                    <p className="ml-2">£600</p>
+                    <p className="ml-2">£{course.price}</p>
                 </div>
                 <ul className="mt-10 list-disc text-xl ml-4">
                     <li>PLAB 2 full course - ONLINE & ONSITE -14 days full course</li>
@@ -34,6 +36,9 @@ const Course = () => {
                     <li className="mt-3">Four MOCKS</li>
                     <li className="mt-3">RETAKE INTERNAL CANDIDATES (Ex Friends Academy Candidates) - FREE</li>
                 </ul>
+            </div>
+            <div className="mt-10">
+                <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold">Book Now</button>
             </div>
         </div>
         <div className="p-20 flex flex-col items-center">

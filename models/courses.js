@@ -25,7 +25,10 @@ const courseSchema = new mongoose.Schema({
             ref: "User"
         }      
     ],
-    date:{
+    startDate:{
+        type: String
+    },
+    endDate: {
         type: String
     },
     schedule: [
@@ -45,7 +48,8 @@ const courseSchema = new mongoose.Schema({
             }
         }
      ],
-})
+},
+)
 
 const Course = mongoose.models.Course || mongoose.model("Course", courseSchema)
 module.exports = Course

@@ -17,7 +17,8 @@ module.exports = {
         google: "	#DB4437",
         facebook: "#3b5998",
         facebookHover: "#2F477A",
-        googleHover: "#CCCCCC"
+        googleHover: "#CCCCCC",
+        dashboard: "#03c9d7"
       },
       fontFamily:{
         main: ['Nunito Sans', "sans-serif"]
