@@ -52,7 +52,8 @@ module.exports = {
         accommodation: "500px",
         testimonials: "405px",
         svg: "200px",
-        signup: "650px"
+        signup: "650px",
+        review: "400px"
       },
       borderWidth:{
         aboutPic: "10px",

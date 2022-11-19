@@ -12,14 +12,15 @@ import TrustedBy from '../components/trustedBy'
 import { getCookie } from "cookies-next"
 import axios from 'axios'
 import { useDispatch } from "react-redux"
-import { loginSuccess, logout } from "../redux/userReducer"
+import { loginSuccess, logout, userReviews } from "../redux/userReducer"
 import { addCourse } from "../redux/courseReducer"
 
 export default function Home(props) {
 
   const dispatch = useDispatch()
-  console.log(props.courses, props.user)
+  // console.log(props.courses, props.user, props.reviews)
   dispatch(addCourse(props.courses))
+  dispatch(userReviews(props.reviews))
   if(props.user === "Token is not Valid" || props.user === "User not exists"){
     dispatch(logout())
   }
@@ -53,8 +54,10 @@ export async function getServerSideProps({req, res}) {
   
   const userData  = await axios.post(`${process.env.url}/userData`, {cookieExist})
   const coursesData = await axios.get(`${process.env.url}/courses`)
+  const getReviews = await axios.get(`${process.env.url}/reviews`)
+  const reviews = getReviews.data
   const user = userData.data
   const courses = coursesData.data
 
-  return { props: { user, courses} }
+  return { props: { user, courses, reviews} }
 }

@@ -33,7 +33,7 @@ const Events = () => {
         if(!user){
             router.push("/account/login")
         }else{
-            router.push("/booking")
+            router.push("/course")
         } 
     }
     

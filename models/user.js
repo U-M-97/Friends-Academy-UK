@@ -41,6 +41,12 @@ const userSchema = new mongoose.Schema({
     amountPaid: {
         type: Number,
         default: 0
+    },
+    review: {
+        type: String
+    },
+    rating: {
+        type: Number
     }
 })
 

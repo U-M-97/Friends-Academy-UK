@@ -4,6 +4,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import MailIcon from '@mui/icons-material/Mail';
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import Link from "next/link";
 
 const Course = () => {
 
@@ -23,7 +24,7 @@ const Course = () => {
                     <p className="font-bold">Duration :</p>
                     <p className="ml-2">14 Days course</p>
                 </div>
-                <p className="text-2xl mt-5">Starts on Fri Nov 4, 2022</p>
+                <p className="text-2xl mt-5">Starts on {course.startDate}</p>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Price :</p>
                     <p className="ml-2">£{course.price}</p>
@@ -38,7 +39,9 @@ const Course = () => {
                 </ul>
             </div>
             <div className="mt-10">
-                <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold">Book Now</button>
+                <Link href="/booking">
+                    <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold">Book Now</button>
+                </Link>
             </div>
         </div>
         <div className="p-20 flex flex-col items-center">
@@ -80,7 +83,7 @@ const Course = () => {
             <div className="w-courseWidth mt-5">
                 <div className="flex mt-5">
                     <p className="text-xl font-bold ">Dates :</p>
-                    <p className="text-xl ml-2">Nov 4, 2022 - Nov 17, 2022</p>
+                    <p className="text-xl ml-2">{course.startDate} - {course.endDate}</p>
                 </div>
                 <p className="text-xl mt-3">Takes place every week, total of 14 sessions</p>
             </div>
@@ -136,7 +139,9 @@ const Course = () => {
             <p className="text-xl mt-5">Bookings will open 420 days before the session starts.</p>
             <p className=" text-base text-justify  mt-5">{readMore == false ? text.slice(0,300) : text}<span className="hover:text-green cursor-pointer font-bold" onClick={() => setReadMore(!readMore)}>{readMore == false ? "...Read More" : "Read Less"}</span> </p>
         </div>
-        <button className="bg-green py-3 px-5 rounded-md font-bold mt-10 hover:bg-greenHover duration-300">Book Now</button>
+        <Link href="/booking">
+            <button className="bg-green py-3 px-5 rounded-md font-bold mt-10 hover:bg-greenHover duration-300">Book Now</button>
+        </Link>
     </div>
   )
 }
