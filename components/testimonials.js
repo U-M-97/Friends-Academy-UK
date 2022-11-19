@@ -78,7 +78,7 @@ const Testimonials = () => {
             >    
                 {reviews && reviews.map((item) => {
                     return(
-                        <SwiperSlide className='py-10 px-5 mb-5'>
+                        <SwiperSlide className='py-10 px-5 mb-5 bg-white' key={item._id}>
                             <div className='flex flex-col flex-nowrap items-center shadow-gray shadow-2xl p-10'>
                                 <div className='relative outline outline-3 outline-green rounded-full h-24 w-24 overflow-hidden mt-2'>
                                     <Image src={item.image} layout='fill' objectFit='cover'/>
