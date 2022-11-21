@@ -59,7 +59,7 @@ const Testimonials = () => {
             </motion.div>
         </div>
 
-        <div className=' w-testimonialsContainer'>
+        <div className='hidden sm:flex sm:w-testimonialsContainer'>
             <Swiper
             style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '60px' }}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -92,22 +92,83 @@ const Testimonials = () => {
                     )
                 })} 
             </Swiper>
-        </div> 
+        </div>
+
+        <div className='w-screen sm:hidden'>
+            <Swiper
+            style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '60px' }}
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            slidesPerView={1}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+            navigation
+            speed={1000}
+            pagination={{ clickable: true }}
+            loop={true}
+            >    
+                {reviews && reviews.map((item) => {
+                    return(
+                        <SwiperSlide className='mt-5 py-10 px-5 mb-5 bg-white' key={item._id}>
+                            <div className='flex flex-col flex-nowrap items-center shadow-gray shadow-2xl p-10'>
+                                <div className='relative outline outline-3 outline-green rounded-full h-24 w-24 overflow-hidden mt-2'>
+                                    <Image src={item.image} layout='fill' objectFit='cover'/>
+                                </div>
+                                <h1 className='mt-5 text-xl font-bold'>{item.username}</h1>
+                                <p className='text-gray'>{item.desc}</p>
+                                <Rating
+                                readOnly
+                                value={item.rating}
+                                />
+                                <div className='overflow-auto h-52 mt-4'>
+                                    <p className='text-center text-lg mx-2'>{item.review}</p> 
+                                </div> 
+                            </div>                 
+                        </SwiperSlide>
+                    )
+                })} 
+            </Swiper>
+        </div>
+
         <div className='mt-10 bg-black border-4 border-green'>
             <video 
             className='h-96 w-courseWidth'
             controls         
             loop
-            autoPlay
             poster="https://www.salesleadsinc.com/media/1419/customer-reviews.png"
             src={video} 
             >
             </video>
-        </div>    
-        <Swiper className='w-aboutWidth mt-10'
+        </div>  
+
+        <Swiper className='hidden sm:flex w-aboutWidth mt-10'
             style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '50px', '--swiper-navigation-margin': '50px' }}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             slidesPerView={4}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+            navigation
+            speed={1000}
+            loop={true}
+        >
+            {
+                videos.map((item) => {
+                    return(
+                        <SwiperSlide key={item}>
+                            <div className='mx-3 cursor-pointer border-4 border-green h-60 overflow-hidden bg-black' onClick={() => setVideo(item.src)}>
+                                <video  autoPlay muted loop className='-translate-y-20'>
+                                    <source src={item.src} type="video/mp4"/>
+                                </video>
+                            </div>
+                         </SwiperSlide>
+                    )
+                })
+            }  
+        </Swiper>
+
+        <Swiper className=' sm:hidden w-screen mt-10'
+            style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '50px', '--swiper-navigation-margin': '50px' }}
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            slidesPerView={2}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
             navigation

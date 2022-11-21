@@ -9,6 +9,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import axios from "axios"
 import { loadStripe } from '@stripe/stripe-js'
+import Alert from '@mui/material/Alert';
 
 const Booking = () => {
 
@@ -23,6 +24,7 @@ const Booking = () => {
     const [ calendar, setCalendar ] = useState(false)
     const [ plab2, setPlab2 ] = useState(null)
     const [ prevAttempt, setPreviousAttempt ] = useState()
+    const [ emptyInputs , setEmptyInputs ] = useState(false)
     
     const formatDate = () => {
         const day = valueCalendar.getDate()
@@ -53,25 +55,31 @@ const Booking = () => {
     }, [calendar])
 
     const handlePay = async () => {
-        const stripe = await stripePromise
-        console.log(plab2, prevAttempt, phone)
-        if(user.plab2Date !== undefined){
-            if(prevAttempt != null && phone != null){
-                console.log("Running")
-                axios.put(`${process.env.url}/userData`, {user, prevAttempt, phone})
+
+        if(phone == null || plab2 == null || prevAttempt == null){
+            setEmptyInputs(true)
+        }else{
+            setEmptyInputs(false)
+            const stripe = await stripePromise
+            console.log(plab2, prevAttempt, phone)
+            if(user.plab2Date !== undefined){
+                if(prevAttempt != null && phone != null){
+                    console.log("Running")
+                    axios.put(`${process.env.url}/userData`, {user, prevAttempt, phone})
+                }
             }
-        }
-        else{
-            if(plab2 != null && prevAttempt != null && phone != null){
-                console.log("Running2")
-                axios.put(`${process.env.url}/userData`, {user, plab2, prevAttempt, phone})  
+            else{
+                if(plab2 != null && prevAttempt != null && phone != null){
+                    console.log("Running2")
+                    axios.put(`${process.env.url}/userData`, {user, plab2, prevAttempt, phone})  
+                }
             }
+            const res = await axios.post(`${process.env.url}/checkout_sessions`, {user, selectedCourse}) 
+            console.log(res.data.id)
+            const result = await stripe.redirectToCheckout({
+                sessionId: res.data.id
+            })
         }
-        const res = await axios.post(`${process.env.url}/checkout_sessions`, {user, selectedCourse}) 
-        console.log(res.data.id)
-        const result = await stripe.redirectToCheckout({
-            sessionId: res.data.id
-        })
     }
 
   return (
@@ -111,6 +119,7 @@ const Booking = () => {
                     {calendar && <div className="z-10 absolute bottom-40" id="calendar"> 
                     <Calendar  className=" bg-white border-2" onChange={setValueCalendar} value={valueCalendar}/>
                     </div> }
+                    {emptyInputs == true ? <Alert severity="error" className="mt-2 w-96">Please fill the required fields!</Alert> : null }
                     <button className="text-xl font-bold mt-10 py-3 bg-green hover:bg-greenHover rounded-md w-2/4" onClick={handlePay}>PAY NOW</button>
                 </div>
             </div>

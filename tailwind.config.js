@@ -25,7 +25,7 @@ module.exports = {
       },
       width:{
         width: "1500px",
-        picturesWrapper: "300vw",
+        picturesWrapper: "400vw",
         translateWidth: "100vw",
         plabWidth: "1400px",
         box: "570px",

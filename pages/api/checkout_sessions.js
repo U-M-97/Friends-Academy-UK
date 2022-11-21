@@ -5,8 +5,7 @@ export default async function handler(req, res){
         const { user, selectedCourse } = req.body
         const userId = user._id
         const courseId = selectedCourse._id
-        const transformedItems = [{
-            description: selectedCourse.description,
+        const transformedItems = [{   
             quantity: 1,
             price_data: {
                 currency: "gbp",
@@ -14,6 +13,7 @@ export default async function handler(req, res){
                 product_data: {
                     name: selectedCourse.title, 
                     images: [selectedCourse.image],
+                    description: selectedCourse.description,
                 }
             }
     }]
@@ -23,8 +23,8 @@ export default async function handler(req, res){
                 payment_method_types: ["card"],
                 line_items: transformedItems,
                 mode: "payment",
-                success_url:`${req.headers.origin}/?success=true`,
-                cancel_url: `${req.headers.origin}/?canceled=true`,
+                success_url:`${req.headers.origin}/paymentSuccessfull`,
+                cancel_url: `${req.headers.origin}/paymentUnsuccessfull`,
                 metadata: {userId, courseId},
             })
             res.status(200).json({ id: session.id })

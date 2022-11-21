@@ -5,13 +5,35 @@ import MailIcon from '@mui/icons-material/Mail';
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import Link from "next/link";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from "next/router";
 
 const Course = () => {
 
     const course = useSelector((state) => state.course.selectedCourse)
     const [ readMore, setReadMore ] = useState(false)
     const text = "Cancellation Policy: - To confirm your booking, you must pay online / bank transfer / money transfer - The course fee can not be transferred to any other candidate - A deduction of £125 will be charged for any cancellation of booking of your PLAB 2 course until a week before the course start date - No cancellation request will be accepted after the start date of your PLAB 2 course however you will be allowed to reschedule your course - Any agreed refund will be refunded back to you within one month of cancellation date to the same card / account the payment was made from - No fee will be refunded for any cancellation within last 7 days prior to starting the course - MOCK fee is non-refundable and non-transferable - High Yield course fee is non-refundable and non-transferable - You can not sale accommodation to any other candidate / person - It is your responsibility to keep your room tidy and return in an acceptable condition - No smoking and / or alcohol consumption will be allowed in the academy as well as within the accommodation - In case of unforeseen situation or special circumstances e.g Natural Pandemic / National Emergency / PLAB 2 exam cancellation we will offer alternate dates of your booked courses without any extra charges however if you want to cancel then a cancellation charges will be applicable as mentioned above. "
-    
+    const user = useSelector((state) => state.user.currentUser)
+    const [ courseRegistered, setCourseRegistered ] = useState(false)
+    const router = useRouter()
+
+    const handleCourseCheck = () => {
+        const findCourse = user.courses.find((item) => {
+            if(item === course._id){
+                return true
+            }
+        })
+        if(findCourse){
+            console.log(findCourse)
+            setCourseRegistered(true)
+            toast("Course already Registered")
+        }else{
+            router.push("/booking")
+        }
+    }
+    console.log(courseRegistered)
+
   return (
     <div className="flex flex-col items-center font-main mb-10">
         <div className="flex">
@@ -39,9 +61,22 @@ const Course = () => {
                 </ul>
             </div>
             <div className="mt-10">
-                <Link href="/booking">
-                    <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold">Book Now</button>
-                </Link>
+                <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold" onClick={handleCourseCheck}>Book Now</button>
+                {courseRegistered == true ? 
+                    <ToastContainer
+                    position="bottom-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                    />
+                     : null  
+                }
             </div>
         </div>
         <div className="p-20 flex flex-col items-center">
@@ -139,9 +174,7 @@ const Course = () => {
             <p className="text-xl mt-5">Bookings will open 420 days before the session starts.</p>
             <p className=" text-base text-justify  mt-5">{readMore == false ? text.slice(0,300) : text}<span className="hover:text-green cursor-pointer font-bold" onClick={() => setReadMore(!readMore)}>{readMore == false ? "...Read More" : "Read Less"}</span> </p>
         </div>
-        <Link href="/booking">
-            <button className="bg-green py-3 px-5 rounded-md font-bold mt-10 hover:bg-greenHover duration-300">Book Now</button>
-        </Link>
+        <button className="bg-green py-3 px-5 rounded-md font-bold mt-10 hover:bg-greenHover duration-300" onClick={handleCourseCheck}>Book Now</button>
     </div>
   )
 }
