@@ -38,7 +38,7 @@ const Events = () => {
     }
     
   return (
-    <div className='font-main flex flex-col items-center justify-center pb-10 bg-green'>
+    <div className='font-main flex flex-col items-center justify-center pb-10 bg-green' id='bookOnline'>
         <div ref={header}>
             <motion.div
             initial={{opacity: 0, scale: 0}}

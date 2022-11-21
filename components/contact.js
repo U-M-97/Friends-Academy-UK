@@ -14,7 +14,7 @@ const Contact = () => {
     const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
 
   return (
-    <div className="pb-20 flex font-main items-center justify-center bg-servicesBG ">
+    <div className="pb-20 flex font-main items-center justify-center bg-servicesBG " id='contact'>
         <div className='w-full sm:w-width flex flex-col sm:flex-row'>
             <div className="flex-1 flex flex-col sm:ml-40 mx-10 sm:mx-0">
                 <div className='flex flex-col'>

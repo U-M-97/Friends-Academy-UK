@@ -9,7 +9,7 @@ const About = () => {
     const {ref: intro2, inView: isIntro2} = useInView({triggerOnce: true})
 
   return (
-    <div className="font-main mb-20 flex flex-col items-center">
+    <div className="font-main mb-20 flex flex-col items-center" id="about">
         <div ref={header}>
             <motion.div
             initial={{opacity: 0, scale: 0}}

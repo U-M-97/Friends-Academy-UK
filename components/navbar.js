@@ -9,6 +9,7 @@ import { useDispatch , useSelector } from 'react-redux'
 import { logout } from "../redux/userReducer"
 import { deleteCookie } from "cookies-next"
 import { useRouter } from 'next/router'
+import { Link as Scroll } from "react-scroll"
 
 const Navbar = (props) => {
 
@@ -117,15 +118,27 @@ const Navbar = (props) => {
                 </li>
 
                 <li className="mr-8 hover:text-green duration-200">
-                    <Link href="">
+                    <Scroll className="cursor-pointer"
+                    to="about"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
                         <a>ABOUT</a>
-                    </Link>
+                    </Scroll>
                 </li>
 
                 <li className="mr-8 hover:text-green duration-200">
-                    <Link href="">
+                    <Scroll className="cursor-pointer"
+                    to="bookOnline"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
                         <a>BOOK ONLINE</a>
-                    </Link>
+                    </Scroll>
                 </li>
 
                 <li className="mr-8 hover:text-green duration-200">
@@ -135,9 +148,15 @@ const Navbar = (props) => {
                 </li>
 
                 <li className="mr-8 hover:text-green duration-200">
-                    <Link href="">
+                    <Scroll className="cursor-pointer"
+                    to="reviews"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
                         <a>CANDIDATE REVIEWS</a>
-                    </Link>
+                    </Scroll>
                 </li>
 
                 <li className="mr-8 cursor-pointer hover:text-green duration-200" id="moreInformation" onMouseEnter={() => setMouseEnter(true)} onMouseLeave={() => setMouseEnter(false)} onClick={handleDropDown}>
@@ -167,9 +186,15 @@ const Navbar = (props) => {
                 </div>
                    
                 <li className="mr-8 hover:text-green duration-200">
-                    <Link href="">
+                    <Scroll className="cursor-pointer"
+                    to="contact"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
                         <a>CONTACT</a>
-                    </Link>
+                    </Scroll>
                 </li>
 
                 { user == null ? null : 

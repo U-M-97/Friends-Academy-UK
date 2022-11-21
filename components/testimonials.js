@@ -15,36 +15,31 @@ const Testimonials = () => {
 
     const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
     const reviews = useSelector((state) => state.user.users)
-    console.log(reviews)
-    const [cards, setCards] = useState([
-        {
-            img: "/images/Emma Watson.jpg",
-            name: "Emma Watson",
-            desc: "British Actress",
-            para: "Friends Academy has deﬁnitely been a game changer for me. Their perspective on things is so clear and they are so knowledgable that they taught me and showed me a totally new way to view myself and my own capabilities, and now I'm reaching goals within weeks that I thought would take me years."
-        },
-        {
-            img: "/images/Elon Musk.jpg",
-            name: "Elon Musk",
-            desc: "CEO, TESLA USA",
-            para: "Friends Academy has deﬁnitely been a game changer for me. Their perspective on things is so clear and they are so knowledgable that they taught me and showed me a totally new way to view myself and my own capabilities, and now I'm reaching goals within weeks that I thought would take me years."
-        },
-        {
-            img: "/images/Tom Cruise.jpg",
-            name: "Tom Cruise",
-            desc: "American Actor",
-            para: "Friends Academy has deﬁnitely been a game changer for me. Their perspective on things is so clear and they are so knowledgable that they taught me and showed me a totally new way to view myself and my own capabilities, and now I'm reaching goals within weeks that I thought would take me years."
-        },
-        {
-            img: "/images/Emilia.jpg",
-            name: "Emilia Clarke",
-            desc: "British Actress",
-            para: "Friends Academy has deﬁnitely been a game changer for me. Their perspective on things is so clear and they are so knowledgable that they taught me and showed me a totally new way to view myself and my own capabilities, and now I'm reaching goals within weeks that I thought would take me years."
-        },
-    ])
+    const [ video, setVideo ] = useState("https://res.cloudinary.com/codillionaire/video/upload/v1668959602/friends-academy/Reviewvideo_xpj3jk.mp4")
+    const videos = [
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668959602/friends-academy/Reviewvideo_xpj3jk.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986675/friends-academy/TRIAL____________Videos_-_Wix.com_2_ubj7ps.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986675/friends-academy/TRIAL____________Videos_-_Wix.com_3_xa8oul.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986688/friends-academy/TRIAL____________Videos_-_Wix.com_8_s2hwzc.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986689/friends-academy/TRIAL____________Videos_-_Wix.com_7_rvydmj.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986691/friends-academy/TRIAL____________Videos_-_Wix.com_bv1l7f.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986692/friends-academy/TRIAL____________Videos_-_Wix.com_5_puqtnk.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986693/friends-academy/TRIAL____________Videos_-_Wix.com_6_bw3sdc.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986695/friends-academy/TRIAL____________Videos_-_Wix.com_10_e8pjai.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986697/friends-academy/TRIAL____________Videos_-_Wix.com_9_trrc3x.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986702/friends-academy/TRIAL____________Videos_-_Wix.com_14_hbzsnj.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986703/friends-academy/TRIAL____________Videos_-_Wix.com_11_jxrmft.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986706/friends-academy/TRIAL____________Videos_-_Wix.com_16_i3ensg.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986706/friends-academy/TRIAL____________Videos_-_Wix.com_15_frs8ek.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986707/friends-academy/TRIAL____________Videos_-_Wix.com_4_yyi3bb.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986708/friends-academy/TRIAL____________Videos_-_Wix.com_12_cttdah.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986709/friends-academy/TRIAL____________Videos_-_Wix.com_17_dgt9wo.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986712/friends-academy/TRIAL____________Videos_-_Wix.com_13_dzihld.mp4"},
+    ]
+    console.log(video)
 
   return (
-    <div className='font-main flex flex-col justify-center items-center bg-servicesBG h-full  overflow-hidden'>
+    <div className='font-main flex flex-col justify-center items-center bg-servicesBG h-full  ' id='reviews'>
 
         <div ref={header}>
             <motion.div
@@ -66,7 +61,7 @@ const Testimonials = () => {
 
         <div className=' w-testimonialsContainer'>
             <Swiper
-            style={{ '--swiper-navigation-color': 'black' }}
+            style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '60px' }}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             slidesPerView={2}
             onSlideChange={() => console.log('slide change')}
@@ -78,7 +73,7 @@ const Testimonials = () => {
             >    
                 {reviews && reviews.map((item) => {
                     return(
-                        <SwiperSlide className='py-10 px-5 mb-5 bg-white' key={item._id}>
+                        <SwiperSlide className='mt-5 py-10 px-5 mb-5 bg-white' key={item._id}>
                             <div className='flex flex-col flex-nowrap items-center shadow-gray shadow-2xl p-10'>
                                 <div className='relative outline outline-3 outline-green rounded-full h-24 w-24 overflow-hidden mt-2'>
                                     <Image src={item.image} layout='fill' objectFit='cover'/>
@@ -92,12 +87,47 @@ const Testimonials = () => {
                                 <div className='overflow-auto h-52 mt-4'>
                                     <p className='text-center text-lg mx-2'>{item.review}</p> 
                                 </div> 
-                            </div>                        
+                            </div>                 
                         </SwiperSlide>
                     )
                 })} 
             </Swiper>
-        </div>  
+        </div> 
+        <div className='mt-10 bg-black border-4 border-green'>
+            <video 
+            className='h-96 w-courseWidth'
+            controls         
+            loop
+            autoPlay
+            poster="https://www.salesleadsinc.com/media/1419/customer-reviews.png"
+            src={video} 
+            >
+            </video>
+        </div>    
+        <Swiper className='w-aboutWidth mt-10'
+            style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '50px', '--swiper-navigation-margin': '50px' }}
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            slidesPerView={4}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+            navigation
+            speed={1000}
+            loop={true}
+        >
+            {
+                videos.map((item) => {
+                    return(
+                        <SwiperSlide>
+                            <div className='mx-3 cursor-pointer border-4 border-green h-60 overflow-hidden bg-black' onClick={() => setVideo(item.src)}>
+                                <video  autoPlay muted loop className='-translate-y-20'>
+                                    <source src={item.src} type="video/mp4"/>
+                                </video>
+                            </div>
+                         </SwiperSlide>
+                    )
+                })
+            }  
+        </Swiper>
     </div>
   )
 }

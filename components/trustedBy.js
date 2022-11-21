@@ -14,7 +14,7 @@ const TrustedBy = () => {
     const {ref: countUp, inView: isCountUp} = useInView({triggerOnce: true})
 
   return (
-    <div className="font-main mt-20 overflow-hidden">
+    <div className="font-main my-20 overflow-hidden">
         <div ref={header}>
             <motion.div
             initial={{opacity: 0, scale: 0}}
@@ -34,7 +34,7 @@ const TrustedBy = () => {
          </div>
         
         <div className=" mt-20 flex justify-center" ref={countUp}>
-            <div className=" sm:w-width flex flex-col sm:flex-row items-center justify-between px-40">
+            <div className=" sm:w-width flex flex-col sm:flex-row items-center justify-center px-40">
                 <div className='mb-10 sm:mb-0 flex flex-col w-80 items-center justify-center rounded-b-xl border-l border-r border-t border-lightGray'>
                     <div className='flex flex-col items-center justify-center mt-14 mb-5'>
                         <PersonIcon className='scale-trustedBy text-green'/>
@@ -43,7 +43,7 @@ const TrustedBy = () => {
                     </div>
                     <div className='h-2 w-full bg-green rounded-b-xl mt-5'></div>
                 </div>
-                <div className='mb-10 sm:mb-0 flex flex-col  w-80 items-center justify-center rounded-b-xl border-l border-r border-t border-lightGray'>
+                {/* <div className='mb-10 sm:mb-0 flex flex-col  w-80 items-center justify-center rounded-b-xl border-l border-r border-t border-lightGray'>
                     <div className='flex flex-col items-center justify-center mt-16 mb-5'>
                         <FaHospitalAlt className='scale-trustedBy text-green'/>
                         <h1 className='text-6xl mt-10 mx-10'>{isCountUp && <><CountUp end={250}/>+</>}</h1>
@@ -58,11 +58,11 @@ const TrustedBy = () => {
                         <p className='text-3xl mt-2'>Pharmacies</p>  
                     </div>
                     <div className='h-2 w-full bg-green rounded-b-xl mt-5'></div>
-                </div>
+                </div> */}
             </div>
         </div>
 
-        <div ref={header2}>
+        {/* <div ref={header2}>
             <motion.div
             initial={{opacity: 0, scale: 0}}
             animate={isHeader2 && {opacity: 1, scale: 1}}
@@ -112,7 +112,7 @@ const TrustedBy = () => {
                 </div>
           
             </div>
-        </div>
+        </div> */}
         
     </div>
   )
