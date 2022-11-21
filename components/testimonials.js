@@ -117,7 +117,7 @@ const Testimonials = () => {
             {
                 videos.map((item) => {
                     return(
-                        <SwiperSlide>
+                        <SwiperSlide key={item}>
                             <div className='mx-3 cursor-pointer border-4 border-green h-60 overflow-hidden bg-black' onClick={() => setVideo(item.src)}>
                                 <video  autoPlay muted loop className='-translate-y-20'>
                                     <source src={item.src} type="video/mp4"/>
