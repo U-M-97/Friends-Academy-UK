@@ -295,7 +295,7 @@ const UpdateCourses = () => {
                       defaultValue={inputs.category}
                       onChange={handleChange}
                     />
-                     <TextField name="price" margin="normal" fullWidth type="number" label="Price in POUNDS(£)" variant="standard" defaultValue={inputs.price}/> 
+                     <TextField inputProps={{min: 0}} name="price" margin="normal" fullWidth type="number" label="Price in POUNDS(£)" variant="standard" defaultValue={inputs.price}/> 
                      <FormControl fullWidth margin="normal" variant="standard">                
                         <InputLabel id="demo-simple-select-label">Status</InputLabel>
                         <Select 

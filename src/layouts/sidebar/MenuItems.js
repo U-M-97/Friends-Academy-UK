@@ -1,6 +1,6 @@
 const Menuitems = [
   {
-    title: "Dashbaord",
+    title: "Dashboard",
     icon: "home",
     href: "/admin",
   },
@@ -15,14 +15,14 @@ const Menuitems = [
     href: "/admin/updateCourses",
   },
   {
-    title: "Remove Courses",
-    icon: "trash-2",
-    href: "/admin/removeCourse",
+    title: "Room Bookings",
+    icon: "calendar",
+    href: "/admin/roomBookings",
   },
   {
-    title: "Users",
-    icon: "user",
-    href: "/admin/users",
+    title: "Rooms",
+    icon: "home",
+    href: "/admin/rooms",
   },
   {
     title: "Ratings",

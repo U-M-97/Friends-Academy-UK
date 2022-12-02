@@ -60,7 +60,7 @@ module.exports = {
         footer: "1px"
       },
       padding:{
-        important: "2px"
+        important: "2px",
       },
       translate:{
         cards: "340px"

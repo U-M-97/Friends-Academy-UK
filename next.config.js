@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   images: {
     domains: ["cdn-icons-png.flaticon.com", "lh3.googleusercontent.com", "platform-lookaside.fbsbx.com", "res.cloudinary.com"]
