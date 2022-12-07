@@ -22,7 +22,7 @@ const roomSchema = new mongoose.Schema({
                 type: String
             },
             phone: {
-                type: Number
+                type: String
             },
             country: {
                 type: String

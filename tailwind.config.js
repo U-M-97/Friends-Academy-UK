@@ -69,6 +69,9 @@ module.exports = {
         debitCard: "5px",
         name: "3px"
       },
+      spacing: {
+        firstRow: "260px"
+      }
     },
   },
   plugins: [

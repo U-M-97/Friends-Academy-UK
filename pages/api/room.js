@@ -42,5 +42,38 @@ export default async function handler (req, res) {
         if(deletedRoom){
             res.send("Room Deleted Successfully")
         }
+    }else if(req.method === "PUT"){
+        try{
+            const {name, gender, phone, country, email, checkIn, checkOut, bed, payment } = req.body.inputs
+            const id = req.body.id
+            console.log(checkIn)
+            const updateRoom = await Room.findByIdAndUpdate(id, {
+                $push: {
+                    roomMembers: {
+                        name: name,
+                        gender: gender,
+                        phone: phone,
+                        country: country,
+                        email: email,
+                        checkIn: {
+                            date: checkIn.date,
+                            month: checkIn.month,
+                            year: checkIn.year
+                        },
+                        checkOut: {
+                            date: checkOut.date,
+                            month: checkOut.month,
+                            year: checkOut.year                    
+                        },
+                        bed: bed,
+                        payment: payment
+                    }
+                }
+            })
+            console.log(updateRoom)
+            // const update = await Room.findById
+        }catch(err){
+            res.send(err)
+        }
     }
 }

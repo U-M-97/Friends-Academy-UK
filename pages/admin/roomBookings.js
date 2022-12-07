@@ -11,6 +11,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TextField, MenuItem, Avatar } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const RemoveCourse = () => {
 
@@ -23,6 +28,7 @@ const RemoveCourse = () => {
       Month: "",
       stringMonth: "",
       Year: "",
+      completeDate: ""
     }
   ])
   const date = new Date()
@@ -36,23 +42,60 @@ const RemoveCourse = () => {
   const [ rooms, setRooms ] = useState()
   const [ dialog, setDialog ] = useState(false)
   const [ inputs, setInputs ] = useState({
+    roomId: "",
     name: "",
     gender: "",
     phone: "",
     country: "",
     email: "",
-    checkIn: "",
-    checkOut: "",
+    checkIn: {
+      date: null,
+      month: null,
+      year: null
+    },
+    checkOut: {
+      date: null,
+      month: null,
+      year: null
+    },
     bed: "",
     payment: ""
   })
   const [ apiRes, setApiRes ] = useState(false)
+  const [ muiCheckInDate, setMuiCheckInDate ] = useState(dayjs(date))
+  const [ muiCheckOutDate, setMuiCheckOutDate ] = useState(null)
+  const [ selectedRoom, setSelectedRoom ] = useState()
 
   const handleChange = (e) => {
     const {name, value} = e.target
     setInputs((prev) => ({
         ...prev, [name]:value
     }))
+  }
+
+  const handleCheckInDate = () => {
+    console.log(muiCheckInDate)
+    setInputs((current) => {
+      return{
+        ...current, checkIn: {
+          date: muiCheckInDate.$D,
+          month: muiCheckInDate.$M,
+          year: muiCheckInDate.$y
+        }
+      }
+    })
+  }
+  
+  const handleCheckOutDate = () => {
+    muiCheckOutDate && setInputs((current) => {
+      return{
+        ...current, checkOut: {
+          date: muiCheckOutDate.$D,
+          month: muiCheckOutDate.$M,
+          year: muiCheckOutDate.$y
+        }
+      }
+    })
   }
 
   let arr = []
@@ -74,10 +117,10 @@ const RemoveCourse = () => {
     for(let i = 0; i < totalDays; i++){
       if(firstDay == 7){
         firstDay = 0
-        arr.push({Day: weekday[firstDay], Date: i+1, Month: currentMonth, stringMonth: monthInString, Year: year})
+        arr.push({Day: weekday[firstDay], Date: i+1, Month: currentMonth, stringMonth: monthInString, Year: year, completeDate: new Date(`${year}-${currentMonth + 1}-${i+1}`)})
         firstDay++
       }else{
-        arr.push({Day: weekday[firstDay], Date: i+1, Month: currentMonth, stringMonth: monthInString, Year: year})
+        arr.push({Day: weekday[firstDay], Date: i+1, Month: currentMonth, stringMonth: monthInString, Year: year, completeDate: new Date(`${year}-${currentMonth + 1}-${i+1}`)})
         firstDay++
       }
     }
@@ -186,22 +229,111 @@ const RemoveCourse = () => {
     console.log(column)
     console.log(member)
 
-    if(member.checkIn.month === member.checkOut.month && member.checkIn.month === column.Month){
-      if(member.checkIn.date <= column.Date && member.checkOut.date >= column.Date){
-        if(column.Date === 23 || column.Date === 8){
-          return(
-            <div className="relative bg-green w-full">
-              <div className="flex items-center justify-center w-full"></div> 
-              <a className="absolute w-40 top-6 font-bold text-xl">{member.name}</a>
-            </div>
-          )
-        }else{
-          return(
-            <div className="bg-green flex items-center justify-center w-full"></div>
-          )
+    if(member.checkIn && member.checkOut){
+      if(member.checkIn.month <= member.checkOut.month && member.checkIn.year === member.checkOut.year && member.checkIn.month <= column.Month && member.checkOut.month >= column.Month){
+        if(member.checkIn.month === column.Month){
+          if(member.checkIn.date <= column.Date){
+            
+            let half
+            let center
+
+            if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
+              half = displayColumn.length - member.checkIn.date
+
+              for(let i = 0; i<=half/2; i++){
+                center = i
+              }
+
+              center = member.checkIn.date + center
+
+              console.log(center)
+              if(column.Date === center){
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  </div>
+                )
+              }else{
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                )
+              }    
+            }
+            else{
+              center = 23
+              if(column.Date === center){
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  </div>
+                )
+              }else{
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                )
+              } 
+            }     
+          }
+        }
+        else if(member.checkIn.month < column.Month && member.checkOut.month > column.Month){
+          if(column.Date === 8 || column.Date === 23){
+            return(
+              <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+              </div>
+            )
+          }else{
+            return(
+              <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+            )
+          }
+        }else if(column.Month === member.checkOut.month){
+          if(column.Date <= member.checkOut.date){
+            let half
+            let center
+
+            if(member.checkOut.date >= 15 && displayColumn[0].Date === 1){
+              center = 8
+              if(column.Date === center){
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  </div>
+                )
+              }else{
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                )
+              }
+            }
+            else{
+              half = member.checkOut.date - displayColumn[0].Date
+              console.log(half)
+
+              for(let i = 0; i <= half/2; i++){
+                center = i
+              }
+              console.log(center)
+
+              center = member.checkOut.date - center
+              console.log(center)
+
+              if(column.Date === center){
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  </div>
+                )
+              }else{
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                )
+              }    
+            }
+          }
         }
       }
-    }
+    } 
   }
 
   const handleClose = () => {
@@ -209,13 +341,29 @@ const RemoveCourse = () => {
     setDialog(false)
   }
 
-  const handleOpen = (date) => {
+  const handleOpen = (column, room) => {
     setDialog(true)
+    setSelectedRoom(room)
+    setMuiCheckInDate(dayjs(new Date(column.completeDate)))
 }
 
-const handleSave = () => {
+  useEffect(() => {
+    handleCheckInDate()
+  }, [muiCheckInDate])
 
+  useEffect(() => {
+    handleCheckOutDate()
+  }, [muiCheckOutDate])
+
+const handleSave = async () => {
+  const data = {
+    id: selectedRoom._id,
+    inputs: inputs
+  }
+  const res = await axios.put(`${process.env.url}/room`, data)
 }
+
+console.log(rooms)
 
   return (
      <ThemeProvider theme={theme}>
@@ -233,7 +381,7 @@ const handleSave = () => {
               </div>
               {displayColumn && displayColumn.map((column) => {
                 return(
-                  <div className="flex flex-col items-center justify-center py-2 w-20 border border-black">
+                  <div className="flex flex-col items-center justify-center py-2 w-20 border border-black" key={column}>
                     <p>{column.Day}</p>
                     <p>{column.Date}</p>
                   </div>
@@ -243,17 +391,17 @@ const handleSave = () => {
             <div>
               {rooms && rooms.map((room) => {
                 return(
-                  <div className="flex border-b border-gray">
+                  <div className="flex border-b border-gray" key={room}>
                     <div className="flex items-center justify-center border-r border-gray w-44 break-words">
                       <p className="text-xl">{room.roomTitle}</p>
                     </div>
                     {displayColumn && displayColumn.map((column) => {
                       return(
-                        <div className="flex flex-col items-center h-20 justify-center w-20 border border-black cursor-pointer hover:bg-lightGray" onClick={handleOpen}>
+                        <div className="flex flex-col items-center h-20 justify-center w-20 border border-black cursor-pointer hover:bg-lightGray" onClick={() => handleOpen(column, room)} key={column}>
                           {
                             room.roomMembers.length != 0 ? room.roomMembers.map((member) => {
                               return(
-                                <div className="flex w-full">
+                                <div className="flex w-full" key={member}>
                                   <ConditionalRendering column={column} member={member}/>
                                 </div>
                               )
@@ -294,7 +442,7 @@ const handleSave = () => {
                     label="Gender"
                     fullWidth
                     variant="standard"
-                    defaultValue={inputs.roomType}
+                    defaultValue={inputs.gender}
                     onChange={handleChange}
                     />
                     <TextField
@@ -303,31 +451,71 @@ const handleSave = () => {
                     label="Phone"
                     fullWidth
                     variant="standard"
-                    defaultValue={inputs.roomType}
+                    defaultValue={inputs.phone}
                     onChange={handleChange}
                     />
-                     <TextField
+                    <TextField
                     name="country"     
                     margin="normal"
                     label="Country"
                     fullWidth
                     variant="standard"
-                    defaultValue={inputs.roomType}
+                    defaultValue={inputs.country}
                     onChange={handleChange}
                     />
-                     <TextField
+                    <TextField
                     name="email"     
                     margin="normal"
                     label="Email"
                     fullWidth
                     variant="standard"
-                    defaultValue={inputs.roomType}
+                    defaultValue={inputs.email}
+                    onChange={handleChange}
+                    />
+                    <div className="mt-10">
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DesktopDatePicker 
+                          label="Check In"
+                          inputFormat="DD/MM/YYYY"
+                          value={muiCheckInDate}
+                          onChange={setMuiCheckInDate}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                        <div className="mt-10">
+                          <DesktopDatePicker
+                            label="Check Out"
+                            inputFormat="DD/MM/YYYY"
+                            value={muiCheckOutDate}
+                            onChange={setMuiCheckOutDate}
+                            renderInput={(params) => <TextField {...params} />}
+                          />
+                        </div>                       
+                      </LocalizationProvider>
+                    </div>
+                    <TextField
+                    name="bed"     
+                    margin="normal"
+                    label="Bed"
+                    fullWidth
+                    variant="standard"
+                    defaultValue={inputs.bed}
+                    onChange={handleChange}
+                    />
+                    <TextField
+                    type="number"
+                    inputProps={{min: 0}}
+                    name="payment"     
+                    margin="normal"
+                    label="Payment"
+                    fullWidth
+                    variant="standard"
+                    defaultValue={inputs.payment}
                     onChange={handleChange}
                     />
                 </div>
                 </div> : 
                 <div className="h-full flex items-center justify-center">
-                <CircularProgress/> 
+                  <CircularProgress/> 
                 </div>     
             }
             
