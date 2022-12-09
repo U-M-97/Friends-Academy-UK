@@ -12,7 +12,7 @@ export default async function handler (req, res) {
                 // console.log(err)
                 return res.send("Token is not Valid")
             }
-            const userData = await User.findById(user.id)
+            const userData = await User.findById(user.id).populate("courses")
             if(!userData){
                 return res.send("User not exists")
             }

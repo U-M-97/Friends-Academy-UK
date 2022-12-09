@@ -204,9 +204,9 @@ const Navbar = (props) => {
                     </div>
                     {isClickedProfile == true || mouseEnterProfile == true ? 
                      <div id="profileMenu" className="flex flex-col justify-between absolute top-16 right-0 border-t-4 border-green bg-white z-40 w-96 text-black">
-                        <Link href="/account/signup">
+                        <Link href="/profile">
                             <div className="border-b border-lightGray py-4 px-5 hover:bg-green hover:text-white duration-300 cursor-pointer">
-                                <a className="text-xl">Edit Profile</a>
+                                <a className="text-xl">Profile</a>
                             </div>
                         </Link>
 
