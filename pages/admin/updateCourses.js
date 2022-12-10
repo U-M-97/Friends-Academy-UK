@@ -115,9 +115,10 @@ const UpdateCourses = () => {
     let arr = []
     let count = 1
     selectedCategory && courses && courses.map((course) => {
+      console.log(course)
       if(course.category === selectedCategory) {
         return(
-          arr.push({_id:course._id, id: count++, courseImage: course.image, courseTitle: course.title, courseStatus: course.status})
+          arr.push({_id:course._id, id: count++, courseImage: course.image, courseTitle: course.title, courseStatus: course.status, courseStartDate: course.startDate})
         )
       }
     })
@@ -136,6 +137,7 @@ const UpdateCourses = () => {
     } },
     { field: 'courseTitle', headerName: 'Course Title', width: 400 },
     { field: 'courseStatus', headerName: 'Status', width: 130,},
+    { field: 'courseStartDate', headerName: 'Start Date', width: 130,},
     { field: 'editButton', headerName: "Edit", width: 130, 
     renderCell: (params) => {
       const course = courses.find((course) => {

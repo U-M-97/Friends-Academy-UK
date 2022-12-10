@@ -36,8 +36,8 @@ export default async function handler(req, res){
     else if(req.method === "GET"){
         const cookie = req.query.cookieExist
         const checkCookie = await Admin.findOne({token: cookie})
-        const {password, ...others} = checkCookie._doc
         if(checkCookie){
+            const {password, ...others} = checkCookie._doc
             res.send(others)
         }else{
             res.send("Cookie not exists")

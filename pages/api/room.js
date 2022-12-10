@@ -70,8 +70,7 @@ export default async function handler (req, res) {
                     }
                 }
             })
-            console.log(updateRoom)
-            // const update = await Room.findById
+            res.send("Booking Added Successfully")
         }catch(err){
             res.send(err)
         }

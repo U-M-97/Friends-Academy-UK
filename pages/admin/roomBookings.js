@@ -230,7 +230,7 @@ const RemoveCourse = () => {
     console.log(member)
 
     if(member.checkIn && member.checkOut){
-      if(member.checkIn.month <= member.checkOut.month && member.checkIn.year === member.checkOut.year && member.checkIn.month <= column.Month && member.checkOut.month >= column.Month){
+      if(member.checkIn.month < member.checkOut.month && member.checkIn.year === member.checkOut.year && member.checkIn.month <= column.Month && member.checkOut.month >= column.Month){
         if(member.checkIn.month === column.Month){
           if(member.checkIn.date <= column.Date){
             
@@ -313,10 +313,8 @@ const RemoveCourse = () => {
               for(let i = 0; i <= half/2; i++){
                 center = i
               }
-              console.log(center)
 
               center = member.checkOut.date - center
-              console.log(center)
 
               if(column.Date === center){
                 return(
@@ -333,7 +331,70 @@ const RemoveCourse = () => {
           }
         }
       }
-    } 
+
+      else if(member.checkIn.month === member.checkOut.month && member.checkIn.year === member.checkOut.year && member.checkIn.month === column.Month){
+        if(column.Date >= member.checkIn.date && column.Date <= member.checkOut.date){
+          let half
+          let center
+          if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
+
+            half = displayColumn.length - member.checkIn.date
+
+            for(let i = 0; i<=half/2; i++){
+              center = i
+            }
+
+            center = member.checkIn.date + center
+            if(column.Date === center){
+              return(
+                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                </div>
+              )
+            }else{
+              return(
+                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+              )
+            }
+          }else{
+            half = member.checkOut.date - displayColumn[0].Date
+            console.log(half)
+
+            for(let i = 0; i <= half/2; i++){
+              center = i
+            }
+
+            center = member.checkOut.date - center
+            if(column.Date === center){
+              return(
+                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                </div>
+              )
+            }else{
+              return(
+                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+              )
+            }    
+          }
+          
+        }else{
+          return(
+            <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
+              <AddCircleIcon className="text-green"/> 
+            </div>
+          )
+        }
+      }
+      
+      else if(member.checkIn.month !== column.Month && member.checkOut.month !== column.Month){
+        return(
+          <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
+            <AddCircleIcon className="text-green"/> 
+          </div>
+        )
+      }
+    }
   }
 
   const handleClose = () => {
@@ -361,6 +422,10 @@ const handleSave = async () => {
     inputs: inputs
   }
   const res = await axios.put(`${process.env.url}/room`, data)
+  if(res.data === "Booking Added Successfully"){
+    handleClose()
+    getRooms()
+  }
 }
 
 console.log(rooms)
