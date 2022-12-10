@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import { useRouter } from "next/router"
 import Alert from '@mui/material/Alert';
 
-const adminLogin = () => {
+const AdminLogin = () => {
 
     const [inputs, setInputs] = useState({
         username: "",
@@ -51,4 +51,4 @@ const adminLogin = () => {
   )
 }
 
-export default adminLogin
+export default AdminLogin

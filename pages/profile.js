@@ -19,7 +19,7 @@ const Profile = () => {
         <div className="flex flex-col">
           {userCourses && userCourses.map((course) => {
             return(
-              <h1 className="ml-10 text-xl mb-2">{course.title}</h1>
+              <h1 className="ml-10 text-xl mb-2" key={course}>{course.title}</h1>
             )
           })}
         </div>
