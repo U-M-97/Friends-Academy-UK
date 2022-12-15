@@ -14,6 +14,7 @@ import { getCookie } from "cookies-next"
 import axios from "axios";
 import { useState, useEffect } from "react"
 import { loginSuccess, logout } from "../../redux/adminReducer";
+import CircularProgress from '@mui/material/CircularProgress'
 
 const MainWrapper = experimentalStyled("div")(() => ({
   display: "flex",
@@ -88,7 +89,11 @@ const FullLayout = ({ children }) => {
 
   useEffect(() => {
     if(cookieExist){
+      console.log("running")
       checkCookie()
+    }else{
+      console.log("running")
+      dispatch(logout())
     }
   }, [])
 

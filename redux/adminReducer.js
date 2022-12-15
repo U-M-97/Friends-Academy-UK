@@ -10,7 +10,7 @@ const adminSlice = createSlice({
             state.admin = action.payload
         },
         logout: (state) => {
-            state = null
+            state.admin = null
         },
     }
 })

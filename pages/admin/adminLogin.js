@@ -26,7 +26,7 @@ const AdminLogin = () => {
         const res = await axios.post(`${process.env.url}/adminAuth`, inputs)
         if(res.data === "Invalid Credentials"){
             setValid(true)
-        }else{
+        }else{ 
             dispatch(loginSuccess(res.data))
             router.push("/admin")
         }

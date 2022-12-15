@@ -230,14 +230,127 @@ const RemoveCourse = () => {
     console.log(member)
 
     if(member.checkIn && member.checkOut){
-      if(member.checkIn.month < member.checkOut.month && member.checkIn.year === member.checkOut.year && member.checkIn.month <= column.Month && member.checkOut.month >= column.Month){
-        if(member.checkIn.month === column.Month){
-          if(member.checkIn.date <= column.Date){
-            
+      if(member.checkIn.year === member.checkOut.year && member.checkIn.year === column.Year){
+        if(member.checkIn.month < member.checkOut.month && member.checkIn.month <= column.Month && member.checkOut.month >= column.Month){
+          if(member.checkIn.month === column.Month){
+            if(member.checkIn.date <= column.Date){
+              
+              let half
+              let center
+
+              if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
+                half = displayColumn.length - member.checkIn.date
+
+                for(let i = 0; i<=half/2; i++){
+                  center = i
+                }
+
+                center = member.checkIn.date + center
+
+                console.log(center)
+                if(column.Date === center){
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                  )
+                }    
+              }
+              else{
+                center = 23
+                if(column.Date === center){
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                  )
+                } 
+              }     
+            }else{
+              return(
+                <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
+                  <AddCircleIcon className="text-green"/> 
+                </div>
+              )
+            }
+          }
+          else if(member.checkIn.month < column.Month && member.checkOut.month > column.Month){
+            if(column.Date === 8 || column.Date === 23){
+              return(
+                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                </div>
+              )
+            }else{
+              return(
+                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+              )
+            }
+          }else if(column.Month === member.checkOut.month){
+            if(column.Date <= member.checkOut.date){
+              let half
+              let center
+
+              if(member.checkOut.date >= 15 && displayColumn[0].Date === 1){
+                center = 8
+                if(column.Date === center){
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                  )
+                }
+              }
+              else{
+                half = member.checkOut.date - displayColumn[0].Date
+                console.log(half)
+
+                for(let i = 0; i <= half/2; i++){
+                  center = i
+                }
+
+                center = member.checkOut.date - center
+
+                if(column.Date === center){
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                  )
+                }    
+              }
+            }else{
+              return(
+                <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
+                  <AddCircleIcon className="text-green"/> 
+                </div>
+              )
+            }
+          }
+        }
+
+        else if(member.checkIn.month === member.checkOut.month && member.checkIn.month === column.Month){
+          if(column.Date >= member.checkIn.date && column.Date <= member.checkOut.date){
             let half
             let center
-
             if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
+
               half = displayColumn.length - member.checkIn.date
 
               for(let i = 0; i<=half/2; i++){
@@ -245,8 +358,26 @@ const RemoveCourse = () => {
               }
 
               center = member.checkIn.date + center
+              if(column.Date === center){
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  </div>
+                )
+              }else{
+                return(
+                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                )
+              }
+            }else{
+              half = member.checkOut.date - displayColumn[0].Date
+              console.log(half)
 
-              console.log(center)
+              for(let i = 0; i <= half/2; i++){
+                center = i
+              }
+
+              center = member.checkOut.date - center
               if(column.Date === center){
                 return(
                   <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
@@ -259,23 +390,94 @@ const RemoveCourse = () => {
                 )
               }    
             }
-            else{
-              center = 23
-              if(column.Date === center){
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                  </div>
-                )
-              }else{
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                )
-              } 
-            }     
+            
+          }else{
+            return(
+              <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
+                <AddCircleIcon className="text-green"/> 
+              </div>
+            )
           }
         }
-        else if(member.checkIn.month < column.Month && member.checkOut.month > column.Month){
+
+        else if(member.checkIn.month !== column.Month && member.checkOut.month !== column.Month){
+          return(
+            <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
+              <AddCircleIcon className="text-green"/> 
+            </div>
+          )
+        }
+      }
+
+      else if(member.checkIn.year < member.checkOut.year){
+        if(member.checkIn.year === column.Year){
+          if(member.checkIn.month === column.Month){
+            if(member.checkIn.date <= column.Date){
+              
+              let half
+              let center
+
+              if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
+                half = displayColumn.length - member.checkIn.date
+
+                for(let i = 0; i<=half/2; i++){
+                  center = i
+                }
+
+                center = member.checkIn.date + center
+
+                console.log(center)
+                if(column.Date === center){
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                  )
+                }    
+              }
+              else{
+                center = 23
+                if(column.Date === center){
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                  )
+                } 
+              }     
+            }else{
+              return(
+                <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
+                  <AddCircleIcon className="text-green"/> 
+                </div>
+              )
+            }
+          }
+
+          else if(member.checkIn.month < column.Month){
+            if(column.Date === 8 || column.Date === 23){
+              return(
+                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                </div>
+              )
+            }else{
+              return(
+                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+              )
+            }
+          }
+        }
+
+        else if(column.Year > member.checkIn.year && column.Year < member.checkOut.year){
           if(column.Date === 8 || column.Date === 23){
             return(
               <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
@@ -287,65 +489,11 @@ const RemoveCourse = () => {
               <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
             )
           }
-        }else if(column.Month === member.checkOut.month){
-          if(column.Date <= member.checkOut.date){
-            let half
-            let center
-
-            if(member.checkOut.date >= 15 && displayColumn[0].Date === 1){
-              center = 8
-              if(column.Date === center){
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                  </div>
-                )
-              }else{
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                )
-              }
-            }
-            else{
-              half = member.checkOut.date - displayColumn[0].Date
-              console.log(half)
-
-              for(let i = 0; i <= half/2; i++){
-                center = i
-              }
-
-              center = member.checkOut.date - center
-
-              if(column.Date === center){
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                  </div>
-                )
-              }else{
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                )
-              }    
-            }
-          }
         }
-      }
 
-      else if(member.checkIn.month === member.checkOut.month && member.checkIn.year === member.checkOut.year && member.checkIn.month === column.Month){
-        if(column.Date >= member.checkIn.date && column.Date <= member.checkOut.date){
-          let half
-          let center
-          if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
-
-            half = displayColumn.length - member.checkIn.date
-
-            for(let i = 0; i<=half/2; i++){
-              center = i
-            }
-
-            center = member.checkIn.date + center
-            if(column.Date === center){
+        else if(column.Year === member.checkOut.year){
+          if(column.Month < member.checkOut.month){
+            if(column.Date === 8 || column.Date === 23){
               return(
                 <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
                   <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
@@ -356,34 +504,57 @@ const RemoveCourse = () => {
                 <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
               )
             }
-          }else{
-            half = member.checkOut.date - displayColumn[0].Date
-            console.log(half)
-
-            for(let i = 0; i <= half/2; i++){
-              center = i
-            }
-
-            center = member.checkOut.date - center
-            if(column.Date === center){
-              return(
-                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                </div>
-              )
-            }else{
-              return(
-                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-              )
-            }    
           }
-          
-        }else{
-          return(
-            <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
-              <AddCircleIcon className="text-green"/> 
-            </div>
-          )
+
+          else if(column.Month === member.checkOut.month){
+            if(column.Date <= member.checkOut.date){
+              let half
+              let center
+
+              if(member.checkOut.date >= 15 && displayColumn[0].Date === 1){
+                center = 8
+                if(column.Date === center){
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                  )
+                }
+              }
+              else{
+                half = member.checkOut.date - displayColumn[0].Date
+                console.log(half)
+
+                for(let i = 0; i <= half/2; i++){
+                  center = i
+                }
+
+                center = member.checkOut.date - center
+
+                if(column.Date === center){
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
+                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
+                  )
+                }    
+              }
+            }else{
+              return(
+                <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
+                  <AddCircleIcon className="text-green"/> 
+                </div>
+              )
+            }
+          }
         }
       }
       
