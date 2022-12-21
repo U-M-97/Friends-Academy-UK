@@ -62,7 +62,6 @@ const FullLayout = ({ children }) => {
     router.events.on("routeChangeStart", handleStart)
     router.events.on("routeChangeComplete", handleComplete)
     router.events.on("routeChangeError", handleComplete)
-    console.log(loading)
 
     return () => {
       router.events.off("routeChangeStart", handleStart)
@@ -74,11 +73,9 @@ const FullLayout = ({ children }) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const cookieExist = getCookie("token");
-  console.log(cookieExist)
 
   const checkCookie = async () => {
     const res = await axios.get(`${process.env.url}/adminAuth`, { params: {cookieExist} } )
-    console.log(res.data)
     if(res.data !== "Cookie not exists"){
       dispatch(loginSuccess(res.data))
     }else{
@@ -89,10 +86,8 @@ const FullLayout = ({ children }) => {
 
   useEffect(() => {
     if(cookieExist){
-      console.log("running")
       checkCookie()
     }else{
-      console.log("running")
       dispatch(logout())
     }
   }, [])

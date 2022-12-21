@@ -37,7 +37,8 @@ module.exports = {
         svg: "200px",
         courseWidth: "700px",
         courses: "1250px",
-        roomAddIconWidth: "70px"
+        roomAddIconWidth: "70px",
+        dialog: "800px"
       },
       scale:{
         arrow: "3",
@@ -54,7 +55,9 @@ module.exports = {
         testimonials: "405px",
         svg: "200px",
         signup: "650px",
-        review: "400px"
+        review: "400px",
+        dialog: "450px",
+        dialogContainer: "620px"
       },
       borderWidth:{
         aboutPic: "10px",

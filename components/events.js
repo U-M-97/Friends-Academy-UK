@@ -16,7 +16,7 @@ const Events = () => {
     const [ selectedCategory, setSelectedCategory ] = useState()
     let categories = []
     let tmp = null
-    courses.map((item) => {
+    courses && courses.map((item) => {
         if(item.category != tmp){
             categories.push(item.category)
             tmp = item.category

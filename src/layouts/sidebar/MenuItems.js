@@ -25,9 +25,9 @@ const Menuitems = [
     href: "/admin/rooms",
   },
   {
-    title: "Ratings",
+    title: "Coupons",
     icon: "star",
-    href: "/rating",
+    href: "/admin/coupons",
   },
   {
     title: "Images",

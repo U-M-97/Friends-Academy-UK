@@ -41,11 +41,11 @@ const Header = () => {
                     <div className='px-3 sm:p-0 flex justify-between sm:ml-32 items-center'>
                         <div className='flex cursor-pointer'>
                             <PhoneIcon className='text-green'/>
-                            <address className='text-font not-italic hover:text-green duration-200'>+ 00 4475 32707561</address>
+                            <address className='text-font not-italic hover:text-green duration-200'>+44 7532 707561</address>
                         </div>
                         <div  className='flex cursor-pointer sm:ml-8'>
                             <MailIcon className='text-green'/>
-                            <address className='text-font not-italic hover:text-green duration-200'>mail@domain.com</address>
+                            <address className='text-font not-italic hover:text-green duration-200'>team@friendsacademy.co.uk</address>
                         </div>    
                     </div>
 
@@ -55,9 +55,9 @@ const Header = () => {
                         <div className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <WhatsAppIcon/>
                         </div>
-                        <div className='hover:text-green duration-300 cursor-pointer mr-4'>
+                        <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <FacebookIcon/>
-                        </div>  
+                        </a> 
                         <div className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <YouTubeIcon/>
                         </div>
