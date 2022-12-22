@@ -109,7 +109,6 @@ const Navbar = (props) => {
             <div className=" flex items-center justify-center ml-10 w-72">
                 <Image src="/images/Friends Academy.png" alt="logo" height={"130px"} width={"300px"} objectFit="cover"/>
             </div>
-        
            <ul className={`flex ${user ? "ml-20" : "ml-40"} items-center`}>
                 <li className="mr-8 hover:text-green duration-200">
                     <Link href="/">
@@ -196,6 +195,8 @@ const Navbar = (props) => {
                         <a>CONTACT</a>
                     </Scroll>
                 </li>
+
+                
 
                 { user == null ? null : 
                 <div className='mr-4 text-gray relative' onMouseEnter={() => setMouseEnterProfile(true)} onMouseLeave={() => setMouseEnterProfile(false)}>

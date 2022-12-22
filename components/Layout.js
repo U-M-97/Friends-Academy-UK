@@ -4,6 +4,8 @@ import Footer from "./footer"
 import { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
 import CircularProgress from '@mui/material/CircularProgress'
+import DiscountHeader from '../components/discountHeader'
+import { useSelector } from "react-redux"
 
 export default function Layout({children}){
 
@@ -39,10 +41,14 @@ export default function Layout({children}){
 
   const [ mobile, setMobile ] = useState(false)
   const homePage = router.pathname == "/account/signup" || router.pathname == "/account/login" || router.pathname.startsWith("/admin") ? false : true
+  const home = router.pathname === "/" ? true : false
   
   useEffect(() => {
     console.log(mobile)
   }, [mobile])
+
+  const [ discountHeader, setDiscountHeader ] = useState(true)
+  const coupon = useSelector((state) => state.coupon.coupons)
 
   return (
     <>
@@ -57,6 +63,7 @@ export default function Layout({children}){
             homePage && 
             <>
               <Header/>
+              { home && coupon != null && discountHeader === true ? <DiscountHeader close={() => setDiscountHeader(false)}/> : null}
               <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>
             </> 
           }

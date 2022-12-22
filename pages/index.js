@@ -14,6 +14,7 @@ import axios from 'axios'
 import { useDispatch } from "react-redux"
 import { loginSuccess, logout, userReviews } from "../redux/userReducer"
 import { addCourse } from "../redux/courseReducer"
+import { addCoupon, delCoupon } from '../redux/couponReducer'
 
 export default function Home(props) {
 
@@ -21,6 +22,11 @@ export default function Home(props) {
   // console.log(props.courses, props.user, props.reviews)
   dispatch(addCourse(props.courses))
   dispatch(userReviews(props.reviews))
+  if(props.coupons === undefined){
+    dispatch(delCoupon())
+  }else{
+    dispatch(addCoupon(props.coupons))
+  }
   if(props.user === "Token is not Valid" || props.user === "User not exists"){
     dispatch(logout())
   }
@@ -55,9 +61,11 @@ export async function getServerSideProps({req, res}) {
   const userData  = await axios.post(`${process.env.url}/userData`, {cookieExist})
   const coursesData = await axios.get(`${process.env.url}/courses`)
   const getReviews = await axios.get(`${process.env.url}/reviews`)
+  const getCoupons = await axios.get(`${process.env.url}/clientCoupon`)
   const reviews = getReviews.data
   const user = userData.data
   const courses = coursesData.data
+  const coupons = getCoupons.data
 
-  return { props: { user, courses, reviews} }
+  return { props: { user, courses, reviews, coupons} }
 }

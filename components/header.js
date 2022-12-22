@@ -55,7 +55,7 @@ const Header = () => {
                         <div className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <WhatsAppIcon/>
                         </div>
-                        <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" className='hover:text-green duration-300 cursor-pointer mr-4'>
+                        <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" rel="noreferrer" className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <FacebookIcon/>
                         </a> 
                         <div className='hover:text-green duration-300 cursor-pointer mr-4'>

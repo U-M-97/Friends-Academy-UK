@@ -9,7 +9,7 @@ const Profile = () => {
   console.log(userCourses)
 
   useEffect(() => {
-    user.courses.length != 0 ? setUserCourses(user.courses) : null
+    user && user.courses.length != 0 ? setUserCourses(user.courses) : null
   }, [])
 
   return (
