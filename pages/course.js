@@ -89,12 +89,6 @@ const Course = () => {
                         </div>
                         <p className="text-xl font-bold ml-5">Dr Rehman Bashir</p>
                     </div>
-                    <div className="flex items-center mx-10 mb-10">
-                        <div className="relative h-32 w-32 rounded-full overflow-hidden border-2 border-green">
-                            <Image src="/images/Sohail Tariq.jpeg" layout="fill" objectFit="cover"/>
-                        </div>
-                        <p className="text-xl font-bold ml-5">Dr Kamran</p>
-                    </div>
                 </div>
                 <div className="flex flex-col mx-5">
                     <div className="flex items-center mx-10 mb-10">
@@ -102,12 +96,6 @@ const Course = () => {
                             <Image src="/images/Sohail Tariq.jpeg" layout="fill" objectFit="cover"/>
                         </div>
                         <p className="text-xl font-bold ml-5">Dr Sohail Tariq</p>
-                    </div>
-                    <div className="flex items-center mx-10 mb-10">
-                        <div className="relative h-32 w-32 rounded-full overflow-hidden border-2 border-green">
-                            <Image src="/images/Rehman Bashir.jpg" layout="fill" objectFit="cover"/>
-                        </div>
-                        <p className="text-xl font-bold ml-5">Dr Rashad</p>
                     </div>
                 </div>
             </div>      

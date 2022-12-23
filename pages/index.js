@@ -19,10 +19,10 @@ import { addCoupon, delCoupon } from '../redux/couponReducer'
 export default function Home(props) {
 
   const dispatch = useDispatch()
-  // console.log(props.courses, props.user, props.reviews)
+  console.log(props.coupons)
   dispatch(addCourse(props.courses))
   dispatch(userReviews(props.reviews))
-  if(props.coupons === undefined){
+  if(props.coupons === undefined || props.coupons.length === 0){
     dispatch(delCoupon())
   }else{
     dispatch(addCoupon(props.coupons))

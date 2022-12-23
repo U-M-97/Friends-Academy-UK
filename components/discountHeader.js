@@ -10,12 +10,13 @@ const DiscountHeader = ({close}) => {
         discount: "",
         discountOn: "",
         discountType: "",
+        endDate: ""
     })
     
     useEffect(() => {
         coupons && coupons.find((coupon) => {
             if(coupon.discountOn === "All Courses"){
-                return setOutputs((output) => ({...output, discount: coupon.discount, discountOn: coupon.discountOn, discountType: coupon.discountType}))
+                return setOutputs((output) => ({...output, discount: coupon.discount, discountOn: coupon.discountOn, discountType: coupon.discountType, endDate: coupon.endDate}))
             }
         })
     },[])
@@ -31,9 +32,9 @@ const DiscountHeader = ({close}) => {
                     SALE !
                 </motion.p>
                 <motion.p
-                animate={{scale: [0.95,1,0.95]}}
-                transition={{ repeat: Infinity, duration: 2, ease: "linear"}}
-                className="ml-4 text-xl font-medium">{outputs.discount} {outputs.discountType} Discount on {outputs.discountOn}. Hurry up and Grab this limited offer right now</motion.p>
+                animate={{scale: [1,1.04,1]}}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut"}}
+                className="ml-4 text-xl font-medium">{outputs.discount} {outputs.discountType} Discount on {outputs.discountOn} till {outputs.endDate}. Hurry up and Grab this limited offer right now</motion.p>
             </div>
         }
         <div className="cursor-pointer hover:text-white" onClick={close}>
