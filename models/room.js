@@ -31,26 +31,10 @@ const roomSchema = new mongoose.Schema({
                 type: String
             },
             checkIn: {
-                date: {
-                    type: Number
-                },
-                month: {
-                    type: Number
-                }, 
-                year: {
-                    type: Number
-                }
+                type: String
             },
             checkOut: {
-                date: {
-                    type: Number
-                },
-                month: {
-                    type: Number
-                }, 
-                year: {
-                    type: Number
-                }
+                type: String
             },
             bed: {
                 type: String

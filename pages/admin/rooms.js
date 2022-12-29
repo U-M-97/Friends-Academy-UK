@@ -12,6 +12,9 @@ import {FormControl, InputLabel, Select} from "@mui/material"
 import { TextField, MenuItem, Avatar } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { addRoom } from '../../redux/adminReducer';
 
 const Rooms = () => {
 
@@ -28,6 +31,8 @@ const Rooms = () => {
     const [ file, setFile ] = useState(null)
     const [ imageUploading, setImageUploading ] = useState(false)
     const [ apiRes, setApiRes ] = useState(false)
+    const router = useRouter()
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -46,7 +51,7 @@ const Rooms = () => {
         let count = 1
         rooms && rooms.map((room) => {
             return(
-                arr.push({_id:room._id, id: count++, roomImage: room.image, roomTitle: room.roomTitle, roomType: room.roomType, roomBeds: room.roomBeds})
+                arr.push({room: room, _id:room._id, id: count++, roomImage: room.image, roomTitle: room.roomTitle, roomType: room.roomType, roomBeds: room.roomBeds})
             )
         })
         setRows(arr)
@@ -85,7 +90,20 @@ const Rooms = () => {
                 <DeleteIcon className="ml-2 cursor-pointer text-red-600" onClick={() => handleDelete(params.row._id)}/>
             )
             }
-        } 
+        },
+        { field: 'moreDetails', headerName: "Details", width: 150,
+        renderCell: (params) => {
+
+            const handleMoreDetails = () => {
+                dispatch(addRoom(params.row.room))
+                router.push("/admin/roomDetails")
+            }
+
+            return(
+                <button className='bg-green py-2 px-5 rounded-sm hover:bg-greenHover' onClick={handleMoreDetails}>More Details</button>
+            )
+        }
+    },
     ]
 
     const handleClose = (room) => {

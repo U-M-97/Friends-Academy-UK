@@ -20,10 +20,11 @@ const Course = () => {
 
     const handleCourseCheck = () => {
         const findCourse = user.courses.find((item) => {
-            if(item === course._id){
+            if(item._id === course._id){
                 return true
             }
         })
+        console.log(findCourse)
         if(findCourse){
             console.log(findCourse)
             setCourseRegistered(true)

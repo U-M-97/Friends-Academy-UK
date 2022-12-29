@@ -26,7 +26,12 @@ export default async function handler(req, res){
             if(req.method === "POST"){
                 const checkCoupon = await Coupon.findOne({$and: [{status: "active"}, {code: code}, {discountOn: course}]}).select("discount")
                 if(checkCoupon){
-                    res.send({message: "Coupon is Valid", discount: checkCoupon.discount})
+                    if(checkCoupon.usersLimit === "unlimited"){
+                        res.send({message: "Coupon is Valid", discount: checkCoupon.discount, id: "unlimited"})
+                    }else{
+                        res.send({message: "Coupon is Valid", discount: checkCoupon.discount, id: checkCoupon._id})
+                    }
+                    
                 }else{
                     res.send({message: "Invalid Coupon"})
                 }

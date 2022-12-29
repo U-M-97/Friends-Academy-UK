@@ -1,10 +1,23 @@
 const dbConnect = require("../../utils/connectDB")
 const verifyToken = require("./verifyToken")
 const Coupon = require("../../models/coupons")
+const cron = require("cron")
+const dayjs = require("dayjs")
 
 export default async function handler(req, res){
     
     await dbConnect()
+
+    const d = new Date()
+    const date = dayjs(d).format("DD/MM/YYYY")
+
+    const job = new cron.CronJob("* */6 * * * * ", async () => {
+        const updateExpiryDate = await Coupon.updateMany({endDate: {$lte: date}}, {
+            status: "expired"
+        })
+    })
+
+    job.start()
     
     const tokenCheck  = verifyToken(req)
 
@@ -19,6 +32,7 @@ export default async function handler(req, res){
     if(tokenCheck === "Allowed"){
         if(req.method === "POST"){
             const { couponCode, couponName, discount, discountType, discountOn, startDate, endDate, totalUsers} = req.body
+            
             const newCoupon = await new Coupon({
                 name: couponName,
                 code: couponCode,

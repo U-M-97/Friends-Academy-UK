@@ -56,33 +56,51 @@ export default async function handler (req, res) {
             }
         }else if(req.method === "PUT"){
             try{
-                const {name, gender, phone, country, email, checkIn, checkOut, bed, payment } = req.body.inputs
+                const {memberId, name, gender, phone, country, email, checkIn, checkOut, bed, payment } = req.body.inputs
                 const id = req.body.id
-                console.log(checkIn)
-                const updateRoom = await Room.findByIdAndUpdate(id, {
-                    $push: {
-                        roomMembers: {
-                            name: name,
-                            gender: gender,
-                            phone: phone,
-                            country: country,
-                            email: email,
-                            checkIn: {
-                                date: checkIn.date,
-                                month: checkIn.month,
-                                year: checkIn.year
-                            },
-                            checkOut: {
-                                date: checkOut.date,
-                                month: checkOut.month,
-                                year: checkOut.year                    
-                            },
-                            bed: bed,
-                            payment: payment
+                const reqMethod = req.body.reqMethod
+                console.log(reqMethod)
+                
+                if(reqMethod === "Add Member"){
+                    const updateRoom = await Room.findByIdAndUpdate(id, {
+                        $push: {
+                            roomMembers: {
+                                name: name,
+                                gender: gender,
+                                phone: phone,
+                                country: country,
+                                email: email,
+                                checkIn: checkIn,
+                                checkOut: checkOut,
+                                bed: bed,
+                                payment: payment
+                            }
                         }
+                    })
+                    console.log(updateRoom)
+                    res.send("Booking Added Successfully")
+                } 
+
+                else if(reqMethod === "Update Member"){
+                    console.log(memberId)
+                    const updateData = {
+                        name: name,
+                        gender: gender,
+                        phone: phone,
+                        country: country,
+                        email: email,
+                        checkIn: checkIn,
+                        checkOut: checkOut,
+                        bed: bed,
+                        payment: payment
                     }
-                })
-                res.send("Booking Added Successfully")
+                    const updateRoomMember = await Room.findOneAndUpdate({$and: [{_id: id}, {'roomMembers._id' : memberId}]}, {
+                        $set: {
+                            'roomMembers.$': updateData
+                        } 
+                    })
+                    res.send("Member Updated Successfully")
+                }
             }catch(err){
                 res.send(err)
             }

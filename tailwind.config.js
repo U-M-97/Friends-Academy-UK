@@ -40,7 +40,7 @@ module.exports = {
         courseWidth: "700px",
         courses: "1250px",
         roomAddIconWidth: "70px",
-        dialog: "800px"
+        dialog: "800px",
       },
       scale:{
         arrow: "3",

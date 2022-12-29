@@ -35,6 +35,7 @@ const Booking = () => {
     const [ discountOn, setDiscountOn ] = useState()
     const [ apiRes, setApiRes ] = useState(false)
     const [ invalidCoupon, setInvalidCoupon ] = useState(false)
+    const [ coupon, setCoupon ] = useState("No Coupon")
 
     useEffect(() => {
         setSelectedCourse(course)
@@ -88,7 +89,7 @@ const Booking = () => {
                     axios.put(`${process.env.url}/userData`, {user, plab2, prevAttempt, phone})  
                 }
             }
-            const res = await axios.post(`${process.env.url}/checkout_sessions`, {user, selectedCourse}) 
+            const res = await axios.post(`${process.env.url}/checkout_sessions`, {user, selectedCourse, coupon}) 
             console.log(res.data.id)
             const result = await stripe.redirectToCheckout({
                 sessionId: res.data.id
@@ -97,7 +98,7 @@ const Booking = () => {
     }
 
     const findCoupons = () => {
-        coupons.find((coupon) => {
+        coupons && coupons.find((coupon) => {
             if(coupon.discountOn === "All Courses"){
                 setIsCoupon(true)
                 setDiscountOn(coupon.discountOn)
@@ -136,6 +137,7 @@ const Booking = () => {
             selectedCourse && setSelectedCourse((item) => ({
                 ...item, price: discountedPrice
             }))
+            setCoupon(checkCoupon.data.id)
         }else{
             setApiRes(false)
             setInvalidCoupon(true)

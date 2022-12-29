@@ -2,6 +2,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 const User = require("../../models/user")
 const Course = require("../../models/courses")
+const Coupon = require("../../models/coupons")
 import { buffer } from "micro"
 
 export const config = {
@@ -15,6 +16,9 @@ const fullFillOrder = async (session) => {
     const user = session.metadata.userId
     const amount = session.amount_total / 100
     const course = session.metadata.courseId
+    const coupon = session.metadata.coupon
+    console.log(coupon)
+
     const updateUser = await User.findByIdAndUpdate(user,
       {
         $inc: { amountPaid: amount },
@@ -29,8 +33,15 @@ const fullFillOrder = async (session) => {
         $push: {
           courseStudents: user
         }
+    })
+
+    if(coupon !== "unlimited"){
+      console.log("running")
+      const UpdateCoupon = await Coupon.findByIdAndUpdate({_id: coupon}, {
+        $inc: {totalUses: 1}
       })
-      console.log(updateCourse)
+    }
+
 }
 
 export default async function WebHookHandler (req, res) {

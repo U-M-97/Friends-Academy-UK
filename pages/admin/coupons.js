@@ -17,6 +17,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const Coupons = () => {
 
@@ -26,7 +27,6 @@ const Coupons = () => {
     const [ discountOn, setDiscountOn ] = useState("Choose One")
     const [ courses, setCourses ] = useState()
     const [ coupons, setCoupons ] = useState()
-    const [ selectedCourse, setSelectedCourse ] = useState()
     const [ isEndDate, setIsEndDate ] = useState(true)
     const [startDate, setStartDate] = useState(dayjs(date));
     const [endDate, setEndDate] = useState(dayjs(date));
@@ -38,12 +38,15 @@ const Coupons = () => {
         discountType: "£",
         discountOn: "",
         startDate: dayjs(date).format("DD/MM/YYYY"),
-        endDate: dayjs(date).format("DD/MM/YYYY"),
+        endDate: "",
         totalUsers: "unlimited",
+        startDate: "",
+        endDate: ""
     })
     const [ isInputs, setIsInputs ] = useState(true)
     const [ apiRes, setApiRes ] = useState(false)
     const [ rows, setRows ] = useState()
+    const [ category, setCategory ] = useState()
 
     const handleStartDate = (newValue) => {
         setStartDate(newValue)
@@ -76,22 +79,47 @@ const Coupons = () => {
             getCoupons()
         }
     }
+
+    const handleEdit = (id) => {
+        const coupon = coupons && coupons.find((item) => {
+            if(item._id === id){
+                return item
+            }
+        })
+
+        setInputs((input) => ({
+            ...input, couponCode: coupon.code, couponName: coupon.name, discount: coupon.discount, discountType: coupon.discountType, discountOn: coupon.discountOn, endDate: coupon.endDate, startDate: coupon.startDate, totalUsers: coupon.usersLimit
+        }))
+        setIsEndDate(true)
+        setStartDate(dayjs(coupon.startDate, "DD/MM/YYYY"))
+        setEndDate(dayjs(coupon.endDate, "DD/MM/YYYY"))
+        handleOpen()
+    }
     
     const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'couponName', headerName: 'Coupon Name', width: 130 },
     { field: 'couponCode', headerName: 'Coupon Code', width: 130 },
-    { field: 'discount', headerName: 'Discount', width: 130 },
-    { field: 'type', headerName: 'Type', width: 130 },
-    { field: 'uses', headerName: 'Uses', width: 130 },
+    { field: 'discount', headerName: 'Discount', width: 100 },
+    { field: 'type', headerName: 'Type', width: 100 },
+    { field: 'uses', headerName: 'Uses', width: 100 },
     { field: 'status', headerName: 'Status', width: 130 },
-    { field: 'removeButton', headerName: "Delete", width: 130,
+    { field: 'startDate', headerName: 'Start Date', width: 130 },
+    { field: 'endDate', headerName: 'End Date', width: 130 },
+    { field: 'removeButton', headerName: "Delete", width: 70,
+        renderCell: (params) => {
+            return(
+                <DeleteIcon className="ml-2 cursor-pointer text-red-600" onClick={() => handleDelete(params.row._id)}/>
+            )
+        }
+    }, 
+    { field: 'editButton', headerName: "Edit", width: 70,
     renderCell: (params) => {
-      return(
-        <DeleteIcon className="ml-2 cursor-pointer text-red-600" onClick={() => handleDelete(params.row._id)}/>
-      )
+        return(
+            <MoreVertIcon className="ml-2 cursor-pointer text-blue-600" onClick={() => handleEdit(params.row._id)}/>
+        )
     }
-  } 
+}
   ];
   
   const getRows = () => {
@@ -99,7 +127,7 @@ const Coupons = () => {
     let count = 1
     coupons && coupons.map((coupon) => {
         return(
-            arr.push({_id: coupon._id, id: count++, couponName: coupon.name, couponCode: coupon.code, discount: coupon.discount, type: coupon.discountType, uses: coupon.totalUses, status: coupon.status})
+            arr.push({_id: coupon._id, id: count++, couponName: coupon.name, couponCode: coupon.code, discount: coupon.discount, type: coupon.discountType, uses: coupon.totalUses, status: coupon.status, startDate: coupon.startDate, endDate: coupon.endDate})
         )
     })
     setRows(arr)
@@ -107,6 +135,7 @@ const Coupons = () => {
 
   useEffect(() => {
     getRows()
+    setCategory("All")
   }, [coupons])
 
   const handleClose = () => {
@@ -121,7 +150,6 @@ const Coupons = () => {
     if(e.target.value === "All Courses"){
         setDiscountOn(e.target.value)
         setInputs((input) => ({...input, discountOn: e.target.value}))
-        setSelectedCourse(null)
     }else{
         setDiscountOn(e.target.value)
         setInputs((input) => ({...input, discountOn: courses[0].title}))
@@ -150,7 +178,7 @@ const Coupons = () => {
 
   const handleCreate = async () => {
 
-    if(inputs.couponCode != "" && inputs.couponName != "" && inputs.couponCode != "" && inputs.discount != "" && inputs.discountType != "" && inputs.discountOn != "" && inputs.startDate != "" && isEndDate === true ? inputs.endDate != "" : inputs.endDate === null && limitUsers === true ? inputs.totalUsers != "" : inputs.totalUsers === "unlimited"){
+    if(inputs.couponCode != "" && inputs.couponName != "" && inputs.discount != "" && inputs.discountType != "" && inputs.discountOn != "" && inputs.startDate != "" && (isEndDate === true ? inputs.endDate != "" : inputs.endDate === null) && (limitUsers === true ? inputs.totalUsers != "" : inputs.totalUsers === "unlimited")){
         setApiRes(true)
         setIsInputs(true)
         const res = await axios.post(`${process.env.url}/coupon`, inputs)
@@ -158,10 +186,20 @@ const Coupons = () => {
             setApiRes(false)
             handleClose()
             getCoupons()
+            setEndDate(false)
+            setEndDate("")
+            setInputs((input) => ({...input,  couponCode: "",  couponName: "",  discount: "",  discountType: "£", discountOn: "", startDate: dayjs(date).format("DD/MM/YYYY"), endDate: dayjs(date).format("DD/MM/YYYY"), totalUsers: "unlimited",}))     
         }
     }else{
        setIsInputs(false)
     }
+  }
+
+  const handleNewCoupon = () => {
+    setInputs((input) => ({...input,  couponCode: "",  couponName: "",  discount: "",  discountType: "£", discountOn: "", startDate: dayjs(date).format("DD/MM/YYYY"), endDate: null, totalUsers: "unlimited",})) 
+    setStartDate(dayjs(date))   
+    setIsEndDate(false) 
+    handleOpen()
   }
   console.log(coupons)
   console.log(inputs)
@@ -176,17 +214,17 @@ const Coupons = () => {
                         </MenuItem>
                     </TextField>
                     <h1 className="text-2xl font-medium">Coupons</h1>
-                    <button className="mr-40 bg-green w-52 flex items-center justify-center py-2 text-xl font-medium rounded-full" onClick={handleOpen}>
+                    <button className="mr-40 bg-green w-52 flex items-center justify-center py-2 text-xl font-medium rounded-full" onClick={handleNewCoupon}>
                         <AddIcon className="scale-125"/>
                         <p className="ml-2">New Coupon</p>
                     </button>  
                 </div>
                 {
-                    rows && <div style={{ height: 400, width: '100%' }}>
+                    rows && <div style={{ height: 500, width: '100%' }}>
                             <DataGrid
                             rows={rows}
                             columns={columns}
-                            pageSize={5}
+                            pageSize={10}
                             rowsPerPageOptions={[5]}
                             />
                             </div>
@@ -200,17 +238,17 @@ const Coupons = () => {
                             <div className="flex px-5 justify-between text-lg">
                                 <div className="flex-1">
                                     <p>Coupon Code</p>
-                                    <input placeholder="e.g, FRIENDSGIFT" className="rounded-md border-2 border-slate-300 mt-2 w-72 px-2 py-1 hover:bg-slate-100 focus:border-green outline-none" onChange={(e) => setInputs((input) => ({...input,couponCode: e.target.value}))}/>
+                                    <input value={inputs.couponCode} placeholder="e.g, FRIENDSGIFT" className="rounded-md border-2 border-slate-300 mt-2 w-72 px-2 py-1 hover:bg-slate-100 focus:border-green outline-none" onChange={(e) => setInputs((input) => ({...input,couponCode: e.target.value}))}/>
                                 </div>
                                 <div className="flex-1">
                                     <p>Coupon Name</p>
-                                    <input placeholder="e.g, FRIENDS GIFT" className="rounded-md border-2 border-slate-300 mt-2 w-72 px-2 py-1 hover:bg-slate-100 focus:border-green outline-none" onChange={(e) => setInputs((input) => ({...input,couponName: e.target.value}))}/>
+                                    <input value={inputs.couponName} placeholder="e.g, FRIENDS GIFT" className="rounded-md border-2 border-slate-300 mt-2 w-72 px-2 py-1 hover:bg-slate-100 focus:border-green outline-none" onChange={(e) => setInputs((input) => ({...input,couponName: e.target.value}))}/>
                                 </div>
                             </div>
                             <div className="flex items-center justify-between mt-5 px-5 text-lg">
                                 <div className="flex-1">
                                     <p>Discount</p>
-                                    <input type="number" min={0} placeholder={inputs.discountType} className="rounded-md border-2 border-slate-300 w-72 mt-2 px-2 py-1 hover:bg-slate-100 focus:border-green outline-none" onChange={(e) => setInputs((input) => ({...input,discount: e.target.value}))}/>
+                                    <input value={inputs.discount} type="number" min={0} placeholder={inputs.discountType}  className="rounded-md border-2 border-slate-300 w-72 mt-2 px-2 py-1 hover:bg-slate-100 focus:border-green outline-none" onChange={(e) => setInputs((input) => ({...input,discount: e.target.value}))}/>
                                 </div>
                                 <div className=" flex-1">
                                     <p>Discount Type</p>
@@ -249,7 +287,7 @@ const Coupons = () => {
                                         <div className="w-40">
                                             <DesktopDatePicker
                                             label="Start Date"
-                                            inputFormat="MM/DD/YYYY"
+                                            inputFormat="DD/MM/YYYY"
                                             value={startDate}
                                             onChange={handleStartDate}
                                             renderInput={(params) => <TextField {...params} />}
@@ -258,7 +296,7 @@ const Coupons = () => {
                                         <div className={`ml-5 w-40 ${isEndDate === false ? "invisible" : null}`}>                                 
                                             <DesktopDatePicker
                                             label="End Date"
-                                            inputFormat="MM/DD/YYYY"
+                                            inputFormat="DD/MM/YYYY"
                                             value={endDate}
                                             onChange={handleEndDate}
                                             renderInput={(params) => <TextField {...params} />}
@@ -277,7 +315,7 @@ const Coupons = () => {
                                     <Checkbox checked={limitUsers === false ? false : true}/>
                                     <p>Limit the total number of uses for this coupon</p>
                                 </div>
-                                { limitUsers === true ? <input placeholder="Max Users" type="number" min={0} className="rounded-md border-2 border-slate-300 mt-2 w-72 px-2 py-1 hover:bg-slate-100 focus:border-green outline-none" onChange={(e) => setInputs((input) => ({...input,totalUsers: e.target.value}))}/> : null }
+                                { limitUsers === true ? <input value={inputs.totalUsers} placeholder="Max Users" type="number" min={0} className="rounded-md border-2 border-slate-300 mt-2 w-72 px-2 py-1 hover:bg-slate-100 focus:border-green outline-none" onChange={(e) => setInputs((input) => ({...input,totalUsers: e.target.value}))}/> : null }
                             </div>
                         </DialogContent>
                         <div className="mt-5 flex justify-end items-center text-lg font-medium my-5 mr-5">

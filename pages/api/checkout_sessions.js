@@ -3,7 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 export default async function handler(req, res){
     
     if(req.method === "POST"){
-        const { user, selectedCourse } = req.body
+        const { user, selectedCourse, coupon } = req.body
         const userId = user._id
         const courseId = selectedCourse._id
         const transformedItems = [{   
@@ -26,7 +26,7 @@ export default async function handler(req, res){
                 mode: "payment",
                 success_url:`${req.headers.origin}/paymentSuccessfull`,
                 cancel_url: `${req.headers.origin}/paymentUnsuccessfull`,
-                metadata: {userId, courseId},
+                metadata: {userId, courseId, coupon},
             })
             res.status(200).json({ id: session.id })
         }catch(err){

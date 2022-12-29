@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../src/theme/theme";
 import FullLayout from "../../src/layouts/FullLayout";
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import axios from "axios"
@@ -16,48 +16,28 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import ConditionalRendering from "./conditionalRendering";
 
 const RemoveCourse = () => {
 
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const [ columns, setColumns ] = useState([
-    {
-      Day: "",
-      Date: "",
-      Month: "",
-      stringMonth: "",
-      Year: "",
-      completeDate: ""
-    }
-  ])
-  const date = new Date()
-  const getDaysInCurrentMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
-  const firstDayOfCurrentMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
-  const [ month, setMonth ] = useState(date.getMonth())
-  const [ year, setYear ] = useState(date.getFullYear())
-  const prevState = useRef()
+  const [ columns, setColumns ] = useState([])
+  const [ date, setDate ] = useState(dayjs(new Date()).startOf("month"))
   const [ firstRender, setFirstRender ] = useState(false)
   const [ displayColumn, setDisplayColumn ] = useState()
   const [ rooms, setRooms ] = useState()
   const [ dialog, setDialog ] = useState(false)
   const [ inputs, setInputs ] = useState({
     roomId: "",
+    memberId: "",
     name: "",
     gender: "",
     phone: "",
     country: "",
     email: "",
-    checkIn: {
-      date: null,
-      month: null,
-      year: null
-    },
-    checkOut: {
-      date: null,
-      month: null,
-      year: null
-    },
+    checkIn: "",
+    checkOut: "",
     bed: "",
     payment: ""
   })
@@ -65,6 +45,7 @@ const RemoveCourse = () => {
   const [ muiCheckInDate, setMuiCheckInDate ] = useState(dayjs(date))
   const [ muiCheckOutDate, setMuiCheckOutDate ] = useState(null)
   const [ selectedRoom, setSelectedRoom ] = useState()
+  const [ reqMethod, setReqMethod ] = useState()
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -74,14 +55,9 @@ const RemoveCourse = () => {
   }
 
   const handleCheckInDate = () => {
-    console.log(muiCheckInDate)
     setInputs((current) => {
       return{
-        ...current, checkIn: {
-          date: muiCheckInDate.$D,
-          month: muiCheckInDate.$M,
-          year: muiCheckInDate.$y
-        }
+        ...current, checkIn: dayjs(muiCheckInDate).format("DD/MM/YYYY")
       }
     })
   }
@@ -89,46 +65,35 @@ const RemoveCourse = () => {
   const handleCheckOutDate = () => {
     muiCheckOutDate && setInputs((current) => {
       return{
-        ...current, checkOut: {
-          date: muiCheckOutDate.$D,
-          month: muiCheckOutDate.$M,
-          year: muiCheckOutDate.$y
-        }
+        ...current, checkOut:  dayjs(muiCheckOutDate).format("DD/MM/YYYY")
       }
     })
   }
-
-  let arr = []
-  let monthInString
 
   const getRooms = async () => {
     const rooms = await axios.get(`${process.env.url}/room`)
     setRooms(rooms.data)
   }
 
-  const setDate = (totalDays, firstDay, currentMonth, year) => {
-    
-    for(let i = 0; i <= months.length; i++){
-      if(currentMonth == i){
-        monthInString = months[i]
-      }
-    }
+  const getColumns = () => {
 
-    for(let i = 0; i < totalDays; i++){
-      if(firstDay == 7){
-        firstDay = 0
-        arr.push({Day: weekday[firstDay], Date: i+1, Month: currentMonth, stringMonth: monthInString, Year: year, completeDate: new Date(`${year}-${currentMonth + 1}-${i+1}`)})
-        firstDay++
+    let localDate = dayjs(date)
+    let arr = []
+
+    for(let i = 0; i < date.daysInMonth(); i++){
+      if(localDate.isSame(localDate.startOf("month"))){
+        arr.push(localDate)
+        localDate = localDate.add(1, "day")
       }else{
-        arr.push({Day: weekday[firstDay], Date: i+1, Month: currentMonth, stringMonth: monthInString, Year: year, completeDate: new Date(`${year}-${currentMonth + 1}-${i+1}`)})
-        firstDay++
+        arr.push(localDate)
+        localDate = localDate.add(1, "day")
       }
     }
+    console.log(arr)
     setColumns(arr)
 
     if(firstRender == false){
       setFirstRender(true)
-      prevState.current = month
     }
   }
 
@@ -137,436 +102,32 @@ const RemoveCourse = () => {
   }, [columns])
 
   useEffect(() => {
-    setDate(getDaysInCurrentMonth, firstDayOfCurrentMonth, month, year)
+    getColumns()
     getRooms()
   }, [])  
   
-  const getNextYearMonth = () => {
-    console.log("getNextYearMonth")
-    const daysInNextMonth = new Date(year, 1, 0).getDate()
-    const firstDayOfNextMonth = new Date(year, month, 1).getDay()
-    setDate(daysInNextMonth, firstDayOfNextMonth, month, year)
-    prevState.current = month
-  }
-    
-  const getNextMonth = () => {
-      console.log("getNextMonth")
-      const daysInNextMonth = new Date(year, month + 1, 0).getDate()
-      const firstDayOfNextMonth = new Date(year, month, 1).getDay()
-      setDate(daysInNextMonth, firstDayOfNextMonth, month, year)
-      prevState.current = month
-  }
-
-  const getPreviousYearMonth = () => {
-    console.log("getPreviousYearMonth")
-    const daysInPreviousMonth = new Date(year, 0, 0).getDate()
-    const firstDayOfPreviousMonth = new Date(year, month, 1).getDay()
-    setDate(daysInPreviousMonth, firstDayOfPreviousMonth, month, year)
-    prevState.current = month
-  }
-
-  const getPreviousMonth = () => {
-      console.log("getPreviousMonth")
-      const daysInPreviousMonth = new Date(year, month + 1, 0).getDate()
-      const firstDayOfPreviousMonth = new Date(year, month, 1).getDay()
-      setDate(daysInPreviousMonth, firstDayOfPreviousMonth, month, year)
-      prevState.current = month
-  }
-  
   const handleNext = () => {
-    if(displayColumn[0].Date == 1){
+    if(displayColumn[0].isSame(date.startOf("month"))){
       setDisplayColumn(columns.slice(columns.length / 2))
     }else{
-      if(month == 11){
-        setMonth(0)
-        setYear((prev) => prev + 1)
-      }else{
-        setMonth((prev) => prev + 1)
-      }
+      setDate(date.add(1, "month"))
     }
   } 
 
   const handlePrevious = () => {
-    if(displayColumn[0].Date != 1){
+    if(displayColumn[displayColumn.length - 1].isSame(date.endOf("month").set("hour", 0).set("minute", 0).set("second", 0).set("millisecond", 0))){
+      console.log("running")
       setDisplayColumn(columns.slice(0, columns.length / 2))
     }else{
-      if(month == 0){
-        setMonth(11)
-        setYear((prev) => prev - 1)
-      }else{
-        setMonth((prev) => prev - 1)
-      }
+      setDate(date.subtract(1, "month"))
     } 
   }
 
   useEffect(() => {
-    if(firstRender != false){
-      getNextYearMonth()
+    if(firstRender === true){
+      getColumns()
     }
-  }, [month == 0 && prevState.current == 11])
-
-  useEffect(() => {
-    if(firstRender != false){
-      getPreviousYearMonth()
-    }
-  }, [month == 11 && prevState.current == 0])
-
-  useEffect(() => {
-    if(firstRender != false){
-      if(month > prevState.current){
-        getNextMonth()
-      }else if(month < prevState.current){
-        console.log(prevState.current, month)
-        getPreviousMonth()
-      }
-    }
-  }, [month]) 
-
-  const ConditionalRendering = (props) => {
-
-    const column = props.column
-    const member = props.member
-    console.log(column)
-    console.log(member)
-
-    if(member.checkIn && member.checkOut){
-      if(member.checkIn.year === member.checkOut.year && member.checkIn.year === column.Year){
-        if(member.checkIn.month < member.checkOut.month && member.checkIn.month <= column.Month && member.checkOut.month >= column.Month){
-          if(member.checkIn.month === column.Month){
-            if(member.checkIn.date <= column.Date){
-              
-              let half
-              let center
-
-              if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
-                half = displayColumn.length - member.checkIn.date
-
-                for(let i = 0; i<=half/2; i++){
-                  center = i
-                }
-
-                center = member.checkIn.date + center
-
-                console.log(center)
-                if(column.Date === center){
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                    </div>
-                  )
-                }else{
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                  )
-                }    
-              }
-              else{
-                center = 23
-                if(column.Date === center){
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                    </div>
-                  )
-                }else{
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                  )
-                } 
-              }     
-            }else{
-              return(
-                <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
-                  <AddCircleIcon className="text-green"/> 
-                </div>
-              )
-            }
-          }
-          else if(member.checkIn.month < column.Month && member.checkOut.month > column.Month){
-            if(column.Date === 8 || column.Date === 23){
-              return(
-                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                </div>
-              )
-            }else{
-              return(
-                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-              )
-            }
-          }else if(column.Month === member.checkOut.month){
-            if(column.Date <= member.checkOut.date){
-              let half
-              let center
-
-              if(member.checkOut.date >= 15 && displayColumn[0].Date === 1){
-                center = 8
-                if(column.Date === center){
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                    </div>
-                  )
-                }else{
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                  )
-                }
-              }
-              else{
-                half = member.checkOut.date - displayColumn[0].Date
-                console.log(half)
-
-                for(let i = 0; i <= half/2; i++){
-                  center = i
-                }
-
-                center = member.checkOut.date - center
-
-                if(column.Date === center){
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                    </div>
-                  )
-                }else{
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                  )
-                }    
-              }
-            }else{
-              return(
-                <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
-                  <AddCircleIcon className="text-green"/> 
-                </div>
-              )
-            }
-          }
-        }
-
-        else if(member.checkIn.month === member.checkOut.month && member.checkIn.month === column.Month){
-          if(column.Date >= member.checkIn.date && column.Date <= member.checkOut.date){
-            let half
-            let center
-            if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
-
-              half = displayColumn.length - member.checkIn.date
-
-              for(let i = 0; i<=half/2; i++){
-                center = i
-              }
-
-              center = member.checkIn.date + center
-              if(column.Date === center){
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                  </div>
-                )
-              }else{
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                )
-              }
-            }else{
-              half = member.checkOut.date - displayColumn[0].Date
-              console.log(half)
-
-              for(let i = 0; i <= half/2; i++){
-                center = i
-              }
-
-              center = member.checkOut.date - center
-              if(column.Date === center){
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                    <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                  </div>
-                )
-              }else{
-                return(
-                  <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                )
-              }    
-            }
-            
-          }else{
-            return(
-              <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
-                <AddCircleIcon className="text-green"/> 
-              </div>
-            )
-          }
-        }
-
-        else if(member.checkIn.month !== column.Month && member.checkOut.month !== column.Month){
-          return(
-            <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
-              <AddCircleIcon className="text-green"/> 
-            </div>
-          )
-        }
-      }
-
-      else if(member.checkIn.year < member.checkOut.year){
-        if(member.checkIn.year === column.Year){
-          if(member.checkIn.month === column.Month){
-            if(member.checkIn.date <= column.Date){
-              
-              let half
-              let center
-
-              if(member.checkIn.date <= 15 && displayColumn[0].Date === 1){
-                half = displayColumn.length - member.checkIn.date
-
-                for(let i = 0; i<=half/2; i++){
-                  center = i
-                }
-
-                center = member.checkIn.date + center
-
-                console.log(center)
-                if(column.Date === center){
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                    </div>
-                  )
-                }else{
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                  )
-                }    
-              }
-              else{
-                center = 23
-                if(column.Date === center){
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                    </div>
-                  )
-                }else{
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                  )
-                } 
-              }     
-            }else{
-              return(
-                <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
-                  <AddCircleIcon className="text-green"/> 
-                </div>
-              )
-            }
-          }
-
-          else if(member.checkIn.month < column.Month){
-            if(column.Date === 8 || column.Date === 23){
-              return(
-                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                </div>
-              )
-            }else{
-              return(
-                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-              )
-            }
-          }
-        }
-
-        else if(column.Year > member.checkIn.year && column.Year < member.checkOut.year){
-          if(column.Date === 8 || column.Date === 23){
-            return(
-              <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-              </div>
-            )
-          }else{
-            return(
-              <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-            )
-          }
-        }
-
-        else if(column.Year === member.checkOut.year){
-          if(column.Month < member.checkOut.month){
-            if(column.Date === 8 || column.Date === 23){
-              return(
-                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                </div>
-              )
-            }else{
-              return(
-                <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-              )
-            }
-          }
-
-          else if(column.Month === member.checkOut.month){
-            if(column.Date <= member.checkOut.date){
-              let half
-              let center
-
-              if(member.checkOut.date >= 15 && displayColumn[0].Date === 1){
-                center = 8
-                if(column.Date === center){
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                    </div>
-                  )
-                }else{
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                  )
-                }
-              }
-              else{
-                half = member.checkOut.date - displayColumn[0].Date
-                console.log(half)
-
-                for(let i = 0; i <= half/2; i++){
-                  center = i
-                }
-
-                center = member.checkOut.date - center
-
-                if(column.Date === center){
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16">
-                      <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
-                    </div>
-                  )
-                }else{
-                  return(
-                    <div className="bg-green absolute top-firstRow flex items-center justify-center w-20 h-16"></div>
-                  )
-                }    
-              }
-            }else{
-              return(
-                <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
-                  <AddCircleIcon className="text-green"/> 
-                </div>
-              )
-            }
-          }
-        }
-      }
-      
-      else if(member.checkIn.month !== column.Month && member.checkOut.month !== column.Month){
-        return(
-          <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16">
-            <AddCircleIcon className="text-green"/> 
-          </div>
-        )
-      }
-    }
-  }
+  }, [date])
 
   const handleClose = () => {
     console.log("asdkjhaskljdklas")
@@ -574,9 +135,13 @@ const RemoveCourse = () => {
   }
 
   const handleOpen = (column, room) => {
+    console.log(column, room)
     setDialog(true)
     setSelectedRoom(room)
-    setMuiCheckInDate(dayjs(new Date(column.completeDate)))
+    setReqMethod("Add Member")
+    setMuiCheckInDate(dayjs(column))
+    setMuiCheckOutDate(null)
+    setInputs(null)
 }
 
   useEffect(() => {
@@ -590,17 +155,28 @@ const RemoveCourse = () => {
 const handleSave = async () => {
   const data = {
     id: selectedRoom._id,
-    inputs: inputs
+    inputs: inputs,
+    reqMethod: reqMethod
   }
   const res = await axios.put(`${process.env.url}/room`, data)
-  if(res.data === "Booking Added Successfully"){
+  if(res.data === "Booking Added Successfully" || res.data === "Member Updated Successfully"){
     handleClose()
     getRooms()
   }
 }
 
-console.log(rooms)
-
+const handleInputs = (column, room, member) => {
+  setSelectedRoom(room)
+  setDialog(true)
+  console.log(member)
+  setMuiCheckInDate(dayjs(member.checkIn, "DD/MM/YYYY"))
+  setMuiCheckOutDate(dayjs(member.checkOut, "DD/MM/YYYY"))
+  setReqMethod("Update Member")
+  setInputs((input) => ({
+    ...input,roomId: room._id, memberId: member._id, name: member.name, gender: member.gender, phone: member.phone, country: member.country, email: member.email, checkIn: member.checkIn, checkOut: member.checkOut, bed: member.bed, payment: member.payment
+  }))
+}
+console.log(reqMethod)
   return (
      <ThemeProvider theme={theme}>
         <FullLayout>
@@ -608,7 +184,7 @@ console.log(rooms)
             <h1 className="font-bold text-xl text-center">Room Reservations</h1>
             <div className="flex items-center justify-center py-5">
               <button className="mx-5 text-green hover:bg-greenHover hover:text-white rounded-full p-1" onClick={handlePrevious}><ArrowBackIosNewIcon/></button>
-              <p className="text-xl font-bold">{columns && <div>{columns[0].Date} {columns[0].stringMonth}, {columns[0].Year}</div>}</p>
+              <p className="text-xl font-bold">{columns && <div>{date.format("MMMM")} {date.format("YYYY")}</div>}</p>
               <button className="mx-5 text-green hover:bg-greenHover hover:text-white rounded-full p-1" onClick={handleNext}><ArrowForwardIosIcon/></button>
             </div>
             <div className="flex border-y border-gray">
@@ -618,8 +194,8 @@ console.log(rooms)
               {displayColumn && displayColumn.map((column) => {
                 return(
                   <div className="flex flex-col items-center justify-center py-2 w-20 border border-black" key={column}>
-                    <p>{column.Day}</p>
-                    <p>{column.Date}</p>
+                    <p>{dayjs(column).format("DD")}</p>
+                    <p>{dayjs(column).format("dddd").slice(0,3)}</p>
                   </div>
                 )
               })}
@@ -633,16 +209,18 @@ console.log(rooms)
                     </div>
                     {displayColumn && displayColumn.map((column) => {
                       return(
-                        <div className="flex flex-col items-center h-20 justify-center w-20 border border-black cursor-pointer hover:bg-lightGray" onClick={() => handleOpen(column, room)} key={column}>
+                        <div className="flex flex-col items-center h-20 justify-center w-20 border border-black cursor-pointer hover:bg-lightGray" key={column}>
                           {
                             room.roomMembers.length != 0 ? room.roomMembers.map((member) => {
                               return(
+                                <>
                                 <div className="flex w-full" key={member}>
-                                  <ConditionalRendering column={column} member={member}/>
+                                  <ConditionalRendering column={column} member={member} displayColumn={displayColumn} handleInputs={() => handleInputs(column, room, member)} handleOpen={() => handleOpen(column, room)}/>
                                 </div>
+                                </>
                               )
                             }) : 
-                            <div>
+                            <div onClick={() => handleOpen(column, room)} className="h-full w-full flex items-center justify-center">
                               <AddCircleIcon className="text-green"/> 
                             </div>
                           }
@@ -669,7 +247,7 @@ console.log(rooms)
                     label="Guest Name"
                     fullWidth
                     variant="standard"
-                    defaultValue={inputs.roomTitle}
+                    defaultValue={inputs.name}
                     onChange={handleChange}
                     />
                     <TextField

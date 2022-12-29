@@ -28,6 +28,7 @@
     "axios": "^0.27.2",
     "clsx": "1.1.1",
     "cookies-next": "^2.1.1",
+    "cron": "^2.1.0",
     "dayjs": "^1.11.6",
     "feather-icons-react": "^0.5.0",
     "framer-motion": "^7.3.5",
