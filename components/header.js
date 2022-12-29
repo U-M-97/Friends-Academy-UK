@@ -19,7 +19,7 @@ const Header = () => {
 
     return(
         <div className='font-main overflow-x-hidden'>
-            {banner == true ? <div className={styles.headerOpen}>
+            {/* {banner == true ? <div className={styles.headerOpen}>
                 <div className={styles.headerContainer}>
                     <p className='mr-1 text-green'>Our New Address : </p>
                     <p className='mr-10'>113 - 115 Smedley Road, MANCHESTER</p>
@@ -30,13 +30,13 @@ const Header = () => {
                 </div>
             </div>
             : null
-            }
+            } */}
             
             
             <div className='flex justify-center sm:p-2 relative'>
-                <div className='absolute right-5 top-0 bg-green text-black cursor-pointer rounded-b-md sm:p-1' onClick={() => setBanner(!banner)}>
+                {/* <div className='absolute right-5 top-0 bg-green text-black cursor-pointer rounded-b-md sm:p-1' onClick={() => setBanner(!banner)}>
                     {banner == true ? <ClearIcon className='scale-75 md:scale-100'/> : <KeyboardArrowDownIcon/>}
-                </div>
+                </div> */}
                 <div className='flex mt-5 flex-col w-screen sm:mt-0 sm:flex-row sm:w-width sm:justify-between'>
                     <div className='px-3 sm:p-0 flex justify-between sm:ml-32 items-center'>
                         <div className='flex cursor-pointer'>

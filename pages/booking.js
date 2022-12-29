@@ -98,7 +98,7 @@ const Booking = () => {
     }
 
     const findCoupons = () => {
-        coupons && coupons.find((coupon) => {
+        selectedCourse && coupons && coupons.find((coupon) => {
             if(coupon.discountOn === "All Courses"){
                 setIsCoupon(true)
                 setDiscountOn(coupon.discountOn)
@@ -111,7 +111,7 @@ const Booking = () => {
 
     useEffect(() => {
         findCoupons()
-    }, [])
+    }, [selectedCourse])
 
     const handleClose = () => {
         setDialog(false)

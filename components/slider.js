@@ -8,7 +8,7 @@ const Slider = () => {
 
   const [ index, setIndex ] = useState(0)
   const images = [
-    "/images/slider4thimage.jpeg", "/images/main.jpg", "/images/main2.jpg", "/images/main3.jpg", 
+    "/images/slider4thimage.jpeg", "/images/main.jpeg", "/images/main2.jpg", "/images/main3.jpg", 
   ]
 
   const handleArrow = (e) => {

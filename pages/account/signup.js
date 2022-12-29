@@ -53,7 +53,7 @@ const Signup = () => {
             setEmailFormat(true)
             setIsInputs(true)
             const data = {
-                inputs, plab2
+                inputs, plab2, reqMethod: "Sign Up"
             }
             try{
                 const res = await axios.post(`${process.env.url}/email/authEmail`, data)
