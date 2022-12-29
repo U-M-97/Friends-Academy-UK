@@ -11,7 +11,7 @@ const Login = () => {
         email: "",
         password: ""
     })
-    const [ invalidCredentials , setInvalidCredentials ] = useState(true)
+    const [ invalidCredentials , setInvalidCredentials ] = useState(false)
     const [ isInputs, setIsInputs ] = useState(true)
     const router = useRouter()
 

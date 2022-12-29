@@ -41,12 +41,18 @@ const Footer = () => {
                     <a className='ml-4 text-xl text-white hover:underline hover:text-green duration-300 cursor-pointer'>+ 00 4475 32707561</a>
                 </div>
                 <div className='mt-4'>
+                    <PhoneIcon className='text-green scale-125'/>
+                    <a className='ml-4 text-xl text-white hover:underline hover:text-green duration-300 cursor-pointer'>+ 00 4475 32707561</a>
+                </div>
+                <div className='mt-4 flex items-center'>
                     <MailIcon className='text-green scale-125'/>
-                    <label className='ml-4 text-xl text-white hover:underline hover:text-green duration-300 cursor-pointer'>mail@domain.com</label>
+                    <div>
+                        <label className='ml-4 text-xl text-white hover:underline hover:text-green duration-300 cursor-pointer'>team@friendsacademy.co.uk</label>
+                    </div>
                 </div>
                 <div className='mt-4 flex items-center'>
                     <LocationOnIcon className='text-green scale-125'/>
-                    <div className="ml-4 ">
+                    <div className="ml-4">
                         <p className='text-xl text-white'>113-115 Smedley Road Manchester M8 0RS</p>
                     </div>    
                 </div>
@@ -54,9 +60,9 @@ const Footer = () => {
                         <div className=' h-10 w-10 border border-lightGray rounded-full flex items-center justify-center text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <WhatsAppIcon className=''/>
                         </div>
-                        <div className=' h-10 w-10  border border-lightGray rounded-full flex items-center justify-center ml-4 text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" rel="noreferrer" className=' h-10 w-10  border border-lightGray rounded-full flex items-center justify-center ml-4 text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <FacebookIcon className=''/>
-                        </div>
+                        </a>
                         <div className=' h-10 w-10  border border-lightGray rounded-full flex items-center justify-center ml-4 text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <YouTubeIcon className=''/>
                         </div>

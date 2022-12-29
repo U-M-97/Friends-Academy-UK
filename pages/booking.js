@@ -111,7 +111,7 @@ const Booking = () => {
 
     useEffect(() => {
         findCoupons()
-    }, [selectedCourse])
+    }, [selectedCourse && selectedCourse.title])
 
     const handleClose = () => {
         setDialog(false)
