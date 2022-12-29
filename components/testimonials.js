@@ -15,26 +15,26 @@ const Testimonials = () => {
 
     const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
     const reviews = useSelector((state) => state.user.users)
-    const [ video, setVideo ] = useState("https://res.cloudinary.com/codillionaire/video/upload/v1668959602/friends-academy/Reviewvideo_xpj3jk.mp4")
+    const [ video, setVideo ] = useState("https://res.cloudinary.com/codillionaire/video/upload/v1672344896/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_video-converter.com_lreziu.mp4")
     const videos = [
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668959602/friends-academy/Reviewvideo_xpj3jk.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986675/friends-academy/TRIAL____________Videos_-_Wix.com_2_ubj7ps.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986675/friends-academy/TRIAL____________Videos_-_Wix.com_3_xa8oul.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986688/friends-academy/TRIAL____________Videos_-_Wix.com_8_s2hwzc.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986689/friends-academy/TRIAL____________Videos_-_Wix.com_7_rvydmj.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986691/friends-academy/TRIAL____________Videos_-_Wix.com_bv1l7f.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986692/friends-academy/TRIAL____________Videos_-_Wix.com_5_puqtnk.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986693/friends-academy/TRIAL____________Videos_-_Wix.com_6_bw3sdc.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986695/friends-academy/TRIAL____________Videos_-_Wix.com_10_e8pjai.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986697/friends-academy/TRIAL____________Videos_-_Wix.com_9_trrc3x.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986702/friends-academy/TRIAL____________Videos_-_Wix.com_14_hbzsnj.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986703/friends-academy/TRIAL____________Videos_-_Wix.com_11_jxrmft.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986706/friends-academy/TRIAL____________Videos_-_Wix.com_16_i3ensg.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986706/friends-academy/TRIAL____________Videos_-_Wix.com_15_frs8ek.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986707/friends-academy/TRIAL____________Videos_-_Wix.com_4_yyi3bb.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986708/friends-academy/TRIAL____________Videos_-_Wix.com_12_cttdah.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986709/friends-academy/TRIAL____________Videos_-_Wix.com_17_dgt9wo.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986712/friends-academy/TRIAL____________Videos_-_Wix.com_13_dzihld.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672344896/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_video-converter.com_lreziu.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345652/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_3_video-converter.com_p4isqi.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345630/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_6_video-converter.com_t9a3f2.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345620/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_10_video-converter.com_vkcvvb.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345610/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_5_video-converter.com_qmwo80.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345583/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_9_video-converter.com_zehosb.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345573/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_8_video-converter.com_rqfmhg.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345569/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_2_video-converter.com_qysaue.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345546/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_7_video-converter.com_ehwbci.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345528/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_4_video-converter.com_drbtdo.mp4"},
+        // {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986702/friends-academy/TRIAL____________Videos_-_Wix.com_14_hbzsnj.mp4"},
+        // {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986703/friends-academy/TRIAL____________Videos_-_Wix.com_11_jxrmft.mp4"},
+        // {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986706/friends-academy/TRIAL____________Videos_-_Wix.com_16_i3ensg.mp4"},
+        // {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986706/friends-academy/TRIAL____________Videos_-_Wix.com_15_frs8ek.mp4"},
+        // {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986707/friends-academy/TRIAL____________Videos_-_Wix.com_4_yyi3bb.mp4"},
+        // {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986708/friends-academy/TRIAL____________Videos_-_Wix.com_12_cttdah.mp4"},
+        // {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986709/friends-academy/TRIAL____________Videos_-_Wix.com_17_dgt9wo.mp4"},
+        // {src: "https://res.cloudinary.com/codillionaire/video/upload/v1668986712/friends-academy/TRIAL____________Videos_-_Wix.com_13_dzihld.mp4"},
     ]
     console.log(video)
 

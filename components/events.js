@@ -15,14 +15,20 @@ const Events = () => {
     const user = useSelector((state) => state.user.currentUser)
     const [ selectedCategory, setSelectedCategory ] = useState()
     let categories = []
-    let tmp = null
-    courses && courses.map((item) => {
-        if(item.category != tmp){
-            categories.push(item.category)
-            tmp = item.category
-            return  
-        }
+
+    courses && courses.map((course) => {
+        categories.push(course.category)
     })
+
+    const uniqueCategory = categories.filter((item, index) => categories.indexOf(item) === index)
+    console.log(uniqueCategory)
+    // courses && courses.map((item) => {
+    //     if(item.category != tmp){
+    //         categories.push(item.category)
+    //         tmp = item.category
+    //         return  
+    //     }
+    // })
 
     useEffect(() => {
         setSelectedCategory(courses[1].category)
@@ -58,7 +64,7 @@ const Events = () => {
          </div>
 
          <div className='w-80 sm:w-aboutWidth mt-8 flex flex-col sm:flex-row justify-center sm:flex-wrap'>
-            {categories && categories.map((item) => {
+            {uniqueCategory && uniqueCategory.map((item) => {
                 return(
                     <>
                         <div key={item} className={`w-full sm:w-auto border p-2 mr-3 mt-2 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white ${item == selectedCategory ? "bg-pink text-white" : null} `} onClick={() => setSelectedCategory(item)}>
@@ -144,7 +150,7 @@ const Events = () => {
                             <p className={`mt-5 text-md  text-white text-center rounded-lg ${item.status == "active" ? "bg-green" : "bg-red-600"}`}>{item.status}</p>
                         </div>
                         <div className='ml-16 mr-5 flex items-center' onClick={() => handleSelectedCourse(item)}>
-                            <button className='bg-pink text-white py-3 px-8 rounded-3xl text-lg font-semibold hover:bg-green duration-300 hover:text-black'>View Course</button>
+                            <button className='bg-pink text-white py-3 px-8 rounded-3xl text-lg font-semibold hover:bg-green duration-300 hover:text-black'>Book This Course</button>
                         </div>    
                     </div>          
                 </div>

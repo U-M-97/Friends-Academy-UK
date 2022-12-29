@@ -97,14 +97,14 @@ const Accommodation = () => {
                 </motion.div>
             </div>
 
-            <div className='w-full h-full sm:w-3/4 relative'>
-                <Image src="/images/Single Room.jpeg" layout='fill' objectFit='cover'/>
+            <div className='w-full h-full sm:w-3/4 relative bg-black'>
+                <Image src="/images/Single Room.jpeg" layout='fill' objectFit='contain'/>
             </div>
          </div>
 
          <div className='flex flex-col sm:flex-row w-full sm:h-accommodation h-screen'>
             <div className='w-full h-full sm:w-3/4 relative'>
-                <Image src="/images/Double Room.jpeg" layout='fill' objectFit='cover'/>
+                <Image src="/images/Double Room.jpeg" layout='fill' objectFit='contain'/>
             </div>
 
             <div ref={accommodation2} className='sm:w-2/4 bg-white flex justify-center items-center p-10 sm:p-0'>

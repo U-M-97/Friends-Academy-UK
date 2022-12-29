@@ -162,17 +162,14 @@ const UpdateCourses = () => {
   ];
 
   useEffect(() => {
-    let tmp = null
+
     let arr = []
     courses && courses.map((item) => {
-          if(item.category != tmp){
-            arr.push(item.category)
-              tmp = item.category
-              return  
-          }
+          arr.push(item.category)
       }) 
-      setCategories(arr)
-      setSelectedCategory(arr[0])
+      const uniqueCategory = arr.filter((item, index) => arr.indexOf(item) === index)
+      setCategories(uniqueCategory)
+      setSelectedCategory(uniqueCategory[0])
       setApiDelRes(false)
   }, [courses])
 
