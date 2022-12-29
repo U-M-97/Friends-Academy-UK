@@ -22,6 +22,8 @@ import 'react-calendar/dist/Calendar.css'
 import MenuItem from "@mui/material/MenuItem";
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddCourse = () => {
 
@@ -91,7 +93,10 @@ const AddCourse = () => {
           inputs,
           url
       }
-      await axios.post(`${process.env.url}/courses`, uploadData)
+      const res = await axios.post(`${process.env.url}/courses`, uploadData)
+      if(res.data === "Course Added Successfully"){
+        toast.success("Course Added Successfully")
+      }
     }
 
     const getCourses = async () => {
@@ -138,7 +143,8 @@ const AddCourse = () => {
             <Grid item xs={12} lg={12}>
               <BaseCard title="Add Course">
                 <Stack spacing={3}>
-                  <input type="file" name="image" className="w-52" onChange={(e) => setFile(e.target.files[0])}/>
+                  <p>Upload Course Image</p>
+                  <input type="file" name="image" className="w-52 cursor-pointer" onChange={(e) => setFile(e.target.files[0])}/>
                   <TextField name="title" label="Course Title" variant="outlined" onChange={handleChange}/>                  
                   <TextField name="description"  label="Course Description" variant="outlined" onChange={handleChange}/>
                   {newCategory == false ? <TextField
@@ -175,7 +181,7 @@ const AddCourse = () => {
                   {calendar && <div className="z-10 absolute bottom-60" id="calendar">
                     <Calendar className=" bg-white border-2" onChange={setValueCalendar} value={valueCalendar}/>
                   </div> }
-                  <input name="endDate" placeholder="Start Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.endDate} onClick={() => setCalendar2(true)}/> 
+                  <input name="endDate" placeholder="End Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.endDate} onClick={() => setCalendar2(true)}/> 
                   {calendar2 && <div className="z-10 absolute bottom-40" id="calendar2">
                     <Calendar className=" bg-white border-2" onChange={setEndDateValueCalendar} value={endDateValueCalendar}/>
                   </div> }
@@ -184,10 +190,23 @@ const AddCourse = () => {
                 <Button variant="contained" mt={2} onClick={handleSubmit}>
                   Submit
                 </Button>
+              
               </BaseCard>
             </Grid>
 
           </Grid>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+        />
         </FullLayout>
     </ThemeProvider>
   )

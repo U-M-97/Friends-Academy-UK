@@ -25,7 +25,7 @@ const Events = () => {
     })
 
     useEffect(() => {
-        setSelectedCategory(courses[0].category)
+        setSelectedCategory(courses[1].category)
     }, [courses])
 
     const handleSelectedCourse = (course) => {
@@ -130,7 +130,7 @@ const Events = () => {
                                     <p className='ml-3 font-extrabold text-xs bg-black rounded-lg py-important px-1 text-center text-white'>FEATURED!</p>
                                 </div>
                                 <p className='text-2xl font-bold mt-2'>{item.description}</p> 
-                                <p className='text-gray mt-2'>Turkey Only</p>
+                                {/* <p className='text-gray mt-2'>Turkey Only</p> */}
                                 <a href='' className='underline hover:text-green duration-300'>Read More</a>
                             </div>
                         </div>

@@ -42,6 +42,7 @@ const Header = () => {
                         <div className='flex cursor-pointer'>
                             <PhoneIcon className='text-green'/>
                             <address className='text-font not-italic hover:text-green duration-200'>+44 7532 707561</address>
+                            <address className='text-font not-italic hover:text-green duration-200 ml-2'>+44 7449 347301</address>
                         </div>
                         <div  className='flex cursor-pointer sm:ml-8'>
                             <MailIcon className='text-green'/>

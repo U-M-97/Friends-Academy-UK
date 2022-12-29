@@ -8,16 +8,16 @@ export default async function handler(req, res){
     
     await dbConnect()
 
-    const d = new Date()
-    const date = dayjs(d).format("DD/MM/YYYY")
+    // const d = new Date()
+    // const date = dayjs(d).format("DD/MM/YYYY")
 
-    const job = new cron.CronJob("* */6 * * * * ", async () => {
-        const updateExpiryDate = await Coupon.updateMany({endDate: {$lte: date}}, {
-            status: "expired"
-        })
-    })
+    // const job = new cron.CronJob("*/10 * * * * * ", async () => {
+    //     const updateExpiryDate = await Coupon.updateMany({endDate: {$lte: date}}, {
+    //         status: "expired"
+    //     })
+    // })
 
-    job.start()
+    // job.start()
     
     const tokenCheck  = verifyToken(req)
 
@@ -44,7 +44,7 @@ export default async function handler(req, res){
                 usersLimit: totalUsers,
                 status: "active"
             }).save()
-            
+            console.log(newCoupon)
             res.send("Coupon Created Successfully")
         }
 

@@ -47,7 +47,7 @@ const About = () => {
             className="flex-1 flex justify-end">
                 <div className=" border-aboutPic border-green relative flex items-center justify-center mr-5 sm:mr-0 h-80 w-64 sm:h-aboutPic sm:w-aboutPic">
                     <div className="absolute right-8 sm:right-0 -left-20 -top-10 sm:-top-12 sm:bottom-0 sm:-left-16">
-                        <Image src="/images/Rehman Bashir.jpg" height={"550px"} width={"500px"} objectFit="cover" alt="Profile Pic"/>
+                        <Image src="/images/Rehman.jpeg" height={"550px"} width={"500px"} objectFit="cover" alt="Profile Pic"/>
                     </div>
                 </div>
             </motion.div>

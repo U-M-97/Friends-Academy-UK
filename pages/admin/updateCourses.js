@@ -312,7 +312,7 @@ const UpdateCourses = () => {
                         </Select>
                       </FormControl> 
                       <input name="startDate" placeholder="Start Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.startDate} onClick={() => setCalendar(true)}/>
-                      <input name="endDate" placeholder="Start Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.endDate} onClick={() => setCalendar2(true)}/>  
+                      <input name="endDate" placeholder="End Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.endDate} onClick={() => setCalendar2(true)}/>  
                       {calendar && <div className="z-10 absolute bottom-40" id="calendar">
                       <Calendar className=" bg-white border-2" onChange={setValueCalendar} value={valueCalendar}/>
                       </div> }

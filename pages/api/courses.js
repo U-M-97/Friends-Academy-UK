@@ -36,6 +36,8 @@ export default async function handler (req, res) {
                     endDate: endDate
                 })
                 const courseAdded = await course.save()
+
+                res.send("Course Added Successfully")
             }else if (req.method === "PUT"){
                 const { id, image, title, description, category, price, status, startDate, endDate } = req.body
     
