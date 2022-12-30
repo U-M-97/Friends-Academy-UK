@@ -157,9 +157,12 @@ const ConditionalRendering = (props) => {
 
     else{
       return(
-        <div className="absolute top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16" onClick={props.handleOpen}>
-          <AddCircleIcon className="text-green"/> 
+        <div className='relative'>
+          <div className="absolute bg-green top-firstRow flex items-center justify-center  w-roomAddIconWidth h-16 " onClick={props.handleOpen}>
+            <AddCircleIcon className="text-green"/> 
+          </div>
         </div>
+        
       )
     }
   }

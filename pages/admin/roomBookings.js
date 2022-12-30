@@ -46,6 +46,7 @@ const RemoveCourse = () => {
   const [ muiCheckOutDate, setMuiCheckOutDate ] = useState(null)
   const [ selectedRoom, setSelectedRoom ] = useState()
   const [ reqMethod, setReqMethod ] = useState()
+  const [ delButton, setDelButton ] = useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -135,6 +136,7 @@ const RemoveCourse = () => {
   }
 
   const handleOpen = (column, room) => {
+    setDelButton(false)
     console.log(column, room)
     setDialog(true)
     setSelectedRoom(room)
@@ -142,6 +144,7 @@ const RemoveCourse = () => {
     setMuiCheckInDate(dayjs(column))
     setMuiCheckOutDate(null)
     setInputs(null)
+    setInputs((input) => ({ ...input, roomId: room._id}))
 }
 
   useEffect(() => {
@@ -167,6 +170,7 @@ const handleSave = async () => {
 
 const handleInputs = (column, room, member) => {
   setSelectedRoom(room)
+  setDelButton(true)
   setDialog(true)
   console.log(member)
   setMuiCheckInDate(dayjs(member.checkIn, "DD/MM/YYYY"))
@@ -176,7 +180,16 @@ const handleInputs = (column, room, member) => {
     ...input,roomId: room._id, memberId: member._id, name: member.name, gender: member.gender, phone: member.phone, country: member.country, email: member.email, checkIn: member.checkIn, checkOut: member.checkOut, bed: member.bed, payment: member.payment
   }))
 }
-console.log(reqMethod)
+
+const handleDelete = async () => {
+  const data = {
+    reqMethod: "Delete Booking",
+    roomId: inputs.roomId,
+    memberId: inputs.memberId
+  }
+  const res = await axios.delete(`${process.env.url}/room`, { data })
+}
+
   return (
      <ThemeProvider theme={theme}>
         <FullLayout>
@@ -214,7 +227,7 @@ console.log(reqMethod)
                             room.roomMembers.length != 0 ? room.roomMembers.map((member) => {
                               return(
                                 <>
-                                <div className="flex w-full" key={member}>
+                                <div className="relative h-full flex w-full" key={member}>
                                   <ConditionalRendering column={column} member={member} displayColumn={displayColumn} handleInputs={() => handleInputs(column, room, member)} handleOpen={() => handleOpen(column, room)}/>
                                 </div>
                                 </>
@@ -336,6 +349,7 @@ console.log(reqMethod)
             </DialogContent>
             <DialogActions className=" border-lightGray border-t">
             <button onClick={handleClose} className="text-xl px-4 py-1 font-medium rounded-md">Cancel</button>
+            {delButton === true ? <button onClick={handleDelete} className="text-xl text-white bg-red-600 px-4 py-1 font-medium hover:bg-red-500 rounded-md">Delete</button> : null }
             <button onClick={handleSave} className="text-xl bg-dashboard px-4 py-1 font-medium hover:bg-green rounded-md">Save</button>
             </DialogActions>
           </Dialog>

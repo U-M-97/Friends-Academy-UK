@@ -147,7 +147,7 @@ const Events = () => {
                         </div>
                         <div className='ml-16'>
                             <h1 className='text-2xl font-bold'>Status</h1>
-                            <p className={`mt-5 text-md  text-white text-center rounded-lg ${item.status == "active" ? "bg-green" : "bg-red-600"}`}>{item.status}</p>
+                            <p className={`mt-5 text-md  text-white text-center rounded-lg ${item.status == "active" || "Active" ? "bg-green" : "bg-red-600"}`}>{item.status}</p>
                         </div>
                         <div className='ml-16 mr-5 flex items-center' onClick={() => handleSelectedCourse(item)}>
                             <button className='bg-pink text-white py-3 px-8 rounded-3xl text-lg font-semibold hover:bg-green duration-300 hover:text-black'>Book This Course</button>

@@ -58,7 +58,11 @@ const Rooms = () => {
     }
 
     const handleDelete = async (id) => {
-        const res = await axios.delete(`${process.env.url}/room`, { data: id })
+        const data = {
+            id: id,
+            reqMethod: "Delete Room"
+        }
+        const res = await axios.delete(`${process.env.url}/room`, { data })
         if(res.data === "Room Deleted Successfully"){
           getRooms()
         }

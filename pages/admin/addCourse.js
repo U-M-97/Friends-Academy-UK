@@ -24,6 +24,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CircularProgress from '@mui/material/CircularProgress'
 
 const AddCourse = () => {
 
@@ -44,6 +45,7 @@ const AddCourse = () => {
     const [ calendar, setCalendar ] = useState(false)
     const [ calendar2, setCalendar2 ] = useState(false)
     const [ newCategory, setNewCategory ] = useState(false)
+    const [ apiReq, setApiReq ] = useState(false)
 
     const formatDate = (value) => {
       const day = value.getDate()
@@ -83,6 +85,7 @@ const AddCourse = () => {
     console.log(inputs)
 
     const handleSubmit = async () => {
+      setApiReq(true)
       console.log(file)
       const data = new FormData()
       data.append("file", file)
@@ -95,7 +98,8 @@ const AddCourse = () => {
       }
       const res = await axios.post(`${process.env.url}/courses`, uploadData)
       if(res.data === "Course Added Successfully"){
-        toast.success("Course Added Successfully")
+        setApiReq(false)
+        toast.success("Course Added Successfully")  
       }
     }
 
@@ -139,6 +143,8 @@ const AddCourse = () => {
   return (
     <ThemeProvider theme={theme}>
         <FullLayout>
+          { apiReq === false ? 
+          <>
           <Grid container spacing={0} className="relative">
             <Grid item xs={12} lg={12}>
               <BaseCard title="Add Course">
@@ -207,6 +213,11 @@ const AddCourse = () => {
             pauseOnHover
             theme="light"
         />
+        </>
+       : <div className="flex items-center justify-center h-dialogContainer">
+          <CircularProgress/>
+        </div>
+        }
         </FullLayout>
     </ThemeProvider>
   )

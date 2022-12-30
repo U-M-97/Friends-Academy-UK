@@ -24,7 +24,7 @@ const Services = () => {
         transition={{duration: 0.5}}
         className=" flex flex-col items-center mt-10"
         >
-          <h1 className="text-4xl font-bold">Our Services</h1>
+          <h1 className="text-4xl font-bold">Our Highlights</h1>
           <div className="w-56 mt-2 flex items-center justify-center">
             <div className="border-b-2 w-28 border-green"></div>
             <div className='mx-3'>
@@ -44,17 +44,17 @@ const Services = () => {
           <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <PaidIcon className='scale-services ml-4 mt-6 text-green group-hover:text-white '/>
             <h1 className='mt-11 text-2xl font-bold'>Pay Only Once</h1>
-            <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
+            <p className='mt-4 text-lg'>Pay only once and attend the course as many times as you want till you pass.</p>
           </div>
           <div className=" sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <PeopleIcon className=' scale-services ml-5 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Interactive PLAB 2 Practice Sessions</h1>
-            <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
+            <p className='mt-4 text-lg'>Rather than whiteboard teaching we offer live patient (simulated) doctor consultation</p>
           </div>
           <div className=" sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <HandshakeIcon className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Unlimited Career Support</h1>
-            <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
+            <p className='mt-4 text-lg'>We will help you to choose the career in UK according to your desires.</p>
           </div> 
         </motion.div>
       </div>
@@ -68,17 +68,17 @@ const Services = () => {
           <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <AssignmentIndIcon className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Support with CV Building</h1>
-            <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
+            <p className='mt-4 text-lg'>We will guide you to write a CV to help secure a job.</p>
           </div>
           <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <AiOutlineFileSearch className=' scale-services ml-3 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Support with Job Search</h1>
-            <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
+            <p className='mt-4 text-lg'>We will help and guide you to find the appropriate first job for you in UK.</p>
           </div>
           <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <FiBookOpen className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Interview Guidance</h1>
-            <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
+            <p className='mt-4 text-lg'>We will prepare you for the successful interview.</p>
           </div>
         </motion.div>
       </div>
@@ -92,7 +92,7 @@ const Services = () => {
           <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <SchoolIcon className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Online and Onsite PLAB 2 Courses</h1>
-            <p className='mt-4 text-lg'>Coaching starts by declaring a powerful future. Let me help you realize your business goals and achieve success.</p>
+            <p className='mt-4 text-lg'>There is a course every month and you can join online or onsite according to your availability.</p>
           </div>
         </motion.div>
       </div>

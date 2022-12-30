@@ -1,6 +1,7 @@
 const Room = require("../../models/room")
 const dbConnect = require("../../utils/connectDB")
 const verifyToken = require("./verifyToken")
+const dayjs = require("dayjs")
 
 export default async function handler (req, res) {
    
@@ -48,37 +49,63 @@ export default async function handler (req, res) {
             const rooms = await Room.find()
             res.send(rooms)
         }else if (req.method === "DELETE"){
-            const id = req.body
-            console.log(id)
-            const deletedRoom = await Room.findByIdAndDelete(id)
-            if(deletedRoom){
-                res.send("Room Deleted Successfully")
-            }
+
+            if(req.body.reqMethod === "Delete Booking"){
+                const {roomId, memberId} = req.body
+                const deleteMember = await Room.findOneAndUpdate({_id: roomId}, {
+                    roomMembers: {
+                        $pull: {
+                            "roomMembers._id": memberId
+                        }
+                    }
+                    
+                })
+                console.log(deleteMember)
+                if(deleteMember){
+                    res.send("Booking Deleted Successfully")
+                }
+            }else if(req.body.reqMethod === "Delete Room"){
+                const id = req.body.id
+                console.log(id)
+                const deletedRoom = await Room.findByIdAndDelete(id)
+                if(deletedRoom){
+                    res.send("Room Deleted Successfully")
+                }
+            }  
         }else if(req.method === "PUT"){
             try{
-                const {memberId, name, gender, phone, country, email, checkIn, checkOut, bed, payment } = req.body.inputs
+                const {roomId, memberId, name, gender, phone, country, email, checkIn, checkOut, bed, payment } = req.body.inputs
                 const id = req.body.id
                 const reqMethod = req.body.reqMethod
-                console.log(reqMethod)
+                
                 
                 if(reqMethod === "Add Member"){
-                    const updateRoom = await Room.findByIdAndUpdate(id, {
-                        $push: {
-                            roomMembers: {
-                                name: name,
-                                gender: gender,
-                                phone: phone,
-                                country: country,
-                                email: email,
-                                checkIn: checkIn,
-                                checkOut: checkOut,
-                                bed: bed,
-                                payment: payment
+
+                    const alreadyBooked = await Room.find({$and: [{_id: roomId}, {'roomMembers.checkIn': {$lte: checkIn}}, {'roomMembers.checkOut': {$gte: checkIn}}, {'roomMembers.checkIn': {$lte: checkOut}}, {'roomMembers.checkOut': {$gte: checkOut}}]})
+                    console.log(alreadyBooked)
+
+                    if(alreadyBooked.length === 0) {
+                        const updateRoom = await Room.findByIdAndUpdate(id, {
+                            $push: {
+                                roomMembers: {
+                                    name: name,
+                                    gender: gender,
+                                    phone: phone,
+                                    country: country,
+                                    email: email,
+                                    checkIn: checkIn,
+                                    checkOut: checkOut,
+                                    bed: bed,
+                                    payment: payment
+                                }
                             }
-                        }
-                    })
-                    console.log(updateRoom)
-                    res.send("Booking Added Successfully")
+                        })
+                        console.log(updateRoom)
+                        res.send("Booking Added Successfully")
+                    }else{
+                        res.send("Dates Already Booked")
+                    }
+                   
                 } 
 
                 else if(reqMethod === "Update Member"){

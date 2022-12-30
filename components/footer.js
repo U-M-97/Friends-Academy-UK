@@ -17,7 +17,7 @@ const Footer = () => {
                 <div className="relative h-36 sm:w-full bg-green">
                   <Image src="/images/Friends Academy.png" layout={"fill"} objectFit="cover" alt="logo"/>
                 </div>
-                <p className="text-white text-lg mt-4">Coaching is a form of development in which a person called a coach supports a learner or client in achieving a specific personal or professional goal by providing training and guidance. The learner is sometimes called a coachee.</p>
+                <p className="text-white text-lg mt-4">We have implemented more interactive teaching style unlike the conventional methods. We suggest you to join us to sharpen up your interpersonal & consultation skills to enable you to pass your examination in the first attempt.</p>
             </div>
             <div className="flex-1 sm:mr-5 mt-10 sm:mt-0">
                 <h1 className="text-white text-2xl">Events</h1>
