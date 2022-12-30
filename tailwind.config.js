@@ -15,7 +15,7 @@ module.exports = {
         servicesBG: "#f3fafa",
         login: "#dae5e8",
         google: "	#DB4437",
-        facebook: "#3b5998",
+        facebookColor: "#3b5998",
         facebookHover: "#2F477A",
         googleHover: "#CCCCCC",
         dashboard: "#03c9d7",

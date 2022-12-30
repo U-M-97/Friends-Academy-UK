@@ -4,6 +4,7 @@ export default async function handler(req, res){
     
     if(req.method === "POST"){
         const { user, selectedCourse, coupon } = req.body
+        console.log(selectedCourse)
         const userId = user._id
         const courseId = selectedCourse._id
         const transformedItems = [{   
@@ -24,6 +25,7 @@ export default async function handler(req, res){
                 payment_method_types: ["card"],
                 line_items: transformedItems,
                 mode: "payment",
+                invoice_creation: {enabled: true},
                 success_url:`${req.headers.origin}/paymentSuccessfull`,
                 cancel_url: `${req.headers.origin}/paymentUnsuccessfull`,
                 metadata: {userId, courseId, coupon},

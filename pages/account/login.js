@@ -57,7 +57,7 @@ const Login = () => {
                 </Link>
                 
                 <Link href="/api/facebook/authFacebook" >
-                    <a className="bg-facebook p-1 rounded-sm w-96 mt-2 flex items-center hover:bg-facebookHover">
+                    <a className="bg-facebookColor p-1 rounded-sm w-96 mt-2 flex items-center hover:bg-facebookHover">
                         <div className="relative h-11 w-11 ml-20">
                             <Image src="/images/facebook.png" layout="fill" objectFit="cover"/>
                         </div>

@@ -68,7 +68,7 @@ passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: `${process.env.url}/facebook/redirectFacebook`,
-  profileFields: ['id', 'displayName', 'photos', 'email']
+  profileFields: ['id', 'displayName', 'photos', 'email'],
 },
   async (accessToken, refreshToken, profile, done) => {
     // console.log(profile, profile._json.picture.data.url)

@@ -71,7 +71,7 @@ const Booking = () => {
 
     const handlePay = async () => {
 
-        if(phone == null || plab2 == null || prevAttempt == null){
+        if(phone == null && prevAttempt == null){
             setEmptyInputs(true)
         }else{
             setEmptyInputs(false)
@@ -91,6 +91,7 @@ const Booking = () => {
             }
             const res = await axios.post(`${process.env.url}/checkout_sessions`, {user, selectedCourse, coupon}) 
             console.log(res.data.id)
+          
             const result = await stripe.redirectToCheckout({
                 sessionId: res.data.id
             })

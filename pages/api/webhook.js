@@ -17,7 +17,6 @@ const fullFillOrder = async (session) => {
     const amount = session.amount_total / 100
     const course = session.metadata.courseId
     const coupon = session.metadata.coupon
-    console.log(coupon)
 
     const updateUser = await User.findByIdAndUpdate(user,
       {
@@ -41,7 +40,6 @@ const fullFillOrder = async (session) => {
         $inc: {totalUses: 1}
       })
     }
-
 }
 
 export default async function WebHookHandler (req, res) {
