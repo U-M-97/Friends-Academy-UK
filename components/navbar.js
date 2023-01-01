@@ -124,13 +124,13 @@ const Navbar = (props) => {
                 <Image src="/images/Friends Academy.png" alt="logo" height={"70px"} width={"210px"} objectFit="cover"/>
             </div>
            <ul className={`flex ${user ? "ml-20" : "ml-40"} items-center`}>
-                <li className="mr-8 hover:text-green duration-200">
+                <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
                     <Link href="/">
                         <a>HOME</a>
                     </Link>
                 </li>
 
-                <li className="mr-8 hover:text-green duration-200">
+                <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
                     <Scroll className="cursor-pointer"
                     to="about"
                     spy={true}
@@ -142,7 +142,7 @@ const Navbar = (props) => {
                     </Scroll>
                 </li>
 
-                <li className="mr-8 hover:text-green duration-200">
+                <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
                     <Scroll className="cursor-pointer"
                     to="bookOnline"
                     spy={true}
@@ -154,13 +154,13 @@ const Navbar = (props) => {
                     </Scroll>
                 </li>
 
-                <li className="mr-8 hover:text-green duration-200">
+                <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
                     <Link href="">
                         <a>OSCE BANK</a>
                     </Link>
                 </li>
 
-                <li className="mr-8 hover:text-green duration-200">
+                <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
                     <Scroll className="cursor-pointer"
                     to="reviews"
                     spy={true}
@@ -172,7 +172,7 @@ const Navbar = (props) => {
                     </Scroll>
                 </li>
 
-                <li className="mr-8 cursor-pointer hover:text-green duration-200" id="moreInformation" onMouseEnter={() => setMouseEnter(true)} onMouseLeave={() => setMouseEnter(false)} onClick={handleDropDown}>
+                <li className={`mr-8 duration-200 cursor-pointer ${scrolled === true ? "hover:text-white" : "hover:text-green"}`} id="moreInformation" onMouseEnter={() => setMouseEnter(true)} onMouseLeave={() => setMouseEnter(false)} onClick={handleDropDown}>
                     <a>MORE INFORMATION</a>
                     <KeyboardArrowDownIcon/>
                 </li>
@@ -198,7 +198,7 @@ const Navbar = (props) => {
                     }                   
                 </div>
                    
-                <li className="mr-8 hover:text-green duration-200">
+                <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
                     <Scroll className="cursor-pointer"
                     to="contact"
                     spy={true}
