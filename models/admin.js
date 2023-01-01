@@ -10,7 +10,8 @@ const adminSchema = new mongoose.Schema({
     token: {
         type: String
     }
-})
+}, { timestamps: true }
+)
 
 const Admin = mongoose.models.Admin || mongoose.model("Admin", adminSchema)
 module.exports = Admin

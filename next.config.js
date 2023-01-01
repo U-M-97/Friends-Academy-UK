@@ -8,7 +8,9 @@ const nextConfig = {
   env: {
     stripe_public_key: process.env.STRIPE_PUBLISHABLE_KEY,
     url: process.env.URL,
-    base_url: process.env.BASE_URL
+    base_url: process.env.BASE_URL,
+    // email: process.env.email,
+    // pass: process.env.pass
   }
 }
 

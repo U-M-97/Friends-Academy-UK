@@ -11,6 +11,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Link from "next/link"
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
+import { Link as Scroll } from "react-scroll"
 
 const Header = () => {
 
@@ -18,7 +19,7 @@ const Header = () => {
     const user = useSelector((state) => state.user.currentUser)
 
     return(
-        <div className='font-main overflow-x-hidden'>
+        <div className='font-main overflow-x-hidden' id='header'>
             {/* {banner == true ? <div className={styles.headerOpen}>
                 <div className={styles.headerContainer}>
                     <p className='mr-1 text-green'>Our New Address : </p>
@@ -44,18 +45,27 @@ const Header = () => {
                             <address className='text-font not-italic hover:text-green duration-200'>+44 7532 707561</address>
                             <address className='text-font not-italic hover:text-green duration-200 ml-2'>+44 7449 347301</address>
                         </div>
-                        <div  className='flex cursor-pointer sm:ml-8'>
-                            <MailIcon className='text-green'/>
-                            <address className='text-font not-italic hover:text-green duration-200'>team@friendsacademy.co.uk</address>
-                        </div>    
+                        
+                        <Scroll className="cursor-pointer"
+                        to="contact"
+                        spy={true}
+                        smooth={true}
+                        offset={0}
+                        duration={2000}
+                        >
+                            <div  className='flex cursor-pointer sm:ml-8'>
+                                <MailIcon className='text-green'/>
+                                <address className='text-font not-italic hover:text-green duration-200'>team@friendsacademy.co.uk</address>
+                            </div>
+                        </Scroll>    
                     </div>
 
                     <div className='border-b border-lightGray mt-2 sm:hidden'></div>
                     
                     <div className='flex justify-center mt-2 sm:mr-40 sm:mt-0 items-center'>
-                        <div className='hover:text-green duration-300 cursor-pointer mr-4'>
+                        <a href='https://wa.me/447449347301?text=I want to inquire about Plab 2' target="_blank" rel="noreferrer" className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <WhatsAppIcon/>
-                        </div>
+                        </a>
                         <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" rel="noreferrer" className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <FacebookIcon/>
                         </a> 

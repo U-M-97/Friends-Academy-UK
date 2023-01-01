@@ -116,7 +116,7 @@ const Signup = () => {
                 </div>  
                 { isInputs == false ? <p className="text-red-600 font-bold">Please fill the required fields</p> : null}
                 { userExist == true ? <p className="text-red-600 font-bold">User already exists</p> : null }
-                <button className="bg-green hover:bg-greenHover text-xl p-3 rounded-sm w-96 mt-2" onClick={handleSubmit}>Login</button>
+                <button className="bg-green hover:bg-greenHover text-xl p-3 rounded-sm w-96 mt-2" onClick={handleSubmit}>Sign Up</button>
                 <label className="mt-1">OR</label>
                 <Link href="/api/google/authGoogle">
                     <a className="bg-white hover:bg-googleHover p-1 rounded-sm w-96 mt-1 items-center flex cursor-pointer">

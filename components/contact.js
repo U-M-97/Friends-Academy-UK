@@ -8,10 +8,45 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import axios from 'axios';
+import { useState } from "react"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Alert from '@mui/material/Alert';
 
 const Contact = () => {
 
     const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
+    const [ inputs, setInputs ] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+    })
+    const [ isInputs, setIsInputs ] = useState(true)
+
+    const handleChange = (e) => {
+        const {name,value} = e.target
+        setInputs((input) => ({
+            ...input, [name]:value
+        }))
+    }
+
+    const handleEmail = async () => {
+        if(inputs.name && inputs.email && inputs.subject && inputs.message !== ""){
+            setIsInputs(true)
+            const res = await axios.post(`${process.env.url}/email`, inputs)
+            if(res.data == "Email Sent"){
+                toast.success("Email Sent Successfully")
+            }
+            else{
+                toast.error("Failed to Send Email")
+            }
+        }else{
+            setIsInputs(false)
+        }
+    }
+    console.log(inputs)
 
   return (
     <div className="pb-20 flex font-main items-center justify-center bg-servicesBG " id='contact'>
@@ -56,9 +91,9 @@ const Contact = () => {
                     </div>
 
                     <div className='mt-10 flex '>
-                        <div className='h-14 w-14 border border-lightGray rounded-full flex items-center justify-center sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <a href='https://wa.me/447449347301?text=I want to inquire about Plab 2' target="_blank" rel="noreferrer" className='h-14 w-14 border border-lightGray rounded-full flex items-center justify-center sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <WhatsAppIcon className=''/>
-                        </div>
+                        </a>
                         <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" rel="noreferrer" className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center ml-2 sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <FacebookIcon className=''/>
                         </a>
@@ -94,14 +129,28 @@ const Contact = () => {
                 </div>
 
                 <div>
-                    <p className='text-lg mt-10 sm:mt-12'>If you have any questions or just want to get in touch, use the form below. We look forward to hearing from you! You can get in touch with us directly at <a href="" className='text-green underline'>team@friendsacademy.co.uk.</a></p>
-                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg outline-black' placeholder='Name'/>
-                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg outline-black' placeholder='Email'/>
-                    <textarea className='p-2 pb-20 w-full border border-green rounded-sm mt-5 text-lg outline-black' placeholder='Message'/>
-                    <button className='w-full bg-pink mt-5 p-4 rounded-md text-white font-bold hover:bg-green duration-300'>Send Message</button>
+                    <p className='text-lg mt-10 sm:mt-12'>If you have any questions or just want to get in touch, use the form below. We look forward to hearing from you! You can get in touch with us directly at <a className='text-green underline'>team@friendsacademy.co.uk.</a></p>
+                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg outline-black' name='name' value={inputs.name} placeholder='Name' onChange={handleChange}/>
+                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg outline-black' name='email' value={inputs.email} placeholder='Email' onChange={handleChange}/>
+                    <input className='p-2 w-full border border-green rounded-sm mt-5 text-lg outline-black' name='subject' value={inputs.subject} placeholder='Subject' onChange={handleChange}/>
+                    <textarea className='p-2 pb-20 w-full border border-green rounded-sm mt-5 text-lg outline-black' name='message' value={inputs.message} placeholder='Message' onChange={handleChange}/>
+                    { isInputs === false ? <Alert severity="error" className="mt-2 w-full">Please fill the required fields!</Alert> : null }
+                    <button className='w-full bg-pink mt-5 p-4 rounded-md text-white font-bold hover:bg-green duration-300' onClick={handleEmail}>Send Message</button>
                 </div>
             </div>
         </div>
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+        />
         
     </div>
   )

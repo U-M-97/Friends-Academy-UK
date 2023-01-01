@@ -48,7 +48,8 @@ const userSchema = new mongoose.Schema({
     rating: {
         type: Number
     }
-})
+}, { timestamps: true }
+)
 
 const User = mongoose.models.User || mongoose.model("User", userSchema)
 module.exports = User

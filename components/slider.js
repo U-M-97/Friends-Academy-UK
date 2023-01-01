@@ -41,7 +41,7 @@ const Slider = () => {
   }, [index])
 
   return (
-    <div className="relative mt-4 sm:h-slider overflow-hidden font-main">
+    <div className="relative sm:h-slider overflow-hidden font-main">
       <div className="absolute z-30 text-white font-bold text-6xl w-screen flex items-center justify-center mt-28">
         <Typewriter
             onInit={(typewriter) => {

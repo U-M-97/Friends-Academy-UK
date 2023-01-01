@@ -6,6 +6,9 @@ import { useRouter } from 'next/router'
 import CircularProgress from '@mui/material/CircularProgress'
 import DiscountHeader from '../components/discountHeader'
 import { useSelector } from "react-redux"
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { motion } from 'framer-motion';
+import { Link as Scroll } from "react-scroll"
 
 export default function Layout({children}){
 
@@ -50,6 +53,20 @@ export default function Layout({children}){
   const [ discountHeader, setDiscountHeader ] = useState(true)
   const coupon = useSelector((state) => state.coupon.coupons)
 
+  const [ scrolled, setScrolled ] = useState(false)
+
+  useEffect(() => {
+
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 400){
+        setScrolled(true)
+      }else{
+        setScrolled(false)
+      }
+    })
+
+  }, [])
+
   return (
     <>
       {
@@ -62,6 +79,32 @@ export default function Layout({children}){
           {
             homePage && 
             <>
+              { scrolled === true ? 
+                <motion.div
+                initial={{y: 140}}
+                animate={{y: 0}}
+                transition={{duration: 1}}
+                className="fixed z-50 bottom-20 right-20 bg-greenTransparent p-3 rounded-full cursor-pointer"
+                >
+                  <Scroll 
+                  to="header"
+                  spy={true}
+                  smooth={true}
+                  offset={0}
+                  duration={2000}
+                  >
+                    <ArrowUpwardIcon className=" scale-testimonialArrow"/>
+                  </Scroll>
+                </motion.div> 
+                : 
+                <motion.div
+                initial={{y: 0}}
+                animate={{y: 140}}
+                transition={{duration: 1}}
+                className="fixed z-50 bottom-20 right-20 bg-greenTransparent p-3 rounded-full cursor-pointer">
+                  <ArrowUpwardIcon className=" scale-testimonialArrow"/>
+                </motion.div>
+              }
               <Header/>
               { home && coupon != null && discountHeader === true ? <DiscountHeader close={() => setDiscountHeader(false)}/> : null}
               <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>

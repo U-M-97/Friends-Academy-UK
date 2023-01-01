@@ -20,7 +20,8 @@ module.exports = {
         googleHover: "#CCCCCC",
         dashboard: "#03c9d7",
         saleHeader: "#fcdb04",
-        discountGreen: "#bbf982"
+        discountGreen: "#bbf982",
+        greenTransparent: "rgba(136, 206, 208, 0.6)"
       },
       fontFamily:{
         main: ['Nunito Sans', "sans-serif"]

@@ -21,6 +21,7 @@ const Navbar = (props) => {
     const [ mouseEnterProfile, setMouseEnterProfile ] = useState(false)
     const dispatch = useDispatch()
     const router = useRouter()
+    const [ scrolled, setScrolled ] = useState(false)
 
     useEffect(() => {
         console.log("running")
@@ -74,8 +75,21 @@ const Navbar = (props) => {
         window.location.href="/"
     }
 
+    useEffect(() => {
+
+        window.addEventListener("scroll", () => {
+
+            if(window.scrollY > 100){
+                setScrolled(true)
+            }else{
+                setScrolled(false)
+            }
+        })
+
+    }, [])
+
   return (
-    <div className="">
+    <div className={`sticky top-0 z-50 ${scrolled === true ? "bg-green duration-500" : "bg-transparent duration-500"}`}>
         <div className={style.border}></div>
         
         <div className=" flex items-center justify-between px-6 mt-3 sm:hidden">
@@ -105,9 +119,9 @@ const Navbar = (props) => {
             </ul>
         </div>
        
-        <div className="hidden sm:flex font-main sm:justify-center">
-            <div className=" flex items-center justify-center ml-10 w-72">
-                <Image src="/images/Friends Academy.png" alt="logo" height={"130px"} width={"300px"} objectFit="cover"/>
+        <div className="hidden py-1 sm:flex font-main sm:justify-center">
+            <div className="flex items-center justify-center ml-10 w-72">
+                <Image src="/images/Friends Academy.png" alt="logo" height={"70px"} width={"210px"} objectFit="cover"/>
             </div>
            <ul className={`flex ${user ? "ml-20" : "ml-40"} items-center`}>
                 <li className="mr-8 hover:text-green duration-200">
