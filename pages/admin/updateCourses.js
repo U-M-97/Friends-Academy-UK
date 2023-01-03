@@ -230,7 +230,10 @@ const UpdateCourses = () => {
           <div className="mb-8">
             <TextField
               select
-              name="category"
+              key={selectedCategory}
+              defaultValue={selectedCategory}
+              value={selectedCategory}
+              name={"category"}
               label="Category"
               className="w-96"
             >

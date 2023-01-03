@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 
-function verifyToken(req){
+function verifyToken(req, role){
     const token = req.cookies.token
     if(!token){
       return "Token is not Present"
@@ -8,18 +8,37 @@ function verifyToken(req){
 
     let isToken
 
-    jwt.verify(token, process.env.jwtSecret, async (err, user) => {
-        if(err){
-            return isToken = false
+    if(role === "client"){
+        jwt.verify(token, process.env.jwtSecret, async (err, user) => {
+            if(err){
+                return isToken = false
+            }
+            return isToken = true
+        })
+    
+        if(!isToken){
+            return "Token is not Valid"
         }
-        return isToken = true
-    })
+    
+        return "Allowed"
+    } 
 
-    if(!isToken){
-        return "Token is not Valid"
+    else if(role === "admin"){
+        jwt.verify(token, process.env.jwtAdminSecret, async (err, user) => {
+            if(err){
+                return isToken = false
+            }
+            return isToken = true
+        })
+    
+        if(!isToken){
+            return "Token is not Valid"
+        }
+    
+        return "Allowed"
     }
 
-    return "Allowed"
+    
 }
 
 

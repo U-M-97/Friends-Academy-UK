@@ -13,9 +13,10 @@ export default async function handler(req, res){
             const token = jwt.sign(
                 {
                   id: isAdmin._id,
+                  role: "admin",
                   created: Date.now().toString(),
                 },
-                process.env.jwtSecret,
+                process.env.jwtAdminSecret,
                 {expiresIn: "1d"}
             )
     

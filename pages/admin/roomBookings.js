@@ -17,6 +17,7 @@ import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ConditionalRendering from "./conditionalRendering";
+import Alert from '@mui/material/Alert';
 
 const RemoveCourse = () => {
 
@@ -42,11 +43,12 @@ const RemoveCourse = () => {
     payment: ""
   })
   const [ apiRes, setApiRes ] = useState(false)
-  const [ muiCheckInDate, setMuiCheckInDate ] = useState(dayjs(date))
+  const [ muiCheckInDate, setMuiCheckInDate ] = useState(dayjs(new Date()))
   const [ muiCheckOutDate, setMuiCheckOutDate ] = useState(null)
   const [ selectedRoom, setSelectedRoom ] = useState()
   const [ reqMethod, setReqMethod ] = useState()
   const [ delButton, setDelButton ] = useState(false)
+  const [ alreadyBooked, setAlreadyBooked ] = useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -58,15 +60,15 @@ const RemoveCourse = () => {
   const handleCheckInDate = () => {
     setInputs((current) => {
       return{
-        ...current, checkIn: dayjs(muiCheckInDate).format("DD/MM/YYYY")
+        ...current, checkIn: dayjs(muiCheckInDate)
       }
     })
   }
-  
+
   const handleCheckOutDate = () => {
     muiCheckOutDate && setInputs((current) => {
       return{
-        ...current, checkOut:  dayjs(muiCheckOutDate).format("DD/MM/YYYY")
+        ...current, checkOut:  dayjs(muiCheckOutDate)
       }
     })
   }
@@ -131,20 +133,15 @@ const RemoveCourse = () => {
   }, [date])
 
   const handleClose = () => {
-    console.log("asdkjhaskljdklas")
+    setAlreadyBooked(false)
     setDialog(false)
   }
 
-  const handleOpen = (column, room) => {
+  const handleOpen = () => {
     setDelButton(false)
-    console.log(column, room)
     setDialog(true)
-    setSelectedRoom(room)
     setReqMethod("Add Member")
-    setMuiCheckInDate(dayjs(column))
     setMuiCheckOutDate(null)
-    setInputs(null)
-    setInputs((input) => ({ ...input, roomId: room._id}))
 }
 
   useEffect(() => {
@@ -156,15 +153,20 @@ const RemoveCourse = () => {
   }, [muiCheckOutDate])
 
 const handleSave = async () => {
+  console.log(inputs)
+  setAlreadyBooked(false)
   const data = {
-    id: selectedRoom._id,
     inputs: inputs,
     reqMethod: reqMethod
   }
   const res = await axios.put(`${process.env.url}/room`, data)
+  console.log(res.data)
   if(res.data === "Booking Added Successfully" || res.data === "Member Updated Successfully"){
     handleClose()
     getRooms()
+  }
+  else if(res.data === "Dates Already Booked"){
+    setAlreadyBooked(true)
   }
 }
 
@@ -188,6 +190,10 @@ const handleDelete = async () => {
     memberId: inputs.memberId
   }
   const res = await axios.delete(`${process.env.url}/room`, { data })
+  if(res.data === "Booking Deleted Successfully"){
+    handleClose()
+    getRooms()
+  }
 }
 
   return (
@@ -195,11 +201,13 @@ const handleDelete = async () => {
         <FullLayout>
           <div className="font-main">
             <h1 className="font-bold text-xl text-center">Room Reservations</h1>
-            <div className="flex items-center justify-center py-5">
+            <div className="relative flex items-center justify-center py-5">
               <button className="mx-5 text-green hover:bg-greenHover hover:text-white rounded-full p-1" onClick={handlePrevious}><ArrowBackIosNewIcon/></button>
               <p className="text-xl font-bold">{columns && <div>{date.format("MMMM")} {date.format("YYYY")}</div>}</p>
               <button className="mx-5 text-green hover:bg-greenHover hover:text-white rounded-full p-1" onClick={handleNext}><ArrowForwardIosIcon/></button>
+              <button className="absolute bg-green rounded-md px-4 py-2 text-xl font-bold right-10 hover:bg-greenHover" onClick={handleOpen}>Add Booking</button>
             </div>
+                  
             <div className="flex border-y border-gray">
               <div className="flex items-center w-44 break-words justify-center border-r border-gray">
                 <p className="text-xl">Rooms</p>
@@ -227,15 +235,15 @@ const handleDelete = async () => {
                             room.roomMembers.length != 0 ? room.roomMembers.map((member) => {
                               return(
                                 <>
-                                <div className="relative h-full flex w-full" key={member}>
+                                <div className="relative w-full" key={member}>
                                   <ConditionalRendering column={column} member={member} displayColumn={displayColumn} handleInputs={() => handleInputs(column, room, member)} handleOpen={() => handleOpen(column, room)}/>
                                 </div>
                                 </>
                               )
-                            }) : 
-                            <div onClick={() => handleOpen(column, room)} className="h-full w-full flex items-center justify-center">
-                              <AddCircleIcon className="text-green"/> 
-                            </div>
+                            }) : null
+                            // <div onClick={() => handleOpen(column, room)} className="h-full w-full flex items-center justify-center">
+                            //   <AddCircleIcon className="text-green"/> 
+                            // </div>
                           }
                         </div>
                       )
@@ -246,13 +254,27 @@ const handleDelete = async () => {
             </div>
           </div>
 
-          <Dialog open={dialog} onClose={handleClose} scroll="paper">
+          <Dialog open={dialog} onClose={handleClose} scroll="paper" maxWidth="false">
+            <div className="w-dialog">
             <DialogTitle style={{fontSize: "20px" , fontWeight: "600"}}>Booking Menu</DialogTitle>
-            <DialogContent className="w-aboutPic">
+            <DialogContent className="w-dialog">
             {  
                 inputs && apiRes == false ?
                 <div className="flex flex-col items-center justify-center">
                 <div className="mt-4 relative">
+                    { alreadyBooked === true ? <Alert severity="error" className="mt-2 w-full">Dates are already booked</Alert> : null }
+                    <TextField
+                      select
+                      name={"room"}
+                      label="Select Room"
+                      className="w-96"
+                    >
+                      {rooms && rooms.map((room) => (
+                        <MenuItem key={room} value={room} onClick={() => setInputs((input) => ({...input, roomId: room._id}))}>
+                          {room.roomTitle}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                     <TextField
                     autoFocus
                     name="name"     
@@ -352,6 +374,7 @@ const handleDelete = async () => {
             {delButton === true ? <button onClick={handleDelete} className="text-xl text-white bg-red-600 px-4 py-1 font-medium hover:bg-red-500 rounded-md">Delete</button> : null }
             <button onClick={handleSave} className="text-xl bg-dashboard px-4 py-1 font-medium hover:bg-green rounded-md">Save</button>
             </DialogActions>
+            </div>
           </Dialog>
         </FullLayout>
     </ThemeProvider>

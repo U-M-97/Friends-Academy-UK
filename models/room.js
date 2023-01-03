@@ -31,16 +31,20 @@ const roomSchema = new mongoose.Schema({
                 type: String
             },
             checkIn: {
-                type: String
+                type: Date
             },
             checkOut: {
-                type: String
+                type: Date
             },
             bed: {
                 type: String
             },
             payment: {
                 type: Number
+            },
+            paid: {
+                type: Boolean,
+                default: false
             }
         }
     ]

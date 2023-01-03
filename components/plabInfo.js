@@ -28,7 +28,7 @@ const PlabInfo = () => {
             </motion.div>
         </div> 
         
-        <div className='flex items-center mt-10 sm:w-plabWidth'>
+        <div className='flex sm:flex-row flex-col-reverse items-center mt-10 sm:w-plabWidth'>
             <div ref={p1} className="  flex-1">
                 <motion.p             
                     initial={{x: "-100%"}}
@@ -42,7 +42,7 @@ const PlabInfo = () => {
             </div>
         </div>
 
-        <div className='flex items-center mt-10 sm:w-plabWidth'>
+        <div className='flex flex-col sm:flex-row items-center mt-10 sm:w-plabWidth'>
             <div className='flex-1 flex items-center justify-center'>
                 <Image src={"/images/Illus3.png"} height={"400px"} width={"400px"}/>
             </div>
@@ -56,7 +56,7 @@ const PlabInfo = () => {
             </div>  
         </div>
 
-        <div className='flex items-center mt-10 sm:w-plabWidth'>
+        <div className='flex flex-col-reverse sm:flex-row items-center mt-10 sm:w-plabWidth'>
             <div ref={p3} className="flex-1">            
                 <motion.div
                 initial={{x: "-100%"}}

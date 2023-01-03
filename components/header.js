@@ -38,8 +38,8 @@ const Header = () => {
                 {/* <div className='absolute right-5 top-0 bg-green text-black cursor-pointer rounded-b-md sm:p-1' onClick={() => setBanner(!banner)}>
                     {banner == true ? <ClearIcon className='scale-75 md:scale-100'/> : <KeyboardArrowDownIcon/>}
                 </div> */}
-                <div className='flex mt-5 flex-col w-screen sm:mt-0 sm:flex-row sm:w-width sm:justify-between'>
-                    <div className='px-3 sm:p-0 flex justify-between sm:ml-32 items-center'>
+                <div className='flex mt-2 flex-col w-screen sm:mt-0 sm:flex-row sm:w-width sm:justify-between'>
+                    <div className='px-3 sm:p-0 sm:flex justify-between sm:ml-32 items-center'>
                         <div className='flex cursor-pointer'>
                             <PhoneIcon className='text-green'/>
                             <address className='text-font not-italic hover:text-green duration-200'>+44 7532 707561</address>
@@ -53,7 +53,7 @@ const Header = () => {
                         offset={0}
                         duration={2000}
                         >
-                            <div  className='flex cursor-pointer sm:ml-8'>
+                            <div  className='flex cursor-pointer mt-2 sm:mt-0 sm:ml-8'>
                                 <MailIcon className='text-green'/>
                                 <address className='text-font not-italic hover:text-green duration-200'>team@friendsacademy.co.uk</address>
                             </div>

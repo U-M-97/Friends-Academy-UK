@@ -19,7 +19,8 @@ export default async function handler(req, res){
 
     // job.start()
     
-    const tokenCheck  = verifyToken(req)
+    const role = "admin"
+    const tokenCheck  = verifyToken(req, role)
 
     if(tokenCheck === "Token is not Present"){
         return res.send("Token is not Present")

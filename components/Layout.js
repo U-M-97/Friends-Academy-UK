@@ -79,12 +79,11 @@ export default function Layout({children}){
           {
             homePage && 
             <>
-              { scrolled === true ? 
-                <motion.div
+               <motion.div
                 initial={{y: 140}}
-                animate={{y: 0}}
+                animate={{y: scrolled === true ? 0 : 140}}
                 transition={{duration: 1}}
-                className="fixed z-50 bottom-20 right-20 bg-greenTransparent p-3 rounded-full cursor-pointer"
+                className="fixed z-50 bottom-20 right-20 rounded-full cursor-pointer "
                 >
                   <Scroll 
                   to="header"
@@ -92,19 +91,11 @@ export default function Layout({children}){
                   smooth={true}
                   offset={0}
                   duration={2000}
+                  className="bg-greenTransparent p-4 rounded-full hover:scale-125 flex items-center justify-center duration-300"
                   >
                     <ArrowUpwardIcon className=" scale-testimonialArrow"/>
                   </Scroll>
                 </motion.div> 
-                : 
-                <motion.div
-                initial={{y: 0}}
-                animate={{y: 140}}
-                transition={{duration: 1}}
-                className="fixed z-50 bottom-20 right-20 bg-greenTransparent p-3 rounded-full cursor-pointer">
-                  <ArrowUpwardIcon className=" scale-testimonialArrow"/>
-                </motion.div>
-              }
               <Header/>
               { home && coupon != null && discountHeader === true ? <DiscountHeader close={() => setDiscountHeader(false)}/> : null}
               <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>

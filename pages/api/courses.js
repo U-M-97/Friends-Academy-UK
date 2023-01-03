@@ -10,7 +10,8 @@ export default async function handler (req, res) {
         res.send(courses)
     }
     else{
-        const tokenCheck = await verifyToken(req)
+        const role = "admin"
+        const tokenCheck = await verifyToken(req, role)
         
         if(tokenCheck === "Token is not Present"){
             return res.send("Token is not Present")

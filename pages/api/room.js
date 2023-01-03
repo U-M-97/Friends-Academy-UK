@@ -2,11 +2,13 @@ const Room = require("../../models/room")
 const dbConnect = require("../../utils/connectDB")
 const verifyToken = require("./verifyToken")
 const dayjs = require("dayjs")
+const nodemailer = require("nodemailer")
 
 export default async function handler (req, res) {
    
     await dbConnect()
-    const tokenCheck = await verifyToken(req)
+    const role = "admin"
+    const tokenCheck = await verifyToken(req, role)
     
     if(tokenCheck === "Token is not Present"){
         return res.send("Token is not Present")
@@ -51,14 +53,14 @@ export default async function handler (req, res) {
         }else if (req.method === "DELETE"){
 
             if(req.body.reqMethod === "Delete Booking"){
+            
                 const {roomId, memberId} = req.body
                 const deleteMember = await Room.findOneAndUpdate({_id: roomId}, {
-                    roomMembers: {
-                        $pull: {
-                            "roomMembers._id": memberId
+                    $pull: { 
+                        roomMembers: {
+                            _id: memberId
                         }
                     }
-                    
                 })
                 console.log(deleteMember)
                 if(deleteMember){
@@ -77,36 +79,72 @@ export default async function handler (req, res) {
                 const {roomId, memberId, name, gender, phone, country, email, checkIn, checkOut, bed, payment } = req.body.inputs
                 const id = req.body.id
                 const reqMethod = req.body.reqMethod
-                
-                
+
                 if(reqMethod === "Add Member"){
 
-                    const alreadyBooked = await Room.find({$and: [{_id: roomId}, {'roomMembers.checkIn': {$lte: checkIn}}, {'roomMembers.checkOut': {$gte: checkIn}}, {'roomMembers.checkIn': {$lte: checkOut}}, {'roomMembers.checkOut': {$gte: checkOut}}]})
-                    console.log(alreadyBooked)
-
-                    if(alreadyBooked.length === 0) {
-                        const updateRoom = await Room.findByIdAndUpdate(id, {
-                            $push: {
-                                roomMembers: {
-                                    name: name,
-                                    gender: gender,
-                                    phone: phone,
-                                    country: country,
-                                    email: email,
-                                    checkIn: checkIn,
-                                    checkOut: checkOut,
-                                    bed: bed,
-                                    payment: payment
+                    const findRoom = Room.findById(roomId, async (error, room) => {
+                        if(room){
+                            const isBooked = room.roomMembers.find((member) => {
+                                
+                                if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut))){
+                                    return member
                                 }
+                            })
+                 
+                            if(isBooked === undefined){
+                                const updateRoom = await Room.findByIdAndUpdate({_id: roomId}, {
+                                    $push: {
+                                        roomMembers: {
+                                            name: name,
+                                            gender: gender,
+                                            phone: phone,
+                                            country: country,
+                                            email: email,
+                                            checkIn: checkIn,
+                                            checkOut: checkOut,
+                                            bed: bed,
+                                            payment: payment
+                                        }
+                                    }
+                                }, { new: true })
+                                
+                                let transporter = nodemailer.createTransport({
+                                    host: 'smtp.gmail.com',
+                                    port: 587,
+                                    secure: false,
+                                    auth: {
+                                        user: process.env.email,
+                                        pass:process.env.pass
+                                    }
+                                })
+
+                                let mailOptions = {
+                                    from: "hafizusamamaqsood@gmail.com",
+                                    to: email,
+                                    subject: "Room Booking",
+                                    text: `Your Room is booked successfully. You can pay now by adding your booking ID ${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id} in Make a Payment option on our Website`,
+                                    html: `
+                                        <p style="font-size: medium">Your Room is booked successfully. You can pay now by adding your booking ID</p> <h1 style="font-size: bold">${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id}</h1> <p style="font-size: medium"> in Make a Payment option on our Website</p>
+                                    `
+                                }
+
+                                transporter.sendMail(mailOptions, (err,info) => {
+                                    if(err){
+                                        console.log(err)
+                                        res.send("Failed")
+                                    }else{
+                                        console.log("Email Sent")
+                                        res.send("Email Sent")
+                                    }
+                                })
+                                
+                                res.send("Booking Added Successfully")
+                            }else{
+                                res.send("Dates Already Booked")
                             }
-                        })
-                        console.log(updateRoom)
-                        res.send("Booking Added Successfully")
-                    }else{
-                        res.send("Dates Already Booked")
-                    }
-                   
-                } 
+                        }
+                    })
+                }
 
                 else if(reqMethod === "Update Member"){
                     console.log(memberId)
@@ -121,7 +159,7 @@ export default async function handler (req, res) {
                         bed: bed,
                         payment: payment
                     }
-                    const updateRoomMember = await Room.findOneAndUpdate({$and: [{_id: id}, {'roomMembers._id' : memberId}]}, {
+                    const updateRoomMember = await Room.findOneAndUpdate({$and: [{_id: roomId}, {'roomMembers._id' : memberId}]}, {
                         $set: {
                             'roomMembers.$': updateData
                         } 

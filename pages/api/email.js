@@ -19,7 +19,7 @@ export default async function handler(req,res){
                 pass:process.env.pass
             }
         })
-        console.log(transporter)
+
         let mailOptions = {
             from: {name: name, address: `${email}`},
             to: "hafizusamamaqsood@gmail.com",

@@ -11,7 +11,8 @@ export default async function handler(req, res){
         res.send(coupons)
     }
     else{
-        const tokenCheck = await verifyToken(req)
+        const role = "client"
+        const tokenCheck = await verifyToken(req, role)
         
         if(tokenCheck === "Token is not Present"){
             return res.send("Token is not Present")
