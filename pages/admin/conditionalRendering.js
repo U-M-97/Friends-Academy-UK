@@ -5,8 +5,6 @@ const ConditionalRendering = (props) => {
 
     const column = props.column
     const member = props.member
-    console.log(dayjs(member.checkIn))
-    console.log(column)
     const displayColumn = props.displayColumn
     
     if(column.isSame(dayjs(member.checkIn))){

@@ -79,69 +79,76 @@ export default async function handler (req, res) {
                 const {roomId, memberId, name, gender, phone, country, email, checkIn, checkOut, bed, payment } = req.body.inputs
                 const id = req.body.id
                 const reqMethod = req.body.reqMethod
-
+        
                 if(reqMethod === "Add Member"){
 
                     const findRoom = Room.findById(roomId, async (error, room) => {
-                        if(room){
-                            const isBooked = room.roomMembers.find((member) => {
-                                console.log(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) )
-                                if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut))){
-                                    return member
-                                }
-                            })
-                 
-                            if(isBooked === undefined){
-                                const updateRoom = await Room.findByIdAndUpdate({_id: roomId}, {
-                                    $push: {
-                                        roomMembers: {
-                                            name: name,
-                                            gender: gender,
-                                            phone: phone,
-                                            country: country,
-                                            email: email,
-                                            checkIn: checkIn,
-                                            checkOut: checkOut,
-                                            bed: bed,
-                                            payment: payment
+                        try{
+                            if(room){
+                                const isBooked = room.roomMembers.find((member) => {
+                                    console.log(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)))
+                                    if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut))){
+                                        return member
+                                    }
+                                })
+                    
+                                if(isBooked === undefined){
+                                    const updateRoom = await Room.findByIdAndUpdate({_id: roomId}, {
+                                        $push: {
+                                            roomMembers: {
+                                                name: name,
+                                                gender: gender,
+                                                phone: phone,
+                                                country: country,
+                                                email: email,
+                                                checkIn: checkIn,
+                                                checkOut: checkOut,
+                                                bed: bed,
+                                                payment: payment
+                                            }
                                         }
-                                    }
-                                }, { new: true })
+                                    }, { new: true })
                                 
-                                let transporter = nodemailer.createTransport({
-                                    host: 'smtp.gmail.com',
-                                    port: 587,
-                                    secure: false,
-                                    auth: {
-                                        user: process.env.email,
-                                        pass:process.env.pass
-                                    }
-                                })
-
-                                let mailOptions = {
-                                    from: "team@friendsacademy.co.uk",
-                                    to: email,
-                                    subject: "Room Booking",
-                                    text: `Your Room is booked successfully. You can pay now by adding your booking ID ${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id} in Make a Payment option on our Website`,
-                                    html: `
-                                        <p style="font-size: medium">Your Room is booked successfully. You can pay now by adding your booking ID</p> <h1 style="font-size: bold">${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id}</h1> <p style="font-size: medium"> in Make a Payment option on our Website</p>
-                                    `
+                                    if(email.length !== 0){
+                                        console.log("running")
+                                        let transporter = nodemailer.createTransport({
+                                            host: 'smtp.gmail.com',
+                                            port: 587,
+                                            secure: false,
+                                            auth: {
+                                                user: process.env.email,
+                                                pass:process.env.pass
+                                            }
+                                        })
+        
+                                        let mailOptions = {
+                                            from: "team@friendsacademy.co.uk",
+                                            to: email,
+                                            subject: "Room Booking",
+                                            text: `Your Room is booked successfully. You can pay now by adding your booking ID ${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id} in Make a Payment option on our Website`,
+                                            html: `
+                                                <p style="font-size: medium">Your Room is booked successfully. You can pay now by adding your booking ID</p> <h1 style="font-size: bold">${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id}</h1> <p style="font-size: medium"> in Make a Payment option on our Website</p>
+                                            `
+                                        }
+        
+                                        transporter.sendMail(mailOptions, (err,info) => {
+                                            if(err){
+                                                console.log(err)
+                                                res.send("Email Failed to send")
+                                            }else{
+                                                console.log("Email Sent")
+                                                res.send("Booking Added Successfully")
+                                            }
+                                        })
+                                    } else{
+                                        res.send("Booking Added Successfully")
+                                    }     
+                                }else{
+                                    res.send("Dates Already Booked")
                                 }
-
-                                transporter.sendMail(mailOptions, (err,info) => {
-                                    if(err){
-                                        console.log(err)
-                                        res.send("Failed")
-                                    }else{
-                                        console.log("Email Sent")
-                                        res.send("Email Sent")
-                                    }
-                                })
-                                
-                                res.send("Booking Added Successfully")
-                            }else{
-                                res.send("Dates Already Booked")
                             }
+                        }catch(err){
+                            res.status(500).send({ error: err.message })
                         }
                     })
                 }
