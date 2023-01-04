@@ -85,7 +85,7 @@ export default async function handler (req, res) {
                     const findRoom = Room.findById(roomId, async (error, room) => {
                         if(room){
                             const isBooked = room.roomMembers.find((member) => {
-                                
+                                console.log(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) )
                                 if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut))){
                                     return member
                                 }
@@ -119,7 +119,7 @@ export default async function handler (req, res) {
                                 })
 
                                 let mailOptions = {
-                                    from: "hafizusamamaqsood@gmail.com",
+                                    from: "team@friendsacademy.co.uk",
                                     to: email,
                                     subject: "Room Booking",
                                     text: `Your Room is booked successfully. You can pay now by adding your booking ID ${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id} in Make a Payment option on our Website`,
