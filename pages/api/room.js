@@ -1,7 +1,7 @@
 const Room = require("../../models/room")
 const dbConnect = require("../../utils/connectDB")
 const verifyToken = require("./verifyToken")
-const dayjs = require("dayjs")
+import dayjs from "dayjs"
 const nodemailer = require("nodemailer")
 
 export default async function handler (req, res) {
