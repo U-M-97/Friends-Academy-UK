@@ -2,6 +2,9 @@ const Room = require("../../models/room")
 const dbConnect = require("../../utils/connectDB")
 const verifyToken = require("./verifyToken")
 const dayjs = require("dayjs")
+var isBetween = require('dayjs/plugin/isBetween')
+dayjs.extend(isBetween)
+
 const nodemailer = require("nodemailer")
 
 export default async function handler (req, res) {
@@ -86,9 +89,8 @@ export default async function handler (req, res) {
                         try{
                             if(room){
                                 const isBooked = room.roomMembers.find((member) => {
-                                    const checkInObject = dayjs(member.checkIn)
-                                    const checkOutObject = dayjs(member.checkOut)
-                                    if(checkInObject.isBetween(dayjs(checkIn), dayjs(checkOut)) || checkOutObject.isBetween(dayjs(checkIn), dayjs(checkOut))){
+                            
+                                    if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut))){
                                         return member
                                     }
                                 })
