@@ -76,7 +76,6 @@ const Booking = () => {
         }else{
             setEmptyInputs(false)
             const stripe = await stripePromise
-            console.log(plab2, prevAttempt, phone)
             if(user.plab2Date !== undefined){
                 if(prevAttempt != null && phone != null){
                     console.log("Running")
@@ -89,7 +88,7 @@ const Booking = () => {
                     axios.put(`${process.env.url}/userData`, {user, plab2, prevAttempt, phone})  
                 }
             }
-            const res = await axios.post(`${process.env.url}/checkout_sessions`, {user, selectedCourse, coupon}) 
+            const res = await axios.post(`${process.env.url}/checkout_sessions`, {user, selectedCourse, coupon, paymentType: "Course Payment"}) 
             console.log(res.data.id)
           
             const result = await stripe.redirectToCheckout({

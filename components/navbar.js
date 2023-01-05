@@ -231,11 +231,11 @@ const Navbar = (props) => {
                             </div>
                         </Link>
 
-                        <Link href="/account/signup">
+                        <Link href="/makeAPayment">
                             <div className="border-b border-lightGray py-4 px-5  hover:bg-green hover:text-white duration-300 cursor-pointer">
                                 <a className="text-xl">Make a Payment</a>
-                            </div>
-                        </Link>
+                            </div>     
+                        </Link>      
 
                         <div className="border-b border-lightGray py-4 px-5  hover:bg-green hover:text-white duration-300 cursor-pointer" onClick={logoutUser}>
                             <a className="text-xl">Logout</a>

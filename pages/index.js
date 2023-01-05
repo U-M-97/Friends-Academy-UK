@@ -9,6 +9,7 @@ import Events from '../components/events'
 import Accommodation from '../components/accomodation'
 import Testimonials from '../components/testimonials'
 import TrustedBy from '../components/trustedBy'
+import Intro from '../components/intro'
 import { getCookie } from "cookies-next"
 import axios from 'axios'
 import { useDispatch } from "react-redux"
@@ -41,6 +42,7 @@ export default function Home(props) {
         <link rel="icon" href="/images/Friends Academy.png"/>
       </Head>
       <Slider/>
+      <Intro/>
       <PlabInfo/>
       <Services/>
       <About/>

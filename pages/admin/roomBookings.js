@@ -57,6 +57,16 @@ const RemoveCourse = () => {
     }))
   }
 
+  const calculatePayment = () => {
+    if(muiCheckOutDate){
+      const totalAmount = Math.max(0, muiCheckOutDate.diff(muiCheckInDate, "day")) * 20
+      console.log(totalAmount)
+      setInputs((input) => ({
+        ...input, payment: totalAmount
+      }))
+    }
+  }
+
   const handleCheckInDate = () => {
     setInputs((current) => {
       return{
@@ -71,6 +81,7 @@ const RemoveCourse = () => {
         ...current, checkOut:  dayjs(muiCheckOutDate)
       }
     })
+    calculatePayment()
   }
 
   const getRooms = async () => {
@@ -138,6 +149,9 @@ const RemoveCourse = () => {
   }
 
   const handleOpen = () => {
+    setInputs((input) => ({
+      ...input,   roomId: "", memberId: "", name: "",  gender: "", phone: "", country: "", email: "", checkOut: "", bed: "", payment: "" 
+    }))
     setDelButton(false)
     setDialog(true)
     setReqMethod("Add Member")
@@ -190,7 +204,7 @@ const handleDelete = async () => {
     memberId: inputs.memberId
   }
   const res = await axios.delete(`${process.env.url}/room`, { data })
-  if(res.data === "Booking Deleted Successfully"){
+  if(res.data === "Booking Deleted Successfully"){s
     handleClose()
     getRooms()
   }

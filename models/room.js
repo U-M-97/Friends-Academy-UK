@@ -45,6 +45,10 @@ const roomSchema = new mongoose.Schema({
             paid: {
                 type: Boolean,
                 default: false
+            },
+            bookedOn: {
+                type: Date,
+                default: new Date()
             }
         }
     ]

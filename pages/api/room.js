@@ -89,13 +89,14 @@ export default async function handler (req, res) {
                         try{
                             if(room){
                                 const isBooked = room.roomMembers.find((member) => {
-                            
-                                    if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut))){
+                                    console.log(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)))
+                                    if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(checkIn).isBetween(dayjs(member.checkIn), dayjs(member.checkOut) || dayjs(checkOut).isBetween(dayjs(member.checkIn), dayjs(member.checkOut)))){
                                         return member
                                     }
                                 })
-                    
+                          
                                 if(isBooked === undefined){
+                                    
                                     const updateRoom = await Room.findByIdAndUpdate({_id: roomId}, {
                                         $push: {
                                             roomMembers: {
@@ -107,7 +108,7 @@ export default async function handler (req, res) {
                                                 checkIn: checkIn,
                                                 checkOut: checkOut,
                                                 bed: bed,
-                                                payment: payment
+                                                payment: payment,
                                             }
                                         }
                                     }, { new: true })

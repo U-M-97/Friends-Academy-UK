@@ -3,6 +3,7 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 const User = require("../../models/user")
 const Course = require("../../models/courses")
 const Coupon = require("../../models/coupons")
+const Room = require("../../models/room")
 import { buffer } from "micro"
 
 export const config = {
@@ -12,7 +13,7 @@ export const config = {
     },
 }
 
-const fullFillOrder = async (session) => {
+const fullFillCourseOrder = async (session) => {
     const user = session.metadata.userId
     const amount = session.amount_total / 100
     const course = session.metadata.courseId
@@ -42,6 +43,18 @@ const fullFillOrder = async (session) => {
     }
 }
 
+const fullFillRoomOrder = async (session) => {
+  console.log("running")
+  const user = session.metadata.userId
+  const room = session.metadata.roomId
+  const booking = session.metadata.bookingId
+
+  const updateBooking = await Room.findOneAndUpdate({_id: room, roomMembers:{ $elemMatch: { __id: booking}}}, {
+    $set: { "roomMembers.$.paid": true }
+  },{ new: true})
+  console.log(updateBooking)
+}
+
 export default async function WebHookHandler (req, res) {
     if(req.method === "POST"){
         const buf = await buffer(req)
@@ -59,7 +72,12 @@ export default async function WebHookHandler (req, res) {
 
           if(event.type === "checkout.session.completed"){
             const session = event.data.object
-            return fullFillOrder(session).then(() => res.status(200)).catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
+            if(session.metadata.paymentType === "Course Payment"){
+              return fullFillCourseOrder(session).then(() => res.status(200)).catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
+            }
+            else if(session.metadata.paymentType === "Room Payment"){
+              return fullFillRoomOrder(session).then(() => res.status(200)).catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
+            }
           }
     }
 }
