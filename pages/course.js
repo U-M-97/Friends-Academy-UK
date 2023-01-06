@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
 import dayjs from "dayjs"
+import { useEffect } from "react";
 
 const Course = () => {
 
@@ -18,6 +19,32 @@ const Course = () => {
     const user = useSelector((state) => state.user.currentUser)
     const [ courseRegistered, setCourseRegistered ] = useState(false)
     const router = useRouter()
+    const [ totalCourseDays, setTotalCourseDays ] = useState()
+    const [ schedule, setSchedule ] = useState()
+
+
+    const handleSchedule = () => {
+        let arr = []
+        let startDate = dayjs(course.startDate)
+    
+        for(let i = 0; i<=totalCourseDays; i++){
+            arr.push({
+                day: startDate.format("dddd"), date: startDate.format("DD MMMM, YYYY")
+            })
+           startDate = startDate.add(1, "day")
+        }
+        setSchedule(arr)
+    }
+
+    useEffect(() => {
+        if(course){
+            setTotalCourseDays(dayjs(course.endDate).diff(course.startDate, "day"))
+        }
+    } ,[course])
+
+    useEffect(() => {
+        handleSchedule()
+    }, [totalCourseDays])
 
     const handleCourseCheck = () => {
         const findCourse = user.courses.find((item) => {
@@ -34,7 +61,7 @@ const Course = () => {
             router.push("/booking")
         }
     }
-    console.log(course.description)
+    console.log(schedule)
 
   return (
     <div className="flex flex-col items-center font-main mb-10">
@@ -47,9 +74,12 @@ const Course = () => {
                 <p className="text-2xl mt-2">{course.tagline}</p>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Duration :</p>
-                    <p className="ml-2">12 to 14 Days course</p>
+                    <p className="ml-2">{totalCourseDays} Days</p>
                 </div>
-                <p className="text-2xl mt-5">Starts on {dayjs(course.startDate).format("DD/MM/YYYY")}</p>
+                <div className="flex text-2xl items-center mt-5 ">
+                    <p className="font-bold">Starts on: </p>
+                    <p className="ml-3">{dayjs(course.startDate).format("DD MMMM, YYYY")}</p>
+                </div>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Price :</p>
                     <p className="ml-2">£{course.price}</p>
@@ -92,7 +122,7 @@ const Course = () => {
                 <div className="flex flex-col mx-5">
                     <div className="flex items-center mx-10 mb-10">
                         <div className="relative h-32 w-32 rounded-full overflow-hidden border-2 border-green">
-                            <Image src="/images/Rehman Bashir.jpg" layout="fill" objectFit="cover"/>
+                            <Image src="/images/Rehman.jpeg" layout="fill" objectFit="cover"/>
                         </div>
                         <p className="text-xl font-bold ml-5">Dr Rehman Bashir</p>
                     </div>
@@ -113,38 +143,23 @@ const Course = () => {
             <div className="w-courseWidth mt-5">
                 <div className="flex mt-5">
                     <p className="text-xl font-bold ">Dates :</p>
-                    <p className="text-xl ml-2">{dayjs(course.startDate).format("DD/MM/YYYY")} - {dayjs(course.endDate).format("DD/MM/YYYY")}</p>
+                    <p className="text-xl ml-2">{dayjs(course.startDate).format("DD MMMM, YYYY")} - {dayjs(course.endDate).format("DD MMMM, YYYY")}</p>
                 </div>
                 {/* <p className="text-xl mt-3">Takes place every week, total of 14 sessions</p> */}
             </div>
-            <div className="flex mt-10 w-courseWidth justify-between text-xl border-b border-green pb-5">
-                <p>Mondays</p>
-                <p>10:00 am - 6:00 pm</p>
-            </div>
-            <div className="flex mt-10 w-courseWidth justify-between text-xl border-b border-green pb-5">
-                <p>Tuesdays</p>
-                <p>10:00 am - 6:00 pm</p>
-            </div>
-            <div className="flex mt-10 w-courseWidth justify-between text-xl border-b border-green pb-5">
-                <p>Wednesdays</p>
-                <p>10:00 am - 6:00 pm</p>
-            </div>
-            <div className="flex mt-10 w-courseWidth justify-between text-xl border-b border-green pb-5">
-                <p>Thursdays</p>
-                <p>10:00 am - 6:00 pm</p>
-            </div>
-            <div className="flex mt-10 w-courseWidth justify-between text-xl border-b border-green pb-5">
-                <p>Fridays</p>
-                <p>10:00 am - 6:00 pm</p>
-            </div>
-            <div className="flex mt-10 w-courseWidth justify-between text-xl border-b border-green pb-5">
-                <p>Saturdays</p>
-                <p>10:00 am - 6:00 pm</p>
-            </div>
-            <div className="flex mt-10 w-courseWidth justify-between text-xl border-b border-green pb-5 ">
-                <p>Sundays</p>
-                <p>10:00 am - 6:00 pm</p>
-            </div>
+            {
+                schedule && schedule.map((item) => {
+                    return(
+                        <div className="flex mt-10 w-courseWidth items-center justify-between text-xl border-b border-green pb-5">
+                            <div>
+                                <p>{item.day}</p>
+                                <p>{item.date}</p>
+                            </div>
+                            <p>10:00 am - 6:00 pm</p>
+                        </div>
+                    )       
+                })
+            }
             <p className="text-xl text-gray mt-10">London time (GMT +01:00)</p>
         </div>
         <div className="mt-5 flex flex-col justify-center items-center w-courseWidth ">
@@ -152,7 +167,11 @@ const Course = () => {
             <div className="w-courseWidth">
                 <div className="flex mt-10">
                     <PhoneIcon className="text-green scale-150"/>
-                    <p className="text-xl ml-5">07532707561</p> 
+                    <p className="text-xl ml-5">+ 44 7532 707561</p> 
+                </div>
+                <div className="flex mt-5">
+                    <PhoneIcon className="text-green scale-150"/>
+                    <p className="text-xl ml-5">+ 44 7449 347301</p> 
                 </div>
                 <div className="flex mt-5">
                     <MailIcon className="text-green scale-150"/>

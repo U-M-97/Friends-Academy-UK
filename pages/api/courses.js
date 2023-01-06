@@ -41,12 +41,13 @@ export default async function handler (req, res) {
 
                 res.send("Course Added Successfully")
             }else if (req.method === "PUT"){
-                const { id, image, title, description, category, price, status, startDate, endDate } = req.body
+                const { id, image, title, tagline, description, category, price, status, startDate, endDate } = req.body
     
                 try{
                     const course = await Course.findByIdAndUpdate({_id: id}, {
                         image: image,
                         title: title,
+                        tagline: tagline,
                         description: description,
                         category: category,
                         price: price,

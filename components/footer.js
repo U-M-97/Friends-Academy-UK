@@ -41,11 +41,11 @@ const Footer = () => {
                 </div>
                 <div className='mt-10'>
                     <PhoneIcon className='text-green scale-125'/>
-                    <a className='ml-4 text-xl text-white hover:underline hover:text-green duration-300 cursor-pointer'>+ 00 4475 32707561</a>
+                    <a className='ml-4 text-xl text-white hover:underline hover:text-green duration-300 cursor-pointer'>+44 7532 707561</a>
                 </div>
                 <div className='mt-4'>
                     <PhoneIcon className='text-green scale-125'/>
-                    <a className='ml-4 text-xl text-white hover:underline hover:text-green duration-300 cursor-pointer'>+ 00 4475 32707561</a>
+                    <a className='ml-4 text-xl text-white hover:underline hover:text-green duration-300 cursor-pointer'>+ 44 7449 347301</a>
                 </div>
                 <div className='mt-4 flex items-center'>
                     <MailIcon className='text-green scale-125'/>

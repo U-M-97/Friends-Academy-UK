@@ -15,6 +15,7 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteIcon from '@mui/icons-material/Delete';
+import dayjs from "dayjs";
 
 const UpdateCourses = () => {
 
@@ -32,6 +33,7 @@ const UpdateCourses = () => {
     id: "",
     image: "",
     title: "",
+    tagline: "",
     description: "",
     category: "",
     price: "",
@@ -43,6 +45,8 @@ const UpdateCourses = () => {
   const [ imageUploading, setImageUploading ] = useState(false)
   const [ apiRes, setApiRes ] = useState(false)
   const [ apiDelRes, setApiDelRes ] = useState(false)
+  const [ displayStartDate, setDisplayStartDate ] = useState()
+  const [ displayEndDate, setDisplayEndDate ] = useState()
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -51,32 +55,23 @@ const UpdateCourses = () => {
     }))
   }
 
-  const formatDate = (value) => {
-    const day = value.getDate()
-    const month = value.getMonth() + 1
-    const year = value.getFullYear()
-    const result = `${day}/${month}/${year}`
-    return result
-  }
-
   useEffect(() => {
     setCalendar(false)
     setCalendar2(false)
-    let date
     if(calendar == true){
-      date = formatDate(valueCalendar)
       setInputs((current) => {
         return{
-          ...current, startDate: date
+          ...current, startDate: valueCalendar
         }
       })
+      setDisplayStartDate(dayjs(valueCalendar).format("DD/MM/YYYY"))
     }else if(calendar2 == true){
-      date = formatDate(endDateValueCalendar)
       setInputs((current) => {
         return{
-          ...current, endDate: date
+          ...current, endDate: endDateValueCalendar
         }
       })
+      setDisplayEndDate(dayjs(endDateValueCalendar).format("DD/MM/YYYY"))
     }
   }, [valueCalendar , endDateValueCalendar])
 
@@ -96,19 +91,20 @@ const UpdateCourses = () => {
   const handleOpen = (course) => {
     setDialog(true)
     setInputs((current) => {
+      console.log(course)
       return{
-        ...current, id:course._id, image: course.image, title: course.title, description: course.description, category: course.category, price: course.price, status: course.status, startDate: course.startDate, endDate: course.endDate
+        ...current, id:course._id, image: course.image, title: course.title, tagline: course.tagline, description: course.description, category: course.category, price: course.price, status: course.status, startDate: course.startDate, endDate: course.endDate
       }
     })
   }
 
-  const handleDelete = async (id) => {
-    setApiDelRes(true)
-    const res = await axios.delete(`${process.env.url}/courses`, { data: id })
-    if(res.data === "Course Deleted Successfully"){
-      getCourses()
-    }
-  }
+  // const handleDelete = async (id) => {
+  //   setApiDelRes(true)
+  //   const res = await axios.delete(`${process.env.url}/courses`, { data: id })
+  //   if(res.data === "Course Deleted Successfully"){
+  //     getCourses()
+  //   }
+  // }
 
   const getRowsAndColumns = () => {
     let arr = []
@@ -117,7 +113,7 @@ const UpdateCourses = () => {
       console.log(course)
       if(course.category === selectedCategory) {
         return(
-          arr.push({_id:course._id, id: count++, courseImage: course.image, courseTitle: course.title, courseStatus: course.status, courseStartDate: course.startDate})
+          arr.push({_id:course._id, id: count++, courseImage: course.image, courseTitle: course.title, courseStatus: course.status, courseStartDate: dayjs(course.startDate).format("DD MMMM YYYY")})
         )
       }
     })
@@ -135,8 +131,8 @@ const UpdateCourses = () => {
       );
     } },
     { field: 'courseTitle', headerName: 'Course Title', width: 400 },
-    { field: 'courseStatus', headerName: 'Status', width: 130,},
-    { field: 'courseStartDate', headerName: 'Start Date', width: 130,},
+    { field: 'courseStatus', headerName: 'Status', width: 80,},
+    { field: 'courseStartDate', headerName: 'Start Date', width: 160,},
     { field: 'editButton', headerName: "Edit", width: 130, 
     renderCell: (params) => {
       const course = courses.find((course) => {
@@ -152,13 +148,13 @@ const UpdateCourses = () => {
       )
     }
   },
-  { field: 'removeButton', headerName: "Delete", width: 130,
-    renderCell: (params) => {
-      return(
-        <DeleteIcon className="ml-2 cursor-pointer text-red-600" onClick={() => handleDelete(params.row._id)}/>
-      )
-    }
-  } 
+  // { field: 'removeButton', headerName: "Delete", width: 130,
+  //   renderCell: (params) => {
+  //     return(
+  //       <DeleteIcon className="ml-2 cursor-pointer text-red-600" onClick={() => handleDelete(params.row._id)}/>
+  //     )
+  //   }
+  // } 
   ];
 
   useEffect(() => {
@@ -221,6 +217,7 @@ const UpdateCourses = () => {
       getCourses()
     }
    }
+   console.log(inputs)
 
   return (
     <ThemeProvider theme={theme}>
@@ -254,9 +251,10 @@ const UpdateCourses = () => {
                 />
               </div>  
           }
-          <Dialog open={dialog} onClose={handleClose} scroll="paper">
+          <Dialog open={dialog} onClose={handleClose} scroll="paper" maxWidth="false">
+          <div className="w-dialog h-dialogContainer">
             <DialogTitle style={{fontSize: "20px" , fontWeight: "600"}}>Edit Course</DialogTitle>
-            <DialogContent className="w-aboutPic h-accommodation">
+            <DialogContent className="">
               {
                 inputs && apiRes == false ?
                 <div className="flex flex-col items-center justify-center">
@@ -274,6 +272,16 @@ const UpdateCourses = () => {
                       fullWidth
                       variant="standard"
                       defaultValue={inputs.title}
+                      onChange={handleChange}
+                    />
+                    <TextField
+                      name="tagline"
+                      autoFocus
+                      margin="normal"
+                      label="Course Tagline"
+                      fullWidth
+                      variant="standard"
+                      defaultValue={inputs.tagline}
                       onChange={handleChange}
                     />
                     <TextField
@@ -311,8 +319,8 @@ const UpdateCourses = () => {
                           <MenuItem value="inactive">Inactive</MenuItem>
                         </Select>
                       </FormControl> 
-                      <input name="startDate" placeholder="Start Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.startDate} onClick={() => setCalendar(true)}/>
-                      <input name="endDate" placeholder="End Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.endDate} onClick={() => setCalendar2(true)}/>  
+                      <input name="startDate" placeholder="Start Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={displayStartDate} onClick={() => setCalendar(true)}/>
+                      <input name="endDate" placeholder="End Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={displayEndDate} onClick={() => setCalendar2(true)}/>  
                       {calendar && <div className="z-10 absolute bottom-40" id="calendar">
                       <Calendar className=" bg-white border-2" onChange={setValueCalendar} value={valueCalendar}/>
                       </div> }
@@ -331,6 +339,7 @@ const UpdateCourses = () => {
               <button onClick={handleClose} className="text-xl px-4 py-1 font-medium rounded-md">Cancel</button>
               <button onClick={handleSave} className="text-xl bg-dashboard px-4 py-1 font-medium hover:bg-green rounded-md">Save</button>
             </DialogActions>
+            </div>
             </Dialog> 
             </>
             : 
