@@ -90,7 +90,7 @@ const Footer = () => {
         <div className=" border-t-footer border-gray w-screen sm:w-full mt-14"></div>
         <div className="text-lightGray mt-5 sm:my-5 flex">
             <CopyrightIcon/>
-            <p className="ml-2">Copyrights {date} <a className="text-green">Friends Academy</a> All Rights Reserved. Friends Academy | Developed By <a href="https://twitter.com/usamamaqsood25" target="_blank" className="text-green">Usama Maqsood.</a></p>
+            <p className="ml-2">Copyrights {date} <a className="text-green">Friends Academy</a> All Rights Reserved. Friends Academy | Developed By <a href="https://twitter.com/usamamaqsood25" target="_blank"  rel="noreferrer" className="text-green">Usama Maqsood.</a></p>
         </div>
     </div>
   )
