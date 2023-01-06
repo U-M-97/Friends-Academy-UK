@@ -18,10 +18,10 @@ const Testimonials = () => {
     const [ video, setVideo ] = useState("https://res.cloudinary.com/codillionaire/video/upload/v1672344896/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_video-converter.com_lreziu.mp4")
     const videos = [
         {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672344896/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_video-converter.com_lreziu.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345652/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_3_video-converter.com_p4isqi.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345630/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_6_video-converter.com_t9a3f2.mp4"},
-        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345620/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_10_video-converter.com_vkcvvb.mp4"},
         {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345610/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_5_video-converter.com_qmwo80.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345620/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_10_video-converter.com_vkcvvb.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345630/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_6_video-converter.com_t9a3f2.mp4"},
+        {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345652/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_3_video-converter.com_p4isqi.mp4"},
         {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345583/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_9_video-converter.com_zehosb.mp4"},
         {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345573/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_8_video-converter.com_rqfmhg.mp4"},
         {src: "https://res.cloudinary.com/codillionaire/video/upload/v1672345569/friends-academy/Candidates_Reviews_-_Friends_Academy_Ltd_-_Manchester_2_video-converter.com_qysaue.mp4"},

@@ -33,7 +33,7 @@ const Course = () => {
             router.push("/booking")
         }
     }
-    console.log(courseRegistered)
+    console.log(course.description)
 
   return (
     <div className="flex flex-col items-center font-main mb-10">
@@ -45,21 +45,25 @@ const Course = () => {
                 <h1 className="text-4xl font-bold">{course.title}</h1>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Duration :</p>
-                    <p className="ml-2">14 Days course</p>
+                    <p className="ml-2">12 to 14 Days course</p>
                 </div>
                 <p className="text-2xl mt-5">Starts on {course.startDate}</p>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Price :</p>
                     <p className="ml-2">£{course.price}</p>
                 </div>
-                <ul className="mt-10 list-disc text-xl ml-4">
-                    <li>PLAB 2 full course - ONLINE & ONSITE -14 days full course</li>
+                <pre className="mt-5 font-main text-xl whitespace-pre-wrap leading-10">{course.description}</pre>
+                {/* <ul className="mt-10 list-disc text-xl ml-4">
+                    <li>PLAB 2 full course - ONLINE & ONSITE 12 to 14 days full course</li>
                     <li className="mt-3">Detailed discussion and interactive sessions by our experienced team</li>
                     <li className="mt-3">Ongoing practice sessions everyday</li>
                     <li className="mt-3">One full day dedicated for SIMMAN and Acutely unwell patient management</li>
-                    <li className="mt-3">Four MOCKS</li>
+                    <li className="mt-3">Full day reserved for mannequin discussions and practice</li>
+                    <li className="mt-3">Four MOCKS (One full mock consisting of 16 stations, 3 mini mocks consisting of 8 stations each)</li>
+                    <li className="mt-3">Pay once and attend course till you pass</li>
+                    <li className="mt-3">Recorded lectures (free one play time)</li>
                     <li className="mt-3">RETAKE INTERNAL CANDIDATES (Ex Friends Academy Candidates) - FREE</li>
-                </ul>
+                </ul> */}
             </div>
             <div className="mt-10">
                 <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold" onClick={handleCourseCheck}>Book Now</button>
@@ -109,7 +113,7 @@ const Course = () => {
                     <p className="text-xl font-bold ">Dates :</p>
                     <p className="text-xl ml-2">{course.startDate} - {course.endDate}</p>
                 </div>
-                <p className="text-xl mt-3">Takes place every week, total of 14 sessions</p>
+                {/* <p className="text-xl mt-3">Takes place every week, total of 14 sessions</p> */}
             </div>
             <div className="flex mt-10 w-courseWidth justify-between text-xl border-b border-green pb-5">
                 <p>Mondays</p>

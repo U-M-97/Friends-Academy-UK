@@ -25,11 +25,13 @@ import InputLabel from '@mui/material/InputLabel';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CircularProgress from '@mui/material/CircularProgress'
+import dayjs from "dayjs";
 
 const AddCourse = () => {
 
     const [ inputs, setInputs ] = useState({
         title: "",
+        tagline: "",
         description: "",
         category: "",
         price: "",
@@ -46,33 +48,27 @@ const AddCourse = () => {
     const [ calendar2, setCalendar2 ] = useState(false)
     const [ newCategory, setNewCategory ] = useState(false)
     const [ apiReq, setApiReq ] = useState(false)
-
-    const formatDate = (value) => {
-      const day = value.getDate()
-      const month = value.getMonth() + 1
-      const year = value.getFullYear()
-      const result = `${day}/${month}/${year}`
-      return result
-  }
+    const [ displayStartDate, setDisplayStartDate ] = useState()
+    const [ displayEndDate, setDisplayEndDate ] = useState()
 
     useEffect(() => {
       setCalendar(false)
       setCalendar2(false)
-      let date
+      console.log(valueCalendar)
       if(calendar == true){
-        date = formatDate(valueCalendar)
         setInputs((current) => {
           return{
-            ...current, startDate: date
+            ...current, startDate: valueCalendar
           }
         })
+        setDisplayStartDate(dayjs(valueCalendar).format("DD/MM/YYYY"))
       }else if(calendar2 == true){
-        date = formatDate(endDateValueCalendar)
         setInputs((current) => {
           return{
-            ...current, endDate: date
+            ...current, endDate: endDateValueCalendar
           }
         })
+        setDisplayEndDate(dayjs(endDateValueCalendar).format("DD/MM/YYYY"))
       }
     }, [valueCalendar , endDateValueCalendar])
 
@@ -142,6 +138,8 @@ const AddCourse = () => {
 
   return (
     <ThemeProvider theme={theme}>
+     
+    
         <FullLayout>
           { apiReq === false ? 
           <>
@@ -151,8 +149,9 @@ const AddCourse = () => {
                 <Stack spacing={3}>
                   <p>Upload Course Image</p>
                   <input type="file" name="image" className="w-52 cursor-pointer" onChange={(e) => setFile(e.target.files[0])}/>
-                  <TextField name="title" label="Course Title" variant="outlined" onChange={handleChange}/>                  
-                  <TextField name="description"  label="Course Description" variant="outlined" onChange={handleChange}/>
+                  <TextField name="title" label="Course Title" variant="outlined" onChange={handleChange}/>    
+                  <TextField name="tagline" label="Tagline" variant="outlined" onChange={handleChange}/>                 
+                  <TextField multiline rows="10" name="description"  label="Course Description" variant="outlined" onChange={handleChange}/>
                   {newCategory == false ? <TextField
                     select
                     name="category"
@@ -183,11 +182,11 @@ const AddCourse = () => {
                       <MenuItem value="Inactive">Inactive</MenuItem>
                     </Select>
                   </FormControl>
-                  <input name="startDate" placeholder="Start Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.startDate} onClick={() => setCalendar(true)}/> 
+                  <input name="startDate" placeholder="Start Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={displayStartDate}  onClick={() => setCalendar(true)}/> 
                   {calendar && <div className="z-10 absolute bottom-60" id="calendar">
                     <Calendar className=" bg-white border-2" onChange={setValueCalendar} value={valueCalendar}/>
                   </div> }
-                  <input name="endDate" placeholder="End Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={inputs.endDate} onClick={() => setCalendar2(true)}/> 
+                  <input name="endDate" placeholder="End Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md " value={displayEndDate} onClick={() => setCalendar2(true)}/> 
                   {calendar2 && <div className="z-10 absolute bottom-40" id="calendar2">
                     <Calendar className=" bg-white border-2" onChange={setEndDateValueCalendar} value={endDateValueCalendar}/>
                   </div> }

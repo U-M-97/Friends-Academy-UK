@@ -46,7 +46,7 @@ const Accommodation = () => {
     }
 
   return (
-    <div className='font-main flex flex-col items-center overflow-hidden'>
+    <div className='font-main flex flex-col items-center overflow-hidden' id='accomodation'>
         <div ref={header}>
             <motion.div
             initial={{opacity: 0, scale: 0}}

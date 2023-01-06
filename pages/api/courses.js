@@ -23,12 +23,13 @@ export default async function handler (req, res) {
     
         if(tokenCheck === "Allowed"){
             if(req.method === "POST"){
-                const {title, description, category, price, status, startDate, endDate} = req.body.inputs
+                const {title, tagline, description, category, price, status, startDate, endDate} = req.body.inputs
                 console.log()
                 const url = req.body.url
                 const course = new Course({
                     image: url,
                     title: title,
+                    tagline: tagline,
                     description: description,
                     category: category,
                     price: price,

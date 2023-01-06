@@ -110,7 +110,7 @@ const Navbar = (props) => {
             <ul className="mt-10">
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">Home</li>
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">About</li>
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">BOOK ONLINE</li>
+                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">Courses</li>
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">OSCE BANK</li>
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">CANDIDATE REVIEWS</li>
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">BLOG</li>
@@ -150,14 +150,20 @@ const Navbar = (props) => {
                     offset={0}
                     duration={2000}
                     >
-                        <a>BOOK ONLINE</a>
+                        <a>COURSES</a>
                     </Scroll>
                 </li>
 
                 <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
-                    <Link href="">
-                        <a>OSCE BANK</a>
-                    </Link>
+                    <Scroll className="cursor-pointer"
+                        to="accomodation"
+                        spy={true}
+                        smooth={true}
+                        offset={0}
+                        duration={2000}
+                        >
+                        <a>ACCOMODATION</a>
+                    </Scroll>
                 </li>
 
                 <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>

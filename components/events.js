@@ -52,7 +52,7 @@ const Events = () => {
             transition={{duration: 0.5}}
             className=" flex flex-col items-center mt-20"
             >
-                <h1 className="text-3xl sm:text-4xl font-bold">Our Events and Courses</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold">Our Courses</h1>
                 <div className="w-56 mt-2 flex items-center justify-center">
                     <div className="border-b-2 w-28 border-white"></div>
                     <div className='mx-3'>
@@ -137,7 +137,7 @@ const Events = () => {
                                 </div>
                                 <p className='text-2xl font-bold mt-2'>{item.description}</p> 
                                 {/* <p className='text-gray mt-2'>Turkey Only</p> */}
-                                <a href='' className='underline hover:text-green duration-300'>Read More</a>
+                                <p className='underline hover:text-green duration-300' onClick={() => handleSelectedCourse(item)}>Read More</p>
                             </div>
                         </div>
             

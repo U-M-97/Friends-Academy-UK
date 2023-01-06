@@ -7,8 +7,11 @@ const courseSchema = new mongoose.Schema({
     title:{
         type: String
     },
-    description:{
+    tagline: {
         type: String
+    },
+    description:{
+        type: String,
     },
     category:{
         type: String
@@ -26,10 +29,10 @@ const courseSchema = new mongoose.Schema({
         }      
     ],
     startDate:{
-        type: String
+        type: Date
     },
     endDate: {
-        type: String
+        type: Date
     },
     schedule: [
         {

@@ -38,7 +38,7 @@ const TrustedBy = () => {
                 <div className='mb-10 sm:mb-0 flex flex-col w-80 items-center justify-center rounded-b-xl border-l border-r border-t border-lightGray'>
                     <div className='flex flex-col items-center justify-center mt-14 mb-5'>
                         <PersonIcon className='scale-trustedBy text-green'/>
-                        <h1 className='text-6xl mt-10'>{isCountUp && <><CountUp end={1000}/>+</>}</h1>
+                        <h1 className='text-6xl mt-10'>{isCountUp && <><CountUp end={500}/>+</>}</h1>
                         <p className='text-3xl mt-2'>Registered Students</p>
                     </div>
                     <div className='h-2 w-full bg-green rounded-b-xl mt-5'></div>
