@@ -22,7 +22,7 @@ export default async function handler(req,res){
 
         let mailOptions = {
             from: {name: name, address: `${email}`},
-            to: "hafizusamamaqsood@gmail.com",
+            to: "team@friendsacademy.co.uk",
             subject: subject,
             html: output
         }

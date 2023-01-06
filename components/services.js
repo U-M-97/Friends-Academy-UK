@@ -49,12 +49,12 @@ const Services = () => {
           <div className=" sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <PeopleIcon className=' scale-services ml-5 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Interactive PLAB 2 Practice Sessions</h1>
-            <p className='mt-4 text-lg'>Rather than whiteboard teaching we offer live patient (simulated) doctor consultation</p>
+            <p className='mt-4 text-lg'>Rather than whiteboard teaching we offer live (simulated) patient doctor roleplay</p>
           </div>
           <div className=" sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <HandshakeIcon className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Unlimited Career Support</h1>
-            <p className='mt-4 text-lg'>We will help you to choose the career in UK according to your desires.</p>
+            <p className='mt-4 text-lg'>We shall help you to choose the career in UK according to your desires.</p>
           </div> 
         </motion.div>
       </div>
@@ -68,17 +68,17 @@ const Services = () => {
           <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <AssignmentIndIcon className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Support with CV Building</h1>
-            <p className='mt-4 text-lg'>We will guide you to write a CV to help secure a job.</p>
+            <p className='mt-4 text-lg'>We shall guide you to write a professional CV to help secure a job.</p>
           </div>
           <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <AiOutlineFileSearch className=' scale-services ml-3 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Support with Job Search</h1>
-            <p className='mt-4 text-lg'>We will help and guide you to find the appropriate first job for you in UK.</p>
+            <p className='mt-4 text-lg'>We shall help and guide you to hunt the appropriate first job to start your career in UK.</p>
           </div>
           <div className="sm:h-card sm:w-card rounded-xl p-8 mx-5 hover:bg-green hover:text-white duration-200 group">
             <FiBookOpen className=' scale-services ml-4 mt-6 text-green group-hover:text-white'/>
             <h1 className='mt-11 text-2xl font-bold'>Interview Guidance</h1>
-            <p className='mt-4 text-lg'>We will prepare you for the successful interview.</p>
+            <p className='mt-4 text-lg'>We shall prepare you for the successful interview.</p>
           </div>
         </motion.div>
       </div>
