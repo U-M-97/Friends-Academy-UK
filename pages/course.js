@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
+import dayjs from "dayjs"
 
 const Course = () => {
 
@@ -43,11 +44,12 @@ const Course = () => {
             </div>
             <div className="w-courseWidth p-10">
                 <h1 className="text-4xl font-bold">{course.title}</h1>
+                <p className="text-2xl mt-2">{course.tagline}</p>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Duration :</p>
                     <p className="ml-2">12 to 14 Days course</p>
                 </div>
-                <p className="text-2xl mt-5">Starts on {course.startDate}</p>
+                <p className="text-2xl mt-5">Starts on {dayjs(course.startDate).format("DD/MM/YYYY")}</p>
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Price :</p>
                     <p className="ml-2">£{course.price}</p>
@@ -111,7 +113,7 @@ const Course = () => {
             <div className="w-courseWidth mt-5">
                 <div className="flex mt-5">
                     <p className="text-xl font-bold ">Dates :</p>
-                    <p className="text-xl ml-2">{course.startDate} - {course.endDate}</p>
+                    <p className="text-xl ml-2">{dayjs(course.startDate).format("DD/MM/YYYY")} - {dayjs(course.endDate).format("DD/MM/YYYY")}</p>
                 </div>
                 {/* <p className="text-xl mt-3">Takes place every week, total of 14 sessions</p> */}
             </div>
