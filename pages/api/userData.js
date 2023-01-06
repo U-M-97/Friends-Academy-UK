@@ -6,13 +6,13 @@ export default async function handler (req, res) {
     await dbConnect()
     if(req.method === "POST"){
         const cookieExist = req.body.cookieExist
-        // console.log(cookieExist)
+
         jwt.verify(cookieExist, process.env.jwtSecret, async (err, user) => {
             if(err){
-                // console.log(err)
+               
                 return res.send("Token is not Valid")
             }
-            const userData = await User.findById(user.id).populate({ path: "courses", match: { $ne: null }})
+            const userData = await User.findById(user.id).populate({ path: "courses", match: { courses: { $exists: true }}})
             if(!userData){
                 return res.send("User not exists")
             }
