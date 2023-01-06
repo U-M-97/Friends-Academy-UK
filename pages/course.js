@@ -150,7 +150,7 @@ const Course = () => {
             {
                 schedule && schedule.map((item) => {
                     return(
-                        <div className="flex mt-10 w-courseWidth items-center justify-between text-xl border-b border-green pb-5">
+                        <div className="flex mt-10 w-courseWidth items-center justify-between text-xl border-b border-green pb-5" key={item}>
                             <div>
                                 <p>{item.day}</p>
                                 <p>{item.date}</p>
