@@ -6,9 +6,9 @@ const Intro = () => {
   const {ref: intro, inView: isIntro} = useInView()
 
   return (
-    <div className="h-slider bg-servicesBG flex items-center justify-center " >
-        <div className="flex h-full w-width">
-            <div className=" w-2/5 items-center flex justify-center"  ref={intro}>
+    <div className="sm:h-slider bg-servicesBG flex items-center justify-center " >
+        <div className="flex flex-col sm:flex-row h-full w-full sm:w-width mt-10 sm:mt-0">
+            <div className=" sm:w-2/5 flex items-center justify-center px-10"  ref={intro}>
                 {isIntro && 
                 <motion.h1
                 initial={{opacity: 0, y: 80}}
@@ -16,11 +16,11 @@ const Intro = () => {
                 transition={{duration: 2}}
                 exit={{ y: 80, opacity: 0 }}
                 key="animated-element"
-                className="text-2xl font-medium">INTRODUCTION TO FRIENDS ACADEMY
+                className="sm:text-2xl text-xl text-center font-medium">INTRODUCTION TO FRIENDS ACADEMY
                 </motion.h1>}
             </div>
 
-            <div className=" w-3/5 flex items-center justify-center text-xl text-justify px-10">
+            <div className=" sm:w-3/5 flex items-center justify-center text-xl text-justify px-10 mt-5 sm:mt-0 " ref={intro}>
               {isIntro && 
               <motion.p
               initial={{opacity: 0, y: 80}}

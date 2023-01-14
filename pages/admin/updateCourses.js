@@ -90,6 +90,8 @@ const UpdateCourses = () => {
 
   const handleOpen = (course) => {
     setDialog(true)
+    setDisplayStartDate(dayjs(course.startDate).format("DD/MM/YYYY"))
+    setDisplayEndDate(dayjs(course.endDate).format("DD/MM/YYYY"))
     setInputs((current) => {
       console.log(course)
       return{
@@ -113,7 +115,7 @@ const UpdateCourses = () => {
       console.log(course)
       if(course.category === selectedCategory) {
         return(
-          arr.push({_id:course._id, id: count++, courseImage: course.image, courseTitle: course.title, courseStatus: course.status, courseStartDate: dayjs(course.startDate).format("DD MMMM YYYY")})
+          arr.push({_id:course._id, id: count++, courseImage: course.image, courseTitle: course.title, courseStatus: course.status, courseStartDate: dayjs(course.startDate).format("DD MMMM, YYYY"), courseEndDate: dayjs(course.endDate).format("DD MMMM, YYYY")})
         )
       }
     })
@@ -133,6 +135,7 @@ const UpdateCourses = () => {
     { field: 'courseTitle', headerName: 'Course Title', width: 400 },
     { field: 'courseStatus', headerName: 'Status', width: 80,},
     { field: 'courseStartDate', headerName: 'Start Date', width: 160,},
+    { field: 'courseEndDate', headerName: 'End Date', width: 160,},
     { field: 'editButton', headerName: "Edit", width: 130, 
     renderCell: (params) => {
       const course = courses.find((course) => {

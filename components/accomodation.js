@@ -6,6 +6,9 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import "swiper/css/bundle"
+import { Autoplay, Navigation, Pagination, Scrollbar, A11y  } from 'swiper';
 
 const Accommodation = () => {
 
@@ -44,6 +47,23 @@ const Accommodation = () => {
             }
         }     
     }
+
+    const images = [
+        "/images/Rooms/1.jpeg",
+        "/images/Rooms/2.jpeg",
+        "/images/Rooms/3.jpeg",
+        "/images/Rooms/4.jpeg",
+        "/images/Rooms/5.jpeg",
+        "/images/Rooms/6.jpeg",
+        "/images/Rooms/7.jpeg",
+        "/images/Rooms/8.jpeg",
+        "/images/Rooms/9.jpeg",
+        "/images/Rooms/10.jpeg",
+        "/images/Rooms/11.jpeg",
+        "/images/Rooms/12.jpeg",
+        "/images/Rooms/13.jpeg",
+        "/images/Rooms/14.jpeg",
+    ]
 
   return (
     <div className='font-main flex flex-col items-center overflow-hidden' id='accomodation'>
@@ -138,6 +158,32 @@ const Accommodation = () => {
                 </motion.div>
             </div>
          </div>
+
+         <Swiper className='hidden sm:flex w-plabWidth mt-10 h-aboutPic'
+            style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '50px', '--swiper-navigation-margin': '50px' }}
+            modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
+            slidesPerView={2}
+            navigation
+            speed={1000}
+            loop={true}
+            spaceBetween={40}
+            autoplay={{
+                disableOnInteraction: false
+            }}
+        >
+            {
+                images && images.map((image) => {
+                    return(
+                        <SwiperSlide key={item}>
+                            <div className=' relative border-8 border-green w-full h-full'>
+                                <Image src={image} layout='fill' objectFit='contain'/>
+                            </div>
+                        </SwiperSlide> 
+                    )
+                })
+            }
+        </Swiper>
+
     </div>
   )
 }

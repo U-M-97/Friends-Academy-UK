@@ -137,7 +137,7 @@ const Events = () => {
                                     <p className='ml-3 font-extrabold text-xs bg-black rounded-lg py-important px-1 text-center text-white'>FEATURED!</p>
                                 </div>
                                 <p className='text-2xl font-bold mt-2'>{item.tagline}</p> 
-                                <p className='text-gray font-bold text-lg mt-2'>{dayjs(item.startDate).format("DD MMMM YYYY")}</p>
+                                <p className='text-gray font-bold text-lg mt-2'>{item.startDate && dayjs(item.startDate).format("DD MMMM YYYY")}</p>
                                 <p className='underline hover:text-green duration-300' onClick={() => handleSelectedCourse(item)}>Read More</p>
                             </div>
                         </div>
