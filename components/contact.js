@@ -35,7 +35,11 @@ const Contact = () => {
     const handleEmail = async () => {
         if(inputs.name && inputs.email && inputs.subject && inputs.message !== ""){
             setIsInputs(true)
-            const res = await axios.post(`${process.env.url}/email`, inputs)
+            const data = {
+                reqType: "Contact Email",
+                inputs: inputs
+            }
+            const res = await axios.post(`${process.env.url}/email`, data)
             if(res.data == "Email Sent"){
                 toast.success("Email Sent Successfully")
             }

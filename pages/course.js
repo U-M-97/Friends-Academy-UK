@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
 import dayjs from "dayjs"
 import { useEffect } from "react";
+import axios from "axios";
 
 const Course = () => {
 
@@ -21,7 +22,7 @@ const Course = () => {
     const router = useRouter()
     const [ totalCourseDays, setTotalCourseDays ] = useState()
     const [ schedule, setSchedule ] = useState()
-
+    const [ bookingType, setBookingType ] = useState()
 
     const handleSchedule = () => {
         let arr = []
@@ -39,6 +40,11 @@ const Course = () => {
     useEffect(() => {
         if(course){
             setTotalCourseDays(dayjs(course.endDate).diff(course.startDate, "day"))
+            if(course.category === "Mini Mocks" || course.category === "Personalised Sessions"){
+                setBookingType("Request")
+            }else{
+                setBookingType("Book")
+            }
         }
     } ,[course])
 
@@ -52,16 +58,27 @@ const Course = () => {
                 return true
             }
         })
-        console.log(findCourse)
+        
         if(findCourse){
-            console.log(findCourse)
             setCourseRegistered(true)
             toast("Course already Registered")
         }else{
             router.push("/booking")
         }
     }
-    console.log(schedule)
+
+    const handleCourseRequest = async () => {
+        try{
+            const data = {
+                reqType: "Course Request",
+                email: user.email,
+                course: course.title
+            }
+            const res = await axios.post(`${process.env.url}/email`, data)
+        }catch(err){
+            console.log(err)
+        }
+    }
 
   return (
     <div className="flex flex-col items-center font-main mb-10">
@@ -71,15 +88,15 @@ const Course = () => {
             </div>
             <div className="w-courseWidth p-10">
                 <h1 className="text-4xl font-bold">{course.title}</h1>
-                <p className="text-2xl mt-2">{course.tagline}</p>
-                <div className="mt-5 flex text-2xl">
+                <p className="text-2xl mt-5">{course.tagline}</p>
+              { isNaN(totalCourseDays) == false && <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Duration :</p>
                     <p className="ml-2">{totalCourseDays} Days</p>
-                </div>
-                <div className="flex text-2xl items-center mt-5 ">
+                </div>}
+                { course.startDate && <div className="flex text-2xl items-center mt-5 ">
                     <p className="font-bold">Starts on: </p>
                     <p className="ml-3">{dayjs(course.startDate).format("DD MMMM, YYYY")}</p>
-                </div>
+                </div>}
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Price :</p>
                     <p className="ml-2">£{course.price}</p>
@@ -98,7 +115,9 @@ const Course = () => {
                 </ul> */}
             </div>
             <div className="mt-10">
-                <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold" onClick={handleCourseCheck}>Book Now</button>
+                { bookingType === "Book" ? <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold" onClick={handleCourseCheck}>Book Now</button> 
+                : bookingType === "Request" ? <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold" onClick={handleCourseRequest}>Request to Book</button> : null
+            }
                 {courseRegistered == true ? 
                     <ToastContainer
                     position="bottom-right"
@@ -130,7 +149,7 @@ const Course = () => {
                 <div className="flex flex-col mx-5">
                     <div className="flex items-center mx-10 mb-10">
                         <div className="relative h-32 w-32 rounded-full overflow-hidden border-2 border-green">
-                            <Image src="/images/Sohail Tariq.jpeg" layout="fill" objectFit="cover"/>
+                            <Image src="/images/Sohail Tariq2.jpeg" layout="fill" objectFit="cover"/>
                         </div>
                         <p className="text-xl font-bold ml-5">Dr Sohail Tariq</p>
                     </div>
@@ -139,14 +158,13 @@ const Course = () => {
         </div>
         
         <div className="w-aboutWidth flex flex-col items-center justify-center mb-10">
-            <h1 className="text-4xl font-bold">Schedule</h1>
-            <div className="w-courseWidth mt-5">
+            { course.startDate && <h1 className="text-4xl font-bold">Schedule</h1> }
+            { course.startDate && <div className="w-courseWidth mt-5">
                 <div className="flex mt-5">
                     <p className="text-xl font-bold ">Dates :</p>
                     <p className="text-xl ml-2">{dayjs(course.startDate).format("DD MMMM, YYYY")} - {dayjs(course.endDate).format("DD MMMM, YYYY")}</p>
                 </div>
-                {/* <p className="text-xl mt-3">Takes place every week, total of 14 sessions</p> */}
-            </div>
+            </div>}
             {
                 schedule && schedule.map((item) => {
                     return(
@@ -188,7 +206,9 @@ const Course = () => {
             <p className="text-xl mt-5">Bookings will open 420 days before the session starts.</p>
             <p className=" text-base text-justify  mt-5">{readMore == false ? text.slice(0,300) : text}<span className="hover:text-green cursor-pointer font-bold" onClick={() => setReadMore(!readMore)}>{readMore == false ? "...Read More" : "Read Less"}</span> </p>
         </div>
-        <button className="bg-green py-3 px-5 rounded-md font-bold mt-10 hover:bg-greenHover duration-300" onClick={handleCourseCheck}>Book Now</button>
+        { bookingType === "Book" ?  <button className="bg-green py-3 px-5 rounded-md font-bold mt-10 hover:bg-greenHover duration-300" onClick={handleCourseCheck}>Book Now</button>
+        : bookingType === "Request" ? <button className="bg-green py-3 px-5 rounded-md font-bold mt-10 hover:bg-greenHover duration-300" onClick={handleCourseRequest}>Request to Book</button> : null    
+    }
     </div>
   )
 }
