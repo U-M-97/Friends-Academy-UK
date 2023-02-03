@@ -288,6 +288,8 @@ const UpdateCourses = () => {
                       onChange={handleChange}
                     />
                     <TextField
+                      multiline 
+                      rows="10"
                       name="description"
                       autoFocus
                       margin="normal"

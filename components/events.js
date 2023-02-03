@@ -37,11 +37,7 @@ const Events = () => {
 
     const handleSelectedCourse = (course) => {
         dispatch(selectCourse(course))
-        if(!user){
-            router.push("/account/login")
-        }else{
-            router.push("/course")
-        } 
+        router.push("/course")
     }
     
   return (

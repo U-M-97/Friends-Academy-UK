@@ -53,31 +53,39 @@ const Course = () => {
     }, [totalCourseDays])
 
     const handleCourseCheck = () => {
-        const findCourse = user.courses.find((item) => {
-            if(item._id === course._id){
-                return true
-            }
-        })
-        
-        if(findCourse){
-            setCourseRegistered(true)
-            toast("Course already Registered")
+        if(!user){
+            router.push("/account/login")
         }else{
-            router.push("/booking")
-        }
+            const findCourse = user.courses.find((item) => {
+                if(item._id === course._id){
+                    return true
+                }
+            })
+            
+            if(findCourse){
+                setCourseRegistered(true)
+                toast("Course already Registered")
+            }else{
+                router.push("/booking")
+            }
+        }   
     }
 
     const handleCourseRequest = async () => {
-        try{
-            const data = {
-                reqType: "Course Request",
-                email: user.email,
-                course: course.title
+        if(!user){
+            router.push("/account/login")
+        }else{
+            try{
+                const data = {
+                    reqType: "Course Request",
+                    email: user.email,
+                    course: course.title
+                }
+                const res = await axios.post(`${process.env.url}/email`, data)
+            }catch(err){
+                console.log(err)
             }
-            const res = await axios.post(`${process.env.url}/email`, data)
-        }catch(err){
-            console.log(err)
-        }
+        }   
     }
 
   return (
@@ -91,7 +99,7 @@ const Course = () => {
                 <p className="text-2xl mt-5">{course.tagline}</p>
               { isNaN(totalCourseDays) == false && <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Duration :</p>
-                    <p className="ml-2">{totalCourseDays} Days</p>
+                    <p className="ml-2">{totalCourseDays + 1} Days</p>
                 </div>}
                 { course.startDate && <div className="flex text-2xl items-center mt-5 ">
                     <p className="font-bold">Starts on: </p>
@@ -197,7 +205,7 @@ const Course = () => {
                 </div>
                 <div className="flex mt-5">
                     <LocationOnIcon className="text-green scale-150"/>
-                    <p className="text-xl ml-5">113 Smedley Road, Chseetham Hill, Manchester, UK</p>
+                    <p className="text-xl ml-5">113 Smedley Road, Cheetham Hill, Manchester, UK</p>
                 </div>
             </div>
         </div>
