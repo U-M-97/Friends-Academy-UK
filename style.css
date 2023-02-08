@@ -12,3 +12,8 @@
     border-radius: 20px
 }
 
+.ql-editor {
+    overflow-y: scroll;
+    resize: vertical;
+    min-height:200px;
+}

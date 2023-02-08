@@ -26,6 +26,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CircularProgress from '@mui/material/CircularProgress'
 import dayjs from "dayjs";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+import { modules } from "./textEditorModules"
 
 const AddCourse = () => {
 
@@ -50,6 +54,11 @@ const AddCourse = () => {
     const [ apiReq, setApiReq ] = useState(false)
     const [ displayStartDate, setDisplayStartDate ] = useState()
     const [ displayEndDate, setDisplayEndDate ] = useState()
+    const [value, setValue] = useState('')
+    console.log(value)
+
+    const [ editorState , setEditorState] = useState()
+    const [ onEditorStateChange , setOnEditorStateChange] = useState()
 
     useEffect(() => {
       setCalendar(false)
@@ -136,10 +145,14 @@ const AddCourse = () => {
     }
     }, [calendar, calendar2])
 
+    useEffect(() => {
+      setInputs((input) => ({
+        ...input, description: value
+      }))
+    } ,[value])
+
   return (
     <ThemeProvider theme={theme}>
-     
-    
         <FullLayout>
           { apiReq === false ? 
           <>
@@ -150,8 +163,9 @@ const AddCourse = () => {
                   <p>Upload Course Image</p>
                   <input type="file" name="image" className="w-52 cursor-pointer" onChange={(e) => setFile(e.target.files[0])}/>
                   <TextField name="title" label="Course Title" variant="outlined" onChange={handleChange}/>    
-                  <TextField name="tagline" label="Tagline" variant="outlined" onChange={handleChange}/>                 
-                  <TextField multiline rows="10" name="description"  label="Course Description" variant="outlined" onChange={handleChange}/>
+                  <TextField name="tagline" label="Tagline" variant="outlined" onChange={handleChange}/>
+                  <ReactQuill modules={modules} value={value} onChange={setValue} theme="snow" />           
+                  {/* <TextField multiline rows="10" name="description"  label="Course Description" variant="outlined" onChange={handleChange}/> */}
                   {newCategory == false ? <TextField
                     select
                     name="category"
