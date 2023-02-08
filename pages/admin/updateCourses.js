@@ -19,7 +19,7 @@ import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
-import { modules } from "./textEditorModules"
+import { modules } from "../../utils/textEditorModules"
 
 const UpdateCourses = () => {
 
