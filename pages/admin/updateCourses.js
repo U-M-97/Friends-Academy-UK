@@ -16,10 +16,6 @@ import 'react-calendar/dist/Calendar.css'
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteIcon from '@mui/icons-material/Delete';
 import dayjs from "dayjs";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
-import { modules } from "../../utils/textEditorModules"
 
 const UpdateCourses = () => {
 
@@ -51,13 +47,6 @@ const UpdateCourses = () => {
   const [ apiDelRes, setApiDelRes ] = useState(false)
   const [ displayStartDate, setDisplayStartDate ] = useState()
   const [ displayEndDate, setDisplayEndDate ] = useState()
-  const [ description, setDescription ] = useState()
-
-  useEffect(() => {
-    setInputs((input) => ({
-      ...input, description: description
-    }))
-  }, [description])
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -298,8 +287,7 @@ const UpdateCourses = () => {
                       defaultValue={inputs.tagline}
                       onChange={handleChange}
                     />
-                    <ReactQuill className="my-4" modules={modules} value={inputs.description} onChange={setDescription} theme="snow" />
-                    {/* <TextField
+                    <TextField
                       multiline 
                       rows="10"
                       name="description"
@@ -310,7 +298,7 @@ const UpdateCourses = () => {
                       variant="standard"
                       defaultValue={inputs.description}
                       onChange={handleChange}
-                    /> */}
+                    />
                     <TextField
                       name="category"
                       autoFocus

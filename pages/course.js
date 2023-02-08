@@ -11,9 +11,6 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs"
 import { useEffect } from "react";
 import axios from "axios";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
 
 const Course = () => {
 
@@ -113,8 +110,7 @@ const Course = () => {
                 <div className="mt-5 flex text-2xl">
                     <p className="font-bold">Price :</p>
                     <p className="ml-2">£{course.price}</p>
-                </div>
-                <ReactQuill readOnly={true} value={course.description} theme="bubble" />   
+                </div>  
                 <pre className="mt-5 font-main text-xl whitespace-pre-wrap leading-10">{course.description}</pre>
                 {/* <ul className="mt-10 list-disc text-xl ml-4">
                     <li>PLAB 2 full course - ONLINE & ONSITE 12 to 14 days full course</li>
