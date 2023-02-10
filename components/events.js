@@ -32,13 +32,13 @@ const Events = () => {
         router.push("/course")
     }
 
-    // const handleMobileCategory = (item) => {
-    //     if(selectedCategory === item){
-    //         setSelectedCategory(null)
-    //     }else{
-    //         setSelectedCategory(item)
-    //     }
-    // }
+    const handleMobileCategory = (item) => {
+        if(selectedCategory === item){
+            setSelectedCategory(null)
+        }else{
+            setSelectedCategory(item)
+        }
+    }
     
   return (
     <div className='font-main flex flex-col items-center justify-center pb-10 bg-green' id='bookOnline'>
@@ -64,9 +64,9 @@ const Events = () => {
             {uniqueCategory && uniqueCategory.map((item) => {
                 return(
                     <>
-                        {/* <div key={item} className={`sm:hidden w-full border p-2 mr-3 mt-2 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white ${item == selectedCategory ? "bg-pink text-white" : null} `} onClick={() => handleMobileCategory(item)}>
+                        <div key={item} className={`sm:hidden w-full border p-2 mr-3 mt-2 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white ${item == selectedCategory ? "bg-pink text-white" : null} `} onClick={() => handleMobileCategory(item)}>
                             <p>{item}</p>
-                        </div> */}
+                        </div>
                         <div key={item} className={`hidden sm:flex sm:w-auto sm:border sm:p-2 sm:mr-3 sm:mt-2 sm:rounded-md sm:cursor-pointer sm:bg-white sm:border-black sm:hover:bg-pink sm:hover:border-green sm:duration-300 sm:font-semibold sm:text-lg sm:hover:text-white ${item == selectedCategory ? "sm:bg-pink sm:text-white" : null} `} onClick={() => setSelectedCategory(item)}>
                             <p>{item}</p>
                         </div>

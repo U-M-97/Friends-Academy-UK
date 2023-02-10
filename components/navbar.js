@@ -101,7 +101,7 @@ const Navbar = (props) => {
             </div>
         </div>
         
-        <div className={`font-main fixed top-0 flex flex-col h-full w-screen bg-white duration-700 z-50 sm:hidden ${open == false ? " -translate-x-full" : " translate-x"}`}>
+        {/* <div className={`font-main fixed top-0 flex flex-col h-full w-screen bg-white duration-700 z-50 sm:hidden ${open == false ? " -translate-x-full" : " translate-x"}`}>
             <div className="flex justify-end mt-5">
                 <div className="bg-green p-2 h-10 w-10 mr-5 rounded-md" onClick={handleClick}>
                     <CloseIcon className="scale-125"/>
@@ -171,7 +171,7 @@ const Navbar = (props) => {
                     </Scroll>
                 </li>
             </ul>
-        </div>
+        </div> */}
        
         <div className="hidden py-1 sm:flex font-main sm:justify-center">
             <div className="flex items-center justify-center ml-10 w-72">
