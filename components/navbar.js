@@ -108,7 +108,7 @@ const Navbar = (props) => {
                 </div>
             </div>
             <div className="mt-10">
-                {/* <a href="/" className="p-4 font-bold text-2xl border-b border-b-lightGray flex">HOME</a>       */}
+                <Link href="/" ><a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>HOME</a></Link>      
 
                 <Scroll className="cursor-pointer " 
                 to="about"
