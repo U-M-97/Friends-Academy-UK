@@ -107,7 +107,7 @@ const Navbar = (props) => {
                     <CloseIcon className="scale-125"/>
                 </div>
             </div>
-            <ul className="mt-10">
+            <div className="mt-10">
                 <a href="/" className="p-4 font-bold text-2xl border-b border-b-lightGray flex">HOME</a>      
 
                 <Scroll className="cursor-pointer " 
@@ -150,8 +150,8 @@ const Navbar = (props) => {
                     <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>CANDIDATE REVIEWS</a>
                 </Scroll>
 
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">BLOG</li>
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">GALLERY</li>
+                <div className="p-4 font-bold text-2xl border-b border-b-lightGray">BLOG</div>
+                <div className="p-4 font-bold text-2xl border-b border-b-lightGray">GALLERY</div>
 
                 <Scroll className="cursor-pointer" 
                 to="contact"
@@ -163,7 +163,7 @@ const Navbar = (props) => {
                     <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>CONTACT</a>
                 </Scroll>
 
-            </ul>
+            </div>
         </div>
        
         <div className="hidden py-1 sm:flex font-main sm:justify-center">
