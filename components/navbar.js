@@ -110,58 +110,57 @@ const Navbar = (props) => {
             <ul className="mt-10">
                 <a href="/" className="p-4 font-bold text-2xl border-b border-b-lightGray flex">HOME</a>      
 
-                <Scroll className="cursor-pointer " onClick={handleClick}
+                <Scroll className="cursor-pointer " 
                 to="about"
                 spy={true}
                 smooth={true}
                 offset={0}
                 duration={2000}
                 >
-                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex">ABOUT</a>
+                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>ABOUT</a>
                 </Scroll>
 
-                <Scroll className="cursor-pointer" onClick={handleClick}
+                <Scroll className="cursor-pointer" 
                 to="bookOnline"
                 spy={true}
                 smooth={true}
                 offset={0}
                 duration={2000}
                 >
-                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex">COURSES</a>
+                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>COURSES</a>
                 </Scroll>
 
-                <Scroll className="cursor-pointer" onClick={handleClick}
+                <Scroll className="cursor-pointer" 
                 to="accomodation"
                 spy={true}
                 smooth={true}
                 offset={0}
                 duration={2000}
                 >
-                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex">ACCOMODATION</a>
+                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>ACCOMODATION</a>
                 </Scroll>
 
-
-                <Scroll className="cursor-pointer" onClick={handleClick}
+                <Scroll className="cursor-pointer" 
                 to="reviews"
                 spy={true}
                 smooth={true}
                 offset={0}
                 duration={2000}
                 >
-                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex">CANDIDATE REVIEWS</a>
+                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>CANDIDATE REVIEWS</a>
                 </Scroll>
 
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">BLOG</li>
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">GALLERY</li>
 
-                <Scroll className="cursor-pointer" onClick={handleClick}
+                <Scroll className="cursor-pointer" 
                 to="contact"
                 spy={true}
                 smooth={true}
                 offset={0}
                 duration={2000}
                 >
-                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex">CONTACT</a>
+                    <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>CONTACT</a>
                 </Scroll>
 
             </ul>
