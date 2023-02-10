@@ -110,6 +110,13 @@ const AddCourse = () => {
     let arr = []
 
     useEffect(() => {
+   
+      courses && courses.map((course) => {
+        arr.push(course.category)
+      })
+
+      const uniqueCategory = arr.filter((item, index) => categories.indexOf(item) === index)
+      setCategories(uniqueCategory)
       let tmp = null
       courses && courses.map((item) => {
           if(item.category != tmp){
@@ -118,7 +125,7 @@ const AddCourse = () => {
               return  
           }
       }) 
-      setCategories(arr)
+      // setCategories(arr)
     }, [courses])
 
     useEffect(() => {

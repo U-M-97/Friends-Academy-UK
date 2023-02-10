@@ -22,7 +22,7 @@ const Events = () => {
     })
 
     const uniqueCategory = categories.filter((item, index) => categories.indexOf(item) === index)
-    console.log(uniqueCategory)
+
     // courses && courses.map((item) => {
     //     if(item.category != tmp){
     //         categories.push(item.category)
@@ -38,6 +38,14 @@ const Events = () => {
     const handleSelectedCourse = (course) => {
         dispatch(selectCourse(course))
         router.push("/course")
+    }
+
+    const handleMobileCategory = (item) => {
+        if(selectedCategory === item){
+            setSelectedCategory(null)
+        }else{
+            setSelectedCategory(item)
+        }
     }
     
   return (
@@ -64,7 +72,10 @@ const Events = () => {
             {uniqueCategory && uniqueCategory.map((item) => {
                 return(
                     <>
-                        <div key={item} className={`w-full sm:w-auto border p-2 mr-3 mt-2 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white ${item == selectedCategory ? "bg-pink text-white" : null} `} onClick={() => setSelectedCategory(item)}>
+                        <div key={item} className={`sm:hidden w-full border p-2 mr-3 mt-2 rounded-md cursor-pointer bg-white border-black hover:bg-pink hover:border-green duration-300 font-semibold text-lg hover:text-white ${item == selectedCategory ? "bg-pink text-white" : null} `} onClick={() => handleMobileCategory(item)}>
+                            <p>{item}</p>
+                        </div>
+                        <div key={item} className={`hidden sm:flex sm:w-auto sm:border sm:p-2 sm:mr-3 sm:mt-2 sm:rounded-md sm:cursor-pointer sm:bg-white sm:border-black sm:hover:bg-pink sm:hover:border-green sm:duration-300 sm:font-semibold sm:text-lg sm:hover:text-white ${item == selectedCategory ? "sm:bg-pink sm:text-white" : null} `} onClick={() => setSelectedCategory(item)}>
                             <p>{item}</p>
                         </div>
                         <div className='sm:hidden'>
@@ -83,9 +94,9 @@ const Events = () => {
                                                         <p className=' mt-3 font-extrabold text-xs bg-pink rounded-lg py-important px-1 text-center text-white'>NEW!</p>
                                                         <p className=' mt-3 font-extrabold text-xs bg-black rounded-lg py-important px-1 text-center text-white'>FEATURED!</p>
                                                     </div>
-                                                    <p className='text-2xl font-bold mt-2'>{course.description}</p> 
-                                                    <p className='text-gray mt-2'>Turkey Only</p>
-                                                    <a href='' className='underline hover:text-green duration-300'>Read More</a>
+                                                    <p className='text-2xl font-bold mt-2'>{course.tagline}</p> 
+                                                    <p className='text-gray mt-2'>{course.startDate && dayjs(course.startDate).format("DD MMMM YYYY")}</p>
+                                                    <p className='underline hover:text-green duration-300' onClick={() => handleSelectedCourse(item)}>Read More</p>
                                                 </div>
                                             </div>
 
@@ -96,7 +107,7 @@ const Events = () => {
                                                 </div>
                                                 <div className='flex mt-3 items-center'>
                                                     <h1 className='text-2xl font-bold'>Status</h1>
-                                                    <p className={`ml-5 text-md  text-white text-center rounded-lg ${course.status == "active" ? "bg-green" : "bg-red-600"}`}>{course.status}</p>
+                                                    <p className={`ml-5 text-md  text-white text-center rounded-lg ${course.status == "active" || course.status == "Active" ? "bg-green" : "bg-red-600"}`}>{course.status}</p>
                                                 </div>
                                                 <div className='mt-3 mr-5 flex items-center' onClick={() => handleSelectedCourse(course)}>
                                                     <button className='bg-pink text-white py-3 px-8 rounded-3xl text-lg font-semibold hover:bg-green duration-300 hover:text-black'>View Course</button>

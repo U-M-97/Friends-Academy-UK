@@ -108,14 +108,68 @@ const Navbar = (props) => {
                 </div>
             </div>
             <ul className="mt-10">
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">Home</li>
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">About</li>
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">Courses</li>
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">OSCE BANK</li>
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">CANDIDATE REVIEWS</li>
+                <li className="font-bold text-2xl border-b border-b-lightGray">
+                    <a href="/">
+                        <p className="p-4">HOME</p>
+                    </a>
+                </li>
+                <li className="font-bold text-2xl border-b border-b-lightGray">
+                    <Scroll className="cursor-pointer bg-pink" onClick={handleClick}
+                    to="about"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
+                        <p className="p-4">ABOUT</p>
+                    </Scroll>
+                </li>
+                <li className="font-bold text-2xl border-b border-b-lightGray">
+                    <Scroll className="cursor-pointer" onClick={handleClick}
+                    to="bookOnline"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
+                        <p className="p-4">COURSES</p>
+                    </Scroll>
+                </li>
+                <li className="font-bold text-2xl border-b border-b-lightGray">
+                    <Scroll className="cursor-pointer" onClick={handleClick}
+                    to="accomodation"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
+                        <p className="p-4">ACCOMODATION</p>
+                    </Scroll>
+                </li>
+                <li className="font-bold text-2xl border-b border-b-lightGray">
+                    <Scroll className="cursor-pointer" onClick={handleClick}
+                    to="reviews"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
+                        <p className="p-4">CANDIDATE REVIEWS</p>
+                    </Scroll>
+                </li>
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">BLOG</li>
                 <li className="p-4 font-bold text-2xl border-b border-b-lightGray">GALLERY</li>
-                <li className="p-4 font-bold text-2xl border-b border-b-lightGray">CONTACT</li>
+                <li className="font-bold text-2xl border-b border-b-lightGray">
+                    <Scroll className="cursor-pointer" onClick={handleClick}
+                    to="contact"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={2000}
+                    >
+                        <p className="p-4">CONTACT</p>
+                    </Scroll>
+                </li>
             </ul>
         </div>
        

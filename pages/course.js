@@ -92,11 +92,14 @@ const Course = () => {
 
   return (
     <div className="flex flex-col items-center font-main mb-10">
-        <div className="flex">
-            <div className="w-testimonials p-10">
+        <div className="sm:flex">
+            <div className="hidden sm:inline sm:w-testimonials p-10">
                 <Image src={course.image} height="500px" width="500px" objectFit="cover"/>
             </div>
-            <div className="w-courseWidth p-10">
+            <div className="sm:hidden p-5 flex items-center justify-center">
+                <Image src={course.image} height="300px" width="300px" objectFit="cover"/>
+            </div>
+            <div className="sm:w-courseWidth p-5 sm:p-10 ">
                 <h1 className="text-4xl font-bold">{course.title}</h1>
                 <p className="text-2xl mt-5">{course.tagline}</p>
               { isNaN(totalCourseDays) == false && <div className="mt-5 flex text-2xl">
@@ -125,7 +128,7 @@ const Course = () => {
                 </ul> */}
             </div>
             <div className="mt-10">
-                { bookingType === "Book" ? <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold" onClick={handleCourseCheck}>Book Now</button> 
+                { bookingType === "Book" ? <button className="hidden sm:inline bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold" onClick={handleCourseCheck}>Book Now</button> 
                 : bookingType === "Request" ? <button className="bg-green p-3 hover:bg-greenHover duration-300 rounded-md font-bold" onClick={handleCourseRequest}>Request to Book</button> : null
             }
                 {courseRegistered == true ? 
@@ -145,10 +148,10 @@ const Course = () => {
                 }
             </div>
         </div>
-        <div className="p-20 flex flex-col items-center">
+        <div className="sm:p-20 flex flex-col items-center">
             <h1 className="text-4xl font-bold">Instructors</h1>
-            <div className="flex mt-10">
-                <div className="flex flex-col mx-5">
+            <div className="sm:flex mt-10">
+                <div className="flex flex-col sm:mx-5">
                     <div className="flex items-center mx-10 mb-10">
                         <div className="relative h-32 w-32 rounded-full overflow-hidden border-2 border-green">
                             <Image src="/images/Rehman.jpeg" layout="fill" objectFit="cover"/>
@@ -156,7 +159,7 @@ const Course = () => {
                         <p className="text-xl font-bold ml-5">Dr Rehman Bashir</p>
                     </div>
                 </div>
-                <div className="flex flex-col mx-5">
+                <div className="flex flex-col sm:mx-5">
                     <div className="flex items-center mx-10 mb-10">
                         <div className="relative h-32 w-32 rounded-full overflow-hidden border-2 border-green">
                             <Image src="/images/Sohail Tariq2.jpeg" layout="fill" objectFit="cover"/>
@@ -167,10 +170,10 @@ const Course = () => {
             </div>      
         </div>
         
-        <div className="w-aboutWidth flex flex-col items-center justify-center mb-10">
+        <div className="sm:w-aboutWidth flex flex-col items-center justify-center mb-10 mt-5 sm:mt-0">
             { course.startDate && <h1 className="text-4xl font-bold">Schedule</h1> }
-            { course.startDate && <div className="w-courseWidth mt-5">
-                <div className="flex mt-5">
+            { course.startDate && <div className="sm:w-courseWidth mt-5">
+                <div className="flex flex-col sm:flex-row items-center justify-center mt-5">
                     {course.endDate && <p className="text-xl font-bold ">Dates :</p>}
                     {!course.endDate && <p className="text-xl font-bold ">Date :</p>}
                     {course.endDate && <p className="text-xl ml-2">{dayjs(course.startDate).format("DD MMMM, YYYY")} - {dayjs(course.endDate).format("DD MMMM, YYYY")}</p>}
@@ -180,7 +183,7 @@ const Course = () => {
             {
                 schedule && schedule.map((item) => {
                     return(
-                        <div className="flex mt-10 w-courseWidth items-center justify-between text-xl border-b border-green pb-5" key={item}>
+                        <div className="flex mt-10 w-full sm:w-courseWidth items-center justify-between sm:text-xl border-b border-green pb-5" key={item}>
                             <div>
                                 <p>{item.day}</p>
                                 <p>{item.date}</p>
@@ -192,9 +195,9 @@ const Course = () => {
             }
             <p className="text-xl text-gray mt-10">London time (GMT +01:00)</p>
         </div>
-        <div className="mt-5 flex flex-col justify-center items-center w-courseWidth ">
-            <h1 className="text-4xl font-bold">Location and Contact Details</h1>
-            <div className="w-courseWidth">
+        <div className="mt-5 flex flex-col justify-center items-center sm:w-courseWidth ">
+            <h1 className="text-4xl font-bold mx-5">Location and Contact Details</h1>
+            <div className="sm:w-courseWidth mx-5">
                 <div className="flex mt-10">
                     <PhoneIcon className="text-green scale-150"/>
                     <p className="text-xl ml-5">+ 44 7532 707561</p> 
@@ -213,7 +216,7 @@ const Course = () => {
                 </div>
             </div>
         </div>
-        <div className="mt-14 flex flex-col items-center justify-center w-courseWidth ">
+        <div className="mt-14 flex flex-col items-center justify-center sm:w-courseWidth p-5 sm:p-0">
             <h1 className="text-4xl font-bold">Booking Policy</h1>
             <p className="text-xl mt-5">Bookings will open 420 days before the session starts.</p>
             <p className=" text-base text-justify  mt-5">{readMore == false ? text.slice(0,300) : text}<span className="hover:text-green cursor-pointer font-bold" onClick={() => setReadMore(!readMore)}>{readMore == false ? "...Read More" : "Read Less"}</span> </p>

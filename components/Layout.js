@@ -97,7 +97,7 @@ export default function Layout({children}){
                   </Scroll>
                 </motion.div> 
               <Header/>
-              { home && coupon != null && discountHeader === true ? <DiscountHeader close={() => setDiscountHeader(false)}/> : null}
+              {/* { home && coupon != null && discountHeader === true ? <DiscountHeader close={() => setDiscountHeader(false)}/> : null} */}
               <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>
             </> 
           }

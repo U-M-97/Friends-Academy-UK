@@ -148,8 +148,8 @@ const Booking = () => {
 
   return (
     <div className="flex items-center justify-center my-10 font-main">
-        <div className="h-slider w-aboutWidth flex shadow-2xl shadow-gray">
-            <div className="relative w-1/3">
+        <div className="sm:h-slider sm:w-aboutWidth flex sm:shadow-2xl shadow-gray">
+            <div className="hidden sm:flex relative w-1/3">
                 <Image src="/images/bg-main-desktop.png" layout="fill" objectFit="fill"/>
                 <div className="absolute left-14 top-10 h-56 w-96">
                     <Image src="/images/bg-card-front.png" layout="fill"/>
@@ -166,11 +166,11 @@ const Booking = () => {
                     <Image src="/images/bg-card-back.png" layout="fill"/>
                 </div>
             </div>
-            <div className=" w-4/6">
+            <div className=" sm:w-4/6">
                 <div className="flex items-center justify-center">
-                    <h1 className="ml-32 mt-10 text-xl font-bold">Welcome to Friends Academy Booking Area</h1>
+                    <h1 className="sm:ml-32 sm:mt-10 text-xl font-bold px-5">Welcome to Friends Academy Booking Area</h1>
                 </div>
-                <div className=" relative ml-28 mt-10 flex flex-col">
+                <div className=" relative p-5 sm:p-0 sm:ml-28 mt-5 sm:mt-10 flex flex-col">
                     <h1 className="text-lg ">Tell us a bit about yourself</h1>
                     <PhoneInput
                     country={'pk'}
@@ -178,15 +178,15 @@ const Booking = () => {
                     onChange={setPhone}
                     className="mt-10"
                     />
-                    <input type="number" min="0" placeholder="Previous Plab 2 Attempts" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md" value={prevAttempt} onChange={(e) => setPreviousAttempt(e.target.value)}/>
-                    {user && !user.plab2Date ? <input placeholder="Your Plab 2 Exam Date" className=" w-96 mt-10 border border-black py-4 px-3 rounded-md" value={plab2} onClick={() => setCalendar(true)}/> : null}
+                    <input type="number" min="0" placeholder="Previous Plab 2 Attempts" className=" sm:w-96 mt-10 border border-black py-4 px-3 rounded-md" value={prevAttempt} onChange={(e) => setPreviousAttempt(e.target.value)}/>
+                    {user && !user.plab2Date ? <input placeholder="Your Plab 2 Exam Date" className=" sm:w-96 mt-10 border border-black py-4 px-3 rounded-md" value={plab2} onClick={() => setCalendar(true)}/> : null}
                     {calendar && <div className="z-10 absolute bottom-40" id="calendar"> 
                     <Calendar  className=" bg-white border-2" onChange={setValueCalendar} value={valueCalendar}/>
                     </div> }
-                    {emptyInputs == true ? <Alert severity="error" className="mt-2 w-96">Please fill the required fields!</Alert> : null }
-                    <div className="mt-10">
-                        <button className="text-xl font-bold py-3 bg-green hover:bg-greenHover rounded-md w-2/4" onClick={handlePay}>PAY £{selectedCourse && selectedCourse.price}</button>
-                        { isCoupon === true ? <button className="text-xl font-bold py-3 border rounded-md ml-5 w-72 hover:bg-pink" onClick={handleOpen}>USE COUPON</button> : null }
+                    {emptyInputs == true ? <Alert severity="error" className="mt-2 sm:w-96">Please fill the required fields!</Alert> : null }
+                    <div className="mt-10 flex sm:inline items-center justify-center">
+                        <button className="text-xl font-bold py-3 bg-green hover:bg-greenHover rounded-md w-2/4 mb-10 sm:mb-0" onClick={handlePay}>PAY £{selectedCourse && selectedCourse.price}</button>
+                        { isCoupon === true ? <button className="text-xl font-bold py-3 border rounded-md ml-5 sm:w-72 hover:bg-pink" onClick={handleOpen}>USE COUPON</button> : null }
                     </div>
                 </div>
             </div>
