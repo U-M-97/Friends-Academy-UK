@@ -110,7 +110,7 @@ const Navbar = (props) => {
             <div className="mt-10">
                 <a href="/" className="p-4 font-bold text-2xl border-b border-b-lightGray flex">HOME</a>      
 
-                <Scroll className="cursor-pointer " 
+                {/* <Scroll className="cursor-pointer " 
                 to="about"
                 spy={true}
                 smooth={true}
@@ -148,11 +148,11 @@ const Navbar = (props) => {
                 duration={2000}
                 >
                     <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>CANDIDATE REVIEWS</a>
-                </Scroll>
+                </Scroll> */}
 
                 <div className="p-4 font-bold text-2xl border-b border-b-lightGray">BLOG</div>
                 <div className="p-4 font-bold text-2xl border-b border-b-lightGray">GALLERY</div>
-
+{/* 
                 <Scroll className="cursor-pointer" 
                 to="contact"
                 spy={true}
@@ -161,7 +161,7 @@ const Navbar = (props) => {
                 duration={2000}
                 >
                     <a className="p-4 font-bold text-2xl border-b border-b-lightGray flex" onClick={handleClick}>CONTACT</a>
-                </Scroll>
+                </Scroll> */}
 
             </div>
         </div>
