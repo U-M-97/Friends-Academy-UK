@@ -60,7 +60,7 @@ const Footer = () => {
                     </div>    
                 </div>
                 <div className='mt-10 flex justify-center sm:justify-start'>
-                        <a href='https://wa.me/447449347301?text=I want to inquire about Plab 2' target="_blank" rel="noreferrer" className=' h-10 w-10 border border-lightGray rounded-full flex items-center justify-center text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <a href='https://chat.whatsapp.com/DPVsiq2Qn5nG2OJgnBpdxR' target="_blank" rel="noreferrer" className=' h-10 w-10 border border-lightGray rounded-full flex items-center justify-center text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <WhatsAppIcon className=''/>
                         </a>
                         <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" rel="noreferrer" className=' h-10 w-10  border border-lightGray rounded-full flex items-center justify-center ml-4 text-white hover:text-white cursor-pointer hover:bg-green duration-300'>

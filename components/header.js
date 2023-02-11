@@ -63,7 +63,7 @@ const Header = () => {
                     <div className='border-b border-lightGray mt-2 sm:hidden'></div>
                     
                     <div className='flex justify-center mt-2 sm:mr-40 sm:mt-0 items-center'>
-                        <a href='https://wa.me/447449347301?text=I want to inquire about Plab 2' target="_blank" rel="noreferrer" className='hover:text-green duration-300 cursor-pointer mr-4'>
+                        <a href='https://chat.whatsapp.com/DPVsiq2Qn5nG2OJgnBpdxR' target="_blank" rel="noreferrer" className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <WhatsAppIcon/>
                         </a>
                         <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" rel="noreferrer" className='hover:text-green duration-300 cursor-pointer mr-4'>
