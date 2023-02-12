@@ -50,7 +50,6 @@ const Contact = () => {
             setIsInputs(false)
         }
     }
-    console.log(inputs)
 
   return (
     <div className="pb-20 flex font-main items-center justify-center bg-servicesBG " id='contact'>

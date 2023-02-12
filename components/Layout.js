@@ -33,7 +33,6 @@ export default function Layout({children}){
       router.events.on("routeChangeStart", handleStart)
       router.events.on("routeChangeComplete", handleComplete)
       router.events.on("routeChangeError", handleComplete)
-      console.log(loading)
   
       return () => {
         router.events.off("routeChangeStart", handleStart)

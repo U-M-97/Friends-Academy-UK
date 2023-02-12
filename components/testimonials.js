@@ -65,7 +65,7 @@ const Testimonials = () => {
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             slidesPerView={2}
             onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSwiper={(swiper) => console.log(swiper)}
             navigation
             speed={1000}
             pagination={{ clickable: true }}
@@ -99,8 +99,8 @@ const Testimonials = () => {
             style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '60px' }}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             slidesPerView={1}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
             navigation
             speed={1000}
             pagination={{ clickable: true }}
@@ -144,8 +144,8 @@ const Testimonials = () => {
             style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '50px', '--swiper-navigation-margin': '50px' }}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             slidesPerView={4}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
             navigation
             speed={1000}
             loop={true}
@@ -169,8 +169,8 @@ const Testimonials = () => {
             style={{ '--swiper-navigation-color': 'black', '--swiper-navigation-size': '50px', '--swiper-navigation-margin': '50px' }}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             slidesPerView={2}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
             navigation
             speed={1000}
             loop={true}

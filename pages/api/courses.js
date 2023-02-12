@@ -6,7 +6,7 @@ export default async function handler (req, res) {
     await dbConnect()
 
     if(req.method === "GET"){
-        const courses = await Course.find()
+        const courses = await Course.find().sort({ category: 1, startDate: 1})
         res.send(courses)
     }
     else{

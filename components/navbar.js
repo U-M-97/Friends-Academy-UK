@@ -24,7 +24,7 @@ const Navbar = (props) => {
     const [ scrolled, setScrolled ] = useState(false)
 
     useEffect(() => {
-        console.log("running")
+       
         const handleKey = (e) => {
             const link = document.getElementById("moreInformation")
             const dropDown = document.getElementById("dropDown")

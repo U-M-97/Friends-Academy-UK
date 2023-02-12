@@ -14,7 +14,7 @@ const Events = () => {
     const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
     const courses = useSelector((state) => state.course.currentCourses)
     const user = useSelector((state) => state.user.currentUser)
-    const [ selectedCategory, setSelectedCategory ] = useState()
+    const [ selectedCategory, setSelectedCategory ] = useState("Plab-2 Full Course")
     let categories = []
 
     courses && courses.map((course) => {
@@ -23,9 +23,9 @@ const Events = () => {
 
     const uniqueCategory = categories.filter((item, index) => categories.indexOf(item) === index)
 
-    useEffect(() => {
-        courses && setSelectedCategory(courses[0].category)
-    }, [courses])
+    // useEffect(() => {
+    //     setSelectedCategory("Plab-2 Full Course")
+    // }, [])
 
     const handleSelectedCourse = (course) => {
         dispatch(selectCourse(course))
