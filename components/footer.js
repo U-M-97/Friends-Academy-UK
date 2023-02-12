@@ -72,9 +72,9 @@ const Footer = () => {
                         <div className='h-10 w-10  border border-lightGray rounded-full flex items-center justify-center ml-4 text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <TwitterIcon className=''/>
                         </div>
-                        <div className='h-10 w-10  border border-lightGray rounded-full flex items-center justify-center ml-4 text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <a href='https://www.instagram.com/friendsacademymanchester2019/' target="_blank" rel="noreferrer" className='h-10 w-10  border border-lightGray rounded-full flex items-center justify-center ml-4 text-white hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <InstagramIcon className=''/>
-                        </div>
+                        </a>
                 </div>
             </div>
             <div className="flex-1 sm:mr-5 mt-10 sm:mt-0">

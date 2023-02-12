@@ -4,6 +4,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import SearchIcon from '@mui/icons-material/Search';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import styles from "../styles/header.module.css"
 import { useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -69,9 +70,12 @@ const Header = () => {
                         <a href='https://www.facebook.com/friendsacademymanchester' target="_blank" rel="noreferrer" className='hover:text-green duration-300 cursor-pointer mr-4'>
                             <FacebookIcon/>
                         </a> 
-                        <div className='hover:text-green duration-300 cursor-pointer mr-4'>
+                        <div className='hover:text-green duration-300 scale-110 translate-y-0.5 cursor-pointer mr-4'>
                             <YouTubeIcon/>
                         </div>
+                        <a href="https://www.instagram.com/friendsacademymanchester2019/" target="_blank" rel="noreferrer" className='hover:text-green duration-300 cursor-pointer mr-4'>
+                            <InstagramIcon className=''/>
+                        </a>
                         <div className={styles.line}></div>
                         <div className='mr-4 text-gray cursor-pointer'>
                             <SearchIcon className=' scale-125'/>

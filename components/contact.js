@@ -106,9 +106,9 @@ const Contact = () => {
                         <div className=' h-14 w-14 border border-lightGray rounded-full flex items-center justify-center  ml-2 sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <TwitterIcon className=''/>
                         </div>
-                        <div className='h-14 w-14 border border-lightGray rounded-full flex items-center justify-center  ml-2 sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
+                        <a href="https://www.instagram.com/friendsacademymanchester2019/" target="_blank" rel="noreferrer" className='h-14 w-14 border border-lightGray rounded-full flex items-center justify-center  ml-2 sm:ml-4 text-green hover:text-white cursor-pointer hover:bg-green duration-300'>
                             <InstagramIcon className=''/>
-                        </div>
+                        </a>
                     </div>
                 </div>     
             </div>
