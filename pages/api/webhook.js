@@ -35,7 +35,7 @@ const fullFillCourseOrder = async (session) => {
         }
     })
 
-    if(coupon !== "unlimited"){
+    if(coupon !== "unlimited" && coupon !== "No Coupon"){
       console.log("running")
       const UpdateCoupon = await Coupon.findByIdAndUpdate({_id: coupon}, {
         $inc: {totalUses: 1}

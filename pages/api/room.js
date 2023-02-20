@@ -126,12 +126,24 @@ export default async function handler (req, res) {
                                         })
         
                                         let mailOptions = {
-                                            from: "team@friendsacademy.co.uk",
+                                            from: {name: "Friends Academy", address: "team@friendsacademy.co.uk"},
                                             to: email,
                                             subject: "Room Booking",
                                             text: `Your Room is booked successfully. You can pay now by adding your booking ID ${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id} in Make a Payment option on our Website`,
                                             html: `
                                                 <p style="font-size: medium">Your Room is booked successfully. You can pay now by adding your booking ID</p> <h1 style="font-size: bold">${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id}</h1> <p style="font-size: medium"> in Make a Payment option on our Website</p>
+                                                <a href="https://www.friendsacademy.co.uk/makeAPayment" style="background-color: #88ced0;
+                                                    padding: 10px 30px;
+                                                    width: 400px;
+                                                    cursor: pointer;
+                                                    border: none;
+                                                    font-weight: bold;
+                                                    font-size: large;
+                                                    text-decoration: none;
+                                                    color: black;
+                                                    font-family: sans-serif;
+                                                    ">Make A Payment
+                                                </a>
                                             `
                                         }
         

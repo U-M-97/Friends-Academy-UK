@@ -18,6 +18,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ConditionalRendering from "./conditionalRendering";
 import Alert from '@mui/material/Alert';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RemoveCourse = () => {
 
@@ -30,6 +32,7 @@ const RemoveCourse = () => {
   const [ rooms, setRooms ] = useState()
   const [ dialog, setDialog ] = useState(false)
   const [ inputs, setInputs ] = useState({
+    roomName: "",
     roomId: "",
     memberId: "",
     name: "",
@@ -58,8 +61,15 @@ const RemoveCourse = () => {
   }
 
   const calculatePayment = () => {
+    let price
+    if(inputs.roomName.includes("Single")){
+      price = 25
+    }else{
+      price = 20
+    }
     if(muiCheckOutDate){
-      const totalAmount = Math.max(0, muiCheckOutDate.diff(muiCheckInDate, "day")) * 20
+      console.log(price)
+      const totalAmount = Math.max(0, muiCheckOutDate.diff(muiCheckInDate, "day") + 1) * price
       console.log(totalAmount)
       setInputs((input) => ({
         ...input, payment: totalAmount
@@ -150,12 +160,13 @@ const RemoveCourse = () => {
 
   const handleOpen = () => {
     setInputs((input) => ({
-      ...input,   roomId: "", memberId: "", name: "",  gender: "", phone: "", country: "", email: "", checkOut: "", bed: "", payment: "" 
+      ...input, roomName: "", roomId: "", memberId: "", name: "",  gender: "", phone: "", country: "", email: "", checkOut: "", bed: "", payment: ""
     }))
     setDelButton(false)
     setDialog(true)
     setReqMethod("Add Member")
     setMuiCheckOutDate(null)
+    setSelectedRoom(null)
 }
 
   useEffect(() => {
@@ -167,7 +178,7 @@ const RemoveCourse = () => {
   }, [muiCheckOutDate])
 
 const handleSave = async () => {
-  console.log(inputs)
+  setApiRes(true)
   setAlreadyBooked(false)
   const data = {
     inputs: inputs,
@@ -178,10 +189,17 @@ const handleSave = async () => {
   if(res.data === "Booking Added Successfully" || res.data === "Member Updated Successfully"){
     handleClose()
     getRooms()
+    toast.success("Email Sent Successfully")
+  }
+  else if(res.data === "Email Failed to send"){
+    toast.error("Booking added Successfully but Failed to Send Email")
+    handleClose()
+    getRooms()
   }
   else if(res.data === "Dates Already Booked"){
     setAlreadyBooked(true)
   }
+  setApiRes(false)
 }
 
 const handleInputs = (column, room, member) => {
@@ -189,26 +207,31 @@ const handleInputs = (column, room, member) => {
   setDelButton(true)
   setDialog(true)
   console.log(member)
-  setMuiCheckInDate(dayjs(member.checkIn, "DD/MM/YYYY"))
-  setMuiCheckOutDate(dayjs(member.checkOut, "DD/MM/YYYY"))
+  setMuiCheckInDate(dayjs(member.checkIn))
+  setMuiCheckOutDate(dayjs(member.checkOut))
   setReqMethod("Update Member")
   setInputs((input) => ({
-    ...input,roomId: room._id, memberId: member._id, name: member.name, gender: member.gender, phone: member.phone, country: member.country, email: member.email, checkIn: member.checkIn, checkOut: member.checkOut, bed: member.bed, payment: member.payment
+    ...input,roomName: room.roomTitle ,roomId: room._id, memberId: member._id, name: member.name, gender: member.gender, phone: member.phone, country: member.country, email: member.email, checkIn: member.checkIn, checkOut: member.checkOut, bed: member.bed, payment: member.payment
   }))
 }
 
 const handleDelete = async () => {
+  setApiRes(true)
   const data = {
     reqMethod: "Delete Booking",
     roomId: inputs.roomId,
     memberId: inputs.memberId
   }
   const res = await axios.delete(`${process.env.url}/room`, { data })
-  if(res.data === "Booking Deleted Successfully"){s
+  if(res.data === "Booking Deleted Successfully"){
     handleClose()
     getRooms()
+    toast.success("Booking Deleted Successfully")
   }
+  setApiRes(false)
 }
+
+console.log(inputs)
 
   return (
      <ThemeProvider theme={theme}>
@@ -269,7 +292,7 @@ const handleDelete = async () => {
           </div>
 
           <Dialog open={dialog} onClose={handleClose} scroll="paper" maxWidth="false">
-            <div className="w-dialog">
+            <div className="w-dialog h-screen">
             <DialogTitle style={{fontSize: "20px" , fontWeight: "600"}}>Booking Menu</DialogTitle>
             <DialogContent className="w-dialog">
             {  
@@ -277,18 +300,29 @@ const handleDelete = async () => {
                 <div className="flex flex-col items-center justify-center">
                 <div className="mt-4 relative">
                     { alreadyBooked === true ? <Alert severity="error" className="mt-2 w-full">Dates are already booked</Alert> : null }
-                    <TextField
+                    {selectedRoom != null ? 
+                      <div>
+                        <p className="text-xl font-bold">{selectedRoom.roomTitle}</p>
+                        <div className="flex items-center mt-3">
+                          <p className="text-xl font-bold">Booking ID : </p>
+                          <p className="ml-3 text-xl">{inputs.memberId}</p>
+                        </div>
+                      </div>
+                       : 
+                      <TextField
                       select
                       name={"room"}
                       label="Select Room"
                       className="w-96"
-                    >
-                      {rooms && rooms.map((room) => (
-                        <MenuItem key={room} value={room} onClick={() => setInputs((input) => ({...input, roomId: room._id}))}>
+                      >
+                      {selectedRoom == null && rooms && rooms.map((room) => (
+                        <MenuItem key={room} value={room} onClick={() => setInputs((input) => ({...input, roomId: room._id, roomName: room.roomTitle}))}>
                           {room.roomTitle}
                         </MenuItem>
                       ))}
-                    </TextField>
+                      </TextField>
+                    }
+                   
                     <TextField
                     autoFocus
                     name="name"     
@@ -372,24 +406,39 @@ const handleDelete = async () => {
                     label="Payment"
                     fullWidth
                     variant="standard"
-                    defaultValue={inputs.payment}
+                    value={inputs.payment}
                     onChange={handleChange}
                     />
                 </div>
                 </div> : 
-                <div className="h-full flex items-center justify-center">
+                <div className="h-96 flex items-center justify-center">
                   <CircularProgress/> 
                 </div>     
             }
             
             </DialogContent>
-            <DialogActions className=" border-lightGray border-t">
-            <button onClick={handleClose} className="text-xl px-4 py-1 font-medium rounded-md">Cancel</button>
-            {delButton === true ? <button onClick={handleDelete} className="text-xl text-white bg-red-600 px-4 py-1 font-medium hover:bg-red-500 rounded-md">Delete</button> : null }
-            <button onClick={handleSave} className="text-xl bg-dashboard px-4 py-1 font-medium hover:bg-green rounded-md">Save</button>
-            </DialogActions>
+            {
+              apiRes === false ? 
+              <DialogActions className=" border-lightGray border-t">
+              <button onClick={handleClose} className="text-xl px-4 py-1 font-medium rounded-md">Cancel</button>
+              {delButton === true ? <button onClick={handleDelete} className="text-xl text-white bg-red-600 px-4 py-1 font-medium hover:bg-red-500 rounded-md">Delete</button> : null }
+              <button onClick={handleSave} className="text-xl bg-dashboard px-4 py-1 font-medium hover:bg-green rounded-md">Save</button>
+              </DialogActions> : null
+            }
             </div>
           </Dialog>
+          <ToastContainer
+            position="top-right"
+            autoClose={10000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+        />
         </FullLayout>
     </ThemeProvider>
   )

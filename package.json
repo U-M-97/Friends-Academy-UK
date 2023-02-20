@@ -26,6 +26,7 @@
     "@stripe/stripe-js": "^1.42.0",
     "apexcharts": "^3.23.1",
     "axios": "^0.27.2",
+    "cloc": "^2.11.0",
     "clsx": "1.1.1",
     "cookies-next": "^2.1.1",
     "cron": "^2.1.0",
