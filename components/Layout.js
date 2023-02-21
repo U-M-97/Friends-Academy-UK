@@ -99,7 +99,7 @@ export default function Layout({children}){
                 </motion.div> 
               <Header/>
               {/* { home && coupon != null && discountHeader === true ? <DiscountHeader close={() => setDiscountHeader(false)}/> : null} */}
-              { banner.checked != false && banner.checked != null ? <Banner/> : null }
+              { banner && banner.checked != false && banner.checked != null ? <Banner/> : null }
               <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>
             </> 
           }
