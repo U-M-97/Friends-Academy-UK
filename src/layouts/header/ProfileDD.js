@@ -13,6 +13,10 @@ import {
   Button,
   Divider,
 } from "@mui/material";
+import { logout } from "../../../redux/adminReducer";
+import { useDispatch } from "react-redux";
+import { deleteCookie } from "cookies-next"
+
 const ProfileDD = () => {
   const [anchorEl4, setAnchorEl4] = React.useState(null);
 
@@ -23,6 +27,15 @@ const ProfileDD = () => {
   const handleClose4 = () => {
     setAnchorEl4(null);
   };
+
+  const dispatch = useDispatch()
+
+  const handleAdminLogout = () => {
+    deleteCookie("token")
+    dispatch(logout())
+    window.location.href="/admin"
+  }
+
   return (
     <>
       <Button
@@ -34,7 +47,7 @@ const ProfileDD = () => {
       >
         <Box display="flex" alignItems="center">
           <Image
-            src={userimg}
+            src="/images/Rehman.jpeg"
             alt={userimg}
             width="30"
             height="30"
@@ -64,7 +77,7 @@ const ProfileDD = () => {
                 ml: 1,
               }}
             >
-              Julia
+              Admin
             </Typography>
             <FeatherIcon icon="chevron-down" width="20" height="20" />
           </Box>
@@ -106,7 +119,7 @@ const ProfileDD = () => {
           <Divider />
           <Box p={2}>
             <Link to="/">
-              <Button fullWidth variant="contained" color="primary">
+              <Button fullWidth variant="contained" color="primary" onClick={handleAdminLogout}>
                 Logout
               </Button>
             </Link>

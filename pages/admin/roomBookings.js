@@ -42,16 +42,18 @@ const RemoveCourse = () => {
     email: "",
     checkIn: "",
     checkOut: "",
-    bed: "",
-    payment: ""
+    payment: "",
+    status: undefined,
+    previousRoom: undefined
   })
   const [ apiRes, setApiRes ] = useState(false)
-  const [ muiCheckInDate, setMuiCheckInDate ] = useState(dayjs(new Date()))
+  const [ muiCheckInDate, setMuiCheckInDate ] = useState(null)
   const [ muiCheckOutDate, setMuiCheckOutDate ] = useState(null)
   const [ selectedRoom, setSelectedRoom ] = useState()
   const [ reqMethod, setReqMethod ] = useState()
   const [ delButton, setDelButton ] = useState(false)
   const [ alreadyBooked, setAlreadyBooked ] = useState(false)
+  const [ roomError, setRoomError ] = useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -160,7 +162,7 @@ const RemoveCourse = () => {
 
   const handleOpen = () => {
     setInputs((input) => ({
-      ...input, roomName: "", roomId: "", memberId: "", name: "",  gender: "", phone: "", country: "", email: "", checkOut: "", bed: "", payment: ""
+      ...input, roomName: "", roomId: "", memberId: "", name: "",  gender: "", phone: "", country: "", email: "", checkOut: "", payment: ""
     }))
     setDelButton(false)
     setDialog(true)
@@ -178,28 +180,33 @@ const RemoveCourse = () => {
   }, [muiCheckOutDate])
 
 const handleSave = async () => {
-  setApiRes(true)
-  setAlreadyBooked(false)
-  const data = {
-    inputs: inputs,
-    reqMethod: reqMethod
+  if(inputs.roomId != ""){
+    setRoomError(false)
+    setApiRes(true)
+    setAlreadyBooked(false)
+    const data = {
+      inputs: inputs,
+      reqMethod: reqMethod
+    }
+    const res = await axios.put(`${process.env.url}/room`, data)
+    console.log(res.data)
+    if(res.data === "Booking Added Successfully" || res.data === "Member Updated Successfully"){
+      handleClose()
+      getRooms()
+      toast.success("Email Sent Successfully")
+    }
+    else if(res.data === "Email Failed to send"){
+      toast.error("Booking added Successfully but Failed to Send Email")
+      handleClose()
+      getRooms()
+    }
+    else if(res.data === "Dates Already Booked"){
+      setAlreadyBooked(true)
+    }
+    setApiRes(false)
+  }else{
+    setRoomError(true)
   }
-  const res = await axios.put(`${process.env.url}/room`, data)
-  console.log(res.data)
-  if(res.data === "Booking Added Successfully" || res.data === "Member Updated Successfully"){
-    handleClose()
-    getRooms()
-    toast.success("Email Sent Successfully")
-  }
-  else if(res.data === "Email Failed to send"){
-    toast.error("Booking added Successfully but Failed to Send Email")
-    handleClose()
-    getRooms()
-  }
-  else if(res.data === "Dates Already Booked"){
-    setAlreadyBooked(true)
-  }
-  setApiRes(false)
 }
 
 const handleInputs = (column, room, member) => {
@@ -211,7 +218,7 @@ const handleInputs = (column, room, member) => {
   setMuiCheckOutDate(dayjs(member.checkOut))
   setReqMethod("Update Member")
   setInputs((input) => ({
-    ...input,roomName: room.roomTitle ,roomId: room._id, memberId: member._id, name: member.name, gender: member.gender, phone: member.phone, country: member.country, email: member.email, checkIn: member.checkIn, checkOut: member.checkOut, bed: member.bed, payment: member.payment
+    ...input,roomName: room.roomTitle ,roomId: room._id, memberId: member._id, name: member.name, gender: member.gender, phone: member.phone, country: member.country, email: member.email, checkIn: member.checkIn, checkOut: member.checkOut, payment: member.payment,  status: member.paid == false ? "Unpaid" : "Paid", previousRoom: room._id
   }))
 }
 
@@ -231,7 +238,19 @@ const handleDelete = async () => {
   setApiRes(false)
 }
 
+const handleRoom = (room) => {
+  setInputs((input) => ({...input, roomId: room._id, roomName: room.roomTitle}))
+  setRoomError(false)
+}
+
+const handleRoomChanged = (room) => {
+  setInputs((input) => ({...input, roomId: room._id, roomName: room.roomTitle}))
+  setRoomError(false)
+  setReqMethod("Room Changed")
+}
+
 console.log(inputs)
+console.log(muiCheckInDate)
 
   return (
      <ThemeProvider theme={theme}>
@@ -301,11 +320,27 @@ console.log(inputs)
                 <div className="mt-4 relative">
                     { alreadyBooked === true ? <Alert severity="error" className="mt-2 w-full">Dates are already booked</Alert> : null }
                     {selectedRoom != null ? 
-                      <div>
-                        <p className="text-xl font-bold">{selectedRoom.roomTitle}</p>
-                        <div className="flex items-center mt-3">
-                          <p className="text-xl font-bold">Booking ID : </p>
-                          <p className="ml-3 text-xl">{inputs.memberId}</p>
+                      <div className="flex items-center">
+                        <div>
+                          <p className="text-xl font-bold">{inputs.roomName}</p>
+                          <div className="flex items-center mt-3">
+                            <p className="text-xl font-bold">Booking ID : </p>
+                            <p className="ml-3 text-xl">{inputs.memberId}</p>
+                          </div>
+                        </div>
+                        <div className="ml-20">
+                          <TextField
+                          select
+                          name={"room"}
+                          label="Change Room"
+                          className="w-40"
+                          >
+                          {rooms && rooms.map((room) => (
+                            <MenuItem key={room} value={room} onClick={() => handleRoomChanged(room)}>
+                              {room.roomTitle}
+                            </MenuItem>
+                          ))}
+                          </TextField>
                         </div>
                       </div>
                        : 
@@ -315,8 +350,8 @@ console.log(inputs)
                       label="Select Room"
                       className="w-96"
                       >
-                      {selectedRoom == null && rooms && rooms.map((room) => (
-                        <MenuItem key={room} value={room} onClick={() => setInputs((input) => ({...input, roomId: room._id, roomName: room.roomTitle}))}>
+                      {rooms && rooms.map((room) => (
+                        <MenuItem key={room} value={room} onClick={() => handleRoom(room)}>
                           {room.roomTitle}
                         </MenuItem>
                       ))}
@@ -390,15 +425,6 @@ console.log(inputs)
                       </LocalizationProvider>
                     </div>
                     <TextField
-                    name="bed"     
-                    margin="normal"
-                    label="Bed"
-                    fullWidth
-                    variant="standard"
-                    defaultValue={inputs.bed}
-                    onChange={handleChange}
-                    />
-                    <TextField
                     type="number"
                     inputProps={{min: 0}}
                     name="payment"     
@@ -409,6 +435,16 @@ console.log(inputs)
                     value={inputs.payment}
                     onChange={handleChange}
                     />
+                    { inputs.status !== undefined ? <TextField
+                    type="text"
+                    inputProps={{min: 0}}
+                    name="status"     
+                    margin="normal"
+                    label="Status"
+                    fullWidth
+                    variant="standard"
+                    value={inputs.status}
+                    /> : null }
                 </div>
                 </div> : 
                 <div className="h-96 flex items-center justify-center">
@@ -420,6 +456,7 @@ console.log(inputs)
             {
               apiRes === false ? 
               <DialogActions className=" border-lightGray border-t">
+              { roomError === true ? <Alert severity="error" className="w-full">Please Select Room</Alert> : null }
               <button onClick={handleClose} className="text-xl px-4 py-1 font-medium rounded-md">Cancel</button>
               {delButton === true ? <button onClick={handleDelete} className="text-xl text-white bg-red-600 px-4 py-1 font-medium hover:bg-red-500 rounded-md">Delete</button> : null }
               <button onClick={handleSave} className="text-xl bg-dashboard px-4 py-1 font-medium hover:bg-green rounded-md">Save</button>

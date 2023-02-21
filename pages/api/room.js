@@ -79,22 +79,22 @@ export default async function handler (req, res) {
             }  
         }else if(req.method === "PUT"){
             try{
-                const {roomId, memberId, name, gender, phone, country, email, checkIn, checkOut, bed, payment } = req.body.inputs
+                const {roomId, memberId, name, gender, phone, country, email, checkIn, checkOut, payment, status, previousRoom } = req.body.inputs
                 const id = req.body.id
                 const reqMethod = req.body.reqMethod
-        
-                if(reqMethod === "Add Member"){
 
+                if(reqMethod === "Add Member"){
+                    
                     const findRoom = Room.findById(roomId, async (error, room) => {
                         try{
                             if(room){
                                 const isBooked = room.roomMembers.find((member) => {
                                     console.log(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)))
-                                    if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(checkIn).isBetween(dayjs(member.checkIn), dayjs(member.checkOut) || dayjs(checkOut).isBetween(dayjs(member.checkIn), dayjs(member.checkOut)))){
+                                    if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(checkIn).isBetween(dayjs(member.checkIn), dayjs(member.checkOut)) || dayjs(checkOut).isBetween(dayjs(member.checkIn), dayjs(member.checkOut)) || dayjs(checkIn).isSame(dayjs(member.checkIn)) || dayjs(checkIn).isSame(dayjs(member.checkOut)) || dayjs(checkOut).isSame(dayjs(member.checkIn)) || dayjs(checkOut).isSame(dayjs(member.checkOut))){
                                         return member
                                     }
                                 })
-                          
+                               
                                 if(isBooked === undefined){
                                     
                                     const updateRoom = await Room.findByIdAndUpdate({_id: roomId}, {
@@ -105,9 +105,8 @@ export default async function handler (req, res) {
                                                 phone: phone,
                                                 country: country,
                                                 email: email,
-                                                checkIn: checkIn,
-                                                checkOut: checkOut,
-                                                bed: bed,
+                                                checkIn: dayjs(checkIn),
+                                                checkOut: dayjs(checkOut),
                                                 payment: payment,
                                             }
                                         }
@@ -179,7 +178,6 @@ export default async function handler (req, res) {
                         email: email,
                         checkIn: checkIn,
                         checkOut: checkOut,
-                        bed: bed,
                         payment: payment
                     }
                     const updateRoomMember = await Room.findOneAndUpdate({$and: [{_id: roomId}, {'roomMembers._id' : memberId}]}, {
@@ -188,6 +186,98 @@ export default async function handler (req, res) {
                         } 
                     })
                     res.send("Member Updated Successfully")
+                }
+
+                else if(reqMethod === "Room Changed"){
+
+                    const findRoom = Room.findById(roomId, async (error, room) => {
+                        try{
+                            if(room){
+                                const isBooked = room.roomMembers.find((member) => {
+                                    console.log(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)))
+                                    if(dayjs(member.checkIn).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(member.checkOut).isBetween(dayjs(checkIn), dayjs(checkOut)) || dayjs(checkIn).isBetween(dayjs(member.checkIn), dayjs(member.checkOut)) || dayjs(checkOut).isBetween(dayjs(member.checkIn), dayjs(member.checkOut)) || dayjs(checkIn).isSame(dayjs(member.checkIn)) || dayjs(checkIn).isSame(dayjs(member.checkOut)) || dayjs(checkOut).isSame(dayjs(member.checkIn)) || dayjs(checkOut).isSame(dayjs(member.checkOut))){
+                                        return member
+                                    }
+                                })
+                               
+                                if(isBooked === undefined){
+                                    let paid = status === "Unpaid" ? false : true
+                                    const updateRoom = await Room.findByIdAndUpdate({_id: roomId}, {
+                                        $push: {
+                                            roomMembers: {
+                                                name: name,
+                                                gender: gender,
+                                                phone: phone,
+                                                country: country,
+                                                email: email,
+                                                checkIn: dayjs(checkIn),
+                                                checkOut: dayjs(checkOut),
+                                                payment: payment,
+                                                paid: paid
+                                            }
+                                        }
+                                    }, { new: true })
+
+                                    const updatePreviousRoom = await Room.findByIdAndUpdate({_id: previousRoom}, {
+                                        $pull: {
+                                            roomMembers: {_id: memberId} 
+                                        }
+                                    })
+                                
+                                    if(email.length !== 0){
+                                        console.log("running")
+                                        let transporter = nodemailer.createTransport({
+                                            host: 'smtp.gmail.com',
+                                            port: 587,
+                                            secure: false,
+                                            auth: {
+                                                user: process.env.email,
+                                                pass:process.env.pass
+                                            }
+                                        })
+        
+                                        let mailOptions = {
+                                            from: {name: "Friends Academy", address: "team@friendsacademy.co.uk"},
+                                            to: email,
+                                            subject: "Room Booking",
+                                            text: `Your Room is booked successfully. You can pay now by adding your booking ID ${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id} in Make a Payment option on our Website`,
+                                            html: `
+                                                <p style="font-size: medium">Your Room is booked successfully. You can pay now by adding your booking ID</p> <h1 style="font-size: bold">${updateRoom.roomMembers[updateRoom.roomMembers.length - 1]._id}</h1> <p style="font-size: medium"> in Make a Payment option on our Website</p>
+                                                <a href="https://www.friendsacademy.co.uk/makeAPayment" style="background-color: #88ced0;
+                                                    padding: 10px 30px;
+                                                    width: 400px;
+                                                    cursor: pointer;
+                                                    border: none;
+                                                    font-weight: bold;
+                                                    font-size: large;
+                                                    text-decoration: none;
+                                                    color: black;
+                                                    font-family: sans-serif;
+                                                    ">Make A Payment
+                                                </a>
+                                            `
+                                        }
+        
+                                        transporter.sendMail(mailOptions, (err,info) => {
+                                            if(err){
+                                                console.log(err)
+                                                res.send("Email Failed to send")
+                                            }else{
+                                                console.log("Email Sent")
+                                                res.send("Booking Added Successfully")
+                                            }
+                                        })
+                                    } else{
+                                        res.send("Booking Added Successfully")
+                                    }     
+                                }else{
+                                    res.send("Dates Already Booked")
+                                }
+                            }
+                        }catch(err){
+                            res.status(500).send({ error: err.message })
+                        }
+                    })
                 }
             }catch(err){
                 res.send(err)

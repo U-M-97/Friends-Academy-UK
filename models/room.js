@@ -36,9 +36,9 @@ const roomSchema = new mongoose.Schema({
             checkOut: {
                 type: Date
             },
-            bed: {
-                type: String
-            },
+            // bed: {
+            //     type: String
+            // },
             payment: {
                 type: Number
             },
