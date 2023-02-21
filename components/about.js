@@ -63,9 +63,11 @@ const About = () => {
             className="flex-1 flex flex-col order-last sm:order-first p-10 sm:p-0">
                 <h1 className=" font-extrabold text-3xl">Dr Sohail Tariq</h1>
                 <label className=" text-lg text-gray mt-2">Medicine Trainee in Health Education England/Working in NHS.</label>
-                {/* <p className="mt-5 text-lg">Yes, I know my stuff! And throughout our coaching time, you will develop the tools and confidence to take action. My way of coaching is to empower you in becoming the Leader you want to be. You are unique and so your coaching should be too. I don’t follow a template, or ‘one size fits all’. We start where you are & we work towards your goals. If you want a business that generates you income while also positively contributing to others, then you have arrived at the right place!</p>
-                <p className="mt-5 text-lg">Whether you have an existing business, or you’ve an idea that you want to bring to life, there is a way to create a positive triple bottom-line company: profit-people-planet all winning. No longer are these areas mutually exclusive, you can have it all and do good at the same time!</p> */}
-
+                <p className="mt-5 text-lg">Hello Everyone!</p>
+                <p className="mt-5 text-lg">I am Dr Sohail Tariq</p>
+                <p className="mt-5 text-lg">I am working as Speciality Registrar in Medicine.</p>
+                <p className="mt-5 text-lg">I am working as Speciality Registrar in Medicine.
+With a back ground of Acute Medicine  and  hospital based experience ,I will be guiding you through secondary care challenges you might face in PLAB-2, including history taking, prescription writing, hospital based discussions and  Simman stations.</p>
             </motion.div>
 
             <motion.div 
