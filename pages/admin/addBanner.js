@@ -15,15 +15,16 @@ const AddBanner = () => {
     const [ inputs, setInputs ] = useState({
         tag: "",
         description: "",
-        checked: undefined
+        checked: ""
     })
     const [ loading, setLoading ] = useState(false)
 
-    useEffect(async () => {
-        const res = await axios.get(`${process.env.url}/banner`)
-        setInputs((input) => ({
-            ...input, tag: res.data.tag, description: res.data.description, checked: res.data.checked
-        }))
+    useEffect(() => {
+        const res = axios.get(`${process.env.url}/banner`).then((res) => {
+            setInputs((input) => ({
+                ...input, tag: res.data.tag, description: res.data.description, checked: res.data.checked
+            }))
+        })
     }, [])
 
     const handleChange = (e) => {
@@ -51,7 +52,7 @@ const AddBanner = () => {
             <div>
                 <div className="flex items-center justify-center  mb-5">
                     <p className="text-xl font-bold">Banner will look like</p>
-                    <div>
+                    <div> 
                         <Switch checked={inputs.checked} className=" scale-125 ml-10" onClick={() => setInputs((input) => ({...input, checked: !input.checked}))}/>
                     </div>
                 </div>
