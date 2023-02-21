@@ -16,10 +16,12 @@ import { useDispatch } from "react-redux"
 import { loginSuccess, logout, userReviews } from "../redux/userReducer"
 import { addCourse } from "../redux/courseReducer"
 import { addCoupon, delCoupon } from '../redux/couponReducer'
+import { bannerState } from '../redux/bannerReducer'
 
 export default function Home(props) {
 console.log(props)
   const dispatch = useDispatch()
+  dispatch(bannerState(props.banner))
   dispatch(addCourse(props.courses))
   dispatch(userReviews(props.reviews))
   if(props.coupons === undefined || props.coupons.length === 0){
@@ -63,10 +65,12 @@ export async function getServerSideProps({req, res}) {
   const coursesData = await axios.get(`${process.env.url}/courses`)
   const getReviews = await axios.get(`${process.env.url}/reviews`)
   const getCoupons = await axios.get(`${process.env.url}/clientCoupon`)
+  const getBanner = await axios.get(`${process.env.url}/banner`)
   const reviews = getReviews.data
   const user = userData.data
   const courses = coursesData.data
   const coupons = getCoupons.data
+  const banner = getBanner.data
 
-  return { props: { user, courses, reviews, coupons} }
+  return { props: { user, courses, reviews, coupons, banner} }
 }

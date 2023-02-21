@@ -9,6 +9,7 @@ import { useSelector } from "react-redux"
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { motion } from 'framer-motion';
 import { Link as Scroll } from "react-scroll"
+import Banner from "./banner"
 
 export default function Layout({children}){
 
@@ -51,6 +52,7 @@ export default function Layout({children}){
 
   const [ discountHeader, setDiscountHeader ] = useState(true)
   const coupon = useSelector((state) => state.coupon.coupons)
+  const banner = useSelector((state) => state.banner.banner)
 
   const [ scrolled, setScrolled ] = useState(false)
 
@@ -97,6 +99,7 @@ export default function Layout({children}){
                 </motion.div> 
               <Header/>
               {/* { home && coupon != null && discountHeader === true ? <DiscountHeader close={() => setDiscountHeader(false)}/> : null} */}
+              {banner.checked !== false ? <Banner/> : null }
               <Navbar on={() => setMobile(true)} off={() => setMobile(false)}/>
             </> 
           }

@@ -3,6 +3,7 @@ import userReducer from "./userReducer";
 import courseReducer from "./courseReducer";
 import adminReducer from "./adminReducer";
 import couponReducer from "./couponReducer";
+import bannerReducer from "./bannerReducer";
 import storage from "redux-persist/lib/storage"
 import {
   persistStore,
@@ -21,7 +22,7 @@ const persistConfig = {
   storage,
 }
 
-const rootReducer = combineReducers({ user: userReducer , course: courseReducer, admin: adminReducer, coupon: couponReducer})
+const rootReducer = combineReducers({ user: userReducer , course: courseReducer, admin: adminReducer, coupon: couponReducer, banner: bannerReducer})
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({

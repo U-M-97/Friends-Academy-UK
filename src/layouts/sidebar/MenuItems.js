@@ -30,20 +30,20 @@ const Menuitems = [
     href: "/admin/coupons",
   },
   {
-    title: "Images",
-    icon: "image",
-    href: "/image",
+    title: "Add Banner",
+    icon: "toggle-left",
+    href: "/admin/addBanner",
   },
-  {
-    title: "Pagination",
-    icon: "user",
-    href: "/pagination",
-  },
-  {
-    title: "Tables",
-    icon: "grid",
-    href: "/table",
-  },
+  // {
+  //   title: "Pagination",
+  //   icon: "user",
+  //   href: "/pagination",
+  // },
+  // {
+  //   title: "Tables",
+  //   icon: "grid",
+  //   href: "/table",
+  // },
 ];
 
 export default Menuitems;
