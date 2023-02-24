@@ -60,7 +60,7 @@ export default async function handler(req, res){
                     payment_method_types: ["card"],
                     line_items: transformedItems,
                     mode: "payment",
-                    invoice_creation: {enabled: true},
+                    // invoice_creation: {enabled: true},
                     success_url:`${req.headers.origin}/paymentSuccessfull?=RoomPayment`,
                     cancel_url: `${req.headers.origin}/paymentUnsuccessfull`,
                     metadata: {userId, roomId, bookingId, paymentType},

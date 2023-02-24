@@ -38,7 +38,7 @@ const fullFillCourseOrder = async (session) => {
     if(coupon !== "unlimited" && coupon !== "No Coupon"){
       console.log("running")
       const UpdateCoupon = await Coupon.findByIdAndUpdate({_id: coupon}, {
-        $inc: {totalUses: 1}
+        $inc: { totalUses: 1 }
       })
     }
 }
@@ -52,7 +52,7 @@ const fullFillRoomOrder = async (session) => {
   const updateBooking = await Room.findOneAndUpdate({_id: room, roomMembers:{ $elemMatch: { __id: booking}}}, {
     $set: { "roomMembers.$.paid": true }
   },{ new: true})
-  console.log(updateBooking)
+
 }
 
 export default async function WebHookHandler (req, res) {
@@ -73,10 +73,10 @@ export default async function WebHookHandler (req, res) {
           if(event.type === "checkout.session.completed"){
             const session = event.data.object
             if(session.metadata.paymentType === "Course Payment"){
-              return fullFillCourseOrder(session).then(() => res.status(200)).catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
+              return fullFillCourseOrder(session).then(() => res.status(200).send({response: true})).catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
             }
             else if(session.metadata.paymentType === "Room Payment"){
-              return fullFillRoomOrder(session).then(() => res.status(200)).catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
+              return fullFillRoomOrder(session).then(() => res.status(200).send({response: true})).catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
             }
           }
     }

@@ -9,6 +9,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/userReducer"
 import { useRouter } from 'next/router'
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Signup = () => {
     
@@ -26,6 +27,7 @@ const Signup = () => {
     const [ emailFormat , setEmailFormat ] = useState(true)
     const [ isInputs, setIsInputs ] = useState(true)
     const [ userExist,  setUserExist ] = useState(false)
+    const [ loading, setLoading ] = useState(false)
 
     const formatDate = () => {
         const day = value.getDate()
@@ -50,6 +52,7 @@ const Signup = () => {
     const handleSubmit = async () => {
         setUserExist(false)
         if(emailFormatCheck(inputs.email || inputs.firstName != "" || inputs.lastName != "" || inputs.email != "" || inputs.password != "" || plab2 != null)){
+            setLoading(true)
             setEmailFormat(true)
             setIsInputs(true)
             const data = {
@@ -60,6 +63,7 @@ const Signup = () => {
                 console.log(res.data)
                 if(res.data == "Email already exists"){
                     setUserExist(true)
+                    setLoading(false)
                 }else{
                     // dispatch(loginSuccess(res.data))
                     router.push("/")
@@ -116,7 +120,7 @@ const Signup = () => {
                 </div>  
                 { isInputs == false ? <p className="text-red-600 font-bold">Please fill the required fields</p> : null}
                 { userExist == true ? <p className="text-red-600 font-bold">User already exists</p> : null }
-                <button className="bg-green hover:bg-greenHover text-xl p-3 rounded-sm w-96 mt-2" onClick={handleSubmit}>Sign Up</button>
+                { loading === false ? <button className="bg-green hover:bg-greenHover text-xl p-3 rounded-sm w-96 mt-2" onClick={handleSubmit}>Sign Up</button> : <CircularProgress/> }
                 <label className="mt-1">OR</label>
                 <Link href="/api/google/authGoogle">
                     <a className="bg-white hover:bg-googleHover p-1 rounded-sm w-96 mt-1 items-center flex cursor-pointer">
