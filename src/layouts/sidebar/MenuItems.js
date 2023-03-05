@@ -34,11 +34,11 @@ const Menuitems = [
     icon: "toggle-left",
     href: "/admin/addBanner",
   },
-  // {
-  //   title: "Pagination",
-  //   icon: "user",
-  //   href: "/pagination",
-  // },
+  {
+    title: "Upload Files",
+    icon: "video",
+    href: "/admin/uploadTutorial",
+  },
   // {
   //   title: "Tables",
   //   icon: "grid",

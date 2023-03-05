@@ -25,6 +25,7 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@stripe/stripe-js": "^1.42.0",
     "apexcharts": "^3.23.1",
+    "aws-sdk": "^2.1328.0",
     "axios": "^0.27.2",
     "cloc": "^2.11.0",
     "clsx": "1.1.1",
@@ -59,7 +60,8 @@
     "sharp": "^0.31.3",
     "stripe": "^10.15.0",
     "swiper": "^8.4.4",
-    "typewriter-effect": "^2.19.0"
+    "typewriter-effect": "^2.19.0",
+    "video-react": "^0.16.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
