@@ -187,6 +187,8 @@ const VideoUpload = () => {
     }
   }
 
+  console.log(files)
+
   return (
     <ThemeProvider theme={theme}>
         <FullLayout>
@@ -247,7 +249,7 @@ const VideoUpload = () => {
                       playsInline
                       playbackRate
                       // poster="/assets/poster.png"
-                      src={item.tutorialLocation}
+                      src={item.location}
                     >
                       <ControlBar>
                         <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} />
