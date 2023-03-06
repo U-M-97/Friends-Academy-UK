@@ -211,7 +211,7 @@ const VideoUpload = () => {
             files.map((item) => {
               if(item.type === "png" || item.type === "jpg" || item.type === "jpeg"){
                 return(
-                  <div className="border-2 border-pink rounded-lg flex-col px-10 py-5 mt-5 flex items-center">
+                  <div key={item} className="border-2 border-pink rounded-lg flex-col px-10 py-5 mt-5 flex items-center">
                     <div className="relative h-72 w-testimonials">
                       <Image src={item.location} layout="fill" objectFit="contain"/>
                     </div>
@@ -240,7 +240,7 @@ const VideoUpload = () => {
                 )
               }else{
                 return(
-                  <div className="w-full flex flex-col items-center mt-5 justify-center py-5 border-2 border-pink rounded-lg px-10">
+                  <div key={item} className="w-full flex flex-col items-center mt-5 justify-center py-5 border-2 border-pink rounded-lg px-10">
                     <Player
                       fluid={false}
                       height={500}
