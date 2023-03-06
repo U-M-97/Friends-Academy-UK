@@ -42,14 +42,14 @@ const VideoUpload = () => {
     setError(false)
     setFile(e.target.files[0])
 
-    if(e.target.files.length !== 0){
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        setFileContent(reader.result)
-      };
+    // if(e.target.files.length !== 0){
+    //   const reader = new FileReader();
+    //   reader.onload = function(e) {
+    //     setFileContent(reader.result)
+    //   };
       
-      reader.readAsDataURL(e.target.files[0]);
-    }
+    //   reader.readAsDataURL(e.target.files[0]);
+    // }
   }
 
   const getAllFiles = async () => {
