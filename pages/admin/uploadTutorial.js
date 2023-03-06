@@ -255,7 +255,28 @@ const VideoUpload = () => {
                         <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} />
                       </ControlBar> 
                     </Player>
-                    <h1 className=" mt-5 text-xl font-bold">{item.tutorialName}</h1>
+                    
+                    {
+                      loadingEdit === false ? 
+                      <div className="mt-5 flex items-center justify-center ">
+                      { edit == true ? 
+                      <div>
+                        <input value={input} className="outline-none px-5 w-80 py-2 border-2 border-green rounded-lg" onChange={(e) => setInput(e.target.value)}/> 
+                        <button className="w-20 py-2 text-lg font-bold bg-green ml-5 rounded-lg" onClick={() => handleSave(item)}>Save</button>
+                      </div>
+                      : <h1 className="text-xl font-bold">{item.name}</h1> }
+                      <div className="text-gray cursor-pointer ml-5">
+                       { edit == false ? <EditIcon onClick={() => handleEdit(item.name)}/> : <CloseIcon onClick={() => setEdit(false)}/> }
+                      </div>
+                    </div> : 
+                    <div className="mt-5 flex items-center justify-center ">
+                      <CircularProgress/>
+                    </div>     
+                    }
+                      
+                    <div className="w-full flex justify-end">
+                      <button className="bg-red-500 w-32 py-2 text-lg font-bold text-white rounded-lg" onClick={() => handleOpen(item)}>Delete</button>
+                    </div>
                   </div>
                 )               
               }          
