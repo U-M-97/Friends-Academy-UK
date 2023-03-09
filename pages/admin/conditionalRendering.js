@@ -9,7 +9,7 @@ const ConditionalRendering = (props) => {
     
     if(column.isSame(dayjs(member.checkIn))){
       return(
-        <div className="bg-green flex items-center justify-center w-full h-16 z-10" onClick={props.handleInputs}></div>
+        <div className="bg-green flex items-center justify-center w-1/2 translate-x-full h-16 z-10 border-l-4 border-pink" onClick={props.handleInputs}></div>
       )
     } 
     
@@ -24,7 +24,7 @@ const ConditionalRendering = (props) => {
         if(column.date() === half){
           return(
             <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-              <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+              <a className="absolute bg-pink w-52 font-bold px-5 text-xl text-white text-center z-10 ">{member.name}</a>
             </div>
           )
         }else{
@@ -35,13 +35,13 @@ const ConditionalRendering = (props) => {
       }
 
       else if(column.isSame(checkIn, "month")){
-        if(checkIn.date() < 15){
+        if(checkIn.date() <= 15){
           if(displayColumn[0].date() === 1){
             const half = (checkIn.date() + displayColumn.length) / 2
             if(column.date() === half){
               return(
                 <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  <a className="absolute bg-pink w-52 px-5 text-white  font-bold text-xl text-center z-10 ">{member.name}</a>
                 </div>
               )
             }else{
@@ -55,7 +55,7 @@ const ConditionalRendering = (props) => {
             if(column.date() === half){
               return(
                 <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  <a className="absolute bg-pink w-52 px-5 text-white font-bold text-xl text-center z-10 ">{member.name}</a>
                 </div>
               )
             }else{
@@ -71,7 +71,7 @@ const ConditionalRendering = (props) => {
           if(column.date() === half){
             return(
               <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-                <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                <a className="absolute bg-pink w-52 px-5 text-white font-bold text-xl text-center z-10 ">{member.name}</a>
               </div>
             )
           }else{
@@ -90,7 +90,7 @@ const ConditionalRendering = (props) => {
             if(column.date() === half){
               return(
                 <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  <a className="absolute bg-pink w-52 px-5 text-white font-bold text-xl text-center z-10 ">{member.name}</a>
                 </div>
               )
             }else{
@@ -105,7 +105,7 @@ const ConditionalRendering = (props) => {
             if(column.date() === half){
               return(
                 <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-                  <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                  <a className="absolute bg-pink w-52 px-5 text-white font-bold text-xl text-center z-10 ">{member.name}</a>
                 </div>
               )
             }else{
@@ -121,7 +121,7 @@ const ConditionalRendering = (props) => {
           if(column.date() === half){
             return(
               <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-                <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+                <a className="absolute bg-pink w-52 px-5 text-white font-bold text-xl text-center z-10 ">{member.name}</a>
               </div>
             )
           }else{
@@ -138,7 +138,7 @@ const ConditionalRendering = (props) => {
         if(column.date() === half){
           return(
             <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-              <a className="absolute w-40 font-bold text-xl text-center z-10 ">{member.name}</a>
+              <a className="absolute bg-pink w-52 px-5 text-white font-bold text-xl text-center z-10 ">{member.name}</a>
             </div>
           )
         }else{
@@ -151,7 +151,7 @@ const ConditionalRendering = (props) => {
 
     else if(column.isSame(dayjs(member.checkOut))){
       return(
-        <div className="bg-green flex items-center justify-center w-full h-16 z-10" onClick={props.handleInputs}></div>
+        <div className="bg-green flex items-center justify-center w-1/2 h-16 z-10 border-r-4 border-pink" onClick={props.handleInputs}></div>
       )
     }
 

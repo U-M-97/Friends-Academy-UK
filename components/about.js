@@ -66,7 +66,7 @@ const About = () => {
                 <p className="mt-5 text-lg">Hello Everyone!</p>
                 <p className="mt-5 text-lg">I am Dr Sohail Tariq</p>
                 <p className="mt-5 text-lg">I am working as Speciality Registrar in Medicine.</p>
-                <p className="mt-5 text-lg">I am working as Speciality Registrar in Medicine.
+                <p className="mt-5 text-lg">
 With a back ground of Acute Medicine  and  hospital based experience ,I will be guiding you through secondary care challenges you might face in PLAB-2, including history taking, prescription writing, hospital based discussions and  Simman stations.</p>
             </motion.div>
 

@@ -20,6 +20,8 @@ import ConditionalRendering from "./conditionalRendering";
 import Alert from '@mui/material/Alert';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
 const RemoveCourse = () => {
 
@@ -54,6 +56,8 @@ const RemoveCourse = () => {
   const [ delButton, setDelButton ] = useState(false)
   const [ alreadyBooked, setAlreadyBooked ] = useState(false)
   const [ roomError, setRoomError ] = useState(false)
+  const [ open, setOpen ] = useState(false);
+  const [ deleting, setDeleting ] = useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -223,6 +227,7 @@ const handleInputs = (column, room, member) => {
 }
 
 const handleDelete = async () => {
+  setDeleting(true)
   setApiRes(true)
   const data = {
     reqMethod: "Delete Booking",
@@ -236,6 +241,8 @@ const handleDelete = async () => {
     toast.success("Booking Deleted Successfully")
   }
   setApiRes(false)
+  handleCloseDelModal()
+  setDeleting(false)
 }
 
 const handleRoom = (room) => {
@@ -249,8 +256,13 @@ const handleRoomChanged = (room) => {
   setReqMethod("Room Changed")
 }
 
-console.log(inputs)
-console.log(muiCheckInDate)
+const handleOpenDelModal = () => {
+  setOpen(true)
+}
+
+const handleCloseDelModal = () => {
+  setOpen(false)
+}
 
   return (
      <ThemeProvider theme={theme}>
@@ -458,7 +470,7 @@ console.log(muiCheckInDate)
               <DialogActions className=" border-lightGray border-t">
               { roomError === true ? <Alert severity="error" className="w-full">Please Select Room</Alert> : null }
               <button onClick={handleClose} className="text-xl px-4 py-1 font-medium rounded-md">Cancel</button>
-              {delButton === true ? <button onClick={handleDelete} className="text-xl text-white bg-red-600 px-4 py-1 font-medium hover:bg-red-500 rounded-md">Delete</button> : null }
+              {delButton === true ? <button onClick={handleOpenDelModal} className="text-xl text-white bg-red-600 px-4 py-1 font-medium hover:bg-red-500 rounded-md">Delete</button> : null }
               <button onClick={handleSave} className="text-xl bg-dashboard px-4 py-1 font-medium hover:bg-green rounded-md">Save</button>
               </DialogActions> : null
             }
@@ -476,6 +488,23 @@ console.log(muiCheckInDate)
             pauseOnHover
             theme="light"
         />
+
+          <Modal
+          open={open}
+          onClose={handleCloseDelModal}
+          >
+            <Box className="absolute left-1/2 top-1/2 bg-white p-10 py-14 flex flex-col items-center justify-center -translate-x-1/2 -translate-y-1/2 font-main">
+              <h1 className="text-xl font-bold">Are you sure you want to delete booking ? This cannot be undone and will permanently delete booking</h1>
+              <div className="w-full flex items-center justify-center mt-5"> 
+                { deleting === false ? <button className="mx-10 bg-red-500 w-32 h-9 text-lg text-white font-bold" onClick={handleDelete}>Yes</button> 
+                : <div className="mx-10 h-9 w-32 flex items-center justify-center ">
+                    <CircularProgress/>
+                  </div> }
+                <button className="mx-10 bg-green w-32 h-9 text-lg font-bold" onClick={handleCloseDelModal}>Cancel</button>
+              </div> 
+            </Box>
+          </Modal>
+
         </FullLayout>
     </ThemeProvider>
   )
