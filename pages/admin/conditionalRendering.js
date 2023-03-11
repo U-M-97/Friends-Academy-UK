@@ -67,7 +67,7 @@ const ConditionalRendering = (props) => {
         }
 
         else{
-          const half = (checkIn.date() + displayColumn.length) / 2
+          const half = (checkIn.date() + displayColumn[displayColumn.length - 1 ].date()) / 2
           if(column.date() === half){
             return(
               <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>

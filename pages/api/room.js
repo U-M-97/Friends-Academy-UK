@@ -51,7 +51,7 @@ export default async function handler (req, res) {
             }  
         }
         else if(req.method === "GET"){
-            const rooms = await Room.find()
+            const rooms = await Room.find().sort({updatedAt: -1})
             res.send(rooms)
         }else if (req.method === "DELETE"){
 

@@ -10,7 +10,7 @@ const nextConfig = {
       "res.cloudinary.com", 
       "friends-academy-uk.s3.us-east-2.amazonaws.com",
       "leaseonchain.s3.us-west-1.amazonaws.com",
-      "d3e81ql8hw6nn4.cloudfront.net"
+      "d1rot2z2p85pgg.cloudfront.net"
     ]
   },
   env: {

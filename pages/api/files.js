@@ -2,6 +2,7 @@ const dbConnect = require("../../utils/connectDB")
 const verifyToken = require("./verifyToken")
 import File from "../../models/files"
 import {bucketName, s3} from "../../utils/aws"
+import { getSignedUrl } from "@aws-sdk/cloudfront-signer";
 
 export default async function handler (req, res) {
 
@@ -11,8 +12,33 @@ export default async function handler (req, res) {
 
     if(tokenCheck === "Allowed"){
         if(req.method === "GET"){
+
             const getFiles = await File.find().sort({createdAt: -1})
-            res.send(getFiles)
+            let files = []
+            
+            for(let i=0; i<getFiles.length; i++){ 
+                const url = `${process.env.CDN}/${getFiles[i].key.replace(/ /g, '%20')}`;
+                const privateKey = process.env.CLOUDFRONT_PRIVATE_KEY;
+                const keyPairId = process.env.CLOUDFRONT_PUBLIC_KEY;
+                const dateLessThan = new Date(Date.now() + 1000 * 60 * 24 * 24)
+    
+                const signedUrl = getSignedUrl({
+                    url,
+                    keyPairId,
+                    dateLessThan,
+                    privateKey,
+                })
+                console.log(signedUrl)
+
+                const data = {
+                    file: getFiles[i],
+                    url: signedUrl
+                }
+                
+                files.push(data)
+            }
+
+            res.send(files)
         }
 
         else if(req.method === "DELETE"){

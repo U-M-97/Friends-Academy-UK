@@ -24,7 +24,6 @@ const VideoUpload = () => {
   const [ open, setOpen ] = useState(false);
   const [ selectedFile, setSelectedFile ] = useState()
   const [ loadingDelete, setLoadingDelete ] = useState(false)
-  const [ edit, setEdit ] = useState(false)
   const [ input, setInput ] = useState()
   const [ loadingEdit, setLoadingEdit ] = useState(false)
 
@@ -54,7 +53,16 @@ const VideoUpload = () => {
 
   const getAllFiles = async () => {
     const res = await axios.get(`${process.env.url}/files`)
-    setFiles(res.data)
+    let arr = []
+    console.log(res)
+    res.data.map((data) => {
+      const params = {
+        data,
+        isEdit: false
+      }
+      arr.push(params)
+    })
+    setFiles(arr)
   }
 
   const handleUpload = async () => {
@@ -164,8 +172,11 @@ const VideoUpload = () => {
     }
   }
 
-  const handleEdit = (name) => {
-    setEdit(true)
+  const handleEdit = (name, index) => {
+    const stateDestructure = [...files]
+    console.log(stateDestructure[index])
+    stateDestructure[index].isEdit = true 
+    setFiles(stateDestructure)
     setInput(name)
   }
 
@@ -182,11 +193,16 @@ const VideoUpload = () => {
       if(editName.data === "Name Changed Successfully"){
         getAllFiles()
         setLoadingEdit(false)
-        setEdit(false)
       }
     }
   }
 
+  const handleCloseEdit = (index) => {
+    const stateDestructure = [...files]
+    console.log(stateDestructure[index])
+    stateDestructure[index].isEdit = false 
+    setFiles(stateDestructure)
+  }
   console.log(files)
 
   return (
@@ -210,24 +226,25 @@ const VideoUpload = () => {
             </div>
               
             { files && files.length != 0 ? 
-            files.map((item) => {
-              if(item.type === "png" || item.type === "jpg" || item.type === "jpeg"){
+            files.map((item, index) => {
+              console.log(index)
+              if(item.data.file.type === "png" || item.data.file.type === "jpg" || item.data.file.type === "jpeg"){
                 return(
                   <div key={item} className="border-2 border-pink rounded-lg flex-col px-10 py-5 mt-5 flex items-center">
                     <div className="relative h-72 w-testimonials">
-                      <Image src={item.location} layout="fill" objectFit="contain"/>
+                      <Image src={item.data.url} layout="fill" objectFit="contain"/>
                     </div>
                     {
                       loadingEdit === false ? 
                       <div className="mt-5 flex items-center justify-center ">
-                      { edit == true ? 
+                      { item.isEdit == true ? 
                       <div>
                         <input value={input} className="outline-none px-5 w-80 py-2 border-2 border-green rounded-lg" onChange={(e) => setInput(e.target.value)}/> 
-                        <button className="w-20 py-2 text-lg font-bold bg-green ml-5 rounded-lg" onClick={() => handleSave(item)}>Save</button>
+                        <button className="w-20 py-2 text-lg font-bold bg-green ml-5 rounded-lg" onClick={() => handleSave(item.data.file)}>Save</button>
                       </div>
-                      : <h1 className="text-xl font-bold">{item.name}</h1> }
+                      : <h1 className="text-xl font-bold">{item.data.file.name}</h1> }
                       <div className="text-gray cursor-pointer ml-5">
-                       { edit == false ? <EditIcon onClick={() => handleEdit(item.name)}/> : <CloseIcon onClick={() => setEdit(false)}/> }
+                       { item.isEdit == false ? <EditIcon onClick={() => handleEdit(item.data.file.name, index)}/> : <CloseIcon onClick={() => handleCloseEdit(index)}/> }
                       </div>
                     </div> : 
                     <div className="mt-5 flex items-center justify-center ">
@@ -236,7 +253,7 @@ const VideoUpload = () => {
                     }
                     
                     <div className="w-full flex justify-end">
-                      <button className="bg-red-500 w-32 py-2 text-lg font-bold text-white rounded-lg" onClick={() => handleOpen(item)}>Delete</button>
+                      <button className="bg-red-500 w-32 py-2 text-lg font-bold text-white rounded-lg" onClick={() => handleOpen(item.data.file)}>Delete</button>
                     </div>
                   </div>
                 )
@@ -249,7 +266,7 @@ const VideoUpload = () => {
                       playsInline
                       playbackRate
                       // poster="/assets/poster.png"
-                      src={item.location}
+                      src={item.data.url}
                     >
                       <ControlBar>
                         <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} />
@@ -259,14 +276,14 @@ const VideoUpload = () => {
                     {
                       loadingEdit === false ? 
                       <div className="mt-5 flex items-center justify-center ">
-                      { edit == true ? 
+                      { item.isEdit == true ? 
                       <div>
                         <input value={input} className="outline-none px-5 w-80 py-2 border-2 border-green rounded-lg" onChange={(e) => setInput(e.target.value)}/> 
-                        <button className="w-20 py-2 text-lg font-bold bg-green ml-5 rounded-lg" onClick={() => handleSave(item)}>Save</button>
+                        <button className="w-20 py-2 text-lg font-bold bg-green ml-5 rounded-lg" onClick={() => handleSave(item.data.file)}>Save</button>
                       </div>
-                      : <h1 className="text-xl font-bold">{item.name}</h1> }
+                      : <h1 className="text-xl font-bold">{item.data.file.name}</h1> }
                       <div className="text-gray cursor-pointer ml-5">
-                       { edit == false ? <EditIcon onClick={() => handleEdit(item.name)}/> : <CloseIcon onClick={() => setEdit(false)}/> }
+                       { item.isEdit == false ? <EditIcon onClick={() => handleEdit(item.data.file.name, index)}/> : <CloseIcon onClick={() => handleCloseEdit(index)}/> }
                       </div>
                     </div> : 
                     <div className="mt-5 flex items-center justify-center ">
@@ -275,7 +292,7 @@ const VideoUpload = () => {
                     }
                       
                     <div className="w-full flex justify-end">
-                      <button className="bg-red-500 w-32 py-2 text-lg font-bold text-white rounded-lg" onClick={() => handleOpen(item)}>Delete</button>
+                      <button className="bg-red-500 w-32 py-2 text-lg font-bold text-white rounded-lg" onClick={() => handleOpen(item.data.file)}>Delete</button>
                     </div>
                   </div>
                 )               
