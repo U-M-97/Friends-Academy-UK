@@ -19,18 +19,52 @@ const ConditionalRendering = (props) => {
       const same = checkIn.isSame(checkOut, "month")
       if(same){
         
-        const half = (checkIn.date() + checkOut.date()) / 2
-        half = Math.round(half)
-        if(column.date() === half){
-          return(
-            <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
-              <a className="absolute bg-pink w-52 font-bold px-5 text-xl text-white text-center z-10 ">{member.name}</a>
-            </div>
-          )
-        }else{
-          return(
-            <div className="bg-green flex items-center justify-center w-full h-16 z-10" onClick={props.handleInputs}></div>
-          )
+        if(checkIn.date() <= 15){
+          if(displayColumn[0].date() === 1){
+            const half = (checkIn.date() + displayColumn.length) / 2
+            half = Math.round(half)
+            if(column.date() === half){
+              return(
+                <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
+                  <a className="absolute bg-pink w-52 px-5 text-white  font-bold text-xl text-center z-10 ">{member.name}</a>
+                </div>
+              )
+            }else{
+              return(
+                <div className="bg-green flex items-center justify-center w-full h-16 z-10" onClick={props.handleInputs}></div>
+              )
+            }
+          }else{
+            const half = (displayColumn[0].date() + displayColumn[displayColumn.length - 1].date()) / 2
+            half = Math.round(half)
+            if(column.date() === half){
+              return(
+                <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
+                  <a className="absolute bg-pink w-52 px-5 text-white font-bold text-xl text-center z-10 ">{member.name}</a>
+                </div>
+              )
+            }else{
+              return(
+                <div className="bg-green flex items-center justify-center w-full h-16 z-10" onClick={props.handleInputs}></div>
+              )
+            }
+          }
+        }
+
+        else{
+          const half = (checkIn.date() + displayColumn[displayColumn.length - 1].date()) / 2
+          half = Math.round(half)
+          if(column.date() === half){
+            return(
+              <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
+                <a className="absolute bg-pink w-52 px-5 text-white font-bold text-xl text-center z-10 ">{member.name}</a>
+              </div>
+            )
+          }else{
+            return(
+              <div className="bg-green flex items-center justify-center w-full h-16 z-10" onClick={props.handleInputs}></div>
+            )
+          }
         }
       }
 
@@ -67,7 +101,8 @@ const ConditionalRendering = (props) => {
         }
 
         else{
-          const half = (checkIn.date() + displayColumn[displayColumn.length - 1 ].date()) / 2
+          const half = (checkIn.date() + displayColumn[displayColumn.length - 1].date()) / 2
+          half = Math.round(half)
           if(column.date() === half){
             return(
               <div className="bg-green flex items-center justify-center w-full h-16 z-20" onClick={props.handleInputs}>
