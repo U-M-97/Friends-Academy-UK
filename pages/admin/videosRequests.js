@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../src/theme/theme";
 import FullLayout from "../../src/layouts/FullLayout";
 
-const videosRequests = () => {
+const VideosRequests = () => {
 
     const [ req, setReq ] = useState()
 
@@ -41,4 +41,4 @@ const videosRequests = () => {
     )
 }
 
-export default videosRequests
+export default VideosRequests
