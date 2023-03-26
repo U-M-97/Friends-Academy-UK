@@ -269,7 +269,7 @@ const VideoUpload = () => {
                       src={item.data.url}
                     >
                       <ControlBar>
-                        <PlaybackRateMenuButton rates={[5, 2, 1, 0.5, 0.1]} />
+                        <PlaybackRateMenuButton rates={[2, 1.5, 1, 0.5, 0.1]} />
                       </ControlBar> 
                     </Player>
                     
@@ -317,8 +317,6 @@ const VideoUpload = () => {
                 </div> 
               </Box>
             </Modal>
-
-            
             
           </div>    
         </FullLayout>

@@ -62,7 +62,9 @@
     "stripe": "^10.15.0",
     "swiper": "^8.4.4",
     "typewriter-effect": "^2.19.0",
-    "video-react": "^0.16.0"
+    "video-react": "^0.16.0",
+    "video.js": "^8.0.4",
+    "videojs-contrib-quality-levels": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",

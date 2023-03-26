@@ -173,7 +173,7 @@ const Navbar = (props) => {
            <ul className={`flex ${user ? "ml-20" : "ml-40"} items-center`}>
                 <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
                     <Link href="/">
-                        <a>HOME</a>
+                        <a className="text-lg">Home</a>
                     </Link>
                 </li>
 
@@ -185,7 +185,7 @@ const Navbar = (props) => {
                     offset={0}
                     duration={2000}
                     >
-                        <a>ABOUT</a>
+                        <a className="text-lg">About</a>
                     </Scroll>
                 </li>
 
@@ -197,7 +197,7 @@ const Navbar = (props) => {
                     offset={0}
                     duration={2000}
                     >
-                        <a>COURSES</a>
+                        <a className="text-lg">Courses</a>
                     </Scroll>
                 </li>
 
@@ -209,7 +209,7 @@ const Navbar = (props) => {
                         offset={0}
                         duration={2000}
                         >
-                        <a>ACCOMODATION</a>
+                        <a className="text-lg">Accomodation</a>
                     </Scroll>
                 </li>
 
@@ -221,13 +221,19 @@ const Navbar = (props) => {
                     offset={0}
                     duration={2000}
                     >
-                        <a>CANDIDATE REVIEWS</a>
+                        <a className="text-lg">Candidate Reviews</a>
                     </Scroll>
                 </li>
 
                 <li className={`mr-8 duration-200 cursor-pointer ${scrolled === true ? "hover:text-white" : "hover:text-green"}`} id="moreInformation" onMouseEnter={() => setMouseEnter(true)} onMouseLeave={() => setMouseEnter(false)} onClick={handleDropDown}>
-                    <a>MORE INFORMATION</a>
+                    <a className="text-lg">More Information</a>
                     <KeyboardArrowDownIcon/>
+                </li>
+
+                <li className={`mr-8 duration-200 ${scrolled === true ? "hover:text-white" : "hover:text-green"}`}>
+                    <Link href="/videos">
+                        <a className="text-lg">Videos</a>
+                    </Link>
                 </li>
 
                 <div className="relative inline-block">
@@ -259,7 +265,7 @@ const Navbar = (props) => {
                     offset={0}
                     duration={2000}
                     >
-                        <a>CONTACT</a>
+                        <a className="text-lg">Contact</a>
                     </Scroll>
                 </li>
 

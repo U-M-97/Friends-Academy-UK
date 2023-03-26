@@ -184,6 +184,7 @@ const RemoveCourse = () => {
   }, [muiCheckOutDate])
 
 const handleSave = async () => {
+  console.log(inputs)
   if(inputs.roomId != ""){
     setRoomError(false)
     setApiRes(true)

@@ -39,11 +39,11 @@ const Menuitems = [
     icon: "video",
     href: "/admin/uploadTutorial",
   },
-  // {
-  //   title: "Tables",
-  //   icon: "grid",
-  //   href: "/table",
-  // },
+  {
+    title: "Videos Requests",
+    icon: "help-circle",
+    href: "/admin/videosRequests",
+  },
 ];
 
 export default Menuitems;

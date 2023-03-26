@@ -19,7 +19,7 @@ function verifyToken(req, role){
         if(!isToken){
             return "Token is not Valid"
         }
-    
+        
         return "Allowed"
     } 
 
