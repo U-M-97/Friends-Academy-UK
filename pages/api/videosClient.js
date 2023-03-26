@@ -13,7 +13,7 @@ export default async function handler (req, res) {
 
     const date = dayjs()
 
-    const job = new cron.CronJob("*/10 * * * * * ", async () => {
+    const job = new cron.CronJob("0 * * * * ", async () => {
         console.log("Running Cron")
         const videos = await Video.findOne().populate("access")
         if(videos.access.length !== 0){
