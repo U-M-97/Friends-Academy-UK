@@ -14,6 +14,7 @@ export default async function handler (req, res) {
     const date = dayjs()
 
     const job = new cron.CronJob("*/10 * * * * * ", async () => {
+        console.log("Running Cron")
         const videos = await Video.findOne().populate("access")
         if(videos.access.length !== 0){
             videos.access.forEach(async (item) => {
@@ -43,8 +44,7 @@ export default async function handler (req, res) {
 
     if(tokenCheck === "Allowed"){
         if(req.method === "GET"){
-            const checkAccess = await Video.findOne({ access: { user: req.query.id}})
-            console.log(checkAccess)
+            const checkAccess = await Video.findOne({ "access.user": req.query.id})
             if(!checkAccess){
                 return res.send("Access Denied")
             }
