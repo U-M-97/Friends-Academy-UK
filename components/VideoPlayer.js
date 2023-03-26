@@ -8,7 +8,7 @@ const VideoPlayer = ({url, sources, options}) => {
     const videoRef = useRef(null)
 
     useEffect(() => {
-        console.log(url)
+        
         const videoJsoptions = {
             ...options,
             sources,

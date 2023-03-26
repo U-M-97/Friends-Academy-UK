@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useRouter } from "next/router";
 
 const Video = () => {
 
@@ -14,6 +15,7 @@ const Video = () => {
     const  [ message, setMessage ] = useState("")
     const [ selectedVideo, setSelectedVideo ] = useState()
     const user = useSelector((state) => state.user.currentUser) 
+    const router = useRouter()
 
     const getVideos = async () => {
         const files = await axios.get(`${process.env.url}/videosClient`, { params: { id : user._id }})
@@ -27,7 +29,10 @@ const Video = () => {
     }
 
     useEffect(() => {
-        getVideos()
+        if(!user){
+            router.push("/account/login")
+        }
+        user && getVideos()
     }, [])
 
     const options = {

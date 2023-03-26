@@ -3,11 +3,35 @@ const verifyToken = require("./verifyToken")
 import File from "../../models/files"
 import { getSignedUrl } from "@aws-sdk/cloudfront-signer";
 const Video = require("../../models/videos")
+const cron = require("cron")
+const dayjs = require("dayjs")
 
 export default async function handler (req, res) {
     await dbConnect()
     const role = "client"
     const tokenCheck = await verifyToken(req, role)
+
+    const date = dayjs()
+
+    const job = new cron.CronJob("*/10 * * * * * ", async () => {
+        const videos = await Video.findOne().populate("access")
+        if(videos.access.length !== 0){
+            videos.access.forEach(async (item) => {
+                const diff = date.diff(dayjs(item.time), "hour")
+                if(diff > 24) {
+                    const update = await Video.findOneAndUpdate({
+                        $pull: {
+                            access: {
+                                user: item.user
+                            }
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+    job.start()
 
     if(tokenCheck === "Token is not Present"){
         return res.send("Token is not Present")
@@ -19,7 +43,7 @@ export default async function handler (req, res) {
 
     if(tokenCheck === "Allowed"){
         if(req.method === "GET"){
-            const checkAccess = await Video.findOne({ $in: { access: { user: req.query.id}}})
+            const checkAccess = await Video.findOne({ access: { user: req.query.id}})
             console.log(checkAccess)
             if(!checkAccess){
                 return res.send("Access Denied")
@@ -64,7 +88,6 @@ export default async function handler (req, res) {
                         requests: id
                     }
                 })
-                console.log(videoReq)
                 return res.send("Request Sent Successfully")
             }catch(err){
                 return res.send(err)
