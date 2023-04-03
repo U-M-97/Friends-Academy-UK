@@ -21,7 +21,8 @@ module.exports = {
         dashboard: "#03c9d7",
         saleHeader: "#fcdb04",
         discountGreen: "#bbf982",
-        greenTransparent: "rgba(136, 206, 208, 0.6)"
+        greenTransparent: "rgba(136, 206, 208, 0.6)",
+        whatsapp: "#25D366"
       },
       fontFamily:{
         main: ['Nunito Sans', "sans-serif"]
