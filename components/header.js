@@ -81,7 +81,7 @@ const Header = () => {
                             <SearchIcon className=' scale-125'/>
                         </div>
                         {user == null ? <div className='mx-4 cursor-pointer'>
-                            <Link href="/account/signup">
+                            <Link href="/account/login">
                                 <button className="py-2 px-4 bg-green rounded-md font-bold hover:bg-pink duration-300 hover:text-white">LOGIN</button>
                             </Link> 
                         </div> : null  }              

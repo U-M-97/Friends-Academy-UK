@@ -27,7 +27,6 @@ export default function Layout({children}){
       const handleComplete = (url) => {
         if(url === router.asPath){
           setLoading(false)
-          setTimeout(() =>{setLoading(false)},5000)
         }
       }
   

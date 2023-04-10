@@ -18,13 +18,12 @@ export default async function handler (req, res) {
     if(tokenCheck === "Allowed"){
         if(req.method === "GET"){
             const getRequests = await Video.findOne().populate("requests").populate("access.user")
-            console.log(getRequests)
             res.send(getRequests)
         }
 
         else if(req.method === "POST"){
             const { id } = req.body
-            console.log(id)
+  
             try{
                 const approve = await Video.findOneAndUpdate({
                     $push: {
@@ -45,6 +44,7 @@ export default async function handler (req, res) {
 
         else if(req.method === "DELETE"){
             if(req.query.type === "remove request"){
+                console.log( req.query.id)
                 try{
                     const remove = await Video.findOneAndUpdate({
                         $pull: {
