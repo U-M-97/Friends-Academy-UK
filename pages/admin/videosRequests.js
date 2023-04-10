@@ -44,7 +44,7 @@ const VideosRequests = () => {
                             <p className="font-bold w-60">{item.email}</p>
                             <p className="w-60 ml-10">{item.username}</p>
                             <button className="px-10 ml-10  bg-green" onClick={() => handleApprove(item._id)}>Approve</button>
-                            <button className="px-10 ml-10  bg-red-600 text-white" onClick={() => handleRemove(item._id)}>Remove</button>
+                            <button className="px-10 ml-10  bg-red-600 text-white" onClick={() => handleRemoveAccess(item._id)}>Remove</button>
                         </div>
                     )
                 })}
