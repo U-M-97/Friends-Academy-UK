@@ -17,7 +17,7 @@ export default async function handler (req, res) {
 
     if(tokenCheck === "Allowed"){
         if(req.method === "GET"){
-            const getRequests = await Video.findOne().populate("requests")
+            const getRequests = await Video.findOne().populate("requests").populate("access.user")
             console.log(getRequests)
             res.send(getRequests)
         }
@@ -41,6 +41,37 @@ export default async function handler (req, res) {
             }catch(err){
                 res.send(err)
             }
+        }
+
+        else if(req.method === "DELETE"){
+            if(req.query.type === "remove request"){
+                try{
+                    const remove = await Video.findOneAndUpdate({
+                        $pull: {
+                            requests: req.query.id
+                        }
+                    })
+                    res.send("Request removed successfully")
+                }catch(err){
+                    res.send(err)
+                }
+            }
+
+            else if(req.query.type === "remove access"){
+                try{
+                    const remove = await Video.findOneAndUpdate({
+                        $pull: {
+                            access: {
+                                user: req.query.id
+                            }
+                        }
+                    })
+                    res.send("Access removed successfully")
+                }catch(err){
+                    res.send(err)
+                }
+            }
+           
         }
     }
 }

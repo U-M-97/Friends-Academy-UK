@@ -18,8 +18,8 @@ export default async function handler (req, res) {
         const videos = await Video.findOne().populate("access")
         if(videos.access.length !== 0){
             videos.access.forEach(async (item) => {
-                const diff = date.diff(dayjs(item.time), "hour")
-                if(diff > 24) {
+                const diff = date.diff(dayjs(item.time), "day")
+                if(diff > 30) {
                     const update = await Video.findOneAndUpdate({
                         $pull: {
                             access: {
