@@ -166,7 +166,7 @@ const RemoveCourse = () => {
 
   const handleOpen = () => {
     setInputs((input) => ({
-      ...input, roomName: "", roomId: "", memberId: "", name: "",  gender: "", phone: "", country: "", email: "", checkOut: "", payment: ""
+      ...input, roomName: "", roomId: "", memberId: "", name: "",  gender: "", phone: "", country: "", email: "", checkOut: "", payment: "", status: undefined
     }))
     setDelButton(false)
     setDialog(true)
@@ -457,7 +457,19 @@ const handleCloseDelModal = () => {
                     fullWidth
                     variant="standard"
                     value={inputs.status}
-                    /> : null }
+                    /> : 
+                    
+                    <TextField
+                    type="text"
+                    inputProps={{min: 0}}
+                    name="status"     
+                    margin="normal"
+                    label="Status"
+                    fullWidth
+                    variant="standard"
+                    value="Unpaid"
+                    /> 
+                    }
                 </div>
                 </div> : 
                 <div className="h-96 flex items-center justify-center">
