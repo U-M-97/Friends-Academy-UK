@@ -56,7 +56,7 @@ const Footer = () => {
                 <div className='mt-4 flex items-center'>
                     <LocationOnIcon className='text-green scale-125'/>
                     <div className="ml-4">
-                        <p className='text-xl text-white'>113-115 Smedley Road Manchester M8 0RS</p>
+                        <p className='text-xl text-white'>14-16 Woodfield Road FY1 6AX Blackpool</p>
                     </div>    
                 </div>
                 <div className='mt-10 flex justify-center sm:justify-start'>

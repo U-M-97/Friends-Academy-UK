@@ -89,7 +89,7 @@ const Contact = () => {
                     <div className='mt-4 flex items-center'>
                         <LocationOnIcon className='text-green scale-125'/>
                         <div className='ml-4'>
-                            <label className='text-xl'>113-115 Smedley Road Manchester M8 0RS</label> 
+                            <label className='text-xl'>14-16 Woodfield Road FY1 6AX Blackpool</label> 
                         </div>
                     </div>
 

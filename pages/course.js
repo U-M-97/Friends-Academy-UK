@@ -11,8 +11,15 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs"
 import { useEffect } from "react";
 import axios from "axios";
+require('dayjs/plugin/timezone');
+require('dayjs/plugin/utc');
+
+dayjs.extend(require('dayjs/plugin/timezone'));
+dayjs.extend(require('dayjs/plugin/utc'));
+dayjs.tz.guess()
 
 const Course = () => {
+    console.log(dayjs.tz.guess())
 
     const course = useSelector((state) => state.course.selectedCourse)
     const [ readMore, setReadMore ] = useState(false)
@@ -212,7 +219,7 @@ const Course = () => {
                 </div>
                 <div className="flex mt-5">
                     <LocationOnIcon className="text-green scale-150"/>
-                    <p className="text-xl ml-5">113 Smedley Road, Cheetham Hill, Manchester, UK</p>
+                    <p className="text-xl ml-5">14-16 Woodfield Road FY1 6AX Blackpool</p>
                 </div>
             </div>
         </div>
