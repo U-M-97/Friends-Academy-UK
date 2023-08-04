@@ -73,7 +73,7 @@ const Contact = () => {
                         </motion.div>
                     </div>
 
-                    <label className='text-lg mt-12'>113-115 Smedley Road Manchester M8 0RS</label>
+                    <label className='text-lg mt-12'>14-16 Woodfield Road FY1 6AX Blackpool</label>
                     <div className='mt-10'>
                         <PhoneIcon className='text-green scale-125'/>
                         <label className='ml-4 text-xl'>+ 44 7532 707561</label>
