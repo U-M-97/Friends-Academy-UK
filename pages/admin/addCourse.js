@@ -115,7 +115,7 @@ const AddCourse = () => {
         arr.push(course.category)
       })
 
-      const uniqueCategory = arr.filter((item, index) => categories.indexOf(item) === index)
+      const uniqueCategory = arr.filter((item, index) => arr.indexOf(item) === index)
       setCategories(uniqueCategory)
       let tmp = null
       courses && courses.map((item) => {
