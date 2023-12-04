@@ -83,18 +83,18 @@ const AddCourse = () => {
 
   const handleSubmit = async () => {
     setApiReq(true);
-    console.log(file);
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "friends-academy");
-    const cloudinary = await axios.post(
-      "https://api.cloudinary.com/v1_1/codillionaire/image/upload",
-      data,
-    );
-    const url = cloudinary.data.url;
+    // console.log(file);
+    // const data = new FormData();
+    // data.append("file", file);
+    // data.append("upload_preset", "friends-academy");
+    // const cloudinary = await axios.post(
+    //   "https://api.cloudinary.com/v1_1/codillionaire/image/upload",
+    //   data,
+    // );
+    // const url = cloudinary.data.url;
     const uploadData = {
       inputs,
-      url,
+      // url,
     };
     const res = await axios.post(`${process.env.url}/courses`, uploadData);
     if (res.data === "Course Added Successfully") {
@@ -121,7 +121,7 @@ const AddCourse = () => {
       });
 
     const uniqueCategory = arr.filter(
-      (item, index) => arr.indexOf(item) === index,
+      (item, index) => arr.indexOf(item) === index
     );
     setCategories(uniqueCategory);
     let tmp = null;
@@ -160,13 +160,13 @@ const AddCourse = () => {
               <Grid item xs={12} lg={12}>
                 <BaseCard title="Add Course">
                   <Stack spacing={3}>
-                    <p>Upload Course Image</p>
+                    {/* <p>Upload Course Image</p>
                     <input
                       type="file"
                       name="image"
                       className="w-52 cursor-pointer"
                       onChange={(e) => setFile(e.target.files[0])}
-                    />
+                    /> */}
                     <TextField
                       name="title"
                       label="Course Title"

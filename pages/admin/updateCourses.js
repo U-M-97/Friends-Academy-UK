@@ -78,7 +78,9 @@ const UpdateCourses = () => {
   }, [valueCalendar, endDateValueCalendar]);
 
   const getCourses = async () => {
-    const res = await axios.get(`${process.env.url}/courses`);
+    const res = await axios.get(`${process.env.url}/courses`, {
+      params: { type: "get all courses" },
+    });
     setCourses(res.data);
   };
 
@@ -199,7 +201,7 @@ const UpdateCourses = () => {
         arr.push(item.category);
       });
     const uniqueCategory = arr.filter(
-      (item, index) => arr.indexOf(item) === index,
+      (item, index) => arr.indexOf(item) === index
     );
     setCategories(uniqueCategory);
     setSelectedCategory(uniqueCategory[0]);
@@ -232,7 +234,7 @@ const UpdateCourses = () => {
     data.append("upload_preset", "friends-academy");
     const cloudinary = await axios.post(
       "https://api.cloudinary.com/v1_1/codillionaire/image/upload",
-      data,
+      data
     );
     setInputs((current) => {
       return {
