@@ -1,55 +1,57 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     email: {
-        type: String
+      type: String,
     },
     username: {
-        type: String
+      type: String,
     },
     googleId: {
-        type: Number
+      type: Number,
     },
     facebookId: {
-        type: Number
+      type: Number,
     },
     image: {
-        type: String,
-        default: "https://cdn-icons-png.flaticon.com/512/456/456212.png"
+      type: String,
+      default: "https://cdn-icons-png.flaticon.com/512/456/456212.png",
     },
     password: {
-        type: String
+      type: String,
     },
     plab2Date: {
-        type: String
+      type: String,
     },
     prevPlab2Attempts: {
-        type: String
+      type: String,
     },
     phone: {
-        type: String
+      type: String,
     },
     token: {
-        type: String
+      type: String,
     },
-    courses:[
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Course"
-        }
+    courses: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
+      },
     ],
     amountPaid: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     review: {
-        type: String
+      type: String,
     },
     rating: {
-        type: Number
-    }
-}, { timestamps: true }
-)
+      type: Number,
+    },
+  },
+  { timestamps: true },
+);
 
-const User = mongoose.models.User || mongoose.model("User", userSchema)
-module.exports = User
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+module.exports = User;

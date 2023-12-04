@@ -1,49 +1,54 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import PersonIcon from '@mui/icons-material/Person';
-import { FaHospitalAlt } from 'react-icons/fa';
-import CountUp from 'react-countup';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import Image from "next/image"
-import style from "../styles/trustedBy.module.css"
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import PersonIcon from "@mui/icons-material/Person";
+import { FaHospitalAlt } from "react-icons/fa";
+import CountUp from "react-countup";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import Image from "next/image";
+import style from "../styles/trustedBy.module.css";
 
 const TrustedBy = () => {
-
-    const {ref: header, inView: isHeader} = useInView({triggerOnce: true})
-    const {ref: header2, inView: isHeader2} = useInView({triggerOnce: true})
-    const {ref: countUp, inView: isCountUp} = useInView({triggerOnce: true})
+  const { ref: header, inView: isHeader } = useInView({ triggerOnce: true });
+  const { ref: header2, inView: isHeader2 } = useInView({ triggerOnce: true });
+  const { ref: countUp, inView: isCountUp } = useInView({ triggerOnce: true });
 
   return (
     <div className="font-main my-20 overflow-hidden">
-        <div ref={header}>
-            <motion.div
-            initial={{opacity: 0, scale: 0}}
-            animate={isHeader && {opacity: 1, scale: 1}}
-            transition={{duration: 0.5}}
-            className=" flex flex-col items-center mt-20"
-            >
-                <h1 className="text-3xl sm:text-4xl font-bold">Trusted By</h1>
-                <div className="w-56 mt-2 flex items-center justify-center">
-                    <div className="border-b-2 w-28 border-green"></div>
-                    <div className='mx-3'>
-                        <div className="h-2 w-2 rounded-full bg-pink"></div>
-                    </div>
-                    <div className="border-b-2 w-28 border-green"></div>
-                </div>
-            </motion.div>
-         </div>
-        
-        <div className=" mt-20 flex justify-center" ref={countUp}>
-            <div className=" sm:w-width flex flex-col sm:flex-row items-center justify-center px-40">
-                <div className='mb-10 sm:mb-0 flex flex-col w-80 items-center justify-center rounded-b-xl border-l border-r border-t border-lightGray'>
-                    <div className='flex flex-col items-center justify-center mt-14 mb-5'>
-                        <PersonIcon className='scale-trustedBy text-green'/>
-                        <h1 className='text-6xl mt-10'>{isCountUp && <><CountUp end={500}/>+</>}</h1>
-                        <p className='text-3xl mt-2'>Registered Students</p>
-                    </div>
-                    <div className='h-2 w-full bg-green rounded-b-xl mt-5'></div>
-                </div>
-                {/* <div className='mb-10 sm:mb-0 flex flex-col  w-80 items-center justify-center rounded-b-xl border-l border-r border-t border-lightGray'>
+      <div ref={header}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={isHeader && { opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className=" flex flex-col items-center mt-20"
+        >
+          <h1 className="text-3xl sm:text-4xl font-bold">Trusted By</h1>
+          <div className="w-56 mt-2 flex items-center justify-center">
+            <div className="border-b-2 w-28 border-green"></div>
+            <div className="mx-3">
+              <div className="h-2 w-2 rounded-full bg-pink"></div>
+            </div>
+            <div className="border-b-2 w-28 border-green"></div>
+          </div>
+        </motion.div>
+      </div>
+
+      <div className=" mt-20 flex justify-center" ref={countUp}>
+        <div className=" sm:w-width flex flex-col sm:flex-row items-center justify-center px-40">
+          <div className="mb-10 sm:mb-0 flex flex-col w-80 items-center justify-center rounded-b-xl border-l border-r border-t border-lightGray">
+            <div className="flex flex-col items-center justify-center mt-14 mb-5">
+              <PersonIcon className="scale-trustedBy text-green" />
+              <h1 className="text-6xl mt-10">
+                {isCountUp && (
+                  <>
+                    <CountUp end={500} />+
+                  </>
+                )}
+              </h1>
+              <p className="text-3xl mt-2">Registered Students</p>
+            </div>
+            <div className="h-2 w-full bg-green rounded-b-xl mt-5"></div>
+          </div>
+          {/* <div className='mb-10 sm:mb-0 flex flex-col  w-80 items-center justify-center rounded-b-xl border-l border-r border-t border-lightGray'>
                     <div className='flex flex-col items-center justify-center mt-16 mb-5'>
                         <FaHospitalAlt className='scale-trustedBy text-green'/>
                         <h1 className='text-6xl mt-10 mx-10'>{isCountUp && <><CountUp end={250}/>+</>}</h1>
@@ -59,10 +64,10 @@ const TrustedBy = () => {
                     </div>
                     <div className='h-2 w-full bg-green rounded-b-xl mt-5'></div>
                 </div> */}
-            </div>
         </div>
+      </div>
 
-        {/* <div ref={header2}>
+      {/* <div ref={header2}>
             <motion.div
             initial={{opacity: 0, scale: 0}}
             animate={isHeader2 && {opacity: 1, scale: 1}}
@@ -113,9 +118,8 @@ const TrustedBy = () => {
           
             </div>
         </div> */}
-        
     </div>
-  )
-}
+  );
+};
 
-export default TrustedBy
+export default TrustedBy;

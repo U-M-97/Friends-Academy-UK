@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { logout } from "../../../redux/adminReducer";
 import { useDispatch } from "react-redux";
-import { deleteCookie } from "cookies-next"
+import { deleteCookie } from "cookies-next";
 
 const ProfileDD = () => {
   const [anchorEl4, setAnchorEl4] = React.useState(null);
@@ -28,13 +28,13 @@ const ProfileDD = () => {
     setAnchorEl4(null);
   };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleAdminLogout = () => {
-    deleteCookie("token")
-    dispatch(logout())
-    window.location.href="/admin"
-  }
+    deleteCookie("token");
+    dispatch(logout());
+    window.location.href = "/admin";
+  };
 
   return (
     <>
@@ -119,7 +119,12 @@ const ProfileDD = () => {
           <Divider />
           <Box p={2}>
             <Link to="/">
-              <Button fullWidth variant="contained" color="primary" onClick={handleAdminLogout}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={handleAdminLogout}
+              >
                 Logout
               </Button>
             </Link>

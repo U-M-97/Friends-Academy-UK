@@ -1,10 +1,10 @@
-import { configureStore, combineReducers  } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userReducer";
 import courseReducer from "./courseReducer";
 import adminReducer from "./adminReducer";
 import couponReducer from "./couponReducer";
 import bannerReducer from "./bannerReducer";
-import storage from "redux-persist/lib/storage"
+import storage from "redux-persist/lib/storage";
 import {
   persistStore,
   persistReducer,
@@ -14,25 +14,31 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
+} from "redux-persist";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-}
+};
 
-const rootReducer = combineReducers({ user: userReducer , course: courseReducer, admin: adminReducer, coupon: couponReducer, banner: bannerReducer})
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const rootReducer = combineReducers({
+  user: userReducer,
+  course: courseReducer,
+  admin: adminReducer,
+  coupon: couponReducer,
+  banner: bannerReducer,
+});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-})
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
 
-export let persistor = persistStore(store)
+export let persistor = persistStore(store);

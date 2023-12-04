@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./pages/**/*.{js,ts,jsx,tsx}",
-  "./components/**/*.{js,ts,jsx,tsx}",],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    
     extend: {
-      colors:{
+      colors: {
         pink: "#e75387",
         green: "#88ced0",
         greenHover: "#A0D8D9",
@@ -22,12 +23,12 @@ module.exports = {
         saleHeader: "#fcdb04",
         discountGreen: "#bbf982",
         greenTransparent: "rgba(136, 206, 208, 0.6)",
-        whatsapp: "#25D366"
+        whatsapp: "#25D366",
       },
-      fontFamily:{
-        main: ['Nunito Sans', "sans-serif"]
+      fontFamily: {
+        main: ["Nunito Sans", "sans-serif"],
       },
-      width:{
+      width: {
         width: "1500px",
         picturesWrapper: "400vw",
         translateWidth: "100vw",
@@ -43,15 +44,15 @@ module.exports = {
         courses: "1250px",
         roomAddIconWidth: "70px",
         dialog: "800px",
-        videoContainer: "1100px"
+        videoContainer: "1100px",
       },
-      scale:{
+      scale: {
         arrow: "3",
         services: "3",
         testimonialArrow: "2",
-        trustedBy: "4"
+        trustedBy: "4",
       },
-      height:{
+      height: {
         slider: "600px",
         about: "900px",
         card: "320px",
@@ -62,28 +63,26 @@ module.exports = {
         signup: "650px",
         review: "400px",
         dialog: "450px",
-        dialogContainer: "620px"
+        dialogContainer: "620px",
       },
-      borderWidth:{
+      borderWidth: {
         aboutPic: "10px",
-        footer: "1px"
+        footer: "1px",
       },
-      padding:{
+      padding: {
         important: "2px",
       },
-      translate:{
-        cards: "340px"
+      translate: {
+        cards: "340px",
       },
-      letterSpacing:{
+      letterSpacing: {
         debitCard: "5px",
-        name: "3px"
+        name: "3px",
       },
       spacing: {
-        firstRow: "260px"
-      }
+        firstRow: "260px",
+      },
     },
   },
-  plugins: [
-    
-  ]
-}
+  plugins: [],
+};

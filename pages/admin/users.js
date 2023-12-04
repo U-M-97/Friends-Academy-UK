@@ -5,11 +5,9 @@ import FullLayout from "../../src/layouts/FullLayout";
 const users = () => {
   return (
     <ThemeProvider theme={theme}>
-        <FullLayout>
-            Users
-        </FullLayout>
+      <FullLayout>Users</FullLayout>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default users
+export default users;

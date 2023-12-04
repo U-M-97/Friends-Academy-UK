@@ -1,57 +1,58 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const roomSchema = new mongoose.Schema({
+const roomSchema = new mongoose.Schema(
+  {
     roomTitle: {
-        type: String
+      type: String,
     },
     image: {
-        type: String
+      type: String,
     },
     roomType: {
-        type: String
+      type: String,
     },
     roomBeds: {
-        type: Number
+      type: Number,
     },
     roomMembers: [
-        {
-            name: {
-                type: String
-            }, 
-            gender: {
-                type: String
-            },
-            phone: {
-                type: String
-            },
-            country: {
-                type: String
-            },
-            email: {
-                type: String
-            },
-            checkIn: {
-                type: Date
-            },
-            checkOut: {
-                type: Date
-            },
-            payment: {
-                type: Number
-            },
-            paid: {
-                type: Boolean,
-                default: false
-            },
-            bookedOn: {
-                type: Date,
-                default: new Date()
-            }
-        }
-    ]
+      {
+        name: {
+          type: String,
+        },
+        gender: {
+          type: String,
+        },
+        phone: {
+          type: String,
+        },
+        country: {
+          type: String,
+        },
+        email: {
+          type: String,
+        },
+        checkIn: {
+          type: Date,
+        },
+        checkOut: {
+          type: Date,
+        },
+        payment: {
+          type: Number,
+        },
+        paid: {
+          type: Boolean,
+          default: false,
+        },
+        bookedOn: {
+          type: Date,
+          default: new Date(),
+        },
+      },
+    ],
+  },
+  { timestamps: true },
+);
 
-}, { timestamps: true }
-)
-
-const Room = mongoose.models.Room || mongoose.model("Room", roomSchema)
-module.exports = Room
+const Room = mongoose.models.Room || mongoose.model("Room", roomSchema);
+module.exports = Room;

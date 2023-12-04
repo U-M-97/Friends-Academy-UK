@@ -19,7 +19,7 @@ import LogoIcon from "../logo/LogoIcon";
 import Menuitems from "./MenuItems";
 import Buynow from "./Buynow";
 import { useRouter } from "next/router";
-import DiscountIcon from '@mui/icons-material/Discount';
+import DiscountIcon from "@mui/icons-material/Discount";
 
 const Sidebar = ({ isMobileSidebarOpen, onSidebarClose, isSidebarOpen }) => {
   const [open, setOpen] = React.useState(true);
@@ -58,15 +58,18 @@ const Sidebar = ({ isMobileSidebarOpen, onSidebarClose, isSidebarOpen }) => {
                   }}
                 >
                   <ListItemIcon>
-                    {item.title === "Coupons" ? <DiscountIcon/> : <FeatherIcon
-                      style={{
-                        color: `${location === item.href ? "white" : ""} `,
-                      }}
-                      icon={item.icon}
-                      width="20"
-                      height="20"
-                    />
-                    }
+                    {item.title === "Coupons" ? (
+                      <DiscountIcon />
+                    ) : (
+                      <FeatherIcon
+                        style={{
+                          color: `${location === item.href ? "white" : ""} `,
+                        }}
+                        icon={item.icon}
+                        width="20"
+                        height="20"
+                      />
+                    )}
                   </ListItemIcon>
 
                   <ListItemText onClick={onSidebarClose}>
